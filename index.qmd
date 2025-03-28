@@ -1,7 +1,7 @@
 ---
 title: "AFROMAPR 2025"
 subtitle: "CARTOGRAPHIER LES TERRITOIRES AVEC R ET MAGRIT"
-author: "(c) FR CIST"
+author: "(c) FR CIST 2025"
 format: html
 ---
 
