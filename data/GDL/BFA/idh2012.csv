@@ -1,0 +1,14 @@
+"code";"pays";"nom";"pop";"idh";"hea";"edu";"inc"
+"BFAr101";"BFA";"Boucle de Mouhoun";1916;0.364;0.593;0.203;0.401
+"BFAr102";"BFA";"Cascades";678;0.402;0.556;0.259;0.451
+"BFAr103";"BFA";"Centre (incl Ouagadougou)";2056;0.543;0.653;0.455;0.54
+"BFAr104";"BFA";"Centre-Est";1315;0.38;0.673;0.193;0.423
+"BFAr105";"BFA";"Centre-Nord";1322;0.354;0.618;0.176;0.41
+"BFAr106";"BFA";"Centre-Ouest";1312;0.395;0.585;0.253;0.416
+"BFAr107";"BFA";"Centre-Sud";837;0.396;0.604;0.249;0.412
+"BFAr108";"BFA";"Est";1625;0.317;0.542;0.152;0.384
+"BFAr109";"BFA";"Hauts Bassins";1865;0.43;0.586;0.292;0.463
+"BFAr110";"BFA";"Nord";1272;0.38;0.573;0.229;0.419
+"BFAr111";"BFA";"Plateau Central";829;0.384;0.591;0.226;0.424
+"BFAr112";"BFA";"Sahel";1356;0.256;0.514;0.091;0.358
+"BFAr113";"BFA";"Sud-Ouest";729;0.324;0.536;0.165;0.386

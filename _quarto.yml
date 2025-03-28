@@ -1,0 +1,34 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Afromapr 2025"
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 2
+    logo: img/logo_cist_small.jpg
+    contents:
+      - href: index.qmd
+        text: "Objectifs"
+      - href: Enseigne_R.qmd
+        text: "Introduction à R"
+    right: 
+      - icon: github # add icons as navbar buttons
+        href: https://github.com/worldregio/afromapr
+        target: _blank
+  page-footer:
+    background: dark
+    left: Copyright 2025, FR CIST
+format:
+  html:
+    grid:
+      sidebar-width: 300px
+    theme: 
+      light: minty    
+      dark: solar
+    css: styles.css
+    toc: true
+
+
