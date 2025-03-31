@@ -1,5 +1,5 @@
 ---
-title: "Enseigner avec R"
+title: "EXO1 : Enseigner la statistique avec R"
 subtitle: "AFROMPA'R Bouaké 2025"
 author: "Claude Grasland"
 date: "2025-03-28"
@@ -30,26 +30,39 @@ editor:
     wrap: 72
 ---
 
-## INTRODUCTION
 
-On se propoe de passer en revue une partie du programme de l'été à travers un exercice pédagogique associant statistique, cartographie, analyse spatiale, modélisation ... Cet exercice correspond typiquement au travail qu'on pourrait donner à des étudiants de licence 2 ou 3 ayant suivi des cours de statistique, cartographie et SIG.
+
+On se propoe de montrer l'intérêt de R pour l'enseignement de la statistique aux étudiants de licence de géographie... Cet exercice correspond typiquement au travail qu'on pourrait donner à des étudiants de licence 2 ou 3 ayant suivi des cours de statistique univariée et bivariée et ayant des connaissances de base en cartographie thématique. 
  
 On propose de réaliser une analyse de la distribution de l'Indicateur de Développement humain des régions de Côte d'Ivoire entre 2002 et 2022 à l'aide des données accessibles sur le site [Global Data Lab](https://globaldatalab.org/)  . Le programme est rédigé de telle sorte qu'on puisse facilement refaire l'exercice en prenant d'autres dates (ex. Evolution entre 2012 et 2022) ou d'autres pays d'Afrique de l'Ouest.
 
 ```{r}
 library(sf)
+library(dplyr)
 ```
 
+## (1) PREPARATION DES DONNEES STATISTIQUES
 
-```{r, echo=F}
+-   **Consigne** : Après avoir chargé les fichiers *idh2002.csv* et *idh2022.csv*, construisez un tableau de donnée comportant le code et le nom des régions ainsi que leur population et leur indicateur de développement humain aux deux dates.
+
+```{r}
 # Importe les données
-base<-readRDS("data/GDL/GDL_HDI_AFR_OUEST.RDS")
+tab1<-read.table("data/exo_stats/idh1992.csv", 
+                dec=".",
+                sep = ";",
+                header=TRUE)
+tab2<-read.table("data/exo_stats/idh2022.csv", 
+                dec=".", 
+                sep=";",
+                header=TRUE)
 
-# Extrait un pays et des variables
-map<-base[base$iso_code=="CIV", c("gdlcode","Region","pop2002","pop2022","hdi2002","hdi2022")]
+# Sélectionne les variables
+tab1 <- tab1 %>% select(code=code, pays=pays, nom=nom, pop1992 = pop, idh1992 = idh)
+tab2 <- tab2 %>% select(code=code,  pop2022 = pop, idh2022 = idh)
 
-# Extrait le tableau de données brut
-don<-st_drop_geometry(map)
+# Fusionne les deux tableaux
+don <- left_join(tab1,tab2)
+
 
 # Affiche
 library(knitr)
@@ -69,11 +82,11 @@ kable(don,
 
 ### Paramètres principaux
 
--   **Consigne** : Etudiez l'évolution  de l'IDH entre 2002 et 2022 en vous servant de paramètres principaux (valeurs centrales, paramètres de dispersion). Puis établissez deux histogrammes permettant de visualiser l'évolution.
+-   **Consigne** : Etudiez l'évolution  de l'IDH entre 1992 et 2022 en vous servant de paramètres principaux (valeurs centrales, paramètres de dispersion). Puis établissez deux histogrammes permettant de visualiser l'évolution.
 
 ```{r}
 # sélectionne les variables
-sel <- don[,c("hdi2002","hdi2022")]
+sel <- don[,c("idh1992","idh2022")]
 
 # Tableau standard
 quant<-apply(sel,2,quantile)
@@ -84,57 +97,55 @@ tab<-rbind(quant,moy,ect,cv)
 row.names(tab) <-c("Minimum","Q1","Médiane","Q3","Maximum","Moyenne","Ecart-type", "C.V. (%)")
 
 kable(tab, caption="Paramètres principaux", digits =2,
-      col.names = c("Situation en 2002","Situation en 2022"),
+      col.names = c("Situation en 1992","Situation en 2022"),
       )
 ```
 
 
 ### Histogrammes
 
--   **Consigne** : Etablissez deux histogrammes permettant de visualiser la forme de la distribution de l'IDH en 2002 et en 2022
+-   **Consigne** : Etablissez deux histogrammes permettant de visualiser la forme de la distribution de l'IDH en 1992 et en 2022
 
 ```{r, fig.width=8, fig.height=8}
 par(mfrow=c(2,1))
 
-mintot <-min(c(sel$hdi2002, sel$hdi2022))
-maxtot <-max(c(sel$hdi2002, sel$hdi2022))
+mintot <-min(c(sel$idh1992, sel$idh2022))
+maxtot <-max(c(sel$idh1992, sel$idh2022))
 
 # Histogramme
-hist(sel$hdi2002,
-     breaks=quantile(sel$hdi2002),
+hist(sel$idh1992,
+     breaks=quantile(sel$idh1992),
      xlim=c(mintot,maxtot),
      col="gray80",
-     main= "Situation en 2002",
+     main= "Situation en 1992",
      xlab = "IDH régional",
      ylab = "Fréquence moyenne")
-rug(sel$hdi2002, col="black", lwd=2)
-lines(density(sel$hdi2002), lty=3,lwd=2)
+rug(sel$idh1992, col="black", lwd=2)
+lines(density(sel$idh1992), lty=3,lwd=2)
 
-hist(sel$hdi2022,
-     breaks=quantile(sel$hdi2022),
+hist(sel$idh2022,
+     breaks=quantile(sel$idh2022),
      xlim=c(mintot,maxtot),
      col="gray80",
      main= "Situation en 2022",
      xlab = "IDH régional",
      ylab = "Fréquence moyenne")
-rug(sel$hdi2022, col="black", lwd=2)
-lines(density(sel$hdi2022), lty=3,lwd=2)
+rug(sel$idh2022, col="black", lwd=2)
+lines(density(sel$idh2022), lty=3,lwd=2)
 ```
 
 {{< pagebreak >}}
 
-## (3) DONNEES GEOMETRIQUES
-
-
-### Acquision 
+## (3) PREPARATION DES DONNEES GEOMETRIQUES
 
 -   **Consigne** : Après avoir chargé le fonds de carte affichez le contour des régions et  le code des unités.
 
 ```{r}
+# Importe le fonds de carte
+map <- st_read("data/exo_stats/mapreg.shp")
 
-
-# ne conserve que le code et le nom
-map <- map[,c("gdlcode","Region","geometry")]
+# Projette
+map <- st_transform(map, 2042)
 
 
 # Affichage du fonds de carte
@@ -145,7 +156,7 @@ plot(map$geometry,
 
 # Ajout du code des unités spatiales
 coo<-st_coordinates(st_centroid(map))
-text(coo, map$gdlcode, cex=0.5,col="black",)
+text(coo, map$code, cex=0.5,col="black",)
 
 ```
 
@@ -161,23 +172,23 @@ text(coo, map$gdlcode, cex=0.5,col="black",)
 
 ```{r}
 library(mapsf)
-map<-map[,c("gdlcode","geometry")]
-map_don <- merge(map, don, by="gdlcode")
+map<-map[,c("code","geometry")]
+map_don <- merge(map, don, by="code")
 
 maxequ<-max(don$pop012,don$pop2022)
 
 par(mfrow=c(1,2))
 mf_map(map_don$geometry, col="white")
-mf_map(map_don, type="prop", var="pop2002",
+mf_map(map_don, type="prop", var="pop1992",
        val_max = maxequ, inches=0.1, col="gray20", 
-       leg_title = "Population",)
-mf_layout(title="2012",frame = T, credits = "Source : INS Tunisie")
+       leg_title = "Population (milliers)",)
+mf_layout(title="1992",frame = T, credits = "Source : Global Data Lab, 2025")
 
 mf_map(map_don$geometry, col="white")
 mf_map(map_don, type="prop", var="pop2022",
        val_max = maxequ, inches=0.1, col="gray20",
-       leg_title = "Population")
-mf_layout(title="2022",frame = T, credits = "Source : INS Tunisie")
+       leg_title = "Population (milliers)")
+mf_layout(title="2022",frame = T, credits = "Source : Gloabl Data Lab 2025")
 
 
 ```
@@ -185,24 +196,24 @@ mf_layout(title="2022",frame = T, credits = "Source : INS Tunisie")
 
 ### Cartes de ratio (choroplèthes)
 
--   **Consigne** : Réalisez deux cartes de taux décrivant le niveau de l'IDH en 2002 et 2022. Pour les rendre comparables vous utiliserez dans chaque carte une partition en quintiles (5 classes d'effectifs égaux)
+-   **Consigne** : Réalisez deux cartes de taux décrivant le niveau de l'IDH en 2002 et 2022. Pour les rendre comparables vous utiliserez dans chaque carte une partition en quartiles (4 classes d'effectifs égaux)
 
 
 ```{r}
 library(mapsf)
-map_don <- merge(map, don, by="gdlcode")
+map_don <- merge(map, don, by="code")
 maxequ<-max(don$hdi2002,don$hdi2022)
 
 par(mfrow=c(1,2))
-mf_map(map_don, type="choro", var="hdi2002",
-       breaks = "quantile",nbreaks = 5, pal ="Grays",
+mf_map(map_don, type="choro", var="idh1992",
+       breaks = "quantile",nbreaks = 4, pal ="Grays",
        leg_title = "IDH",leg_val_rnd = 2)
-mf_layout(title="2002",frame = T, credits = "Source : Global Data Lab")
+mf_layout(title="1992",frame = T, credits = "Source : Global Data Lab, 2025")
 
-mf_map(map_don, type="choro", var="hdi2022",
-       breaks = "quantile",nbreaks = 5, pal ="Grays",
+mf_map(map_don, type="choro", var="idh2022",
+       breaks = "quantile",nbreaks = 4, pal ="Grays",
        leg_title = "IDH",leg_val_rnd = 2)
-mf_layout(title="2022",frame = T, credits = "Source : Global Data Lab")
+mf_layout(title="2022",frame = T, credits = "Source : Global Data Lab, 2025")
 
 ```
 
@@ -213,15 +224,15 @@ mf_layout(title="2022",frame = T, credits = "Source : Global Data Lab")
 
 ### Nuage de points
 
-- **Consigne** : Tracez un nuage de point montrant l'évolution de l'indicateur entre les deux dates.
+- **Consigne** : Tracez un nuage de point montrant l'évolution de l'indicateur de développement humain entre les deux dates.
 
 ```{r}
 # prépration de l'analyse
-gdlcode<-don$gdlcode
-nom<-don$Region
-X<-don$hdi2002
-Y<-don$hdi2022
-tab<-data.frame(gdlcode,nom,X,Y)
+code<-don$code
+nom<-don$nom
+X<-don$idh1992
+Y<-don$idh2022
+tab<-data.frame(code,nom,X,Y)
 
 # Diagramme
 plot(tab$X,tab$Y, 
@@ -229,7 +240,7 @@ plot(tab$X,tab$Y,
      cex=0.8,
      col="red",
      main = "Evolution de l'IDH",
-     xlab="IDH 2002",
+     xlab="IDH 1992",
      ylab ="IDH 2022")
 text(tab$X,tab$Y,tab$nom, 
      pos=2,
@@ -262,7 +273,7 @@ plot(tab$X,tab$Y,
      cex=0.8,
      col="red",
      main = "Evolution de l'IDH",
-     xlab="IDH 2002",
+     xlab="IDH 1992",
      ylab ="IDH 2022")
 text(tab$X,tab$Y,tab$nom, 
      pos=2,
@@ -297,8 +308,8 @@ library(mapsf)
 tab$Y_res_std<-tab$Y_res/sd(tab$Y_res)
 
 # Jointure avec la carte
-map<-map[,c("gdlcode","geometry")]
-map_reg <- merge(map, tab, by="gdlcode")
+map<-map[,c("code","geometry")]
+map_reg <- merge(map, tab, by="code")
 
 # Choix de la palette et des classes
 library(RColorBrewer)
@@ -308,7 +319,7 @@ mybreaks = c(-10, -2,-1,0,1,2,10)
 mf_map(map_reg, type="choro", var="Y_res_std",
        pal = mypal, breaks=mybreaks,
        leg_title = "Résidus standardisés",leg_val_rnd = 1)
-mf_layout(title="Ecarts à la tendance 2002-2022",frame = T, credits = "Source : Global Data Lab")
+mf_layout(title="Ecarts à la tendance 1992-2022",frame = T, credits = "Source : Global Data Lab, 2025")
 
 ```
 
@@ -316,44 +327,64 @@ mf_layout(title="Ecarts à la tendance 2002-2022",frame = T, credits = "Source :
 
 ## (6) ANALYSE SPATIALE
 
-### Distance au chef_lieu
+On se propose d'analyser l'effet de la distance à la capitale économique (Abidjan) ou politique (Yamoussoukro) sur l'évolution de lIDH entre 1992 et 2022 
 
--   **Consigne** : ajoutez au tableau de données une colonne correspondant à la distance en km à la ville principale du pays (ici Abidjan) et faites en une cartographie en prenant comme bornes de classes 0, 100, 200, 300, 400, 500, 1000 km. 
+### Distance aux deux capitales.
+
+-   **Consigne** : ajoutez au tableau de données une colonne correspondant à la distance en km à Abidjan ou Yamoussoukro et faites en une cartographie en prenant comme bornes de classes 0, 100, 200, 300, 400, 500, 1000 km. 
 
 ```{r}
-map_don$cap<-0
-map_don$cap[1]<-1
-cap<-map_don[map_don$cap==1,]
-map_don$dist<-1+as.numeric(st_distance(st_centroid(map_don),st_centroid(cap)))/1000
+map_don$capeco<-0
+map_don$capeco[1]<-1
+capeco<-map_don[map_don$capeco==1,]
+map_don$distcapeco<-1+as.numeric(st_distance(st_centroid(map_don),st_centroid(capeco)))/1000
+
+map_don$cappol<-0
+map_don$cappol[2]<-1
+cappol<-map_don[map_don$cappol==1,]
+map_don$distcappol<-1+as.numeric(st_distance(st_centroid(map_don),st_centroid(cappol)))/1000
+
+
 
 # Choix de la palette et des classes
 mypal<-brewer.pal(n = 7, name = "Greys")
 mybreaks = c(0,100,200,300,400,500, 1000)
 
-mf_map(map_don, type="choro", var="dist",
+par(mfrow=c(1,2))
+mf_map(map_don, type="choro", var="distcapeco",
        pal = mypal, breaks=mybreaks,
        leg_title = "en km",leg_val_rnd = 0)
-mf_layout(title="Distance à vol d'oiseau au chef-lieu",frame = T, credits = "Source : INS Tunisie")
+mf_layout(title="Distance à la capitale économique",frame = T, credits = "Source : EE CIST 2025")
+
+mf_map(map_don, type="choro", var="distcappol",
+       pal = mypal, breaks=mybreaks,
+       leg_title = "en km",leg_val_rnd = 0)
+mf_layout(title="Distance à la capitale politique",frame = T, credits = "Source : EE CIST 2025")
+
+
 
 ```
 
 
-### Relation entre équipement et distance au chef-lieu
+### Relation entre développement et distance à la capitale
 
--   **Consigne** : Déterminez le modèle qui décrit le mieux la relation entre l'IDH  (Y) et la distance à lamétropole économique (X) en 2022
+-   **Consigne** : Etudiez les corrélations entre l'IDH en 1992 (Y1) ou 2022 (Y2) et la distance à la capitale économique (X1) ou  politique (X2). Que pouvez-vous en conclure ?
 
 ```{r,fig.width=8,fig.height=8}
-X<-map_don$dist
-Y<-map_don$hdi2022
+X1<-map_don$distcapeco
+X2<-map_don$distcappol
+Y1<-map_don$idh1992
+Y2<-map_don$idh2022
 
 par(mfrow=c(2,2))
-plot(X,Y,main="Modèle arithmétique Y = a.X+b", sub = round(cor(X,Y),3))
-plot(Y, log(X), main = "Modèle logarithmique Y = a.log(X)+b",sub = round(cor(log(X),Y),3))
-plot(log(Y),X, main = "Modèle exponentiel log(Y) = a.X+b",sub = round(cor(X,log(Y)),3))
-plot(log(X),log(Y), main = "Modèle puissance log(Y) = a.log(X)+b",sub = round(cor(log(X),log(Y)),3))
-
-
-
+plot(X1,Y1,main="Distance à Abidjan 1992", sub = round(cor(X1,Y1),3), pch=20)
+abline(lm(Y1~X1),col="red")
+plot(X2,Y1, main = "Distance à Yamoussoukro 1992",sub = round(cor(X2,Y1),3),pch=20)
+abline(lm(Y1~X2),col="red")
+plot(X1,Y2,main="Distance à Abidjan 2022", sub = round(cor(X1,Y2),3), pch=20)
+abline(lm(Y2~X1),col="red")
+plot(X2,Y2, main = "Distance à Yamoussoukro 2022",sub = round(cor(X2,Y2),3),pch=20)
+abline(lm(Y2~X2),col="red")
 
 ```
 
