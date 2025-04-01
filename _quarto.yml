@@ -15,7 +15,9 @@ website:
       - href: Enseigne_R.qmd
         text: "Obj.1 Statistiques avec R"
       - href: Magrit.qmd
-        text: "Obj.2 Cartes thématiques avec Magrit"
+        text: "Obj.2 Cartographie avec Magrit"
+      - href: Access.qmd
+        text: "Obj.3 Accessibilité avec R et OSRM"
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/afromapr
