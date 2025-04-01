@@ -2,51 +2,142 @@
   {
     "objectID": "Enseigne_R.html",
     "href": "Enseigne_R.html",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "",
     "text": "On se propoe de montrer l’intérêt de R pour l’enseignement de la statistique aux étudiants de licence de géographie… Cet exercice correspond typiquement au travail qu’on pourrait donner à des étudiants de licence 2 ou 3 ayant suivi des cours de statistique univariée et bivariée et ayant des connaissances de base en cartographie thématique.\nOn propose de réaliser une analyse de la distribution de l’Indicateur de Développement humain des régions de Côte d’Ivoire entre 2002 et 2022 à l’aide des données accessibles sur le site Global Data Lab . Le programme est rédigé de telle sorte qu’on puisse facilement refaire l’exercice en prenant d’autres dates (ex. Evolution entre 2012 et 2022) ou d’autres pays d’Afrique de l’Ouest.\nCode\nlibrary(sf)\nlibrary(dplyr)"
   },
   {
     "objectID": "Enseigne_R.html#preparation-des-donnees-statistiques",
     "href": "Enseigne_R.html#preparation-des-donnees-statistiques",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "(1) PREPARATION DES DONNEES STATISTIQUES",
     "text": "(1) PREPARATION DES DONNEES STATISTIQUES\n\nConsigne : Après avoir chargé les fichiers idh2002.csv et idh2022.csv, construisez un tableau de donnée comportant le code et le nom des régions ainsi que leur population et leur indicateur de développement humain aux deux dates.\n\n\n\nCode\n# Importe les données\ntab1&lt;-read.table(\"data/exo_stats/idh1992.csv\", \n                dec=\".\",\n                sep = \";\",\n                header=TRUE)\ntab2&lt;-read.table(\"data/exo_stats/idh2022.csv\", \n                dec=\".\", \n                sep=\";\",\n                header=TRUE)\n\n# Sélectionne les variables\ntab1 &lt;- tab1 %&gt;% select(code=code, pays=pays, nom=nom, pop1992 = pop, idh1992 = idh)\ntab2 &lt;- tab2 %&gt;% select(code=code,  pop2022 = pop, idh2022 = idh)\n\n# Fusionne les deux tableaux\ndon &lt;- left_join(tab1,tab2)\n\n\n# Affiche\nlibrary(knitr)\nkable(don, \n      main = \"Tableau de départ\")\n\n\n\n\n\ncode\npays\nnom\npop1992\nidh1992\npop2022\nidh2022\n\n\n\n\nCIVr101\nCIV\nAbidjan\n2728\n0.564\n5984\n0.569\n\n\nCIVr102\nCIV\nYamoussoukro\n112\n0.623\n245\n0.619\n\n\nCIVr103\nCIV\nBas Sassandra\n529\n0.406\n1160\n0.520\n\n\nCIVr104\nCIV\nComoe\n749\n0.378\n1642\n0.582\n\n\nCIVr105\nCIV\nDenguele\n381\n0.332\n836\n0.440\n\n\nCIVr106\nCIV\nGoh-Djiboua\n686\n0.424\n1504\n0.551\n\n\nCIVr107\nCIV\nLacs\n1098\n0.389\n2409\n0.542\n\n\nCIVr108\nCIV\nLagunes\n1023\n0.456\n2245\n0.566\n\n\nCIVr109\nCIV\nMontagnes\n1365\n0.380\n2994\n0.492\n\n\nCIVr110\nCIV\nSassandra-Marahoue\n1614\n0.407\n3541\n0.512\n\n\nCIVr111\nCIV\nSavanes\n628\n0.409\n1376\n0.471\n\n\nCIVr112\nCIV\nVallee du Bandama\n520\n0.443\n1140\n0.554\n\n\nCIVr113\nCIV\nWoroba\n574\n0.199\n1259\n0.423\n\n\nCIVr114\nCIV\nZanzan\n834\n0.320\n1829\n0.491"
   },
   {
     "objectID": "Enseigne_R.html#statistique-univariee",
     "href": "Enseigne_R.html#statistique-univariee",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "(2) STATISTIQUE UNIVARIEE",
     "text": "(2) STATISTIQUE UNIVARIEE\n\nParamètres principaux\n\nConsigne : Etudiez l’évolution de l’IDH entre 1992 et 2022 en vous servant de paramètres principaux (valeurs centrales, paramètres de dispersion). Puis établissez deux histogrammes permettant de visualiser l’évolution.\n\n\n\nCode\n# sélectionne les variables\nsel &lt;- don[,c(\"idh1992\",\"idh2022\")]\n\n# Tableau standard\nquant&lt;-apply(sel,2,quantile)\nmoy&lt;-apply(sel,2,mean)\nect&lt;-apply(sel,2,sd)\ncv&lt;-100*ect/moy\ntab&lt;-rbind(quant,moy,ect,cv)\nrow.names(tab) &lt;-c(\"Minimum\",\"Q1\",\"Médiane\",\"Q3\",\"Maximum\",\"Moyenne\",\"Ecart-type\", \"C.V. (%)\")\n\nkable(tab, caption=\"Paramètres principaux\", digits =2,\n      col.names = c(\"Situation en 1992\",\"Situation en 2022\"),\n      )\n\n\n\nParamètres principaux\n\n\n\nSituation en 1992\nSituation en 2022\n\n\n\n\nMinimum\n0.20\n0.42\n\n\nQ1\n0.38\n0.49\n\n\nMédiane\n0.41\n0.53\n\n\nQ3\n0.44\n0.56\n\n\nMaximum\n0.62\n0.62\n\n\nMoyenne\n0.41\n0.52\n\n\nEcart-type\n0.10\n0.06\n\n\nC.V. (%)\n24.77\n10.65\n\n\n\n\n\n\n\nHistogrammes\n\nConsigne : Etablissez deux histogrammes permettant de visualiser la forme de la distribution de l’IDH en 1992 et en 2022\n\n\n\nCode\npar(mfrow=c(2,1))\n\nmintot &lt;-min(c(sel$idh1992, sel$idh2022))\nmaxtot &lt;-max(c(sel$idh1992, sel$idh2022))\n\n# Histogramme\nhist(sel$idh1992,\n     breaks=quantile(sel$idh1992),\n     xlim=c(mintot,maxtot),\n     col=\"gray80\",\n     main= \"Situation en 1992\",\n     xlab = \"IDH régional\",\n     ylab = \"Fréquence moyenne\")\nrug(sel$idh1992, col=\"black\", lwd=2)\nlines(density(sel$idh1992), lty=3,lwd=2)\n\nhist(sel$idh2022,\n     breaks=quantile(sel$idh2022),\n     xlim=c(mintot,maxtot),\n     col=\"gray80\",\n     main= \"Situation en 2022\",\n     xlab = \"IDH régional\",\n     ylab = \"Fréquence moyenne\")\nrug(sel$idh2022, col=\"black\", lwd=2)\nlines(density(sel$idh2022), lty=3,lwd=2)"
   },
   {
     "objectID": "Enseigne_R.html#preparation-des-donnees-geometriques",
     "href": "Enseigne_R.html#preparation-des-donnees-geometriques",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "(3) PREPARATION DES DONNEES GEOMETRIQUES",
     "text": "(3) PREPARATION DES DONNEES GEOMETRIQUES\n\nConsigne : Après avoir chargé le fonds de carte affichez le contour des régions et le code des unités.\n\n\n\nCode\n# Importe le fonds de carte\nmap &lt;- st_read(\"data/exo_stats/mapreg.shp\")\n\n\nReading layer `mapreg' from data source \n  `/Users/claudegrasland1/worldregio/afromapr/data/exo_stats/mapreg.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 14 features and 3 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -8.599302 ymin: 4.361807 xmax: -2.494888 ymax: 10.73664\nGeodetic CRS:  WGS 84\n\n\nCode\n# Projette\nmap &lt;- st_transform(map, 2042)\n\n\n# Affichage du fonds de carte\npar(mar=c(0,0,3,0))\nplot(map$geometry, \n     col=\"gray90\",\n     main = \"Code des unités spatiales de la zone d'étude\")\n\n# Ajout du code des unités spatiales\ncoo&lt;-st_coordinates(st_centroid(map))\ntext(coo, map$code, cex=0.5,col=\"black\",)"
   },
   {
     "objectID": "Enseigne_R.html#cartographie-thematique",
     "href": "Enseigne_R.html#cartographie-thematique",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "(4) CARTOGRAPHIE THEMATIQUE",
     "text": "(4) CARTOGRAPHIE THEMATIQUE\n\nCartes de stock\n\nConsigne : Réalisez deux cartes de stock décrivant le nombre d’habitants en 2002 et 2022 Vous utiliserez la même échelle de taille pour rendre les deux cartes comparables.\n\n\n\nCode\nlibrary(mapsf)\nmap&lt;-map[,c(\"code\",\"geometry\")]\nmap_don &lt;- merge(map, don, by=\"code\")\n\nmaxequ&lt;-max(don$pop012,don$pop2022)\n\npar(mfrow=c(1,2))\nmf_map(map_don$geometry, col=\"white\")\nmf_map(map_don, type=\"prop\", var=\"pop1992\",\n       val_max = maxequ, inches=0.1, col=\"gray20\", \n       leg_title = \"Population (milliers)\",)\nmf_layout(title=\"1992\",frame = T, credits = \"Source : Global Data Lab, 2025\")\n\nmf_map(map_don$geometry, col=\"white\")\nmf_map(map_don, type=\"prop\", var=\"pop2022\",\n       val_max = maxequ, inches=0.1, col=\"gray20\",\n       leg_title = \"Population (milliers)\")\nmf_layout(title=\"2022\",frame = T, credits = \"Source : Gloabl Data Lab 2025\")\n\n\n\n\n\n\n\nCartes de ratio (choroplèthes)\n\nConsigne : Réalisez deux cartes de taux décrivant le niveau de l’IDH en 2002 et 2022. Pour les rendre comparables vous utiliserez dans chaque carte une partition en quartiles (4 classes d’effectifs égaux)\n\n\n\nCode\nlibrary(mapsf)\nmap_don &lt;- merge(map, don, by=\"code\")\nmaxequ&lt;-max(don$hdi2002,don$hdi2022)\n\npar(mfrow=c(1,2))\nmf_map(map_don, type=\"choro\", var=\"idh1992\",\n       breaks = \"quantile\",nbreaks = 4, pal =\"Grays\",\n       leg_title = \"IDH\",leg_val_rnd = 2)\nmf_layout(title=\"1992\",frame = T, credits = \"Source : Global Data Lab, 2025\")\n\nmf_map(map_don, type=\"choro\", var=\"idh2022\",\n       breaks = \"quantile\",nbreaks = 4, pal =\"Grays\",\n       leg_title = \"IDH\",leg_val_rnd = 2)\nmf_layout(title=\"2022\",frame = T, credits = \"Source : Global Data Lab, 2025\")"
   },
   {
     "objectID": "Enseigne_R.html#statistiques-bivariees",
     "href": "Enseigne_R.html#statistiques-bivariees",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "(5) STATISTIQUES BIVARIEES",
     "text": "(5) STATISTIQUES BIVARIEES\n\nNuage de points\n\nConsigne : Tracez un nuage de point montrant l’évolution de l’indicateur de développement humain entre les deux dates.\n\n\n\nCode\n# prépration de l'analyse\ncode&lt;-don$code\nnom&lt;-don$nom\nX&lt;-don$idh1992\nY&lt;-don$idh2022\ntab&lt;-data.frame(code,nom,X,Y)\n\n# Diagramme\nplot(tab$X,tab$Y, \n     pch=20,\n     cex=0.8,\n     col=\"red\",\n     main = \"Evolution de l'IDH\",\n     xlab=\"IDH 1992\",\n     ylab =\"IDH 2022\")\ntext(tab$X,tab$Y,tab$nom, \n     pos=2,\n     cex=0.5,\n     col=\"blue\")\n\n\n\n\n\n\n\nAnalyse de la corrélation\n\nConsigne : calculez les coefficients de corrélation de Pearson et Spearman et testez leur sgnificativité.\n\n\n\nCode\ncor.test(X,Y, method=\"pearson\")\n\n\n\n    Pearson's product-moment correlation\n\ndata:  X and Y\nt = 4.9223, df = 12, p-value = 0.0003524\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.5073463 0.9403486\nsample estimates:\n      cor \n0.8177876 \n\n\nCode\ncor.test(X,Y, method=\"spearman\")\n\n\n\n    Spearman's rank correlation rho\n\ndata:  X and Y\nS = 134, p-value = 0.006405\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.7054945 \n\n\n\n\nDroite de régression\n\nConsigne : calculez l’equation de la droite de régression et tracez- là sur le graphique.\n\n\n\nCode\nmodreg &lt;- lm(Y~X)\nsummary(modreg)\n\n\n\nCall:\nlm(formula = Y ~ X)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.052586 -0.016570 -0.001574  0.019274  0.072368 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  0.33948    0.03848   8.823 1.36e-06 ***\nX            0.45013    0.09145   4.922 0.000352 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.03342 on 12 degrees of freedom\nMultiple R-squared:  0.6688,    Adjusted R-squared:  0.6412 \nF-statistic: 24.23 on 1 and 12 DF,  p-value: 0.0003524\n\n\nCode\n# Diagramme\nplot(tab$X,tab$Y, \n     pch=20,\n     cex=0.8,\n     col=\"red\",\n     main = \"Evolution de l'IDH\",\n     xlab=\"IDH 1992\",\n     ylab =\"IDH 2022\")\ntext(tab$X,tab$Y,tab$nom, \n     pos=2,\n     cex=0.5,\n     col=\"blue\")\n\nabline(modreg,col=\"black\",lwd=1)\n\n\n\n\n\n\n\nAnalyse des résidus\n\nConsigne : Calculez les valeurs théoriques prévus par le modèle de régression et les résidus. Affichez le tableau correspondant après l’avoir trié par ordre de résidus croissants.\n\n\n\nCode\ntab$Y_est &lt;- modreg$fitted.values\ntab$Y_res &lt;- modreg$residuals\ntab&lt;-tab[order(tab$Y_res),]\nkable(tab, digits=3)\n\n\n\n\n\n\ncode\nnom\nX\nY\nY_est\nY_res\n\n\n\n\n11\nCIVr111\nSavanes\n0.409\n0.471\n0.524\n-0.053\n\n\n5\nCIVr105\nDenguele\n0.332\n0.440\n0.489\n-0.049\n\n\n1\nCIVr101\nAbidjan\n0.564\n0.569\n0.593\n-0.024\n\n\n9\nCIVr109\nMontagnes\n0.380\n0.492\n0.511\n-0.019\n\n\n10\nCIVr110\nSassandra-Marahoue\n0.407\n0.512\n0.523\n-0.011\n\n\n13\nCIVr113\nWoroba\n0.199\n0.423\n0.429\n-0.006\n\n\n3\nCIVr103\nBas Sassandra\n0.406\n0.520\n0.522\n-0.002\n\n\n2\nCIVr102\nYamoussoukro\n0.623\n0.619\n0.620\n-0.001\n\n\n14\nCIVr114\nZanzan\n0.320\n0.491\n0.484\n0.007\n\n\n12\nCIVr112\nVallee du Bandama\n0.443\n0.554\n0.539\n0.015\n\n\n6\nCIVr106\nGoh-Djiboua\n0.424\n0.551\n0.530\n0.021\n\n\n8\nCIVr108\nLagunes\n0.456\n0.566\n0.545\n0.021\n\n\n7\nCIVr107\nLacs\n0.389\n0.542\n0.515\n0.027\n\n\n4\nCIVr104\nComoe\n0.378\n0.582\n0.510\n0.072\n\n\n\n\n\n\n\nCartographie des résidus\n\nConsigne : Cartographiez les résidus après les avoir standardisés.\n\n\n\nCode\nlibrary(mapsf)\n\n# Standardisation des résidus\ntab$Y_res_std&lt;-tab$Y_res/sd(tab$Y_res)\n\n# Jointure avec la carte\nmap&lt;-map[,c(\"code\",\"geometry\")]\nmap_reg &lt;- merge(map, tab, by=\"code\")\n\n# Choix de la palette et des classes\nlibrary(RColorBrewer)\nmypal&lt;-brewer.pal(n = 6, name = \"RdYlBu\")\nmybreaks = c(-10, -2,-1,0,1,2,10)\n\nmf_map(map_reg, type=\"choro\", var=\"Y_res_std\",\n       pal = mypal, breaks=mybreaks,\n       leg_title = \"Résidus standardisés\",leg_val_rnd = 1)\nmf_layout(title=\"Ecarts à la tendance 1992-2022\",frame = T, credits = \"Source : Global Data Lab, 2025\")"
   },
   {
     "objectID": "Enseigne_R.html#analyse-spatiale",
     "href": "Enseigne_R.html#analyse-spatiale",
-    "title": "EXO1 : Enseigner la statistique avec R",
+    "title": "OBJECTIF 1 : Statistiques avec R",
     "section": "(6) ANALYSE SPATIALE",
     "text": "(6) ANALYSE SPATIALE\nOn se propose d’analyser l’effet de la distance à la capitale économique (Abidjan) ou politique (Yamoussoukro) sur l’évolution de lIDH entre 1992 et 2022\n\nDistance aux deux capitales.\n\nConsigne : ajoutez au tableau de données une colonne correspondant à la distance en km à Abidjan ou Yamoussoukro et faites en une cartographie en prenant comme bornes de classes 0, 100, 200, 300, 400, 500, 1000 km.\n\n\n\nCode\nmap_don$capeco&lt;-0\nmap_don$capeco[1]&lt;-1\ncapeco&lt;-map_don[map_don$capeco==1,]\nmap_don$distcapeco&lt;-1+as.numeric(st_distance(st_centroid(map_don),st_centroid(capeco)))/1000\n\nmap_don$cappol&lt;-0\nmap_don$cappol[2]&lt;-1\ncappol&lt;-map_don[map_don$cappol==1,]\nmap_don$distcappol&lt;-1+as.numeric(st_distance(st_centroid(map_don),st_centroid(cappol)))/1000\n\n\n\n# Choix de la palette et des classes\nmypal&lt;-brewer.pal(n = 7, name = \"Greys\")\nmybreaks = c(0,100,200,300,400,500, 1000)\n\npar(mfrow=c(1,2))\nmf_map(map_don, type=\"choro\", var=\"distcapeco\",\n       pal = mypal, breaks=mybreaks,\n       leg_title = \"en km\",leg_val_rnd = 0)\nmf_layout(title=\"Distance à la capitale économique\",frame = T, credits = \"Source : EE CIST 2025\")\n\nmf_map(map_don, type=\"choro\", var=\"distcappol\",\n       pal = mypal, breaks=mybreaks,\n       leg_title = \"en km\",leg_val_rnd = 0)\nmf_layout(title=\"Distance à la capitale politique\",frame = T, credits = \"Source : EE CIST 2025\")\n\n\n\n\n\n\n\nRelation entre développement et distance à la capitale\n\nConsigne : Etudiez les corrélations entre l’IDH en 1992 (Y1) ou 2022 (Y2) et la distance à la capitale économique (X1) ou politique (X2). Que pouvez-vous en conclure ?\n\n\n\nCode\nX1&lt;-map_don$distcapeco\nX2&lt;-map_don$distcappol\nY1&lt;-map_don$idh1992\nY2&lt;-map_don$idh2022\n\npar(mfrow=c(2,2))\nplot(X1,Y1,main=\"Distance à Abidjan 1992\", sub = round(cor(X1,Y1),3), pch=20)\nabline(lm(Y1~X1),col=\"red\")\nplot(X2,Y1, main = \"Distance à Yamoussoukro 1992\",sub = round(cor(X2,Y1),3),pch=20)\nabline(lm(Y1~X2),col=\"red\")\nplot(X1,Y2,main=\"Distance à Abidjan 2022\", sub = round(cor(X1,Y2),3), pch=20)\nabline(lm(Y2~X1),col=\"red\")\nplot(X2,Y2, main = \"Distance à Yamoussoukro 2022\",sub = round(cor(X2,Y2),3),pch=20)\nabline(lm(Y2~X2),col=\"red\")"
+  },
+  {
+    "objectID": "Magrit.html",
+    "href": "Magrit.html",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "",
+    "text": "On se propoe de montrer ici brièvement l’intérêt du logiciel MAGRIT pour la réalisation de cartes thématiques aussi appelées cartes statistiques. Les cartes thématiques constituent un domaine particulier de la géomatique qui cherche à visualiser la distribution de phénomènes économiques et sociaux distribués le plus souvent à l’intérieur de maillages administratifs issus notamment des recensement. Elle obéit à des règles précises de sémiologie graphique et a donné naissance à des logiciels spécialisés tels que Philcarto et, plus récemment MAGRIT.\nMAGRIT constitue actuellement la solution la plus innovante et la plus efficace en matière de cartograhie thématique. Très utilisé dans l’enseignement, il constitue également un outil de recherche et a fréquemment été utilisé pour la création d’atlas ou d’études à portée opérationnelle.\nInitialement développé comme une application web accessible par l’adresse https://magrit.cnrs.fr/, il est désormais disponible en version desktop téléchargeable que l’on peut installer sur son poste de travail et utiliser sans connexion internet. Ceci est particulièrement précieux pour les utilisateurs localisés dans des pays où les connexions internet sont instables et coûteuses.\nNous allons prendre comme objectif typique l’exemple de la création d’une carte à partir de données du dernier recensement de Côte d’Ivoire en 2021. On supposera que l’on veut créer une carte de l’équipement des ménages en ordinateur dans le district de la vallée du Bandaman au niveau des communes et sous préfectures. Voici le résultat final auquel nous devons aboutir :"
+  },
+  {
+    "objectID": "Magrit.html#donnees-geometriques",
+    "href": "Magrit.html#donnees-geometriques",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(1) DONNEES GEOMETRIQUES",
+    "text": "(1) DONNEES GEOMETRIQUES\nNous avons besoin de disposer tout d’abord d’un fonds de carte administratif de la côte d’Ivoire au niveau des communes et sous-préfecture qui soit compatible avec les données du recensement de 2021. Après quelques recherches, on trouve un fonds de carte récent des communes de côte d’Ivoire sur le site du SIGFU\n\nAprès avoir importé ce fonds de carte dans un format quelconque (shapefile, geojson) on le charge dans MAGRIT et on obtient une première visualisation sans avoir besoin de se servir de QGIS ou ARCGIS?"
+  },
+  {
+    "objectID": "Magrit.html#selection",
+    "href": "Magrit.html#selection",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(2) SELECTION",
+    "text": "(2) SELECTION\nOn souhaite maintenant extraire uniquement le fonds de carte du district de la vallée du Bandana. Là encore, pas besoin de recourir à un SIG puisque MAGRIT dispose de fonctions de sélections à l’intérieur d’une couche. Ici, nous demandons dans notre requête de choisir toutes les entités situées dans les départements de Gbeke ou Hambol qui constituent le district de la Vallée du Bandaman\n\nOn peut alors afficher le résultat de la sélection sous forme d’une nouvelle couche et rendre invisible la précédente :"
+  },
+  {
+    "objectID": "Magrit.html#agregation",
+    "href": "Magrit.html#agregation",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(3) AGREGATION",
+    "text": "(3) AGREGATION\nMaintenant que nous disposons du fonds de carte principal, nous souhaiterions l’agréger aux niveaux administratifs supérieur. Là encore, MAGRIT offre des fonctions pratiques d’agrégation géométrique qui fonctionne parfaitement (si la géométrie du fonds de carte est correcte). On peut donc créer le fonds de carte des départements et celui des régions en se servant des codes fournis par le fonds de carte.\n \nOn peut ensuite empiler nos trois couches et régler la transparence et l’épaissur des limites pour faire apparaître les trois niveaux administratifs"
+  },
+  {
+    "objectID": "Magrit.html#donnees-statistiques",
+    "href": "Magrit.html#donnees-statistiques",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(4) DONNEES STATISTIQUES",
+    "text": "(4) DONNEES STATISTIQUES\nNous allons maintenant ajouter des données statistiques à notre fonds de carte en nous servant des tableaux fournis par l’Agence Nationale de la Statistique de Côte d’Ivoire (ANSTAT) et accessibles sous forme de fichier détaillés par communes sur le site des résultats du recensement 2021.\n\nNous allons prendre comme exemple le tableau n°17 intitulé répartition des ménages selon la possession d’équipement informatiqus, audiovisuels et de communication. les résultats peuvent se consulter en ligne et fournissent le détail du nombre de ménages mossédant tel ou tel équipement par district, région, département, sous-préfecture ou commune comme on peut le voir sur la page ci-dessous :\n\nLe fichier .pdf peut-être téléchargé mais l’extraction des données n’est pas très facile. On est donc obligé de saisir manuellement dans un tableau Excel les colonnes qui nous intéressent en ayant soin d’ajouter au préalable une colonne correspondant au code cartographique du fonds de carte. Ici, nous avons retenu uniquement trois variables correspondant au nombre d’habitant, au nombre de ménages et au nombre d’ordinateur par sous-préfectures ou communes du district de la Vallée du Bandaman."
+  },
+  {
+    "objectID": "Magrit.html#jointure",
+    "href": "Magrit.html#jointure",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(5) JOINTURE",
+    "text": "(5) JOINTURE\nNous allons ensuite importer ce fichier Excel dans MAGRIT et effectuer sa jointure avec notre fonds de carte des communes et sous-préfectures en fournissant le nom de la variable utilisée pour faire le lien, comme on le ferait avec un SIG."
+  },
+  {
+    "objectID": "Magrit.html#carte-de-stock",
+    "href": "Magrit.html#carte-de-stock",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(6) CARTE DE STOCK",
+    "text": "(6) CARTE DE STOCK\nLa table attributaire de la couche des communes et sous-préfecture comporte désormais les variables que nous avions saisi et on peut commencer à créer une carte thématique représentant par exemple la population. Il suffit de quelques commandes pour préciser la couleur des figurés proportionnels et leur taille maximale.\n\nLe résultat s’affiche immédiatement sous la forme d’une nouvelle couche superposée aux précédentes. On remarquera que MAGRIT a calculé automatiquement le centroïde des polygones pour y placer les cercles représentant la population."
+  },
+  {
+    "objectID": "Magrit.html#creation-de-variables",
+    "href": "Magrit.html#creation-de-variables",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(7) CREATION DE VARIABLES",
+    "text": "(7) CREATION DE VARIABLES\nNous souhaiterions maintenant cartographier le nombre moyen d’ordinateurs pour 100 ménages et réaliser une carte choroplèthe du niveau d’équipement. Nous aurions pu créer cette variable dans Excel au moment de la saisie des données, mais il est possible de le faire également à l’intérieur de MAGRIT."
+  },
+  {
+    "objectID": "Magrit.html#carte-choroplethe",
+    "href": "Magrit.html#carte-choroplethe",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(8) CARTE CHOROPLETHE",
+    "text": "(8) CARTE CHOROPLETHE\nNous allons maintenant pouvoir utiliser cette nouvelle variable pour réaliser une carte du taux d’équipement en choisissant la palette de couleur et le mode de discrétisation en classes. MAGRIT fournit une aide au choix des classes grâce à un petit utilitaire de statistiques qui permet de visualiser la forme de la distribution.\n\nDans l’exemple du nombre d’ordinateur par ménage, la distribution est très asymétrique à gauche et un découpage selon une progression géométrique semble être une bonne solution."
+  },
+  {
+    "objectID": "Magrit.html#organisation-des-couches",
+    "href": "Magrit.html#organisation-des-couches",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(9) ORGANISATION DES COUCHES",
+    "text": "(9) ORGANISATION DES COUCHES\nNous allons maintenant réorganiser les couches cartographiques et rendre invisible celles qui ne sont pas nécessaires. Dans notre exemple, on garde la carte choroplète et on superpose par dessus les découpages administratifs des départements et régions. Puis on ajoute une nouvelle couhce avec le nombre total d’ordinateurs en suivant la même procédure que pour la population puisqu’il s’agit d’un stock."
+  },
+  {
+    "objectID": "Magrit.html#habillage-et-finitions",
+    "href": "Magrit.html#habillage-et-finitions",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(10) HABILLAGE ET FINITIONS",
+    "text": "(10) HABILLAGE ET FINITIONS\nNous disposons désormais de toutes les couches cartographiques utiles mais il faut encore habiller notrre carte en ajoutant plusieurs éléments (titre, source, échelle, orientation, …). Ce travail est en général fait dans un logiciel de dessin spécialisé comme Adobe Illustrator ou Inkscape. Mais MAGRIT offre des fonctionalités très avancées qui permettent d’effectuer l’essentiel du travail sans changer de logiciel. Sans les détailler ici, nous présentons le résultat après ce travail exigeant qui suppose une bonne formation professionnelle de cartographe."
+  },
+  {
+    "objectID": "Magrit.html#sauvegarde-et-exportation",
+    "href": "Magrit.html#sauvegarde-et-exportation",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "(11) SAUVEGARDE ET EXPORTATION",
+    "text": "(11) SAUVEGARDE ET EXPORTATION\nLe projet MAGRIT peut être sauvegardé à tout moment au format .mjson ce qui permet ensuite de le reprendre et de le modifier. Ou simplement de réutiliser une partie des couches déjà créée. Si par exemple on souhaite créer une carte du nombre de téléphone mobiles par habitant, il suffira d’importer un nouveau jeu de données et de refaire les couches correspondantes sans être obligé de répéter toutes les étapes.\nLa carte proprement dite peut être exportée sous différents formats en fonction des utilisations que l’on souhaite en faire :\n\nformat SVG : c’est un format vectoriel qui permet des retouches à l’aide d’un logiciel de dessin (Adobe Illustrator ou Inkscape) et assure une qualité maximale pour l’édition d’un atlas, un livre ou un article. Il peut facilement se convertir en .pdf ou en postscript.\nformat PNG : c’est un format image (bitmap) plus pratique pour la production de site web ou la retouche rapide dans un logiciel de traitement d’image comme photoshop ou simplement paint.\nformat couches : c’est un format d’exportation vers les logiciels de SIG (QGIS ou ARCGIS) de type shapefile, geojson, geopackage, etc… On sélectionne les couches que l’on veut exporter pour en faire des fichiers séparés."
+  },
+  {
+    "objectID": "Magrit.html#conclusion",
+    "href": "Magrit.html#conclusion",
+    "title": "OBJECTIF 2 : Cartographie thématique avec Magrit",
+    "section": "CONCLUSION",
+    "text": "CONCLUSION\nMAGRIT n’a pas vocation à se substituer aux SIG (ou R) qui demeurent essentiel pour des cartographies complexes (topographie, images satellites, …) ou pour des opérations d’analyse spatiales (buffer, intersections, analyse de réseaux, …). Mais il offre une solution intégrée de très grande rapidité et efficacité pour la production de cartes thématiques. Sa principale force réside dans l’intégration des différentes étapes qui vont de la collecte de l’information statistique et cartographique à la production d’une carte thématique de qualité respectant l’ensemble des règles de la sémiologie graphique."
   },
   {
     "objectID": "index.html#objectif",

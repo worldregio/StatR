@@ -1,0 +1,162 @@
+---
+title: "OBJECTIF 2 : Cartographie thématique avec Magrit"
+subtitle: "AFROMPA'R Bouaké 2025"
+author: "Claude Grasland"
+date: "2025-03-28"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+    code-fold: true
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+On se propoe de montrer ici brièvement l'intérêt du logiciel [MAGRIT](https://magrit.cnrs.fr/) pour la réalisation de **cartes thématiques** aussi appelées cartes statistiques. Les cartes thématiques constituent un domaine particulier de la géomatique qui cherche à visualiser la distribution de phénomènes économiques et sociaux distribués le plus souvent à l'intérieur de maillages administratifs issus notamment des recensement. Elle obéit à des règles précises de [sémiologie graphique](https://ee2023.netlify.app/modules/cart1-2_the) et a donné naissance à des logiciels spécialisés tels que Philcarto et, plus récemment MAGRIT.
+
+MAGRIT constitue actuellement la solution la plus innovante et la plus efficace en matière de cartograhie thématique. Très utilisé dans l'enseignement, il constitue également un outil de recherche et a fréquemment été utilisé pour la création d'atlas ou d'études à portée opérationnelle. 
+
+Initialement développé comme une application web accessible par l'adresse [https://magrit.cnrs.fr/](https://magrit.cnrs.fr/), il est désormais disponible en [version desktop téléchargeable](https://magrit.cnrs.fr/access-the-app.html) que l'on peut installer sur son poste de travail et utiliser sans connexion internet. Ceci est particulièrement précieux pour les utilisateurs localisés dans des pays où les connexions internet sont instables et coûteuses.
+
+
+Nous allons prendre comme objectif typique l'exemple de la création d'une carte à partir de données du dernier recensement de Côte d'Ivoire en 2021. On supposera que l'on veut créer une carte de l'équipement des ménages en ordinateur dans le district de la vallée du Bandaman au niveau des communes et sous préfectures. Voici le résultat final auquel nous devons aboutir :
+
+
+![](img/magrit/carte_ordi.png){width=600}
+
+## (1) DONNEES GEOMETRIQUES
+
+Nous avons besoin de disposer tout d'abord d'un fonds de carte administratif de la côte d'Ivoire au niveau des communes et sous-préfecture qui soit compatible avec les données du recensement de 2021. Après quelques recherches, on trouve un fonds de carte récent des communes de côte d'Ivoire sur le site du [SIGFU](https://sigfu.ci/explorer/fr/jeux-de-donnees/limites-communes/telechargements)
+
+
+![](img/magrit/sigfu.jpg){width=500}
+
+Après avoir importé ce fonds de carte dans un format quelconque (shapefile, geojson) on le charge dans MAGRIT et on obtient une première visualisation sans avoir besoin de se servir de QGIS ou ARCGIS? 
+
+
+![](img/magrit/magrit001.jpg){width=600}
+
+## (2) SELECTION 
+
+
+On souhaite maintenant extraire uniquement le fonds de carte du district de la vallée du Bandana. Là encore, pas besoin de recourir à un SIG puisque MAGRIT dispose de fonctions de sélections à l'intérieur d'une couche. Ici, nous demandons dans notre requête de choisir toutes les entités situées dans les départements de Gbeke ou Hambol qui constituent le district de la Vallée du Bandaman
+
+![](img/magrit/magrit002.jpg){width=500}
+
+On peut alors afficher le résultat de la sélection sous forme d'une nouvelle couche et rendre invisible la précédente :
+
+![](img/magrit/magrit003.jpg){width=600}
+
+## (3) AGREGATION
+
+Maintenant que nous disposons du fonds de carte principal, nous souhaiterions l'agréger aux niveaux administratifs supérieur. Là encore, MAGRIT offre des fonctions pratiques d'agrégation géométrique qui fonctionne parfaitement (si la géométrie du fonds de carte est correcte). On peut donc créer le fonds de carte des départements et celui des régions en se servant des codes fournis par le fonds de carte. 
+
+![](img/magrit/magrit004.jpg){width=500}
+![](img/magrit/magrit005.jpg){width=500}
+
+
+On peut ensuite empiler nos trois couches et régler la transparence et l'épaissur des limites pour faire apparaître les trois niveaux administratifs
+
+![](img/magrit/magrit006.jpg){width=600}
+
+## (4) DONNEES STATISTIQUES
+
+Nous allons maintenant ajouter des données statistiques à notre fonds de carte en nous servant des tableaux fournis par l'Agence Nationale de la Statistique de Côte d'Ivoire (ANSTAT) et accessibles sous forme de fichier détaillés par communes sur le [site des résultats du recensement 2021](https://rp2021.anstat.ci/publication/).
+
+![](img/magrit/anstat.jpg){width=500}
+
+Nous allons prendre comme exemple le tableau n°17 intitulé [répartition des ménages selon la possession d'équipement informatiqus, audiovisuels et de communication](https://rp2021.anstat.ci/publication/#flipbook-df_28785/1/). les résultats peuvent se consulter en ligne et fournissent le détail du nombre de ménages mossédant tel ou tel équipement par district, région, département, sous-préfecture ou commune comme on peut le voir sur la page ci-dessous : 
+
+
+![](img/magrit/anstat2.jpg){width=800}
+
+Le fichier .pdf peut-être téléchargé mais l'extraction des données n'est pas très facile. On est donc obligé de saisir manuellement dans un tableau Excel les colonnes qui nous intéressent en ayant soin d'ajouter au préalable **une colonne correspondant au code cartographique du fonds de carte**. Ici, nous avons retenu uniquement trois variables correspondant au nombre d'habitant, au nombre de ménages et au nombre d'ordinateur par sous-préfectures ou communes du district de la Vallée du Bandaman.
+
+
+![](img/magrit/Excel.jpg){width=300}
+
+
+## (5) JOINTURE
+
+Nous allons ensuite importer ce fichier Excel dans MAGRIT et effectuer sa jointure avec notre fonds de carte des communes et sous-préfectures en fournissant le nom de la variable utilisée pour faire le lien, comme on le ferait avec un SIG.
+
+
+![](img/magrit/magrit007.jpg){width=400}
+
+## (6) CARTE DE STOCK
+
+La table attributaire de la couche des communes et sous-préfecture comporte désormais les variables que nous avions saisi et on peut commencer à créer une carte thématique représentant par exemple la population. Il suffit de quelques commandes pour préciser la couleur des figurés proportionnels et leur taille maximale.
+
+![](img/magrit/magrit008.jpg){width=400}
+
+Le résultat s'affiche immédiatement sous la forme d'une nouvelle couche superposée aux précédentes. On remarquera que MAGRIT a calculé automatiquement le centroïde des polygones pour y placer les cercles représentant la population.
+
+![](img/magrit/magrit009.jpg){width=600}
+
+## (7) CREATION DE VARIABLES
+
+Nous souhaiterions maintenant cartographier le nombre moyen d'ordinateurs pour 100 ménages et réaliser une carte choroplèthe du niveau d'équipement. Nous aurions pu créer cette variable dans Excel au moment de la saisie des données, mais il est possible de le faire également à l'intérieur de MAGRIT.
+
+
+![](img/magrit/magrit010.jpg){width=400}
+
+## (8) CARTE CHOROPLETHE
+
+Nous allons maintenant pouvoir utiliser cette nouvelle variable pour réaliser une carte du taux d'équipement en choisissant la palette de couleur et le mode de discrétisation en classes. MAGRIT fournit une aide au choix des classes grâce à un petit utilitaire de statistiques qui permet de visualiser la forme de la distribution.
+
+![](img/magrit/magrit011.jpg){width=400}
+
+Dans l'exemple du nombre d'ordinateur par ménage, la distribution est très asymétrique à gauche et un découpage selon une progression géométrique semble être une bonne solution.
+
+
+![](img/magrit/magrit012.jpg){width=600}
+
+## (9) ORGANISATION DES COUCHES
+
+Nous allons maintenant réorganiser les couches cartographiques et rendre invisible celles qui ne sont pas nécessaires. Dans notre exemple, on garde la carte choroplète et on superpose par dessus les découpages administratifs des départements et régions. Puis on ajoute une nouvelle couhce avec le nombre total d'ordinateurs en suivant la même procédure que pour la population puisqu'il s'agit d'un stock.
+
+![](img/magrit/magrit013.jpg){width=600}
+
+## (10) HABILLAGE ET FINITIONS
+
+Nous disposons désormais de toutes les couches cartographiques utiles mais il faut encore habiller notrre carte en ajoutant plusieurs éléments (titre, source, échelle, orientation, ...). Ce travail est en général fait dans un logiciel de dessin spécialisé comme Adobe Illustrator ou Inkscape. Mais MAGRIT offre des fonctionalités très avancées qui permettent d'effectuer l'essentiel du travail sans changer de logiciel. Sans les détailler ici, nous présentons le résultat après ce travail exigeant qui suppose une bonne formation professionnelle de cartographe.
+
+![](img/magrit/magrit014.jpg){width=600}
+
+## (11) SAUVEGARDE ET EXPORTATION
+
+Le projet MAGRIT peut être sauvegardé à tout moment au format .mjson ce qui permet ensuite de le reprendre et de le modifier. Ou simplement de réutiliser une partie des couches déjà créée. Si par exemple on souhaite créer une carte du nombre de téléphone mobiles par habitant, il suffira d'importer un nouveau jeu de données et de refaire les couches correspondantes sans être obligé de répéter toutes les étapes. 
+
+La carte proprement dite peut être exportée sous différents formats en fonction des utilisations que l'on souhaite en faire :
+
+- **format SVG** : c'est un format vectoriel qui permet des retouches à l'aide d'un logiciel de dessin (Adobe Illustrator ou Inkscape) et assure une qualité maximale pour l'édition d'un atlas, un livre ou un article. Il peut facilement se convertir en .pdf ou en postscript. 
+
+- **format PNG** : c'est un format image (bitmap) plus pratique pour la production de site web ou la retouche rapide dans un logiciel de traitement d'image comme photoshop ou simplement paint. 
+
+- **format couches** : c'est un format d'exportation vers les logiciels de SIG (QGIS ou ARCGIS) de type shapefile, geojson, geopackage, etc...  On sélectionne les couches que l'on veut exporter pour en faire des fichiers séparés.
+
+## CONCLUSION
+
+MAGRIT n'a pas vocation à se substituer aux SIG (ou R) qui demeurent essentiel pour des cartographies complexes (topographie, images satellites, ...) ou pour des opérations d'analyse spatiales (buffer, intersections, analyse de réseaux, ...). Mais il offre une solution intégrée de très grande rapidité et efficacité pour la production de cartes thématiques. Sa principale force réside dans l'intégration des différentes étapes qui vont de la collecte de l'information statistique et cartographique à la production d'une carte thématique de qualité respectant l'ensemble des règles de la sémiologie graphique. 
+
+

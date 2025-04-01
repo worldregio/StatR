@@ -1,5 +1,5 @@
 ---
-title: "EXO1 : Enseigner la statistique avec R"
+title: "OBJECTIF 1 : Statistiques avec R"
 subtitle: "AFROMPA'R Bouaké 2025"
 author: "Claude Grasland"
 date: "2025-03-28"
