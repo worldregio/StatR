@@ -18,6 +18,8 @@ website:
         text: "Obj.2 Cartographie avec Magrit"
       - href: Access.qmd
         text: "Obj.3 Accessibilité avec R et OSRM"
+      - href: EnquetR.qmd
+        text: "Obj.4 Enquêter avec R et Kobo"
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/afromapr

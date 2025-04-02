@@ -164,11 +164,11 @@ Chaque atelier utilisant ces bases visera à produire des exemples pédagogiques
 
 ## Programme et calendrier (version provisoire)
 
-![](img/programme_V1.jpg){width=1000}
+![](img/programme_V2.jpg){width=1000}
 
 - **29 Juin** : Les participants seront accueillis le dimanche 29 matin sur le lieu de formation. L’après-midi sera consacré à l’installation des bases de données et logiciels sur les ordinateurs personnels. 
 - **30 Juin** : La première journée sera consacrée à la présentation de la formation et l’apprentissage de l’environnement R Studio. Les étudiants apprendront à importer leurs données dans R, à rédiger quelques traitements de base et produire un document. L’après-midi sera consacré à un exercice de collecte de données de terrain avec Kobo Toolbox.
-- **1-4 Juillet** : Les matinées seront consacrées à l’apprentissage des méthodes d’analyse statistique (avec R) et de cartographie (avec Magrit ou R) à partir de jeux de données fournis par les formateurs. Les ateliers de l’après-midi viseront à reproduire ces méthodes sur des données apportées par les participants.
-- **5 Juillet** : Restitution des travaux des ateliers et remise des certificats de participation.
+- **1-3 Juillet** : Les matinées seront consacrées à l’apprentissage des méthodes d’analyse statistique (avec R) et de cartographie (avec Magrit ou R) à partir de jeux de données fournis par les formateurs. Les ateliers de l’après-midi viseront à reproduire ces méthodes sur des données apportées par les participants.
+- **4 Juillet** : Restitution des travaux des ateliers et remise des certificats de participation.
 
 

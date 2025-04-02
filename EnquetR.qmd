@@ -1,0 +1,310 @@
+---
+title: "OBJECTIF 4 : Enquêter avec R et Kobo"
+subtitle: "AFROMPA'R Bouaké 2025"
+author: "Claude Grasland"
+date: "2025-03-28"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+    code-fold: true
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+```{r setup, include=FALSE}
+
+# packages utilitaires
+library(knitr)
+library(dplyr)
+library(reshape2)
+
+# packages cartographiques
+library(sf)
+library(mapsf)
+library(leaflet)
+
+# package d'enquête
+library(questionr)
+library(foreign)
+library(labelled)
+library(haven)
+
+
+```
+
+
+L'exploitation d'enquêtes existantes  ou la réalisation d'enquêtes inédites  constituent un élément crucial pour l'analyse des dynamiques territoriales. A la différence des données de recensement qui mesure périodiquement l'état de la population et de la société à l'aide d'indicateurs normalisés, les enquêtes permettent de poser des questions inédites et d'apporter des informations cruciales aussi bien sur l'état de santé de la population (ex. [Enquêtes DHS](https://dhsprogram.com/)) que sur l'état de l'opinion publique au niveau national et international (ex. [Afrobarometer](https://www.afrobarometer.org/)). Les chercheurs sont amenés à réaliser leurs propres enquêtes de terrain avec des outils tels que [Kobootolbox](https://www.kobotoolbox.org/) qui sont un élément crucial de formation pour les étudiants de niveau master ou doctorat.
+
+
+L'objectif de l'école d'été **AfrimapR** n'est pas d'aborder de façon exhaustive un sujet qui nécessiterait à lui seul une école d'été entière. Mais de montrer comment il est possible de réaliser des exploitations statistiques simples de données d'enquête à l'aide du logiciel R. Nous insisterons plus précisément sur la **dimension spatiale des enquêtes** qui est trop souvent négligée au profit d'une pure exploitation de variables sociologiques catégorielles. Cette dimension territoriale intervient en effet à la fois en amont de l'enquête pour la définition d'un **plan de sondage représentatif** et en aval pour mettre en évidence des **effets de contexte territorial** permettant de compléter ou de nuancer les explications fondés uniquement sur les déterminants individuels. 
+
+
+## (1) R ET KOBO
+
+La plupart des utilisateurs de Kobo Tooolbox sont habitués à exporter leurs résultats sous la forme de fichiers textes (*.csv*) ou de fichiers excel (*.xls*). Mais il est également possible, lorsque les données d'enquêtes ont été géolocalisées, de les exporter sous la forme de fichiers cartographiques au format *.geojson*. Il est alors possible de visualiser dans R la localisation des personnes enquêtées (comme on le fait sur le site de Kobo Toolbox) mais également de procéder à des analyses statistiques et cartographiques plus originales.
+
+Nous prenons à titre d'exemple les résultats d'une enquête réalisée dans le cadre d'un cours de Licence 3 à l'Université Paris Cité portant sur les méthodes d'entretien et de questionnaire. L'objectif était d'initier des étudiants géogrpahes français à l'usage de Kobo Toolbox en leur demandant à chacun de recueillir 10 questionnaires, 5 avec des personnes de nationalité française et 5 avec des étudiants d'autres pays. Le questionnaire comportait un nombre très limité de questions et est accessible en suivant [ce lien](https://ee.kobotoolbox.org/x/dkUBO19Z)
+
+
+### Récupération des données
+
+
+La lecture du fichier .geojson est effectuée très facilement à l'aide de la fonction `st_read()` du package **sf** (spatial features).
+
+```{r}
+don<-st_read("data/exo_kobo/kobo_student.geojson")
+```
+
+Le fichier comporte 178 réponses et 23 variables. Il est de type *data.frame* et *sf* ce qui signifie que l'on peut à la fois effectuer des traitements statistiques avec les répondes et produire des cartes grâce à la colonne spéciale *geometry* qui indique la localisation des points d'enquête.
+
+### Sélection et recodage des variables
+
+On sélectionne ici juste quelque variables pour produire un tableau simplifié donnant l'âge, le sexe et l'opinion sur la Russie, la Chine et les USA.
+
+```{r}
+sel <- don %>% select(usa = 6, chn = 7, rus=8, age=11, sex = 12)
+
+kable(head(sel))
+```
+
+
+On simplifie les variables en recodant les facteurs et en créant des classes d'âge. Puis on élimine les valeurs manquantes
+
+```{r}
+sel$usa <-as.factor(sel$usa) 
+levels(sel$usa) <- c(NA,"Défavorable", "Favorable", NA, "Défavorable","Favorable")
+
+sel$chn <-as.factor(sel$chn) 
+levels(sel$chn) <- c(NA,"Défavorable", "Favorable", NA, "Défavorable","Favorable")
+
+sel$rus <-as.factor(sel$rus) 
+levels(sel$rus) <- c(NA,"Défavorable", "Favorable", NA, "Défavorable","Favorable")
+
+sel$age<-as.numeric(sel$age)
+sel$age<-cut(sel$age, breaks=c(0,24,100 ))
+levels(sel$age)<-c("- de 25 ans", "25 ans et +")
+
+sel$sex<-as.factor(sel$sex)
+levels(sel$sex)<-c("Homme","Femme")
+
+sel<- na.omit(sel)
+summary(sel)
+```
+
+
+### Localisation des réponses
+
+On transforme les réponses en projection WGS84 (EPSG = 4326) et on visualize le résultat avec le package `leaflet()` en proposant une visualisation à l'échelle de la région parisienne : 
+
+```{r}
+st_crs(sel)<-4326
+leaflet(sel) %>% addTiles() %>% 
+                addCircleMarkers(stroke=F,fillColor =  "red",fillOpacity =0.5) %>% 
+               setView(lng=2.383, lat= 48.829,zoom = 10)
+```
+
+
+Ou bien en proposant un zoom sur le campus de l'Université où les étudiants ont réalisé la plupart de leurs enquêtes :
+
+```{r}
+st_crs(sel)<-4326
+leaflet(sel) %>% addTiles() %>% 
+                addCircleMarkers(stroke=F,fillColor =  "red",fillOpacity =0.5) %>% 
+               setView(lng=2.382, lat= 48.8295,zoom = 18)
+```
+
+
+### Analyse de l'opinion sur la Russie
+
+On peut ensuite procéder à des croisements entre l'opinion sur un pays et l'âge ou le sexe des étudiants. Prenons l'exemple de la Russie.
+
+```{r}
+tab<-table(sel$sex,sel$rus)
+test<-chisq.test(tab)
+plot(tab,col=c("red","lightblue"), main = "Sexe et avis sur la Russie : relation significative", sub = paste("chi 2 = ",round(test$statistic,3), "  dl =", test$parameter, "  p = ", round(test$p.value,3)))
+kable(lprop(tab))
+```
+
+- **Commentaire** : La majorité des réponses est défavorable à la Russie (86%). Mais les femmes apparaissent plus défavroables (94%) que les hommes (78%). La réalisation d'un test statistiques du chi-2 confirme que cette relation moins de 2% de chances d'être l'effet du hasard et est donc significative (chi-2 = 6.15, dl = 1, p < 0.013)
+
+
+```{r}
+tab<-table(sel$age,sel$rus)
+test<-chisq.test(tab)
+plot(tab,col=c("red","lightblue"), main = "Age et avis sur la Russie : relation non significative ", sub = paste("chi 2 = ",round(test$statistic,3), "  dl =", test$parameter, "  p = ", round(test$p.value,3)))
+kable(lprop(tab))
+```
+
+
+- **Commentaire** : Les personnes enquêtes de moins de 25 ans sont plus défavorable à la Russie (89.5%) que les personnes plus âgées (80.7%). Mais l'échantillon ne permet pas de valider l'hypothèse d'une relation significative. Il y a en effet plus de 21% de chances que les différences observées soient l'effet du hasard (chi-2 = 1.55, d.L. = 1, p = 0.213)
+
+## (2) R ET AFROBAROMETER
+
+Les enquêtes [Afrobarometer](https://www.afrobarometer.org/)) sont réalisées par vagues à laquelle tous les pays du continent sont invités à participer. Au cours de chacune des vagues, des questions identiques sont posés aux citoyens de chacun des pays qui participent à l'enquête ce qui permet de comparer leurs opinions. Toutefois certains pays refusent de participer ou bien participent mais ne posent pas toutes les questions et en ajoutent parfois d'autres. Malgré ces limites il s'agit d'une source majeure d'information sur l'évolution des opinions publiques en Afrique puisque la première vague remonte à 1999 et que nous en sommes aujoud'hui à la dixième.
+
+La Côte d'Ivoire a participé aux enquêtes Afrobarometer de 2013, 2014, 2019, 2021 and 2023. Celles-ci ont été réalisées par le laboratoire [Zechlab](https://www.zechlab.com/). Les fichiers de résultats sont librement accessibles sur le site [Afrobarometer](https://www.afrobarometer.org/)) qui fournit à la fois les données (au format SPSS) et les métadonnées relatives aux questions posées et aux modes de collecte.
+
+
+### Importation des données dans R
+
+
+Bien qu'elles soient fournies au format SPSS (extension *.sav*) les données AfroBarometer peuvent facilmement être importées dans R à l'aide du package **foreign** ou du package **haven**. On peut ensuite récupérer le code des variables à l'aide du package **labelled**. Nous procédons ici à l'importation d'un nombre volontairement limité de variables concernant l'opinion des personnes enquêtées sur la Chine, le Japon et les USA
+
+```{r}
+
+# Load and add geo information
+x<-read_sav("data/exo_afrobarometer/survey/afrobarometer_release-dataset_cdi_r9_fr_2023-03-01.sav")
+codes<-read.csv2("data/exo_afrobarometer/geom/CIV_ADMIN_V2.csv") %>%
+       select(geo = ABM_code, REG_CODE,REG_NOM,DIS_CODE,DIS_NOM)
+x$geo<-as.numeric(x$REGION)
+x<-left_join(x,codes)
+
+# Check Geo
+pop<-x %>% group_by(DIS_CODE, DIS_NOM) %>%
+           summarise(wgt= sum(withinwt_ea),n=n())
+
+# Select some variable
+sel <- x %>% mutate(id = RESPNO,
+                    DIS_NOM = DIS_NOM,
+                    urb = to_factor(URBRUR),
+                    sex = to_factor(Q101),
+                    age = as.numeric(Q1),
+                    opi_chn = to_factor(Q78A),
+                    opi_usa = to_factor(Q78B),  
+                    opi_jpn = to_factor(Q78C)   
+                    ) %>%
+             select(id,
+                    DIS_NOM,
+                    urb,
+                    sex,
+                    age,
+                    opi_chn,
+                    opi_usa,
+                    opi_jpn
+                    )
+
+kable(head(sel))
+
+```
+
+
+### Distribution spatiale des réponses
+
+L'enquête Afrobarometer a été réalisée selon la méthode des quotas pour aboutir à un échantillon représentatif de 1200 personnes en croisant l'âge, le sexe, le niveau d'éducation, le milieu urbain ou rural et la localisation géographique.  Il est donc logique que les districts les plus peuplés soient aussi ceux où il y a le plus de réponses comme on peut le voir sur la carte.
+
+```{r}
+map<-readRDS("data/exo_afrobarometer/geom/CIV_DISTRICTS.RDS") %>% st_transform(2042)
+rep<-sel %>% group_by(DIS_NOM) %>% count()
+map<-map %>% left_join(rep)
+mf_map(map, type="base", col="lightyellow")
+mf_map(map, type="prop", var="n", inches=0.4)
+mf_label(map, var="n",col="black",halo = T)
+mf_layout("Nombre de réponses par district à l'enquête Afrobarometer 2021", frame = T, scale =T, credits = "Source : Afrobarometer")
+```
+
+Les quotas ne sont toutefois jamais parfairement respecté et il faut en général utiliser une variable de pondération pour redresser les réponses en augmentant par exemple le poids des habitants des régions sous-représentées ou réduisant celui des régions sur-représentées. Ces questions seront discutés lors de l'école d'été mais pas abordées dans cette introduction.
+
+### Opinion sur la Chine et sexe
+
+On peut procéder comme dans l'exemple précédent à l'étude des variations de l'opinion sur un pays (ici, la Chine) en fonction de l'âge et du sexe. Il y a ici cinq niveaux d'appréciation : très négatif (--), négatif(-), neutre (O), positif(+) et très positif (++)
+
+```{r}
+levels(sel$opi_chn) <- c(NA, "--","-","0","+","++",NA,NA)
+tab<-table(sel$sex,sel$opi_chn)
+test<-chisq.test(tab)
+plot(tab,col=c("red","pink","lightyellow","lightblue","blue"), main = "Sexe et avis sur la Chine : relation significative", sub = paste("chi 2 = ",round(test$statistic,3), "  dl =", test$parameter, "  p = ", round(test$p.value,3)))
+kable(lprop(tab))
+```
+
+- **Commentaire** : L'opinion est majoritairement favorable ou très favorable à la Chine. Mais les femmes sont dans l'ensemble plus réservées que les hommes vis à vis de ce pays et les différences observées entre les deux sexes sont très significatives. 
+
+
+### Opinion sur la Chine et âge
+
+Examinons maintenant l'effet de l'âge en trois groupes.
+
+```{r}
+sel$age <- cut(sel$age, breaks=c(0,25,50,100))
+table(sel$age)
+tab<-table(sel$age,sel$opi_chn)
+test<-chisq.test(tab)
+plot(tab,col=c("red","pink","lightyellow","lightblue","blue"), main = "Âge et avis sur la Chine : relation non significative", sub = paste("chi 2 = ",round(test$statistic,3), "  dl =", test$parameter, "  p = ", round(test$p.value,3)))
+kable(lprop(tab))
+```
+
+- **Commentaire** : L'opinion sur la Chine ne semble pas liée à l'âge. Aucune différence significative n'aparaît entre les différentes classes d'âge.
+
+
+### Opinion sur la Chine et milieu urbain ou rural
+
+Y-a-t-il une opposition entre les milieux urbain et ruraux ?
+
+```{r}
+
+tab<-table(sel$urb,sel$opi_chn)
+test<-chisq.test(tab)
+plot(tab,col=c("red","pink","lightyellow","lightblue","blue"), main = "Milieu  et avis sur la Chine : relation non significative", sub = paste("chi 2 = ",round(test$statistic,3), "  dl =", test$parameter, "  p = ", round(test$p.value,3)))
+kable(lprop(tab))
+```
+
+- **Commentaire** : L'opinion sur la Chine ne semble pas non plus lié au fait d'habiter en ville ou à la campagne. 
+
+
+### Opinion sur la Chine et districts
+
+Existe-t-il une opposition en fonction des districts ?
+
+```{r}
+sel$dis<-substr(sel$DIS_NOM,1,3)
+tab<-table(sel$dis,sel$opi_chn)
+test<-chisq.test(tab)
+plot(tab,col=c("red","pink","lightyellow","lightblue","blue"), main = "Districts  et avis sur la Chine : relation non significative", sub = paste("chi 2 = ",round(test$statistic,3), "  dl =", test$parameter, "  p = ", round(test$p.value,3)))
+kable(lprop(tab))
+```
+
+
+- **Commentaire** : Le graphique et le test du chi-2 suggèrent qu'ul existe une relation significative entre la localisation géographique et l'avis sur le Chine. Mais il faut être prudent dans nos conclusions car certains districts ont ds effectifs très faibles de personnes enquêtées. On peut toutefois essayer d'analyser la géographie de la distribution des avis sur la Chine en calculant un indice synthétique d'appréciation  et en le visualisant à l'aide d'une carte.
+
+```{r}
+tab <- sel  %>% mutate(NEG = opi_chn %in% c("--","-"),
+                      POS = opi_chn %in% c("++","+")) %>%
+                group_by(DIS_NOM) %>%
+                summarise(NEG = sum(NEG),
+                          POS= sum(POS),
+                          ATT = (POS-NEG)/(POS+NEG))
+
+mapdon <- left_join(map,tab)
+
+mf_map(mapdon, type="choro",var = "ATT",leg_pos = "left", leg_title = "(Pos-Neg)/(Pos+Neg)")
+mf_layout(title = "Indice d'attraction de la Chine par district de Côte d'Ivoire en 2021",
+          credits="Source : Afrobarometer, 2021", frame=T, arrow = T, scale = T)
+                                   
+```
+
+- **Commentaire** : 
+
+
+
+
+
