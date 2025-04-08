@@ -236,5 +236,19 @@
     "title": "AFROMAPR 2025",
     "section": "Programme et calendrier (version provisoire)",
     "text": "Programme et calendrier (version provisoire)\n\n\n29 Juin : Les participants seront accueillis le dimanche 29 matin sur le lieu de formation. L’après-midi sera consacré à l’installation des bases de données et logiciels sur les ordinateurs personnels.\n30 Juin : La première journée sera consacrée à la présentation de la formation et l’apprentissage de l’environnement R Studio. Les étudiants apprendront à importer leurs données dans R, à rédiger quelques traitements de base et produire un document. L’après-midi sera consacré à un exercice de collecte de données de terrain avec Kobo Toolbox.\n1-3 Juillet : Les matinées seront consacrées à l’apprentissage des méthodes d’analyse statistique (avec R) et de cartographie (avec Magrit ou R) à partir de jeux de données fournis par les formateurs. Les ateliers de l’après-midi viseront à reproduire ces méthodes sur des données apportées par les participants.\n4 Juillet : Restitution des travaux des ateliers et remise des certificats de participation."
+  },
+  {
+    "objectID": "index.html#equipe-de-formateurs",
+    "href": "index.html#equipe-de-formateurs",
+    "title": "AFROMAPR 2025",
+    "section": "Equipe de formateurs",
+    "text": "Equipe de formateurs\n\nClaude Grasland : R, statistiques\nBamba Vakaramoko : Magrit, cartographie, enquête\nGéraud Magrin : Ateliers, enquête\nStéphane Koffi Yéboué Koissy : Ateliers, enquête\nBrian Plaisant : R, SIG\nMelody Dumont : R, Magrit, cartographie\nJean-Paul N’Gbesso : R, statistiques\nFelix Kouamé N’Dri : R, SIG\nGrégoire Feyt : Ateliers, enquête, statistiques"
+  },
+  {
+    "objectID": "index.html#archives-des-écoles-dété-du-cist",
+    "href": "index.html#archives-des-écoles-dété-du-cist",
+    "title": "AFROMAPR 2025",
+    "section": "Archives des écoles d’été du CIST",
+    "text": "Archives des écoles d’été du CIST\n\nOuidah, Bénin, 2023 : EE CIST 2023 : Méthodes et outils des sciences territoriales\nSousse, Tunisie, 2024 : Geouniv’r 2024"
   }
 ]
