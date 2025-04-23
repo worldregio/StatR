@@ -6,18 +6,6 @@ format: html
 ---
 
 
-![](img/logo_cist_small.jpg){width=70}
-![](img/logo_up1.jpg){width=70}
-![](img/logo_upc.png){width=70}
-![](img/logo_geoteca.jpg){width=70} 
-![](img/logo_geocites.jpg){width=70}
-![](img/logo_PRODIG.png){width=70}
-![](img/logo_uao.jpg){width=90}
-![](img/logo_uabi.png){width=90}
-![](img/logo_ukor.png){width=90}
-![](img/logo_vst.png){width=110}
- 
-
 
 
 
@@ -25,6 +13,16 @@ format: html
 
 ::: {layout="[50,50]"}
 ::: {first-column}
+![](img/logo_up1.jpg){width=60}
+![](img/logo_upc.png){width=60}
+![](img/logo_UGA.png){width=60} 
+![](img/logo_geoteca.jpg){width=60} 
+![](img/logo_geocites.jpg){width=60}
+![](img/logo_PRODIG.png){width=60}
+![](img/logo_pacte.png){width=60}
+
+
+
 **Claude GRASLAND**
 
 Université Paris Cité, 
@@ -42,6 +40,12 @@ FR CIST & UMR PRODIG
 :::
 
 ::: {second-column}
+![](img/logo_uao.jpg){width=80}
+![](img/logo_uabi.png){width=80}
+![](img/logo_ukor.png){width=80}
+![](img/logo_vst.png){width=90}
+ ![](img/logo_igt.jpg){width=90}
+
 **Bamba VAKARAMOKO**
 
 Université Houphouët Boigny d’Abidjan
