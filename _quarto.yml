@@ -3,26 +3,28 @@ project:
   output-dir: docs
 
 website:
-  title: "Afromapr 2025"
+  title: "AfroMap'R 2024 : Statistiques avec R et Rstudio"
   sidebar:
     style: "docked"
     search: true
     collapse-level: 2
-    logo: img/logo_cist_small.jpg
+    logo: img/logo.png
     contents:
       - href: index.qmd
-        text: "Objectifs"
-      - href: Enseigne_R.qmd
-        text: "Obj.1 Statistiques avec R"
-      - href: Magrit.qmd
-        text: "Obj.2 Cartographie avec Magrit"
-      - href: Access.qmd
-        text: "Obj.3 Accessibilité avec R et OSRM"
-      - href: EnquetR.qmd
-        text: "Obj.4 Enquêter avec R et Kobo"
+        text: "A propos"
+      - section: "PROGRAMMER EN R"
+        contents:
+        - href: STAT0-PremiersPas.qmd
+          text: "Premiers pas dans R"
+      - section: "LES VARIABLES STATISTIQUES"
+        contents:
+        - href: STAT1-Variables-Cours.qmd
+          text: "Cours"          
+        - href: STAT1-Variables-Exo.qmd
+          text: "Exercice"
     right: 
       - icon: github # add icons as navbar buttons
-        href: https://github.com/worldregio/afromapr
+        href: https://github.com/worldregio/StatR
         target: _blank
   page-footer:
     background: dark
@@ -34,7 +36,7 @@ format:
     theme: 
       light: minty    
       dark: solar
-    css: styles.css
+    css: style.scss
     toc: true
 
 

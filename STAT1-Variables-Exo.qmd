@@ -1,0 +1,245 @@
+---
+title: "STAT1 : LES VARIABLES STATISTIQUES (Exercice)"
+subtitle: "Typologie, Transformation, Réduction, Agrégation"
+author: "Jean-Paul N’GBESSO & Claude GRASLAND"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: style.scss
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+## Introduction
+
+L'objectif de cet exercice est d'appliquer les principes de statistiques vus en cours en utilisant le logiciel R. Vous allez utiliser un document Rmarkdown où vous devrez à la fois compléter les programmes et commenter les résultats
+
+## IMPORTATION DES DONNEES
+
+Il existe plusieurs façons d'importer des données dans R.
+
+### Importation d'un fichier texte
+
+Nous allons utiliser ici la fonction `read.table()`qui est adapté à l'importation de la plupart des fichiers-texte d'extension .csv ou .txt. Cette fonction comporte plusieurs paramètres qu'il faut adapter en fonction du fichier choisi.
+
+- file = "...": nom et chemin d'accès du fichier
+- sep = "..."  : type de séparateur des colonnes (en général , ou ; )
+- dec = "..." : type de décimal (en général . ou ,)
+- header = TRUE : pour indiquer s'il y a une ligne d'en-tête avec le nom des variables
+- fileEncoding = "UTF-8" : pour indiquer le type d'encodage des caractères
+
+```{r}
+don <- read.table(file = "data/DHS-Benin-2018/femmes_2018.csv",
+                  sep= ";",
+                  dec =".",
+                  header = TRUE,
+                  fileEncoding = "UTF-8")
+```
+
+### Vérification du type de tableau
+
+On utilise la fonction `class()` pour connaître le type de l'objet que nous venons de créer. Normalement c'est un *data.frame* qui est le type de tableau de base dans R.
+
+```{r}
+class(don)
+```
+
+### Dimensions
+
+On utilise la fonction `dim()`pour afficher les dimensions du tableau, c'est-à-dire son nombre de lignes et de colonnes :
+
+```{r}
+dim(don)
+```
+
+### Affichage de l'ensemble du tableau
+
+Il suffit de taper le nom d'un tableau pour qu'ils'affiche en entier. Mais ce n'est évidemment pas recommandé si celui-ci est très grand
+
+```{r}
+#don
+```
+
+### Affichage du début et de la fin d'un tableau
+
+Il est plus avantageux de ne montrer que les premières ou dernières lignes avec les commandes `head()`et `tail()`. 
+
+```{r}
+head(don)
+tail(don)
+```
+
+### Accès aux variables
+
+Pour accéder à une variable du tableau, on utilise l'instruction `$`qui permet d'accéder à une colonne particulière selon la syntaxe.
+
+<nom du tableau>$<nom de la variable>
+
+Par exemple, pour afficher l'ensemble des poids je taperai
+
+```{r}
+#don$poids
+```
+
+
+Si je ne veux voir que les 5 premiers poids, je peux taper :
+
+```{r}
+head(don$poids)
+```
+
+
+
+## TYPE DES VARIABLES
+
+Il est important de s'assurer que le type des variables est correct. Si ce n'est pas le cas, il faut le changer. 
+
+### Examen du type des variables
+
+Pour connaître le type des variables d'un tableau, on utilise la fonction `str()`
+
+```{r}
+str(don)
+```
+
+### Les types de variable dans R
+
+On trouve ici trois types de variables 
+
+- num : variable quantitative continue
+- int : variable quantitative discrète
+- chr : variable de type caractère
+
+Les deux premiers types sont corrects sur le plan statistique. En revanche le type caractère ne correspond pas à une variable utilisable sur le plan statistique. Pour l'utiliser il faut le transformer dans un des deux types suivants :
+
+- factor : variable qualitative
+- logical : variable booléenne.
+
+Il existe d'autres types qu'on verra plus tard. 
+
+### Transformation des variables de type caractère en facteur
+
+On utilise la fonction `as.factor()`pour déclarer qu'une variable est de type qualitatif. 
+
+```{r}
+don$region<-as.factor(don$region)
+don$milieu<-as.factor(don$milieu)
+```
+
+
+### Résumé du tableau
+
+Lorsque toutes les variables ont un type statistique correct, on peut résumer le tableau à l'aide de la fonction `summary()`
+
+```{r}
+summary(don)
+```
+
+On peut également appliquer cette fonction sur une seule variable à la fois :
+
+```{r}
+summary(don$poids)
+```
+
+
+
+
+## CREATION ET TRANSFORMATION DE VARIABLES
+
+Nous allons maintenant créer de nouvelles variables en combinant des variables existances ou en les transformant.
+
+### Transformation de la taille en mètres
+
+On peut utiliser les quatre opérations + _ * / dans le programme. Donc pour passer la taille en mètres on va écrire :
+
+```{r}
+don$taille <- don$taille/100
+```
+
+
+On vérifie le résultat :
+
+```{r}
+summary(don$taille)
+```
+
+
+
+### Calcul de l'Indice de Masse Corporelle (IMC)
+
+Pour calculer l'IMC on va utiliser la fonction puissance qui s'écrit  **
+
+```{r}
+don$IMC <- don$poids/(don$taille**2)
+```
+
+On vérifie le résultat
+
+```{r}
+summary(don$IMC)
+```
+
+
+### Transformation de l'IMC en variable qualitative
+
+On va utiliser la fonction `cut()` pour transformer l'IMC (quantitatif) en une variable IMC2 (qualitative).
+
+```{r}
+don$IMC2 <- cut(don$IMC, breaks = c(15, 18, 25, 30, 35, 200))
+```
+
+On vérifie le résultat 
+
+```{r}
+summary(don$IMC2)
+```
+
+On peut changer le nom des classes d'un facteur avec l'instruction `levels()` :
+
+```{r}
+levels(don$IMC2)<- c("maigre","normal","surpoids","obésité","obésité grave")
+```
+
+On vérifie
+
+```{r}
+summary(don$IMC2)
+```
+
+
+### Transformation de l'IMC en variable booléenne
+
+Supposons maintenant que l'on veuille juste repérer les personnes dont l'IMC est supérieur à 30. On va créer une variable logique (booléenne).
+
+```{r}
+don$IMC3 <- don$IMC > 30
+```
+
+
+On la résume
+
+```{r}
+summary(don$IMC3)
+```
+

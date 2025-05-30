@@ -3,31 +3,31 @@ $presentation-h1-font-size: 2em;
 $modal-footer-bg: red;
 $presentation-font-size-root: 40px;
 $presentation-h3-font-size: 1.05em;
-$link-color: #75AADB !default;
-$footer-bg: #75AADB;
-$modal-footer-bg: #75AADB;
+$link-color:  #BA4A00 !default;
+$footer-bg:  #BA4A00;
+$modal-footer-bg:  #BA4A00;
 $presentation-code-font-size: 5em;
   
 
 
 .title {
-  color: #225789 !important;
+  color: #6e2c00 !important;
 }
 
 .subtitle {
-    color: #225789;;
+    color: #6e2c00;
   }
 
 .quarto-title-author {
-  color: #225789 !important;
+  color: #6e2c00 !important;
 }
 
 .date {
-  color: #225789 !important;
+  color: #6e2c00 !important;
 }
 
 .reveal section h2 {
-  color: #75AADB;
+  color:  #BA4A00;
 }
 
 .medium {
@@ -39,7 +39,7 @@ $presentation-code-font-size: 5em;
 }
 
 .panel-tabset-tabby a {
-  color: #75AADB;
+  color:  #BA4A00;
   font-size: 0.9em;
 }
 
@@ -54,27 +54,27 @@ $presentation-code-font-size: 5em;
 }
 
 .reveal .header {
-  background: "logo.png";
+  background: "img/logo.png";
   background-repeat: no-repeat;
   width: 25px;
   height: 25px;
   float: left;
   text-align: center;
   background-color: white;
-  color: #75AADB;
+  color: #BA4A00;
   padding:0px;
   opacity: 1;
 }
 
 section.slide h1 {
   font-size: 4em !important;
-  color: #75AADB !important;
+  color:  #BA4A00 !important;
 }
 
 section.slide h2 {
   font-size: 1.8em !important;
   color: white !important;
-  background-color: #75AADB !important;
+  background-color: #BA4A00 !important;
   width: 200vw;
   position: relative;
   left: -20vw;
@@ -91,7 +91,7 @@ section.slide h2 {
 figure figcaption {
   font-size: 0.8em; /* Taille de la police de 0.8em */
   font-style: italic;
-  color: gray; /* Couleur de la police gris foncé */
+  color: #6e2c00; /* Couleur de la police gris foncé */
   text-align: center; /* Aligner le texte au centre */
   margin: 10px 0; /* Marge supérieure et inférieure de 10px */
   padding: 5px; /* Rembourrage interne de 5px */
