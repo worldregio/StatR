@@ -15,8 +15,7 @@ format:
     toc-title: "."
     bibliography: [references.bib]
     crossrefs-hover: false
-    css: style.scss
-    theme: [yeti, style.scss]
+    css: exos.scss
 execute:
   warning: false
   message: false 

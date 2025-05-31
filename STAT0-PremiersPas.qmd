@@ -1,7 +1,7 @@
 ---
 title: "Premiers pas"
 subtitle: "AfromapR Bouaké 2025"
-author: "Claude Grasland & Jean-Paul Nguessi"
+author: "Claude Grasland & Jean-Paul Nguesso"
 date: "2025-05-27"
 date-format: iso
 lang: fr
@@ -30,7 +30,7 @@ editor:
     wrap: 72
 ---
 
-
+![Excel](img/R_banner.png){width=800}
 
 - **Mise en place** : Créer un dossier sur votre ordinateur puis ouvrir un projet R dans ce dossier et crée un programme R.
 

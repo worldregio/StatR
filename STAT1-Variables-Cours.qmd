@@ -14,7 +14,7 @@ format:
     embed-resources: true
     smaller: true
     scrollable: true
-    theme: [simple, diapos.scss]
+    theme: [simple,diapos.scss]
 execute:
   echo: false
 editor_options: 

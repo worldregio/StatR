@@ -1,0 +1,140 @@
+---
+title: "Les documents Rmd : Word Killer ?"
+subtitle: "AfromapR Bouaké 2025"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+![Excel](img/office_killer.png){width=800}
+
+
+
+- **Mise en place** : Télécharger le dossier ...
+
+
+# Objectif
+
+Nous venons de voir comment une bonne pratique de R peut conduire progressivement à abandonner l'usage des tableurs (Excel, Open Office) sauf peut-être pour l'étape de saisie des données. Dès lors qu'il s'agit de réaliser des graphiques ou des calculs statistiques complexes, la rédaction d'un programme se révèle beaucoup plus intéressante même si elle impose un coût initial d'apprentissage.
+
+Mais une bonne pratique de R ou plus précisément des documents  R markdown peut vous conduire beaucoup plus loin et vous amener à abandonner également votre logiciel de traitement de texte (Word) et votre outil de présentation (Power Point). Le coût d'apprentissage est naturellement un peu plus élevé mais les bénéfices sont à la mesure de l'investissement.
+
+Comme le montre la figure ci-dessous, un document R markdown est en quelques sorte un mélange entre des lignes de code R qui executent des tâches et des lignes de texte où sont expliqués les calculs et commentés les résultats obtenus. En d'autres termes, un document R markdown vous permet de rédiger un article de recherche complet, une présentation à une conférence, un syllabus de cours, dans un seul environnement logiciel (R studio). 
+
+
+![Programme R](img/DocumentRmd.png)
+
+Nul besoin de ciseau et de colle pour aller chercher tel tableau ici, tel figure là-bas ou telle carte ailleurs. Tous ces éléments sont intégrs au fur et à mesure de la rédaction ce qui facilite considérablement la concentration. Et surtout - on l'a déjà vu pour le programme R - le document peut facilement être reproduit ou mise à jour sans être obligé de réplique des dizaines de click de souris.   
+
+
+
+# Document .Rmd
+
+On va supposer que l'on veut transformer notre programme d'analyse des inégalités régionales en rapport qui sera imprimé ensuite au format word ou pdf.
+
+
+
+## Préparation du document Rmarkdown
+
+On ouvre le projet précédent où se trouve déjà notre programme R
+
+![Programme R](img/Rmd001.png)
+
+A l'intérieur de ce projet, on crée un document de type Rmd (R markdown) auquel on donne le titre "Inégalités de développement en Côte d'Ivoire en 2002" et on le sauvegarde sous le nom `Rapport_CIV_2022.Rmd`.
+
+
+
+Au moment de l'ouverture, le document ressemble à ceci: 
+
+![Programme R](img/Rmd002.png)
+
+On garde le premier bloc de programme (en gris) et on élimine toute la partie créée par Rstudio pour servir d'exemple. On la remplace par notre plan en utilisant des instructions pour hiérarchiser les parties (`##`) , sous-parties (`###`) et sous-sous parties (`####`). On évitera d'utiliser (`#`) qui correspond à un titre de chapitre ou d'ouvrage.
+
+![Programme R](img/Rmd002_code.png)
+
+On clique alors sur le bouton "Knit" (une pelotte de laine bleue) pour visualiser le résultat qui s'affiche sous la forme d'une page .html.
+
+![Sortie html](img/Rmd002_visu.png)
+
+## Combinaison de texte et de code
+
+On va maintenant pouvoir rédiger notre document en alternant des parties de texte (rédigées en langage markdown)
+ et des blocs de code R appelés **chunks**
+
+### Ajout d'un tableau
+
+On décide d'ajouter un tableau de données : 
+
+![Programme R](img/Rmd003_code.png)
+
+Voici le résultat dans la page .html 
+
+![Sortie html](img/Rmd003_visu.png)
+
+On décide d'ajouter un résumé des variables
+
+![Programme R](img/Rmd004_code.png)
+
+Voici le résultat dans la page .html 
+
+![Sortie html](img/Rmd004_visu.png)
+
+### Ajout de graphiques
+
+On veut ensuite insérer deux histogrammes regroupés en une seule figure 
+
+![Programme R](img/Rmd005_code.png)
+
+Voici le résultat dans la page .html 
+
+![Sortie html](img/Rmd005_visu.png)
+
+Puis on ajoute un diagramme de relation entre deux variables
+
+![Programme R](img/Rmd006_code.png)
+
+Voici le résultat dans la page .html 
+
+![Sortie html](img/Rmd006_visu.png)
+
+### Ajout d'un test régression
+
+On termine en ajoutant un test de corrélation entre les deux variables.
+
+![Programme R](img/Rmd007_code.png)
+
+Voici le résultat dans la page .html 
+
+![Sortie html](img/Rmd007_visu.png)
+
+
+## Exportation 
+
+
+
