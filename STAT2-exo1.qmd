@@ -33,6 +33,12 @@ editor:
 
 Le but de ce TD est de mettre en oeuvre les fonctions présentées dans le cours d'initiation à R-Base. Il suffit normalement de recopier les lignes du document de cours. Mais il n'est pas interdit d'y apporter vos propres commentaires. On a ajouté à la fin une partie "libre" pour tester l'apprentissage.
 
+::: {.callout-tip}
+## Télécharger l'exercice
+-  [STAT2](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT2-univarie.zip)
+:::
+
+
 
 # 1. IMPORTATION DES DONNEES
 

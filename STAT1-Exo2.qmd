@@ -34,6 +34,12 @@ editor:
 
 L'objectif de cet exercice est d'importer un tableau puis de modifier les types de variables  et en créer de nouvelles.
 
+::: {.callout-tip}
+## Télécharger l'exercice
+-  [STAT1](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT1-premierpas.zip)
+:::
+
+
 ## (A) IMPORTATION DES DONNEES
 
 Il existe plusieurs façons d'importer des données dans R.

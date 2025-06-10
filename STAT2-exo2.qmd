@@ -31,6 +31,10 @@ editor:
 ---
 
 
+::: {.callout-tip}
+## Télécharger l'exercice
+-  [STAT2](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT2-univarie.zip)
+:::
 
 
 ## Exploration I (*var. quali.*)
