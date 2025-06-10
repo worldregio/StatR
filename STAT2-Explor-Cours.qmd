@@ -1,0 +1,636 @@
+---
+title: "STAT2 : STATISTIQUES EXPLORATOIRES"
+subtitle: "Les fonctions de R-Base"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-06-01"
+title-slide-attributes:
+  data-background-color: "#BA4A00"
+  data-background-size: cover
+  data-background-opacity: "0.5"
+format:
+  revealjs:
+    margin: 0
+    code-line-numbers: false
+    embed-resources: true
+    smaller: true
+    scrollable: true
+    theme: [simple,diapos.scss]
+execute:
+  echo: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(knitr)
+library(dplyr)
+library(questionr)
+```
+
+
+## Introduction
+
+Les deux exercices qui suivent utilisent volontairement les fonctions de base du langage R (on dit que l'on *programme en R-base*) à l'exclusion de tout *package* c'est-à-dire de tout outil graphique ou statistique mis au point ultérieurement. 
+
+Par comparaison avec le jeu de lego, cela revient à effectuer des constructions avec la boîte de base. A première vue cela peut sembler frustrant. Mais en réalité cela ne bride en rien l'imagination et permet d'apprendre plein de choses sans être distrait ...
+
+## Plan
+
+
+1. **La manipulation des tableaux de données** : c'est-à-dire à la fois l'importation, le recodage éventuel des variables et la correction de leur type, la sélection de lignes ou de colonnes pour créer des sous-tableaux.
+
+2. **L'exploration statistique univariée** : c'est-à-dire le calcul de résumés simples d'une variable à l'aide de paramètres statistiques (valeurs centrales, dispersion) et la production de graphiques élémentaires. 
+
+Pour rendre l'apprentissage moins austère, nous avons choisi un tableau de données sur les pays d'Afrique de l'Ouest en 2018
+
+# (A) MANIPULATION DE TABLEAUX
+
+## Importation
+
+- Avec la souris
+
+Cliquer sur les menus déroulants **File/Import Dataset/From text (base)** puis suivre le menu
+
+
+
+## Importation
+
+- Avec des lignes de code
+
+On utilise par exemple la fonction `read.table()` en précisant les paramètres utiles :
+
+```{r}
+don <- read.table(file = "data/africa_pays_2018/data/africa_ouest_2018.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",", # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8")              # encodage adapté au français
+
+
+```
+
+
+
+## Dimensions d'un tableau
+
+- La fonction `dim()` fournit les dimensions d'un tableau
+
+```{r}
+dim(don)
+```
+
+
+## Type d'un tableau
+- La fonction `class()` fournit le type d'un tableau
+
+```{r}
+class(don)
+```
+
+
+## Visualisation d'un tableau
+
+- Premières lignes avec `head()`
+
+```{r}
+head(don)         # Affiche par défaut les 6 premières lignes
+```
+
+- Dernières lignes avec `tail()`
+
+```{r}
+tail(don,2)         # Affiche les 2 dernières lignes
+```
+
+
+
+## Verification des variables
+
+- Vérifie le type avec `str()`
+
+```{r}
+str(don)
+```
+
+
+- Recode avec les fonctions `as.xxx()`
+
+```{r}
+don$LOCKED<-as.factor(don$LOCKED)
+levels(don$LOCKED) <- c("non enclavé","enclavé")
+don$LANGFR <-as.factor(don$LANGFR)
+levels(don$LANGFR)<-c("non francophone","francophone")
+```
+
+
+## Résumé  du tableau
+
+La fonction `summary()` donne un aperçu général des variables
+
+```{r}
+summary(don)
+```
+
+
+
+## Transformations
+
+
+### Copie intégrale 
+
+Elle s'effectue avec l'opérateur  `<-`
+
+```{r}
+tab<-don
+dim(tab)
+head(tab,2)
+tail(tab,2)
+```
+
+
+
+
+## Sélection de lignes
+
+On utilise la syntaxe `tab2<-tab[conditions , ]` avec  les opérateurs logiques suivants
+
+
+- **==** : est égal à
+- **!=** : est différent de 
+- **> ** : est strictement supérieur à 
+- **< ** : est strictement inférieur à 
+- **>=** : est supérieur ou égal à 
+- **<=** : est inférieur ou égal à  
+- **&**  : ET (vrai si les deux conditions sont vérifiées)
+- **|**  : OU inclusif (vrai si l'une des conditions est vérifiée)
+- **xor** : OU exclusif (vrai si une seule des conditions est vérifiée)
+
+## Sélection de lignes
+
+
+- Exemple de sélection des pays enclavés
+
+```{r}
+don2<-don[don$LOCKED=="enclavé",]
+don2
+```
+
+## Sélection de lignes
+
+- Exemple de sélection des pays non enclavés
+
+```{r}
+don3<-don[don$LOCKED!="enclavé",]
+don3
+```
+
+## Sélection de lignes
+
+- Exemple de sélection des pays de plus 20 millions d'habitant
+
+```{r}
+big<-don[don$POP>20,]
+big
+```
+
+
+## Sélection de lignes
+
+- Exemple de sélection des pays enclavés  de plus 20 millions d'habitant (on mélange deux conditions avec l'opérateur `&`)
+
+```{r}
+big2<-don[don$LOCKED=="enclavé" & don$POP>20,]
+big2
+```
+
+
+## Sélection de colonnes
+
+On utilise la syntaxe `tab2<-tab[  ,  liste ]` avec différentes  syntaxes pour les listes de variables :
+
+- Sélection nominale
+
+```{r}
+tab<-don[,c("iso3","nom", "POP", "PIB", "MORINF")]
+head(tab)
+```
+
+- Sélection de positions 
+
+```{r}
+tab<-don[,c(1:4,8)]
+head(tab,2)
+```
+
+
+## Sélection de lignes et colonnes
+
+On utilise la syntaxe `tab2<-tab[ conditions ,  liste]` 
+
+- Exemple : PIB et POP des pays de plus de 20 millions d'habitant
+
+```{r}
+tab<-don[don$POP>20, c("nom","POP","PIB")]
+tab
+```
+
+
+
+
+## Extraction d'une Variable = Vecteur
+
+- Solution n°1 : utilisation de l'opérateur `$`
+
+```{r}
+myvar<-don$POP
+str(myvar)
+mean(myvar)
+```
+
+-Solution n°2 : utilisation de  `[ , ]`
+
+```{r}
+myvar<-don[,3]
+str(myvar)
+mean(myvar)
+```
+
+
+# (B) ANALYSE D'UNE VARIABLE QUALITATIVE
+
+
+## Sélection et recodage
+
+Les variables qualitatives nominales ou *factor* sont des objets composés d'une liste de numéros et d'une liste d'étiquettes. 
+
+```{r quali1}
+X<-don$LANGFR
+X
+
+# Vérification du type
+str(X)
+```
+
+
+## Sélection et recodage
+
+Si la variable chargée est de type *character* il faut la transformer avec `as.factor()` et repérer les niveaux disponibles avec `levels()`
+
+```{r}
+X<-as.factor(X)
+class(X)
+levels(X)
+```
+
+## Sélection et recodage
+
+On peut remplacer les niveaux en utilisant l'instruction `levels() `à nouveau, mais suivie d'un vecteur de charactères indiquant les changements de nom. 
+
+```{r quali2}
+
+levels(X)<-c("non francophone","francophone")
+             
+X
+str(X)
+```
+
+
+## Sélection et recodage
+
+On peut transformer une variable quantitative en facteur avec la fonction `cut()`
+
+```{r quali3}
+summary(don$POP)
+Y<-cut(don$POP, breaks=c(0,10,30,200))
+Y
+str(Y)
+
+```
+
+## Sélection et recodage
+
+On peut ensuite recoder les classes avec `levels()`
+
+```{r quali4}
+levels(Y)<-c("Petit","Moyen","Grand")
+Y
+str(Y)
+```
+
+
+## Table de dénombrement
+
+Pour dénomber une variable qualitative, on utilise l'instruction `table()` qui crée un objet particulier qui n'est ni un *data.frame*, ni une *matrix*.
+
+```{r table}
+tab<-table(X)
+tab
+str(tab)
+```
+
+## Table de dénombrement
+
+On peut créer des tables à 2 dimensions
+
+```{r table2}
+tab2<-table(X,Y)
+tab2
+str(tab2)
+```
+
+
+## Table de dénombrement
+
+Un objet de type *table* peut être manipulé par des fonctions spéciales comme `addmargins()` quii rajoute des sommes en ligne (et en colonne si la table est de dimension 2)
+
+```{r table3}
+addmargins(tab)
+addmargins(tab2)
+```
+
+
+## Table de dénombrement
+
+Les objets de type  `table` sont souvent la source de crises de nerf de la part des étudiants qui les confondent avec des objets de type `vecteur`, `matrice` ou `data.frame`. Il existe des fonctions de conversion d'un type vers un autre mais leur emploi n'est pas très simple. 
+
+On retiendra donc dans l'immédiat que les résultats de l'instruction `table`sont des **objets transitoires** qui servent uniquement à afficher des résultats ou produire des graphiques à l'aide des instructions `plot()` ou `barplot()`.
+
+
+## Graphique avec plot()
+
+La fonction `plot()` s'applique à la plupart de objets R. Elle produit des résultats différents selon le type d'objet qu'elle a identifié. Si on l'applique à un vecteur de type factor on obtient un **diagramme en bâtons** (à ne pas confondre avec un histogramme) 
+
+```{r plot}
+plot(Y)
+```
+
+
+## Graphique avec plot()
+
+On peut améliorer le graphique en lui ajoutant des *paramètres* c'est-à-dire des instructions séparées par des virgules. Le retour à la ligne après chaque paramètre n'est pas obligatoire mais il est recommandé car il rend le code plus clair. 
+
+```{r, plot2}
+plot(Y,
+     col=c("green", "yellow","orange"), 
+     main= "Les pays d'Afrique de l'Ouest",
+     xlab = "Taille", 
+     ylab = "Nombre de pays")
+```
+
+
+
+
+
+
+
+# (C) ANALYSE D'UNE VARIABLE QUANTITATIVE
+
+## Résumés numériques
+
+
+Une variable numérique peut faire l'objet d'un ensemble de résumés statistiques à l'aide de fonctions élémentaires
+
+- `min()`   : minimum
+- `max()`   : maximum
+- `mean()`  : moyenne
+- `sd()`    : écart-type (en anglais : *standard deviation*, soit *sd* en abrégé)
+- `sum()`   : somme
+
+
+## Résumés numériques
+
+```{r}
+X <- don$PIB
+min(X)
+max(X)
+mean(X)
+sd(X)
+```
+
+
+## Résumés numériques
+
+Pour calculer les quantiles on peut utiliser la fonction `quantile()` en paramétrant la valeur de fréquence cumulée ascendante
+
+- **quantile(X,0)**     : minimum
+- **quantile(X,0.10)**  : D1 (premier décile)
+- **quantile(X,0.25)**  : Q1 (premier quartile)
+- **quantile(X,0.5)**   : Q2 (médiane)
+- **quantile(X,0.75)**  : Q3 (troisième quartile)
+- **quantile(X,0.90)**  : D9 (dernier décile)
+- **quantile(X,1)**     : maximum
+
+## Résumés numériques
+
+```{r}
+X<-don$PIB
+quantile(X,0.5)
+sel<-c(0,0.25,0.5,0.75,1)
+quantile(X,sel)
+sel<-c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)
+quantile(X,sel)
+```
+
+
+## Discrétisation
+
+Une variable quantitative peut être discrétisée avec `cut()`. Elle devient alors un facteur qu'on peut dénomber avec `table()` puis visualiseer avec `plot()` sous la forme de *diagramme en bâtons*.
+
+
+```{r}
+summary(X)
+X<-cut(don$PIB, c(1000,2000,3000,4000,5000,6000))
+str(X)
+table(X)
+```
+
+## Discrétisation
+
+
+```{r}
+plot(X, col=c("green","yellow","orange","red","brown"),
+     main = "PIB/hab. en 2018", xlab = "classes")
+```
+
+
+## Boîte à moustaches
+
+La fonction `boxplot()` permet de visualiser une distribution sous forme de boîte à moustache où l'on repère facilement :
+
+- la médiane
+- les quartiles Q1 et Q3
+- le minimum et le maximum
+- les valeurs extrêmes situées à une distance supéreiure à 1.5 x (Q3-Q1) de la médiane
+
+## Boîte à moustaches
+La syntaxe de base est la suivante : 
+
+```{r}
+X<-don$PIB
+boxplot(X)
+```
+
+
+## Boîte à moustaches
+
+Mais on peut améliorer la figure avec quelques paramètres de plus
+
+```{r}
+boxplot(X,horizontal = TRUE, col = "gray80",
+        main = "PIB en 2018",
+        xlab = "en $/hab.")
+```
+
+
+## Histogramme
+
+Dans le cas d'une variable **quantitative continue**, la visualisation la plus logique est l'histogramme que l'on peut tracer avec la fonction `hist()`. Celle-ci comporte de nombreux paramètres que l'on peut visualiser dans la **fenêtre Help** qui se trouve en bas à gauche de R-studio : 
+
+## Histogramme
+
+Comme d'habitude, on peut appliquer la syntaxe la plus simple : 
+
+```{r}
+X<-don$PIB
+hist(X)
+```
+
+
+## Histogramme
+On peut ensuite améliorer avec l'ajout de titres et un choix précis de classes. 
+
+```{r}
+hist(X, 
+     breaks = c(1000, 1500, 2000,3000,5000, 6000), 
+     col= "lightyellow",
+     main = "PIB 2018",
+     ylab = "Densité de probabilité", 
+     xlab = "en $/hab.")
+```
+
+
+## Histogramme
+
+On peut également ajouter une courbe lissée de la distribution avec les fonctions `lines()` et `density()`en indiquant la portée du lissage à l'aide du paramètre `bw`(*band width*) qui est exprimé dans l'unité de mesure de X. On peut aussi ajouter un diagramme de distribution avec la fonction `rug()`
+
+```{r}
+hist(X, 
+      breaks = c(1000, 1500, 2000,3000,5000, 6000),
+     col="lightyellow",
+     main = "PIB en 2018",
+     ylab = "Densité de probabilité", 
+     xlab = "en $/hab")
+lines(density(X),col="red",lwd=2)
+rug(X, col="blue",lwd=2)
+```
+
+#  (D) CROISEMENT DE DEUX VARIABLES
+
+## Statistique bivariée
+
+Nous verrons en détail dans les chapitres suivants comment croiser deux variables d'un point de vue statistiques. Mais on peut déjà indiquer brièvement comment les visualiser rapidement à l'aide de trois exemples.
+
+## Deux variables qualitatives
+
+- Tableau de contingence
+
+```{r}
+X <- as.factor(don$LANGFR)
+levels(X)<-c("non francophone", "francophone")
+Y<-cut(don$POP, breaks=c(0,10,20,200))
+levels(Y) <- c("petit","moyen","grand")
+tab<-table(X,Y)
+addmargins(tab)
+```
+
+## Deux variables qualitatives
+
+- Graphique
+
+```{r}
+plot(tab, col=c("yellow","orange","brown"))
+```
+
+
+## Deux variables qualitatives
+
+- Test (Chi-2)
+
+```{r}
+test<-chisq.test(X,Y)
+test
+```
+
+
+## Deux variables quantitatives
+
+- Paramètres principaux
+
+```{r}
+Y <- don$CO2HAB
+X<-don$PIB
+summary(X)
+summary(Y)
+```
+
+
+## Deux variables quantitatives
+
+- Graphique
+
+```{r}
+plot(X,Y, xlab="PIB/hab",ylab="CO2/hab")
+text(X,Y,don$iso3,pos = 4,cex=0.6)
+```
+
+
+## Deux variables quantitatives
+
+- Test (Pearson)
+
+
+```{r}
+cor.test(Y,X)
+```
+
+
+
+## Une quantitative et une qualitative
+
+- Graphique
+
+```{r}
+Y <- don$AGEMED
+X <- as.factor(don$LANGFR)
+levels(X)<-c("non","oui")
+plot(X,Y, 
+     col=c("blue","red"),
+     xlab ="Age médian",
+     ylab = "Francophone",
+     horizontal=T)
+```
+
+## Une quantitative et une qualitative
+
+- Test (Fisher)
+
+```{r}
+mod<-aov(Y~X)
+summary(mod)
+```
+
+
+
+
+## En résumé
+
+
+
+Nous avons survolé les principales `fonctions élémentaires` de R-Base pour montrer qu'il est facile et surtout rapide de les employer en lieu et place d'un tableur comme Excel ou d'un logiciel de statistique click-bouton. 
+
+Il reste encore beaucoup à apprendre mais à ce stade il est important de bien consolider les acquis et de `connaître par coeur le nom des principales fonctions de base` qui ont été présentées au cours de ce chapitre. 
+
+Vous allez donc reprendre l'ensemble de ce chapitre en utilisant un tableau complet comportant plus de pays et de variables.
+
+
+

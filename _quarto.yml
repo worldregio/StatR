@@ -12,20 +12,28 @@ website:
     contents:
       - href: index.qmd
         text: "A propos"
-      - section: "LE LANGAGE R"
+      - section: "STAT0 : OFFICE KILLER"
         contents:
-        - href: STAT0-PremiersPas.qmd
-          text: "Le langage R : Trop difficile ?"
         - href: STAT0-Excel_Killer.qmd
           text: "Les programmes R : Excel Killer ?"
         - href: STAT0-Word_Killer.qmd
           text: "Les documents Rmd : Word Killer ?"
-      - section: "LES VARIABLES STATISTIQUES"
+      - section: "STAT1 : LES VARIABLES STATISTIQUES"
         contents:
         - href: STAT1-Variables-Cours.qmd
-          text: "Cours"          
-        - href: STAT1-Variables-Exo.qmd
-          text: "Exercice"
+          text: "Cours : Types de variables"  
+        - href: STAT1-Exo1.qmd
+          text: "Exo1 : Premiers pas dans R"
+        - href: STAT1-Exo2.qmd
+          text: "Exo2 : Les femmes du Bénin"
+      - section: "STAT2 : STATISTIQUE EXPLORATOIRE"
+        contents:
+        - href: STAT2-Explor-Cours.qmd
+          text: "Cours : Exploration avec R-base"
+        - href: STAT2-Exo1.qmd
+          text: "Exo1 : Manipuler des tableaux"
+        - href: STAT2-Exo2.qmd
+          text: "Exo2 : Résumer des variables"          
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR

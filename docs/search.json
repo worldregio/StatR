@@ -224,6 +224,83 @@
     "text": "Préparation des variable dans R\nLe logiciel R a été écrit par des statisticiens qui accordent une grande importance au choix du type des variables pour réaliser des traitements ou des graphiques appropriés.\n\nLa première étape d’une analyse statistique avec R consiste donc à vérifier précisément le type des données que l’on a importé et à effectuer les transformations nécessaires avant tout traitement."
   },
   {
+    "objectID": "STAT2-exo1.html",
+    "href": "STAT2-exo1.html",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "",
+    "text": "Le but de ce TD est de mettre en oeuvre les fonctions présentées dans le cours d’initiation à R-Base. Il suffit normalement de recopier les lignes du document de cours. Mais il n’est pas interdit d’y apporter vos propres commentaires. On a ajouté à la fin une partie “libre” pour tester l’apprentissage."
+  },
+  {
+    "objectID": "STAT2-exo1.html#chargement-dun-fichier-texte",
+    "href": "STAT2-exo1.html#chargement-dun-fichier-texte",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Chargement d’un fichier texte",
+    "text": "Chargement d’un fichier texte\n\nAvec la souris\nTaper File/Import Dataset / From text (base) puis suivre le menu. Récupérer ensuite le code.\n\n\nAvec des lignes de code\nOn utilise par exemple la fonction read.table() en précisant les paramètres utiles :\n\ndf&lt;-read.table(file = \"data/africa_pays_2018/data/africa_pays_2018.csv\",\n           header=TRUE,\n           sep = \";\",\n           dec = \",\",\n           encoding = \"UTF-8\")"
+  },
+  {
+    "objectID": "STAT2-exo1.html#dimensions-dun-tableau",
+    "href": "STAT2-exo1.html#dimensions-dun-tableau",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Dimensions d’un tableau",
+    "text": "Dimensions d’un tableau\n\nLa fonction dim() fournit les dimensions d’un tableau\n\ndim(df)\n\n[1] 49 26\n\n\n\n\nLa fonction class() fournit le type d’un tableau\n\nclass(df)\n\n[1] \"data.frame\""
+  },
+  {
+    "objectID": "STAT2-exo1.html#visualisation-du-contenu-dun-tableau",
+    "href": "STAT2-exo1.html#visualisation-du-contenu-dun-tableau",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Visualisation du contenu d’un tableau",
+    "text": "Visualisation du contenu d’un tableau\n\nPremières lignes avec head()\n\nhead(df)\n\n  iso3                 name                  nom  POP   PIB   IDH ADOFEC CO2HAB\n1  AGO               Angola               Angola 31.3  6794 0.582  152.6   1.12\n2  BDI              Burundi              Burundi 11.4   757 0.432   56.2   0.05\n3  BEN                Benin                Bénin 11.6  3224 0.543   87.4   0.62\n4  BFA         Burkina Faso         Burkina Faso 20.0  2161 0.448  105.7   0.20\n5  BWA             Botswana             Botswana  2.3 17700 0.733   46.3   2.96\n6  CAF Central African Rep. Rep. Centrafricaine   4.7   939 0.396  130.2   0.07\n  EMPAGR EMPSER INTERN ESPVIE AGEMED TELMOB MORINF TXMIGR DVIEUX TUBERC URBANI\n1   50.4   41.4   14.3   61.0   16.7   43.1   51.6    0.2    4.3    355   65.9\n2   92.0    6.5    2.7   61.4   17.3   56.5   41.0    0.2    4.4    111   13.2\n3   38.9   42.1   20.0   61.6   18.8   82.4   60.5   -0.2    6.0     56   47.6\n4   25.6   40.9   16.0   61.4   17.6   97.9   49.0   -1.3    4.6     48   29.7\n5   20.9   61.0   47.0   69.4   24.0  150.0   30.0    1.3    7.0    275   69.8\n6   77.4   17.2    4.3   53.0   17.6   27.7   84.5   -8.6    5.3    540   41.6\n  DJEUNE          SUBREG LOCKED COLFRA COLGBR LANGFR LANGEN\n1   91.5   Middle Africa      0      0      0      0      0\n2   87.0  Eastern Africa      1      0      0      1      0\n3   77.8  Western Africa      0      1      0      1      0\n4   84.9  Western Africa      1      1      0      1      0\n5   54.9 Southern Africa      1      0      1      0      1\n6   83.1   Middle Africa      1      1      0      1      0\n\n\n\n\nDernières lignes avec tail()\n\ntail(df)\n\n   iso3         name            nom  POP   PIB   IDH ADOFEC CO2HAB EMPAGR\n44  TUN      Tunisia        Tunisie 11.6 10760 0.739    7.8   2.73   13.2\n45  TZA     Tanzania       Tanzanie 57.2  2625 0.527  119.0   0.22   65.5\n46  UGA       Uganda        Ouganda 43.5  2152 0.541  120.5   0.14   72.8\n47  ZAF South Africa Afrique du Sud 58.2 12556 0.708   68.4   8.09    5.1\n48  ZMB       Zambia         Zambie 17.6  3501 0.583  122.2   0.30   49.1\n49  ZWE     Zimbabwe       Zimbabwe 14.5  2983 0.570   89.0   0.85   66.4\n   EMPSER INTERN ESPVIE AGEMED TELMOB MORINF TXMIGR DVIEUX TUBERC URBANI DJEUNE\n44   54.2   64.2   76.6   32.8  127.7   14.6   -0.3   12.6     35   69.1   35.9\n45   27.7   25.0   65.2   18.0   77.2   37.6   -0.7    4.9    253   34.2   82.3\n46   20.6   23.7   63.2   16.7   57.3   33.8    4.0    3.8    200   24.1   91.0\n47   71.8   56.2   64.0   27.6  153.3   28.5    2.5    8.2    520   66.7   44.2\n48   40.1   14.3   63.7   17.6   89.2   40.4   -0.5    4.0    346   43.8   84.0\n49   26.8   27.1   61.3   18.7   89.4   33.9   -8.2    5.4    210   32.2   77.2\n            SUBREG LOCKED COLFRA COLGBR LANGFR LANGEN\n44 Northern Africa      0      1      0      1      0\n45  Eastern Africa      0      0      1      0      1\n46  Eastern Africa      1      0      1      0      1\n47 Southern Africa      0      0      1      0      1\n48  Eastern Africa      1      0      1      0      1\n49  Eastern Africa      1      0      1      0      1"
+  },
+  {
+    "objectID": "STAT2-exo1.html#verifier-et-recoder-le-type-des-variables",
+    "href": "STAT2-exo1.html#verifier-et-recoder-le-type-des-variables",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Verifier et recoder le type des variables",
+    "text": "Verifier et recoder le type des variables\n\nVérifier le type avec str()\n\nstr(df)\n\n'data.frame':   49 obs. of  26 variables:\n $ iso3  : chr  \"AGO\" \"BDI\" \"BEN\" \"BFA\" ...\n $ name  : chr  \"Angola\" \"Burundi\" \"Benin\" \"Burkina Faso\" ...\n $ nom   : chr  \"Angola\" \"Burundi\" \"Bénin\" \"Burkina Faso\" ...\n $ POP   : num  31.3 11.4 11.6 20 2.3 4.7 25.4 25.5 85.4 5.3 ...\n $ PIB   : int  6794 757 3224 2161 17700 939 5134 3628 1092 3356 ...\n $ IDH   : num  0.582 0.432 0.543 0.448 0.733 0.396 0.536 0.562 0.479 0.574 ...\n $ ADOFEC: num  152.6 56.2 87.4 105.7 46.3 ...\n $ CO2HAB: num  1.12 0.05 0.62 0.2 2.96 0.07 0.33 0.32 0.02 0.62 ...\n $ EMPAGR: num  50.4 92 38.9 25.6 20.9 77.4 40.5 43.8 65.6 34.4 ...\n $ EMPSER: num  41.4 6.5 42.1 40.9 61 17.2 46.5 41.4 24.7 43.7 ...\n $ INTERN: num  14.3 2.7 20 16 47 4.3 46.8 23.2 8.6 8.7 ...\n $ ESPVIE: num  61 61.4 61.6 61.4 69.4 53 57.6 59.1 60.5 64.4 ...\n $ AGEMED: num  16.7 17.3 18.8 17.6 24 17.6 18.9 18.7 17 19.2 ...\n $ TELMOB: num  43.1 56.5 82.4 97.9 150 ...\n $ MORINF: num  51.6 41 60.5 49 30 84.5 59.4 50.6 68.2 36.2 ...\n $ TXMIGR: num  0.2 0.2 -0.2 -1.3 1.3 -8.6 -0.3 -0.2 0.3 -0.8 ...\n $ DVIEUX: num  4.3 4.4 6 4.6 7 5.3 5.2 5 5.9 4.9 ...\n $ TUBERC: num  355 111 56 48 275 540 142 186 321 375 ...\n $ URBANI: num  65.9 13.2 47.6 29.7 69.8 41.6 51 56.7 44.8 67.2 ...\n $ DJEUNE: num  91.5 87 77.8 84.9 54.9 83.1 75.6 77.6 90.5 74.8 ...\n $ SUBREG: chr  \"Middle Africa\" \"Eastern Africa\" \"Western Africa\" \"Western Africa\" ...\n $ LOCKED: int  0 1 0 1 1 1 0 0 0 0 ...\n $ COLFRA: int  0 0 1 1 0 1 1 1 0 1 ...\n $ COLGBR: int  0 0 0 0 1 0 0 0 0 0 ...\n $ LANGFR: int  0 1 1 1 0 1 1 1 1 1 ...\n $ LANGEN: int  0 0 0 0 1 0 0 1 0 0 ...\n\n\n\n\nmodifier le type des variables avec les fonctions as.xxx()\nExemple : transformer la variable LOCKED en factor\n\ndf$LOCKED&lt;-as.factor(df$LOCKED)\nlevels(df$LOCKED) &lt;- c(\"non enclavé\",\"enclavé\")"
+  },
+  {
+    "objectID": "STAT2-exo1.html#résume-le-contenu-du-tableau",
+    "href": "STAT2-exo1.html#résume-le-contenu-du-tableau",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Résume le contenu du tableau",
+    "text": "Résume le contenu du tableau\n\nla fonction summary() donne un aperçu général des variables\n\nsummary(df)\n\n     iso3               name               nom                 POP        \n Length:49          Length:49          Length:49          Min.   :  1.00  \n Class :character   Class :character   Class :character   1st Qu.:  4.90  \n Mode  :character   Mode  :character   Mode  :character   Median : 15.20  \n                                                          Mean   : 26.27  \n                                                          3rd Qu.: 30.10  \n                                                          Max.   :198.40  \n                                                                          \n      PIB             IDH             ADOFEC           CO2HAB     \n Min.   :  757   Min.   :0.3930   Min.   :  5.80   Min.   :0.020  \n 1st Qu.: 2015   1st Qu.:0.4783   1st Qu.: 66.00   1st Qu.:0.170  \n Median : 3290   Median :0.5320   Median : 92.30   Median :0.330  \n Mean   : 5169   Mean   :0.5457   Mean   : 92.83   Mean   :1.079  \n 3rd Qu.: 6437   3rd Qu.:0.5903   3rd Qu.:120.50   3rd Qu.:1.050  \n Max.   :19459   Max.   :0.7470   Max.   :188.30   Max.   :8.090  \n NA's   :3       NA's   :1                                        \n     EMPAGR          EMPSER          INTERN          ESPVIE     \n Min.   : 5.10   Min.   : 6.50   Min.   : 1.30   Min.   :53.00  \n 1st Qu.:30.40   1st Qu.:27.70   1st Qu.: 9.80   1st Qu.:59.80  \n Median :43.80   Median :41.40   Median :20.00   Median :63.20  \n Mean   :46.18   Mean   :39.65   Mean   :25.38   Mean   :63.21  \n 3rd Qu.:64.40   3rd Qu.:49.10   3rd Qu.:42.00   3rd Qu.:66.30  \n Max.   :92.00   Max.   :71.80   Max.   :64.80   Max.   :76.80  \n                                                                \n     AGEMED          TELMOB           MORINF          TXMIGR       \n Min.   :15.20   Min.   : 20.40   Min.   :10.20   Min.   :-15.900  \n 1st Qu.:17.80   1st Qu.: 47.70   1st Qu.:32.70   1st Qu.: -1.300  \n Median :19.20   Median : 88.20   Median :42.10   Median : -0.300  \n Mean   :20.31   Mean   : 82.81   Mean   :45.32   Mean   : -1.108  \n 3rd Qu.:21.50   3rd Qu.:104.50   3rd Qu.:59.40   3rd Qu.:  0.100  \n Max.   :32.80   Max.   :153.30   Max.   :84.50   Max.   : 12.400  \n                                                                   \n     DVIEUX           TUBERC          URBANI         DJEUNE      \n Min.   : 3.800   Min.   : 12.0   Min.   :13.2   Min.   : 35.90  \n 1st Qu.: 5.000   1st Qu.: 93.0   1st Qu.:32.2   1st Qu.: 63.10  \n Median : 5.500   Median :186.0   Median :43.6   Median : 75.60  \n Mean   : 5.965   Mean   :222.3   Mean   :45.4   Mean   : 72.67  \n 3rd Qu.: 6.300   3rd Qu.:308.0   3rd Qu.:56.7   3rd Qu.: 83.00  \n Max.   :12.600   Max.   :611.0   Max.   :89.6   Max.   :105.10  \n                                                                 \n    SUBREG                  LOCKED       COLFRA           COLGBR      \n Length:49          non enclavé:33   Min.   :0.0000   Min.   :0.0000  \n Class :character   enclavé    :16   1st Qu.:0.0000   1st Qu.:0.0000  \n Mode  :character                    Median :0.0000   Median :0.0000  \n                                     Mean   :0.4082   Mean   :0.3878  \n                                     3rd Qu.:1.0000   3rd Qu.:1.0000  \n                                     Max.   :1.0000   Max.   :1.0000  \n                                                                      \n     LANGFR          LANGEN      \n Min.   :0.000   Min.   :0.0000  \n 1st Qu.:0.000   1st Qu.:0.0000  \n Median :0.000   Median :0.0000  \n Mean   :0.449   Mean   :0.4286  \n 3rd Qu.:1.000   3rd Qu.:1.0000  \n Max.   :1.000   Max.   :1.0000"
+  },
+  {
+    "objectID": "STAT2-exo1.html#copie-intégrale-dun-tableau-avec--",
+    "href": "STAT2-exo1.html#copie-intégrale-dun-tableau-avec--",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Copie intégrale d’un tableau avec <-",
+    "text": "Copie intégrale d’un tableau avec &lt;-\n\ndf2&lt;-df"
+  },
+  {
+    "objectID": "STAT2-exo1.html#sélection-de-lignes",
+    "href": "STAT2-exo1.html#sélection-de-lignes",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Sélection de lignes",
+    "text": "Sélection de lignes\nOn utilise la syntaxe df2&lt;-df[** condition **, ] avec la syntaxe suivante pour les opérateurs logiques :\n\négal à ==\ndifférent de !=\nsupérieur à &gt;\ninférieur à &lt;\n\n\nExemple de sélection des pays enclavés\n\ndf2&lt;-df[df$LOCKED==\"enclavé\",]\n\n\n\nExemple de sélection des pays non enclavé\n\ndf2&lt;-df[df$LOCKED!=\"enclavé\",]\n# ou df2&lt;-df[df$LOCKED==\"non enclavé\",]\n\n\n\nExemple de sélection des pays de plus 10 millions d’habitant\n\ndf2&lt;-df[df$POP&gt;10,]\n\n\n\nExemple de sélection des pays enclavés de plus 10 millions d’habitant\n\non mélange deux conditions avec l’opérateur &\n\n\ndf2&lt;-df[df$POP&gt;20 & df$LOCKED==\"enclavé\",]"
+  },
+  {
+    "objectID": "STAT2-exo1.html#sélection-de-colonnes",
+    "href": "STAT2-exo1.html#sélection-de-colonnes",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Sélection de colonnes",
+    "text": "Sélection de colonnes\nOn utilise la syntaxe tab2&lt;-tab[, liste** **] avec différentes syntaxes pour les listes de variables :\n\nliste nominale c(“iso3”, “nom”, “POP”, “PIB”, “MORINF”)\nliste de positions c(1,2,3,4,8)\nliste avec raccourcis c(1:4,13)\n\n\nSélection nominale\n\ndf2&lt;-df[,c(\"iso3\", \"nom\", \"POP\", \"PIB\", \"MORINF\")]\n\n\n\nSélection de position avec raccourcis\n\ndf2&lt;-df[,c(1:4,8)]"
+  },
+  {
+    "objectID": "STAT2-exo1.html#sélection-simultanée-de-lignes-et-colonnes",
+    "href": "STAT2-exo1.html#sélection-simultanée-de-lignes-et-colonnes",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Sélection simultanée de lignes et colonnes",
+    "text": "Sélection simultanée de lignes et colonnes\n\nOn utilise la syntaxe df2&lt;-df[** condition, liste **] a\n\n\nExemple : iso3, PIB et MORINF des pays de moins de 10 millions d’habitant\n\ndf2&lt;-df[df$POP&lt;10,c(\"iso3\",\"PIB\",\"MORINF\")]"
+  },
+  {
+    "objectID": "STAT2-exo1.html#extraction-dune-variable-vecteur",
+    "href": "STAT2-exo1.html#extraction-dune-variable-vecteur",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Extraction d’une Variable = Vecteur",
+    "text": "Extraction d’une Variable = Vecteur\n\nSolution n°1 : utilisation de l’opérateur $\nExtraire le vecteur Y correspondant à la population\n\nY&lt;-df$POP\nY\n\n [1]  31.3  11.4  11.6  20.0   2.3   4.7  25.4  25.5  85.4   5.3   1.0  42.6\n[13]  99.4   3.5 110.7   2.1  30.1  12.6   2.3   1.9   1.3  52.0   4.9   6.7\n[25]   2.1  36.3  26.6  19.4  29.9   4.5  18.4   2.5  22.9 198.4  12.5  42.3\n[37]  11.0  16.1   7.7  15.2   1.1  15.7   8.0  11.6  57.2  43.5  58.2  17.6\n[49]  14.5\n\n\n\n\nSolution n°2 : utilisation de [ , ]\n\nY&lt;-df[,3]\nY\n\n [1] \"Angola\"               \"Burundi\"              \"Bénin\"               \n [4] \"Burkina Faso\"         \"Botswana\"             \"Rep. Centrafricaine \"\n [7] \"Côte d'Ivoire\"        \"Cameroun\"             \"Congo, Rép. dém. du\" \n[10] \"Congo\"                \"Djibouti\"             \"Algérie\"             \n[13] \"Egypte\"               \"Erythrée\"             \"Ethiopie\"            \n[16] \"Gabon\"                \"Ghana\"                \"Guinée\"              \n[19] \"Gambie\"               \"Guinée-Bissau\"        \"Guinée équatoriale\"  \n[22] \"Kenya\"                \"Libéria\"              \"Libye\"               \n[25] \"Lesotho\"              \"Maroc\"                \"Madagascar\"          \n[28] \"Mali\"                 \"Mozambique\"           \"Mauritanie\"          \n[31] \"Malawi\"               \"Namibie\"              \"Niger\"               \n[34] \"Nigéria\"              \"Rwanda\"               \"Soudan\"              \n[37] \"Sud Soudan\"           \"Sénégal\"              \"Sierra Leone\"        \n[40] \"Somalie\"              \"Swaziland\"            \"Tchad\"               \n[43] \"Togo\"                 \"Tunisie\"              \"Tanzanie\"            \n[46] \"Ouganda\"              \"Afrique du Sud\"       \"Zambie\"              \n[49] \"Zimbabwe\""
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Introduction à R",
@@ -250,6 +327,132 @@
     "title": "Introduction à R",
     "section": "Archives des écoles d’été du CIST",
     "text": "Archives des écoles d’été du CIST\n\nOuidah, Bénin, 2023 : EE CIST 2023 : Méthodes et outils des sciences territoriales\nSousse, Tunisie, 2024 : Geouniv’r 2024"
+  },
+  {
+    "objectID": "STAT0-Word_Killer.html",
+    "href": "STAT0-Word_Killer.html",
+    "title": "Les documents Rmd : Word Killer ?",
+    "section": "",
+    "text": "Excel"
+  },
+  {
+    "objectID": "STAT0-Word_Killer.html#préparation-du-document-rmarkdown",
+    "href": "STAT0-Word_Killer.html#préparation-du-document-rmarkdown",
+    "title": "Les documents Rmd : Word Killer ?",
+    "section": "Préparation du document Rmarkdown",
+    "text": "Préparation du document Rmarkdown\nOn ouvre le projet précédent où se trouve déjà notre programme R\n\n\n\nProgramme R\n\n\nA l’intérieur de ce projet, on crée un document de type Rmd (R markdown) auquel on donne le titre “Inégalités de développement en Côte d’Ivoire en 2002” et on le sauvegarde sous le nom Rapport_CIV_2022.Rmd.\nAu moment de l’ouverture, le document ressemble à ceci:\n\n\n\nProgramme R\n\n\nOn garde le premier bloc de programme (en gris) et on élimine toute la partie créée par Rstudio pour servir d’exemple. On la remplace par notre plan en utilisant des instructions pour hiérarchiser les parties (##) , sous-parties (###) et sous-sous parties (####). On évitera d’utiliser (#) qui correspond à un titre de chapitre ou d’ouvrage.\n\n\n\nProgramme R\n\n\nOn clique alors sur le bouton “Knit” (une pelotte de laine bleue) pour visualiser le résultat qui s’affiche sous la forme d’une page .html.\n\n\n\nSortie html"
+  },
+  {
+    "objectID": "STAT0-Word_Killer.html#combinaison-de-texte-et-de-code",
+    "href": "STAT0-Word_Killer.html#combinaison-de-texte-et-de-code",
+    "title": "Les documents Rmd : Word Killer ?",
+    "section": "Combinaison de texte et de code",
+    "text": "Combinaison de texte et de code\nOn va maintenant pouvoir rédiger notre document en alternant des parties de texte (rédigées en langage markdown) et des blocs de code R appelés chunks\n\nAjout d’un tableau\nOn décide d’ajouter un tableau de données :\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\nOn décide d’ajouter un résumé des variables\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\n\n\nAjout de graphiques\nOn veut ensuite insérer deux histogrammes regroupés en une seule figure\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\nPuis on ajoute un diagramme de relation entre deux variables\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\n\n\nAjout d’un test régression\nOn termine en ajoutant un test de corrélation entre les deux variables.\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html"
+  },
+  {
+    "objectID": "STAT0-Word_Killer.html#exportation",
+    "href": "STAT0-Word_Killer.html#exportation",
+    "title": "Les documents Rmd : Word Killer ?",
+    "section": "Exportation",
+    "text": "Exportation"
+  },
+  {
+    "objectID": "STAT1-Exo1.html",
+    "href": "STAT1-Exo1.html",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "",
+    "text": "Excel"
+  },
+  {
+    "objectID": "STAT1-Exo1.html#opérations-de-base",
+    "href": "STAT1-Exo1.html#opérations-de-base",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Opérations de base",
+    "text": "Opérations de base\n\n8+2\n\n[1] 10\n\n8-2\n\n[1] 6\n\n8*2\n\n[1] 16\n\n8/2\n\n[1] 4"
+  },
+  {
+    "objectID": "STAT1-Exo1.html#fonctions-mathématiques",
+    "href": "STAT1-Exo1.html#fonctions-mathématiques",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Fonctions mathématiques",
+    "text": "Fonctions mathématiques\n\n## Puissance\n8**2\n\n[1] 64\n\n## Racine carrée\nsqrt(8)\n\n[1] 2.828427\n\n8**(1/2)\n\n[1] 2.828427\n\n## Logarithme népérien\nlog(10)\n\n[1] 2.302585\n\n# Logarithme décimal\nlog10(10)\n\n[1] 1"
+  },
+  {
+    "objectID": "STAT1-Exo1.html#fonctions-géométriques",
+    "href": "STAT1-Exo1.html#fonctions-géométriques",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Fonctions géométriques",
+    "text": "Fonctions géométriques\n\n## Le nombre pi\npi\n\n[1] 3.141593\n\n## Sinus \nsin(pi)\n\n[1] 1.224647e-16\n\n## Cosinus\ncos(pi)\n\n[1] -1\n\n## Tangente\ntan(pi)\n\n[1] -1.224647e-16"
+  },
+  {
+    "objectID": "STAT1-Exo1.html#eléments",
+    "href": "STAT1-Exo1.html#eléments",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Eléments",
+    "text": "Eléments\nUn élément est unique et constitue la brique de base de tous les objets suivants. On peut aussi l’interpréter comme un vecteur de longueur 1 ou une matrice de dimension 1x1.\n\nx&lt;-8\ny&lt;-2\n\nx+y\n\n[1] 10\n\nx*y\n\n[1] 16\n\nx**y\n\n[1] 64\n\n\nLes éléments se combinent différemment selon leur type. Par exemple, des éléments de type caractère (character) peuvent être assemblés avec l’instruction paste() ou découpez avec l’instruction substr() :\n\nx&lt;-\"Bonjour\"\ny&lt;- \"tout le monde\"\nz&lt;- \"!\"\npaste(x,y,z)\n\n[1] \"Bonjour tout le monde !\"\n\nsubstr(x,1,3)\n\n[1] \"Bon\"\n\n\nQuant aux éléments logiques (logical) nous verrons qu’ils peuvent se combiner avec des opérateurs comme & qui signifie ET ou bien | qui signifie OU.\n\nx&lt;-TRUE\ny&lt;-FALSE\n\nx & y\n\n[1] FALSE\n\nx | y \n\n[1] TRUE"
+  },
+  {
+    "objectID": "STAT1-Exo1.html#vecteurs-vectors",
+    "href": "STAT1-Exo1.html#vecteurs-vectors",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "vecteurs (vectors)",
+    "text": "vecteurs (vectors)\nUn vecteur est un ensemble d’éléments de même type que l’on a concaténés à l’aide de l’instruction c(). On peut ensuite les aditionner, les multiplier ou les combiner avec des éléments.\n\nx &lt;- c(1,2,4,8,16)\ny &lt;- 4\nx+y\n\n[1]  5  6  8 12 20\n\nx*y\n\n[1]  4  8 16 32 64\n\nx**y\n\n[1]     1    16   256  4096 65536\n\n\nOn remarque dans l’exemple ci-dessus que R n’a pas de problème pour combiner des vecteurs de tailles différentes."
+  },
+  {
+    "objectID": "STAT1-Exo1.html#matrices-matrix",
+    "href": "STAT1-Exo1.html#matrices-matrix",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Matrices (matrix)",
+    "text": "Matrices (matrix)\nUne matrice est un ensemble de vecteurs de même longueur et de même type. On peut donc construire une matrice en concaténant des vecteurs verticalement avec cbind()ou horizontalement avec rbind().\n\n# deux vecteurs\nx1 &lt;- c(1,2,4,8,16)\nx2 &lt;- c(5,10,15,20,25)\n\n# matrice en colonnes\nm1 &lt;- cbind(x1,x2)\nm1\n\n     x1 x2\n[1,]  1  5\n[2,]  2 10\n[3,]  4 15\n[4,]  8 20\n[5,] 16 25\n\n# matrice en lignes\nm2 &lt;- rbind(x1,x2)\nm2\n\n   [,1] [,2] [,3] [,4] [,5]\nx1    1    2    4    8   16\nx2    5   10   15   20   25\n\n# piège !\nm3 &lt;- c(x1,x2)\nm3\n\n [1]  1  2  4  8 16  5 10 15 20 25\n\nis.matrix(m3)\n\n[1] FALSE\n\n\n\n\n\n\n\n\nImportant\n\n\n\nSi on assemble deux vecteurs à l’aide de la commande c()on obtient un vecteur et pas une matrice."
+  },
+  {
+    "objectID": "STAT1-Exo1.html#listes-list",
+    "href": "STAT1-Exo1.html#listes-list",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Listes (list)",
+    "text": "Listes (list)\nR utilise des types plus complexes d’objets qui lui sont propres et qui sont en général des listes ou des listes de listes.\n\nliste simple\nliste de liste\nlistes de vecteur = data.frame\n…\n\n\n\n\n\n\n\nImportant\n\n\n\nLes vecteurs regroupent des éléments de même type tandis que les listes regroupent des éléments ou des objets de type quelconque. Le type liste est donc beaucoup plus général, mais aussi plus difficile d’emploi.\nOn peut comparer une liste à un panier de course dans lequel on mélange des choux, des carottes, des navets, une boîte de douze oeufs, un paquet de croquettes pour chiens, etc…\n\n\n\n# Format vecteur\nprenom &lt;- c(\"Ali\", \"Amine\",\n    \"Anne\",\"Marc\",\"Zayneb\")\nsexe &lt;- c(\"H\",\"H\",\"F\",\"H\",\"F\")\nage  &lt;- c(21,22,24,18,25)\n\n\n# Format liste\nAli &lt;- list(\"H\",21)\nAmine &lt;- list(\"F\",22)\nAnne &lt;- list(\"F\",28)\nMarc &lt;- list (\"H\",18)\nZayneb &lt;- list(\"F\",25)\n\n# Ne pas confondre !\nAli &lt;- c(\"H\",21)\nAli\n\n[1] \"H\"  \"21\"\n\nAli &lt;- list(\"H\",21)\nAli\n\n[[1]]\n[1] \"H\"\n\n[[2]]\n[1] 21"
+  },
+  {
+    "objectID": "STAT1-Exo1.html#exercices",
+    "href": "STAT1-Exo1.html#exercices",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "Exercices",
+    "text": "Exercices\nExercice 1\nConstruire le vecteur x suivant :\n\n\n[1] \"Paris\"    \"Londres\"  \"Tokyo\"    \"New York\"\n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nx &lt;- c(\"Paris\", \"Londres\",\"Tokyo\",\"New York\")\nx\n\n[1] \"Paris\"    \"Londres\"  \"Tokyo\"    \"New York\"\n\n\n\n\n\nConstruire le vecteur y suivant :\n\n\n[1] \"France\"      \"Royaume-Uni\" \"Japon\"       \"USA\"        \n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\ny &lt;- c(\"France\", \"Royaume-Uni\",\"Japon\",\"USA\")\ny\n\n[1] \"France\"      \"Royaume-Uni\" \"Japon\"       \"USA\"        \n\n\n\n\n\nConstruire le vecteur z suivant :\n\n\n[1] 10.2 14.6 42.8 23.9\n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nz &lt;- c(10.2, 14.6,42.8,23.9)\nz\n\n[1] 10.2 14.6 42.8 23.9\n\n\n\n\n\nConstruire la matrice m1\n\n\n  [,1]     [,2]          [,3]    [,4]      \nx \"Paris\"  \"Londres\"     \"Tokyo\" \"New York\"\ny \"France\" \"Royaume-Uni\" \"Japon\" \"USA\"     \n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nm1&lt;-rbind(x,y)\nm1\n\n\n\n\nConstruire la matrice m2\n\n\n     x          y            \n[1,] \"Paris\"    \"France\"     \n[2,] \"Londres\"  \"Royaume-Uni\"\n[3,] \"Tokyo\"    \"Japon\"      \n[4,] \"New York\" \"USA\"        \n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nm2&lt;-cbind(x,y)\nm2\n\n\n\n\nConstruire le data.frame df\n\n\n            y        x    z\n1      France    Paris 10.2\n2 Royaume-Uni  Londres 14.6\n3       Japon    Tokyo 42.8\n4         USA New York 23.9\n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\ndf&lt;-data.frame(y,x,z)\n\n\n\n\nExercice 2 (d’après J.Barnier)\nOn a demandé à 4 ménages le revenu des deux conjoints, et le nombre de personnes du ménage :\n\nconjoint1 &lt;- c(1200, 1180, 1750, 2100)\nconjoint2 &lt;- c(1450, 1870, 1690, 0)\nnb_personnes &lt;- c(4, 2, 3, 2)\n\nCalculer le revenu total de chaque ménage, puis diviser par le nombre de personnes pour obtenir le revenu par personne de chaque ménage.\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nrevenu_total &lt;- conjoint1 + conjoint2\nrevenu_total / nb_personnes\n\n[1]  662.500 1525.000 1146.667 1050.000"
+  },
+  {
+    "objectID": "STAT1-Exo2.html",
+    "href": "STAT1-Exo2.html",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "",
+    "text": "L’objectif de cet exercice est d’importer un tableau puis de modifier les types de variables et en créer de nouvelles."
+  },
+  {
+    "objectID": "STAT1-Exo2.html#a-importation-des-donnees",
+    "href": "STAT1-Exo2.html#a-importation-des-donnees",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "(A) IMPORTATION DES DONNEES",
+    "text": "(A) IMPORTATION DES DONNEES\nIl existe plusieurs façons d’importer des données dans R.\n\nImportation d’un fichier texte\nNous allons utiliser ici la fonction read.table()qui est adapté à l’importation de la plupart des fichiers-texte d’extension .csv ou .txt. Cette fonction comporte plusieurs paramètres qu’il faut adapter en fonction du fichier choisi.\n\nfile = “…”: nom et chemin d’accès du fichier\nsep = “…” : type de séparateur des colonnes (en général , ou ; )\ndec = “…” : type de décimal (en général . ou ,)\nheader = TRUE : pour indiquer s’il y a une ligne d’en-tête avec le nom des variables\nfileEncoding = “UTF-8” : pour indiquer le type d’encodage des caractères\n\n\ndon &lt;- read.table(file = \"data/DHS-Benin-2018/femmes_2018.csv\",\n                  sep= \";\",\n                  dec =\".\",\n                  header = TRUE,\n                  fileEncoding = \"UTF-8\")\n\n\n\nVérification du type de tableau\nOn utilise la fonction class() pour connaître le type de l’objet que nous venons de créer. Normalement c’est un data.frame qui est le type de tableau de base dans R.\n\nclass(don)\n\n[1] \"data.frame\"\n\n\n\n\nDimensions\nOn utilise la fonction dim()pour afficher les dimensions du tableau, c’est-à-dire son nombre de lignes et de colonnes :\n\ndim(don)\n\n[1] 4617    7\n\n\n\n\nAffichage de l’ensemble du tableau\nIl suffit de taper le nom d’un tableau pour qu’ils’affiche en entier. Mais ce n’est évidemment pas recommandé si celui-ci est très grand comme c’est le cas ici\n\n#don\n\n\n\nAffichage du début et de la fin d’un tableau\nIl est plus prudent de ne montrer que les premières ou dernières lignes avec les commandes head()et tail().\n\nhead(don)\n\n  poids taille age  region milieu educ nbenf\n1  67.1  164.5  33 ALIBORI  Rural    0     5\n2  62.7  161.8  39 ALIBORI  Rural    0     5\n3  81.7  157.6  33 ALIBORI  Rural    0     4\n4  58.2  160.4  28 ALIBORI  Rural    0     4\n5  58.4  166.8  48 ALIBORI  Rural    0     4\n6  54.6  168.3  39 ALIBORI  Rural    0     4\n\ntail(don)\n\n     poids taille age region milieu educ nbenf\n4612  74.9  162.3  25    ZOU  Urban    9     4\n4613  69.9  154.3  33    ZOU  Urban   11     4\n4614  53.6  163.1  32    ZOU  Urban    0     7\n4615  53.8  152.4  30    ZOU  Urban    7     3\n4616  51.5  160.7  18    ZOU  Urban    9     1\n4617  53.7  150.1  23    ZOU  Urban    0     3\n\n\n\n\nAccès aux variables\nPour accéder à une variable du tableau, on utilise l’instruction $qui permet d’accéder à une colonne particulière selon la syntaxe.\n$\nPar exemple, pour extraire la variable poids du tableau et en faire un vecteur X je taperai.\n\nX&lt;-don$poids\n\nSi je ne veux voir que les 5 premières valeurs de X je peux taper au choix\n\nhead(X,5)\n\n[1] 67.1 62.7 81.7 58.2 58.4\n\nX[1:5]\n\n[1] 67.1 62.7 81.7 58.2 58.4"
+  },
+  {
+    "objectID": "STAT1-Exo2.html#type-des-variables",
+    "href": "STAT1-Exo2.html#type-des-variables",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "TYPE DES VARIABLES",
+    "text": "TYPE DES VARIABLES\nIl est important de s’assurer que le type des variables est correct. Si ce n’est pas le cas, il faut le changer.\n\nExamen du type des variables\nPour connaître le type des variables d’un tableau, on utilise la fonction str()\n\nstr(don)\n\n'data.frame':   4617 obs. of  7 variables:\n $ poids : num  67.1 62.7 81.7 58.2 58.4 54.6 53.4 51.4 45.8 56.4 ...\n $ taille: num  164 162 158 160 167 ...\n $ age   : int  33 39 33 28 48 39 30 19 19 20 ...\n $ region: chr  \"ALIBORI\" \"ALIBORI\" \"ALIBORI\" \"ALIBORI\" ...\n $ milieu: chr  \"Rural\" \"Rural\" \"Rural\" \"Rural\" ...\n $ educ  : int  0 0 0 0 0 0 0 3 13 0 ...\n $ nbenf : int  5 5 4 4 4 4 4 1 1 1 ...\n\n\n\n\nLes types de variable dans R\nOn trouvetrois types de variables\n\nnum : variable quantitative continue\nint : variable quantitative discrète\nchr : variable de type caractère\n\nLes deux premiers types sont corrects sur le plan statistique. En revanche le type caractère ne correspond pas à une variable utilisable sur le plan statistique. Pour l’utiliser il faut le transformer dans un des deux types suivants :\n\nfactor : variable qualitative\nlogical : variable booléenne.\n\nIl existe d’autres types qu’on verra plus tard.\n\n\nTransformation des variables de type caractère en facteur\nOn utilise la fonction as.factor()pour déclarer qu’une variable est de type qualitatif.\n\ndon$region&lt;-as.factor(don$region)\ndon$milieu&lt;-as.factor(don$milieu)\n\n\n\nTransformation d’une variable numérique en logical\nJe peux créer une variable etud qui indique si la personne a étudié au moins un an (educ &gt;0).\n\ndon$etud &lt;- don$educ &gt; 0\nstr(don$etud)\n\n logi [1:4617] FALSE FALSE FALSE FALSE FALSE FALSE ...\n\n\n\n\nRésumé du tableau\nLorsque toutes les variables ont un type statistique correct, on peut résumer le tableau à l’aide de la fonction summary()\n\nsummary(don)\n\n     poids            taille           age               region    \n Min.   : 33.60   Min.   : 80.0   Min.   :15.00   BORGOU    : 565  \n 1st Qu.: 50.20   1st Qu.:154.8   1st Qu.:24.00   ALIBORI   : 554  \n Median : 56.20   Median :158.6   Median :28.00   ZOU       : 441  \n Mean   : 58.72   Mean   :158.7   Mean   :29.41   ATLANTIQUE: 436  \n 3rd Qu.: 64.10   3rd Qu.:162.5   3rd Qu.:34.00   ATACORA   : 431  \n Max.   :142.70   Max.   :187.0   Max.   :49.00   COLLINES  : 382  \n                                                  (Other)   :1808  \n   milieu          educ            nbenf           etud        \n Rural:2759   Min.   : 0.000   Min.   : 1.000   Mode :logical  \n Urban:1858   1st Qu.: 0.000   1st Qu.: 2.000   FALSE:3003     \n              Median : 0.000   Median : 3.000   TRUE :1614     \n              Mean   : 2.264   Mean   : 3.701                  \n              3rd Qu.: 4.000   3rd Qu.: 5.000                  \n              Max.   :17.000   Max.   :16.000                  \n                                                               \n\n\nOn peut également appliquer cette fonction sur une seule variable à la fois :\n\nsummary(don$poids)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  33.60   50.20   56.20   58.72   64.10  142.70"
+  },
+  {
+    "objectID": "STAT1-Exo2.html#b-creation-et-transformation-de-variables",
+    "href": "STAT1-Exo2.html#b-creation-et-transformation-de-variables",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "(B) CREATION ET TRANSFORMATION DE VARIABLES",
+    "text": "(B) CREATION ET TRANSFORMATION DE VARIABLES\nNous allons maintenant créer de nouvelles variables en combinant des variables existances ou en les transformant.\n\nTransformation de la taille en mètres\nOn peut utiliser les quatre opérations + _ * / dans le programme. Donc pour passer la taille en mètres on va écrire :\n\ndon$taille &lt;- don$taille/100\n\nOn vérifie le résultat :\n\nsummary(don$taille)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  0.800   1.548   1.586   1.587   1.625   1.870 \n\n\n\n\nCalcul de l’Indice de Masse Corporelle (IMC)\nPour calculer l’IMC on va utiliser la fonction puissance qui s’écrit **\n\ndon$IMC &lt;- don$poids/(don$taille**2)\n\nOn vérifie le résultat\n\nsummary(don$IMC)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  15.20   20.25   22.22   23.29   25.08  103.75 \n\n\n\n\nTransformation de l’IMC en variable qualitative\nOn va utiliser la fonction cut() pour transformer l’IMC (quantitatif) en une variable IMC2 (qualitative).\n\ndon$IMC2 &lt;- cut(don$IMC, breaks = c(15, 18, 25, 30, 35, 200))\n\nOn vérifie le résultat\n\nsummary(don$IMC2)\n\n (15,18]  (18,25]  (25,30]  (30,35] (35,200] \n     206     3234      789      266      122 \n\n\nOn peut changer le nom des classes d’un facteur avec l’instruction levels() :\n\nlevels(don$IMC2)&lt;- c(\"maigre\",\"normal\",\"surpoids\",\"obésité\",\"obésité grave\")\n\nOn vérifie\n\nsummary(don$IMC2)\n\n       maigre        normal      surpoids       obésité obésité grave \n          206          3234           789           266           122 \n\n\n\n\nTransformation de l’IMC en variable booléenne\nSupposons maintenant que l’on veuille juste repérer les personnes dont l’IMC est supérieur à 30. On va créer une variable logique (booléenne).\n\ndon$surpoids &lt;- don$IMC &gt; 30\n\nOn la résume\n\nsummary(don$surpoids)\n\n   Mode   FALSE    TRUE \nlogical    4229     388"
+  },
+  {
+    "objectID": "STAT1-Exo2.html#c-tableaux-croises-tableaux-resumes",
+    "href": "STAT1-Exo2.html#c-tableaux-croises-tableaux-resumes",
+    "title": "STAT1 : LES VARIABLES STATISTIQUES",
+    "section": "(C) TABLEAUX CROISES & TABLEAUX RESUMES",
+    "text": "(C) TABLEAUX CROISES & TABLEAUX RESUMES\nOn peut agréger les données à l’aide de différentes fonctions.\n\nTableaux croisés de comptage\nLa fonction table() permet de créer des tableaux croisés qui vont compter le nombre de personnes remplissant les conditions définies par deux variables qualitatives.\nPar exemple on peut croiser les variables region et surpoids\n\ntab&lt;-table(don$region, don$surpoids)\ntab\n\n            \n             FALSE TRUE\n  ALIBORI      519   35\n  ATACORA      426    5\n  ATLANTIQUE   378   58\n  BORGOU       536   29\n  COLLINES     348   34\n  COUFFO       285   16\n  DONGA        314   31\n  LITTORAL     255   79\n  MONO         218   18\n  OUÉMÉ        294   32\n  PLATEAU      249   17\n  ZOU          407   34\n\n\nOn transforme le résultat en data.frame en extrayant les colonnes du tableau\n\nnon &lt;- tab[,1]\noui &lt;-tab[,2]\ntot &lt;- non +oui\npct &lt;- 100*oui/tot\ntabres &lt;-data.frame(non,oui,tot, pct)\ntabres\n\n           non oui tot       pct\nALIBORI    519  35 554  6.317690\nATACORA    426   5 431  1.160093\nATLANTIQUE 378  58 436 13.302752\nBORGOU     536  29 565  5.132743\nCOLLINES   348  34 382  8.900524\nCOUFFO     285  16 301  5.315615\nDONGA      314  31 345  8.985507\nLITTORAL   255  79 334 23.652695\nMONO       218  18 236  7.627119\nOUÉMÉ      294  32 326  9.815951\nPLATEAU    249  17 266  6.390977\nZOU        407  34 441  7.709751\n\n\n\n\nTableaux statistiques résumés\nOn peut également calculer des valeurs statistiques en fonction de groupes pré-définis. Par exemple, calculer les tailles minimales, moyennes et maximales par région.\n\ntailmin &lt;- tapply(don$taille, don$region,\"min\")\ntailmoy &lt;- tapply(don$taille, don$region,\"mean\")\ntailmax &lt;- tapply(don$taille, don$region,\"max\")\n\ntabres2 &lt;- data.frame(tailmin, tailmoy, tailmax)\ntabres2\n\n           tailmin  tailmoy tailmax\nALIBORI      1.446 1.604112   1.769\nATACORA      1.426 1.597798   1.778\nATLANTIQUE   1.390 1.582195   1.767\nBORGOU       1.423 1.587435   1.794\nCOLLINES     0.800 1.588882   1.870\nCOUFFO       1.425 1.579781   1.734\nDONGA        1.410 1.585762   1.745\nLITTORAL     1.393 1.590153   1.764\nMONO         1.380 1.580555   1.722\nOUÉMÉ        1.406 1.588000   1.789\nPLATEAU      1.155 1.575286   1.748\nZOU          1.391 1.569061   1.750"
   },
   {
     "objectID": "STAT0-Excel_Killer.html",
@@ -350,129 +553,402 @@
     "text": "Changement de niveau\nOn peut également charger un fichier de niveau supérieur où les données sont au niveau des pays plutôt que des entités infra-nationales. On remplace juste le nom des régions par le code iso des pays\n\n# ETAPE1 : préparation des données\n\n## 1.1 Importation du tableau\ndon &lt;- read.table(file = \"data/africa_GDL/data/don_sta_2022.csv\",\n                  header= TRUE,\n                  dec=\",\",\n                  sep =\";\")\n\n\n\n## 1.3 Sélection des variables\nsel &lt;-don[, c(\"country\",\"iso_code\",\"pop\",\"pib_hab\",\"esp_vie\")]\n\nsel\n\n## ETAPE 2 : Somme des populations\n\nsum(sel$pop)*1000\n\n## ETAPE 3 : Paramètres principaux\nsummary(sel[,c(\"pop\",\"pib_hab\",\"esp_vie\")])\n\n## ETAPE 4 :Histogramme de X\n\nX&lt;- sel$pib_hab\nhist(X, \n     main=\"Histogramme\",\n     breaks = quantile(X,probs = c(0,0.25,0.5,0.75,1)),\n     ylab= \"Densité\",\n     xlab = \"X = PIB par habitant\",\n     probability = T,\n     col= \"lightyellow\",\n      )\n\nrug(X, \n    col=\"blue\",\n    lwd=3)\n\nlines(density(X, bw=sd(X)/2),\n      col=\"red\",\n      lwd=2,\n      )\n\n## ETAPE 5 : Histogramme de Y\n\nY &lt;- sel$esp_vie\nhist(Y, \n     main=\"Histogramme\",\n     breaks = quantile(Y,probs = c(0,0.25,0.5,0.75,1)),\n     ylab= \"Densité\",\n     xlab = \"Y = Espérance de vie\",\n     probability = T,\n     col= \"lightyellow\",\n      )\n\nrug(Y, \n    col=\"blue\",\n    lwd=3)\n\nlines(density(Y, bw=sd(Y)/2),\n      col=\"red\",\n      lwd=2,\n      )\n\n## ETAPE 6 : Relation entre X et Y \n\nplot(sel$pib_hab,sel$esp_vie,\n     xlab = \"X : PIB par habitant\",\n     ylab = \"Y : Espérance de vie\",\n     main = \"Relation entre X et Y\",\n     pch=20,\n     col=\"red\")\ntext(sel$pib_hab,sel$esp_vie,sel$iso_code,\n     cex=0.4,\n     col=\"blue\",\n     pos=1)\n\n\n\n## ETAPE 7 : Test de la relation entre X et Y\n\n## 7.1 Corrélation\ncor(sel$pib_hab,sel$esp_vie)\n\n## 7.2 Test de significativité\ncor.test(sel$pib_hab,sel$esp_vie)\n\n## 7.3 Régression\nmodreg&lt;-lm(esp_vie~pib_hab,data=sel)\nsummary(modreg)\n\n## 7.4 Graphique + droite de régression\n\n\nplot(sel$pib_hab,sel$esp_vie,\n     xlab = \"X : PIB par habitant\",\n     ylab = \"Y : Espérance de vie\",\n     main = \"Relation entre X et Y\",\n     pch=20,\n     col=\"red\")\n\ntext(sel$pib_hab,sel$esp_vie,sel$iso_code,\n     cex=0.4,\n     col=\"blue\",\n     pos=1)\n\ngrid()\n\nabline(modreg, col=\"black\",lwd=2)\n\n\n\n                        country iso_code    pop pib_hab esp_vie\n1                        Angola      AGO  35589    5330    61.9\n2                       Burundi      BDI  12890     710    62.0\n3                         Benin      BEN  13353    3410    60.0\n4                  Burkina Faso      BFA  22674    2040    59.8\n5                      Botswana      BWA   2630   14840    65.9\n6  Central African Republic CAR      CAF   5579     870    54.5\n7                 Cote d'Ivoire      CIV  28161    5380    58.9\n8                      Cameroon      CMR  27915    3680    61.0\n9     Congo Democratic Republic      COD  99010    1080    59.7\n10            Congo Brazzaville      COG   5970    2900    63.1\n11                      Comoros      COM    837    3260    63.7\n12                   Cape Verde      CPV    593    7600    74.7\n13                     Djibouti      DJI   1121    4870    62.9\n14                      Algeria      DZA  44903   10980    77.1\n15                        Egypt      EGY 110990   12360    70.2\n16                      Eritrea      ERI   3684    1960    66.6\n17                     Ethiopia      ETH 123380    2370    65.6\n18                        Gabon      GAB   2389   11190    65.7\n19                        Ghana      GHA  33476    5380    63.9\n20                       Guinea      GIN  13859    2400    59.0\n21                       Gambia      GMB   2706    2090    62.9\n22                Guinea Bissau      GNB   2106    1880    59.9\n23            Equatorial Guinea      GNQ   1675   10660    61.2\n24                        Kenya      KEN  54027    4810    62.1\n25                      Liberia      LBR   5303    1330    61.1\n26                        Libya      LBY   6812   19750    72.2\n27                      Lesotho      LSO   2306    2710    53.0\n28                      Morocco      MAR  37458    7950    75.0\n29                   Madagascar      MDG  29612    1460    65.2\n30                         Mali      MLI  22594    2040    59.4\n31                   Mozambique      MOZ  32970    1220    59.6\n32                   Mauritania      MRT   4736    5340    64.7\n33                    Mauritius      MUS   1263   23250    74.0\n34                       Malawi      MWI  20405    1430    62.9\n35                      Namibia      NAM   2567    9200    58.1\n36                        Niger      NER  26208    1280    62.1\n37                      Nigeria      NGA 218541    4750    53.6\n38                       Rwanda      RWA  13777    2320    67.1\n39                        Sudan      SDN  46874    3510    65.6\n40                      Senegal      SEN  17316    3460    67.9\n41                 Sierra Leone      SLE   8606    1610    60.4\n42                      Somalia      SOM  17598    1350    54.4\n43                  South Sudan      SSD  10913     690    55.6\n44          Sao Tome & Principe      STP    227    4050    68.8\n45                     Eswatini      SWZ   1202    8390    56.4\n46                         Chad      TCD  17723    1390    53.0\n47                         Togo      TGO   8849    2210    61.6\n48                      Tunisia      TUN  12356   10300    74.3\n49                     Tanzania      TZA  65498    2580    66.8\n50                       Uganda      UGA  47250    2240    63.6\n51                 South Africa      ZAF  59894   13190    61.5\n52                       Zambia      ZMB  20018    3160    61.8\n53                     Zimbabwe      ZWE  16321    2080    59.4\n\n\n[1] 1424714000\n\n\n      pop            pib_hab         esp_vie     \n Min.   :   227   Min.   :  690   Min.   :53.00  \n 1st Qu.:  3684   1st Qu.: 1960   1st Qu.:59.70  \n Median : 13859   Median : 3160   Median :62.10  \n Mean   : 26881   Mean   : 5024   Mean   :63.05  \n 3rd Qu.: 32970   3rd Qu.: 5380   3rd Qu.:65.70  \n Max.   :218541   Max.   :23250   Max.   :77.10  \n\n\n\n\n\n\n\n\n\n\n\n[1] 0.5410111\n\n\n\n    Pearson's product-moment correlation\n\ndata:  sel$pib_hab and sel$esp_vie\nt = 4.594, df = 51, p-value = 2.883e-05\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.3170853 0.7078017\nsample estimates:\n      cor \n0.5410111 \n\n\n\nCall:\nlm(formula = esp_vie ~ pib_hab, data = sel)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-9.2718 -2.0244 -0.1578  2.3155 10.2884 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 5.987e+01  9.607e-01  62.314  &lt; 2e-16 ***\npib_hab     6.324e-04  1.377e-04   4.594 2.88e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.855 on 51 degrees of freedom\nMultiple R-squared:  0.2927,    Adjusted R-squared:  0.2788 \nF-statistic:  21.1 on 1 and 51 DF,  p-value: 2.883e-05"
   },
   {
-    "objectID": "STAT0-Word_Killer.html",
-    "href": "STAT0-Word_Killer.html",
-    "title": "Les documents Rmd : Word Killer ?",
+    "objectID": "STAT2-exo2.html",
+    "href": "STAT2-exo2.html",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
     "section": "",
-    "text": "Excel"
+    "text": "Les variables qualitatives nominales ou factor sont des objets composés d’une liste de numéros et d’une liste d’étiquettes.\n\ndon&lt;-read.table(file = \"data/africa_pays_2018/data/africa_pays_2018.csv\",\n           header=TRUE,\n           sep = \";\",\n           dec = \",\",\n           encoding = \"UTF-8\")\n\n# Extraction de la variable\nX&lt;-don$LANGFR\nX\n\n [1] 0 1 1 1 0 1 1 1 1 1 1 1 0 0 0 1 0 1 0 0 1 0 0 0 0 1 1 1 0 0 0 0 1 0 1 0 0 1\n[39] 0 0 0 1 1 1 0 0 0 0 0\n\n# Vérification du type\nstr(X)\n\n int [1:49] 0 1 1 1 0 1 1 1 1 1 ...\n\n\nSi la variable chargée est de type character il faut la transformer avec as.factor() et repérer les niveaux disponibles avec levels()\n\nX&lt;-as.factor(X)\nclass(X)\n\n[1] \"factor\"\n\nlevels(X)\n\n[1] \"0\" \"1\"\n\n\nOn peut remplacer les niveaux en utilisant l’instruction levels()à nouveau, mais suivie d’un vecteur de charactères indiquant les changements de nom.\n\nlevels(X)&lt;-c(\"non francophone\",\"francophone\")\n             \nX\n\n [1] non francophone francophone     francophone     francophone    \n [5] non francophone francophone     francophone     francophone    \n [9] francophone     francophone     francophone     francophone    \n[13] non francophone non francophone non francophone francophone    \n[17] non francophone francophone     non francophone non francophone\n[21] francophone     non francophone non francophone non francophone\n[25] non francophone francophone     francophone     francophone    \n[29] non francophone non francophone non francophone non francophone\n[33] francophone     non francophone francophone     non francophone\n[37] non francophone francophone     non francophone non francophone\n[41] non francophone francophone     francophone     francophone    \n[45] non francophone non francophone non francophone non francophone\n[49] non francophone\nLevels: non francophone francophone\n\nstr(X)\n\n Factor w/ 2 levels \"non francophone\",..: 1 2 2 2 1 2 2 2 2 2 ...\n\n\nOn peut transformer une variable quantitative en facteur avec la fonction cut()\n\nsummary(don$POP)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.00    4.90   15.20   26.27   30.10  198.40 \n\nY&lt;-cut(don$POP, breaks=c(0,10,30,200))\nY\n\n [1] (30,200] (10,30]  (10,30]  (10,30]  (0,10]   (0,10]   (10,30]  (10,30] \n [9] (30,200] (0,10]   (0,10]   (30,200] (30,200] (0,10]   (30,200] (0,10]  \n[17] (30,200] (10,30]  (0,10]   (0,10]   (0,10]   (30,200] (0,10]   (0,10]  \n[25] (0,10]   (30,200] (10,30]  (10,30]  (10,30]  (0,10]   (10,30]  (0,10]  \n[33] (10,30]  (30,200] (10,30]  (30,200] (10,30]  (10,30]  (0,10]   (10,30] \n[41] (0,10]   (10,30]  (0,10]   (10,30]  (30,200] (30,200] (30,200] (10,30] \n[49] (10,30] \nLevels: (0,10] (10,30] (30,200]\n\nstr(Y)\n\n Factor w/ 3 levels \"(0,10]\",\"(10,30]\",..: 3 2 2 2 1 1 2 2 3 1 ...\n\n\nOn peut ensuite recoder les classes avec levels()\n\nlevels(Y)&lt;-c(\"Petit\",\"Moyen\",\"Grand\")\nY\n\n [1] Grand Moyen Moyen Moyen Petit Petit Moyen Moyen Grand Petit Petit Grand\n[13] Grand Petit Grand Petit Grand Moyen Petit Petit Petit Grand Petit Petit\n[25] Petit Grand Moyen Moyen Moyen Petit Moyen Petit Moyen Grand Moyen Grand\n[37] Moyen Moyen Petit Moyen Petit Moyen Petit Moyen Grand Grand Grand Moyen\n[49] Moyen\nLevels: Petit Moyen Grand\n\nstr(Y)\n\n Factor w/ 3 levels \"Petit\",\"Moyen\",..: 3 2 2 2 1 1 2 2 3 1 ...\n\n\n\n\n\nPour dénomber une variable qualitative, on utilise l’instruction table() qui crée un objet particulier qui n’est ni un data.frame, ni une matrix.\n\ntab&lt;-table(X)\ntab\n\nX\nnon francophone     francophone \n             27              22 \n\nstr(tab)\n\n 'table' int [1:2(1d)] 27 22\n - attr(*, \"dimnames\")=List of 1\n  ..$ X: chr [1:2] \"non francophone\" \"francophone\"\n\n\nOn peut créer des tables à 2, 3 ou 4 dimensions\n\ntab2&lt;-table(X,Y)\ntab2\n\n                 Y\nX                 Petit Moyen Grand\n  non francophone    11     6    10\n  francophone         6    13     3\n\nstr(tab2)\n\n 'table' int [1:2, 1:3] 11 6 6 13 10 3\n - attr(*, \"dimnames\")=List of 2\n  ..$ X: chr [1:2] \"non francophone\" \"francophone\"\n  ..$ Y: chr [1:3] \"Petit\" \"Moyen\" \"Grand\"\n\n\nUn objet de type table peut être manipulé par des fonctions spéciales comme addmargins() quii rajoute des sommes en ligne (et en colonne si la table est de dimension 2)\n\naddmargins(tab)\n\nX\nnon francophone     francophone             Sum \n             27              22              49 \n\naddmargins(tab2)\n\n                 Y\nX                 Petit Moyen Grand Sum\n  non francophone    11     6    10  27\n  francophone         6    13     3  22\n  Sum                17    19    13  49\n\n\n\n\n\nLes objets de type table sont souvent la source de crises de nerf de la part des étudiants qui les confondent avec des objets de type vecteur, matrice ou data.frame. Il existe des fonctions de conversion d’un type vers un autre mais leur emploi n’est pas très simple.\n\n\nOn retiendra donc dans l’immédiat que les résultats de l’instruction tablesont des objets transitoires qui servent uniquement à afficher des résultats ou produire des graphiques à l’aide des instructions plot() ou barplot().\n\n\n\n\n\n\nLa fonction plot() s’applique à la plupart de objets R. Elle produit des résultats différents selon le type d’objet qu’elle a identifié. Si on l’applique à un vecteur de type factor on obtient un diagramme en bâtons (à ne pas confondre avec un histogramme)\n\nplot(Y)\n\n\n\n\nOn peut améliorer le graphique en lui ajoutant des paramètres c’est-à-dire des instructions séparées par des virgules. Le retour à la ligne après chaque paramètre n’est pas obligatoire mais il est recommandé car il rend le code plus clair.\n\nplot(Y,\n     col=c(\"green\", \"yellow\",\"orange\"), \n     main= \"Les pays d'Afrique\",\n     xlab = \"Taille\", \n     ylab = \"Nombre de pays\")"
   },
   {
-    "objectID": "STAT0-Word_Killer.html#préparation-du-document-rmarkdown",
-    "href": "STAT0-Word_Killer.html#préparation-du-document-rmarkdown",
-    "title": "Les documents Rmd : Word Killer ?",
-    "section": "Préparation du document Rmarkdown",
-    "text": "Préparation du document Rmarkdown\nOn ouvre le projet précédent où se trouve déjà notre programme R\n\n\n\nProgramme R\n\n\nA l’intérieur de ce projet, on crée un document de type Rmd (R markdown) auquel on donne le titre “Inégalités de développement en Côte d’Ivoire en 2002” et on le sauvegarde sous le nom Rapport_CIV_2022.Rmd.\nAu moment de l’ouverture, le document ressemble à ceci:\n\n\n\nProgramme R\n\n\nOn garde le premier bloc de programme (en gris) et on élimine toute la partie créée par Rstudio pour servir d’exemple. On la remplace par notre plan en utilisant des instructions pour hiérarchiser les parties (##) , sous-parties (###) et sous-sous parties (####). On évitera d’utiliser (#) qui correspond à un titre de chapitre ou d’ouvrage.\n\n\n\nProgramme R\n\n\nOn clique alors sur le bouton “Knit” (une pelotte de laine bleue) pour visualiser le résultat qui s’affiche sous la forme d’une page .html.\n\n\n\nSortie html"
-  },
-  {
-    "objectID": "STAT0-Word_Killer.html#combinaison-de-texte-et-de-code",
-    "href": "STAT0-Word_Killer.html#combinaison-de-texte-et-de-code",
-    "title": "Les documents Rmd : Word Killer ?",
-    "section": "Combinaison de texte et de code",
-    "text": "Combinaison de texte et de code\nOn va maintenant pouvoir rédiger notre document en alternant des parties de texte (rédigées en langage markdown) et des blocs de code R appelés chunks\n\nAjout d’un tableau\nOn décide d’ajouter un tableau de données :\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\nOn décide d’ajouter un résumé des variables\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\n\n\nAjout de graphiques\nOn veut ensuite insérer deux histogrammes regroupés en une seule figure\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\nPuis on ajoute un diagramme de relation entre deux variables\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html\n\n\n\n\nAjout d’un test régression\nOn termine en ajoutant un test de corrélation entre les deux variables.\n\n\n\nProgramme R\n\n\nVoici le résultat dans la page .html\n\n\n\nSortie html"
-  },
-  {
-    "objectID": "STAT0-Word_Killer.html#exportation",
-    "href": "STAT0-Word_Killer.html#exportation",
-    "title": "Les documents Rmd : Word Killer ?",
-    "section": "Exportation",
-    "text": "Exportation"
-  },
-  {
-    "objectID": "STAT1-Variables-Exo.html",
-    "href": "STAT1-Variables-Exo.html",
-    "title": "STAT1 : LES VARIABLES STATISTIQUES (Exercice)",
+    "objectID": "STAT2-exo2.html#exploration-i-var.-quali.",
+    "href": "STAT2-exo2.html#exploration-i-var.-quali.",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
     "section": "",
-    "text": "L’objectif de cet exercice est d’appliquer les principes de statistiques vus en cours en utilisant le logiciel R. Vous allez utiliser un document Rmarkdown où vous devrez à la fois compléter les programmes et commenter les résultats"
+    "text": "Les variables qualitatives nominales ou factor sont des objets composés d’une liste de numéros et d’une liste d’étiquettes.\n\ndon&lt;-read.table(file = \"data/africa_pays_2018/data/africa_pays_2018.csv\",\n           header=TRUE,\n           sep = \";\",\n           dec = \",\",\n           encoding = \"UTF-8\")\n\n# Extraction de la variable\nX&lt;-don$LANGFR\nX\n\n [1] 0 1 1 1 0 1 1 1 1 1 1 1 0 0 0 1 0 1 0 0 1 0 0 0 0 1 1 1 0 0 0 0 1 0 1 0 0 1\n[39] 0 0 0 1 1 1 0 0 0 0 0\n\n# Vérification du type\nstr(X)\n\n int [1:49] 0 1 1 1 0 1 1 1 1 1 ...\n\n\nSi la variable chargée est de type character il faut la transformer avec as.factor() et repérer les niveaux disponibles avec levels()\n\nX&lt;-as.factor(X)\nclass(X)\n\n[1] \"factor\"\n\nlevels(X)\n\n[1] \"0\" \"1\"\n\n\nOn peut remplacer les niveaux en utilisant l’instruction levels()à nouveau, mais suivie d’un vecteur de charactères indiquant les changements de nom.\n\nlevels(X)&lt;-c(\"non francophone\",\"francophone\")\n             \nX\n\n [1] non francophone francophone     francophone     francophone    \n [5] non francophone francophone     francophone     francophone    \n [9] francophone     francophone     francophone     francophone    \n[13] non francophone non francophone non francophone francophone    \n[17] non francophone francophone     non francophone non francophone\n[21] francophone     non francophone non francophone non francophone\n[25] non francophone francophone     francophone     francophone    \n[29] non francophone non francophone non francophone non francophone\n[33] francophone     non francophone francophone     non francophone\n[37] non francophone francophone     non francophone non francophone\n[41] non francophone francophone     francophone     francophone    \n[45] non francophone non francophone non francophone non francophone\n[49] non francophone\nLevels: non francophone francophone\n\nstr(X)\n\n Factor w/ 2 levels \"non francophone\",..: 1 2 2 2 1 2 2 2 2 2 ...\n\n\nOn peut transformer une variable quantitative en facteur avec la fonction cut()\n\nsummary(don$POP)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.00    4.90   15.20   26.27   30.10  198.40 \n\nY&lt;-cut(don$POP, breaks=c(0,10,30,200))\nY\n\n [1] (30,200] (10,30]  (10,30]  (10,30]  (0,10]   (0,10]   (10,30]  (10,30] \n [9] (30,200] (0,10]   (0,10]   (30,200] (30,200] (0,10]   (30,200] (0,10]  \n[17] (30,200] (10,30]  (0,10]   (0,10]   (0,10]   (30,200] (0,10]   (0,10]  \n[25] (0,10]   (30,200] (10,30]  (10,30]  (10,30]  (0,10]   (10,30]  (0,10]  \n[33] (10,30]  (30,200] (10,30]  (30,200] (10,30]  (10,30]  (0,10]   (10,30] \n[41] (0,10]   (10,30]  (0,10]   (10,30]  (30,200] (30,200] (30,200] (10,30] \n[49] (10,30] \nLevels: (0,10] (10,30] (30,200]\n\nstr(Y)\n\n Factor w/ 3 levels \"(0,10]\",\"(10,30]\",..: 3 2 2 2 1 1 2 2 3 1 ...\n\n\nOn peut ensuite recoder les classes avec levels()\n\nlevels(Y)&lt;-c(\"Petit\",\"Moyen\",\"Grand\")\nY\n\n [1] Grand Moyen Moyen Moyen Petit Petit Moyen Moyen Grand Petit Petit Grand\n[13] Grand Petit Grand Petit Grand Moyen Petit Petit Petit Grand Petit Petit\n[25] Petit Grand Moyen Moyen Moyen Petit Moyen Petit Moyen Grand Moyen Grand\n[37] Moyen Moyen Petit Moyen Petit Moyen Petit Moyen Grand Grand Grand Moyen\n[49] Moyen\nLevels: Petit Moyen Grand\n\nstr(Y)\n\n Factor w/ 3 levels \"Petit\",\"Moyen\",..: 3 2 2 2 1 1 2 2 3 1 ...\n\n\n\n\n\nPour dénomber une variable qualitative, on utilise l’instruction table() qui crée un objet particulier qui n’est ni un data.frame, ni une matrix.\n\ntab&lt;-table(X)\ntab\n\nX\nnon francophone     francophone \n             27              22 \n\nstr(tab)\n\n 'table' int [1:2(1d)] 27 22\n - attr(*, \"dimnames\")=List of 1\n  ..$ X: chr [1:2] \"non francophone\" \"francophone\"\n\n\nOn peut créer des tables à 2, 3 ou 4 dimensions\n\ntab2&lt;-table(X,Y)\ntab2\n\n                 Y\nX                 Petit Moyen Grand\n  non francophone    11     6    10\n  francophone         6    13     3\n\nstr(tab2)\n\n 'table' int [1:2, 1:3] 11 6 6 13 10 3\n - attr(*, \"dimnames\")=List of 2\n  ..$ X: chr [1:2] \"non francophone\" \"francophone\"\n  ..$ Y: chr [1:3] \"Petit\" \"Moyen\" \"Grand\"\n\n\nUn objet de type table peut être manipulé par des fonctions spéciales comme addmargins() quii rajoute des sommes en ligne (et en colonne si la table est de dimension 2)\n\naddmargins(tab)\n\nX\nnon francophone     francophone             Sum \n             27              22              49 \n\naddmargins(tab2)\n\n                 Y\nX                 Petit Moyen Grand Sum\n  non francophone    11     6    10  27\n  francophone         6    13     3  22\n  Sum                17    19    13  49\n\n\n\n\n\nLes objets de type table sont souvent la source de crises de nerf de la part des étudiants qui les confondent avec des objets de type vecteur, matrice ou data.frame. Il existe des fonctions de conversion d’un type vers un autre mais leur emploi n’est pas très simple.\n\n\nOn retiendra donc dans l’immédiat que les résultats de l’instruction tablesont des objets transitoires qui servent uniquement à afficher des résultats ou produire des graphiques à l’aide des instructions plot() ou barplot().\n\n\n\n\n\n\nLa fonction plot() s’applique à la plupart de objets R. Elle produit des résultats différents selon le type d’objet qu’elle a identifié. Si on l’applique à un vecteur de type factor on obtient un diagramme en bâtons (à ne pas confondre avec un histogramme)\n\nplot(Y)\n\n\n\n\nOn peut améliorer le graphique en lui ajoutant des paramètres c’est-à-dire des instructions séparées par des virgules. Le retour à la ligne après chaque paramètre n’est pas obligatoire mais il est recommandé car il rend le code plus clair.\n\nplot(Y,\n     col=c(\"green\", \"yellow\",\"orange\"), \n     main= \"Les pays d'Afrique\",\n     xlab = \"Taille\", \n     ylab = \"Nombre de pays\")"
   },
   {
-    "objectID": "STAT1-Variables-Exo.html#introduction",
-    "href": "STAT1-Variables-Exo.html#introduction",
-    "title": "STAT1 : LES VARIABLES STATISTIQUES (Exercice)",
-    "section": "",
-    "text": "L’objectif de cet exercice est d’appliquer les principes de statistiques vus en cours en utilisant le logiciel R. Vous allez utiliser un document Rmarkdown où vous devrez à la fois compléter les programmes et commenter les résultats"
+    "objectID": "STAT2-exo2.html#exploration-ii-var.-quanti",
+    "href": "STAT2-exo2.html#exploration-ii-var.-quanti",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Exploration II (var. quanti)",
+    "text": "Exploration II (var. quanti)\n\nRésumés numériques\nUne variable numérique peut faire l’objet d’un ensemble de résumés statistiques à l’aide de fonctions élémentaires\n\nmin() : minimum\nmax() : maximum\nmean() : moyenne\nsd() : écart-type (en anglais : standard deviation, soit sd en abrégé)\nsum() : somme\n\n\nX &lt;- don$MORINF\nmin(X)\n\n[1] 10.2\n\nmax(X)\n\n[1] 84.5\n\nmean(X)\n\n[1] 45.32041\n\nsd(X)\n\n[1] 17.77484\n\n\nPour calculer les quantiles on peut utiliser la fonction quantile() en paramétrant la valeur de fréquence cumulée ascendante\n\nquantile(X,0) : minimum\nquantile(X,0.10) : D1 (premier décile)\nquantile(X,0.25) : Q1 (premier quartile)\nquantile(X,0.5) : Q2 (médiane)\nquantile(X,0.75) : Q3 (troisième quartile)\nquantile(X,0.90) : D9 (dernier décile)\nquantile(X,1) : maximum\n\n\nX&lt;-don$MORINF\nquantile(X,0.5)\n\n 50% \n42.1 \n\nsel&lt;-c(0,0.25,0.5,0.75,1)\nquantile(X,sel)\n\n  0%  25%  50%  75% 100% \n10.2 32.7 42.1 59.4 84.5 \n\nsel&lt;-c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)\nquantile(X,sel)\n\n   0%   10%   20%   30%   40%   50%   60%   70%   80%   90%  100% \n10.20 25.62 31.02 34.30 38.36 42.10 49.64 53.80 62.24 68.84 84.50 \n\n\nIl peut arriver qu’une fonction soit manquante dans R, comme par exemple le coefficient de variation. Dans ce cas, on peut faire le calcul par des lignes de code ou créer sa propre fonction avec l’instruction function(). La fonction qui est stockée en mémoire apparaît dans la fenêtre Environnement. Lorsqu’on a créé plusieurs fonctions, on peut en faire un programme R qu’on charge en mémoire au début de chaque session. A plus long terme, on peut en faire un package qu’on partagera avec les autres utilisateurs de R.\nA titre d’exemple, nous créons une fonction cv() qui calcule le rapport entre l’écart-type et la moyenne d’une distribution :\n\n# lignes de code\nX &lt;- don$MORINF\nsd(X)/mean(X)\n\n[1] 0.3922039\n\n# fonction\ncv&lt;-function(var) {sd(var)/mean(var)}\ncv(X)\n\n[1] 0.3922039\n\n\n\n\nDénombrement\nUne variable quantitative peut être discrétisée avec cut(). Elle devient alors un facteur qu’on peut dénomber avec table() puis visualiseer avec plot() sous la forme de diagramme en bâtons.\n\nsummary(X)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.20   32.70   42.10   45.32   59.40   84.50 \n\nX&lt;-cut(don$MORINF, c(10,25,40,55,70,85))\nstr(X)\n\n Factor w/ 5 levels \"(10,25]\",\"(25,40]\",..: 3 3 4 3 2 5 4 3 4 2 ...\n\ntable(X)\n\nX\n(10,25] (25,40] (40,55] (55,70] (70,85] \n      5      17      14       8       5 \n\n\n\nplot(X, col=c(\"green\",\"yellow\",\"orange\",\"red\",\"brown\"),\n     main = \"PIB/hab. en 2018\", xlab = \"classes\")\n\n\n\n\n\n\nBoîte à moustaches\nLa fonction boxplot() permet de visualiser une distribution sous forme de boîte à moustache où l’on repère facilement :\n\nla médiane\nles quartiles Q1 et Q3\nle minimum et le maximum\nles valeurs extrêmes situées à une distance supéreiure à 1.5 x (Q3-Q1) de la médiane\n\nLa syntaxe de base est la suivante :\n\nX&lt;-don$MORINF\nboxplot(X)\n\n\n\n\nMais on peut améliorer la figure avec quelques paramètres de plus\n\nboxplot(X,horizontal = TRUE, col = \"gray80\",\n        main = \"Mortalité infantile en 2018\",\n        xlab = \"Décès pour 1000 naissances\")\n\n\n\n\n\n\nHistogramme\nDans le cas d’une variable quantitative continue, la visualisation la plus logique est l’histogramme que l’on peut tracer avec la fonction hist(). Celle-ci comporte de nombreux paramètres que l’on peut visualiser dans la fenêtre Help qui se trouve en bas à gauche de R-studio :\nComme d’habitude, on peut appliquer la syntaxe la plus simple :\n\nX&lt;-don$MORINF\nhist(X)\n\n\n\n\nOn peut ensuite améliorer avec l’ajout de titres et un choix précis de classes. On remarque que si les classes sont d’amplitudes inégales R utilise la densité de probabilité (rapport entre effectif et amplitude de la classe) et non plus l’effectif ce qui est statistiquement correct (et que ne fait pas Excel …).\n\nhist(X, \n     breaks = c(10, 20, 30,40,50, 60,90), \n     col= \"lightyellow\",\n     main = \"Mortalité infantile en 2018\",\n     ylab = \"Densité de probabilité\", \n     xlab = \"Décès pour 1000 naissances\")\n\n\n\n\nOn peut également ajouter une courbe lissée de la distribution avec les fonctions lines() etdensity()en indiquant la portée du lissage à l'aide du paramètrebw(*band width*) qui est exprimé dans l'unité de mesure de X. On peut aussi ajouter un diagramme de distribution avec la fonctionrug()`\n\nhist(X, \n     breaks = c(10, 20, 30,40,50, 60,90), \n     col= \"lightyellow\",\n     main = \"Mortalité infantile en 2018\",\n     ylab = \"Densité de probabilité\", \n     xlab = \"Décès pour 1000 naissances\")\nlines(density(X),col=\"red\",lwd=2)\nrug(X, col=\"blue\",lwd=2)"
   },
   {
-    "objectID": "STAT1-Variables-Exo.html#importation-des-donnees",
-    "href": "STAT1-Variables-Exo.html#importation-des-donnees",
-    "title": "STAT1 : LES VARIABLES STATISTIQUES (Exercice)",
-    "section": "IMPORTATION DES DONNEES",
-    "text": "IMPORTATION DES DONNEES\nIl existe plusieurs façons d’importer des données dans R.\n\nImportation d’un fichier texte\nNous allons utiliser ici la fonction read.table()qui est adapté à l’importation de la plupart des fichiers-texte d’extension .csv ou .txt. Cette fonction comporte plusieurs paramètres qu’il faut adapter en fonction du fichier choisi.\n\nfile = “…”: nom et chemin d’accès du fichier\nsep = “…” : type de séparateur des colonnes (en général , ou ; )\ndec = “…” : type de décimal (en général . ou ,)\nheader = TRUE : pour indiquer s’il y a une ligne d’en-tête avec le nom des variables\nfileEncoding = “UTF-8” : pour indiquer le type d’encodage des caractères\n\n\ndon &lt;- read.table(file = \"data/DHS-Benin-2018/femmes_2018.csv\",\n                  sep= \";\",\n                  dec =\".\",\n                  header = TRUE,\n                  fileEncoding = \"UTF-8\")\n\n\n\nVérification du type de tableau\nOn utilise la fonction class() pour connaître le type de l’objet que nous venons de créer. Normalement c’est un data.frame qui est le type de tableau de base dans R.\n\nclass(don)\n\n[1] \"data.frame\"\n\n\n\n\nDimensions\nOn utilise la fonction dim()pour afficher les dimensions du tableau, c’est-à-dire son nombre de lignes et de colonnes :\n\ndim(don)\n\n[1] 4617    7\n\n\n\n\nAffichage de l’ensemble du tableau\nIl suffit de taper le nom d’un tableau pour qu’ils’affiche en entier. Mais ce n’est évidemment pas recommandé si celui-ci est très grand\n\n#don\n\n\n\nAffichage du début et de la fin d’un tableau\nIl est plus avantageux de ne montrer que les premières ou dernières lignes avec les commandes head()et tail().\n\nhead(don)\n\n  poids taille age  region milieu educ nbenf\n1  67.1  164.5  33 ALIBORI  Rural    0     5\n2  62.7  161.8  39 ALIBORI  Rural    0     5\n3  81.7  157.6  33 ALIBORI  Rural    0     4\n4  58.2  160.4  28 ALIBORI  Rural    0     4\n5  58.4  166.8  48 ALIBORI  Rural    0     4\n6  54.6  168.3  39 ALIBORI  Rural    0     4\n\ntail(don)\n\n     poids taille age region milieu educ nbenf\n4612  74.9  162.3  25    ZOU  Urban    9     4\n4613  69.9  154.3  33    ZOU  Urban   11     4\n4614  53.6  163.1  32    ZOU  Urban    0     7\n4615  53.8  152.4  30    ZOU  Urban    7     3\n4616  51.5  160.7  18    ZOU  Urban    9     1\n4617  53.7  150.1  23    ZOU  Urban    0     3\n\n\n\n\nAccès aux variables\nPour accéder à une variable du tableau, on utilise l’instruction $qui permet d’accéder à une colonne particulière selon la syntaxe.\n$\nPar exemple, pour afficher l’ensemble des poids je taperai\n\n#don$poids\n\nSi je ne veux voir que les 5 premiers poids, je peux taper :\n\nhead(don$poids)\n\n[1] 67.1 62.7 81.7 58.2 58.4 54.6"
+    "objectID": "STAT2-exo2.html#exploration-iii-2-variables",
+    "href": "STAT2-exo2.html#exploration-iii-2-variables",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "Exploration III (2 variables)",
+    "text": "Exploration III (2 variables)\nNous verrons en détail dans les chapitres suivants comment croiser deux variables d’un point de vue statistiques. Mais on peut déjà indiquer brièvement comment les visualiser rapidement à l’aide de trois exemples.\n\nDeux variables qualitatives\n\nTableau de contingence\n\n\nX &lt;- as.factor(don$LANGFR)\nlevels(X)&lt;-c(\"non francophone\", \"francophone\")\nY&lt;-cut(don$POP, breaks=c(0,10,20,200))\nlevels(Y) &lt;- c(\"petit\",\"moyen\",\"grand\")\ntab&lt;-table(X,Y)\naddmargins(tab)\n\n                 Y\nX                 petit moyen grand Sum\n  non francophone    11     5    11  27\n  francophone         6     9     7  22\n  Sum                17    14    18  49\n\n\n\nGraphique\n\n\nplot(tab, col=c(\"yellow\",\"orange\",\"brown\"))\n\n\n\n\n\nTest (Chi-2)\n\n\ntest&lt;-chisq.test(X,Y)\ntest\n\n\n    Pearson's Chi-squared test\n\ndata:  X and Y\nX-squared = 3.0236, df = 2, p-value = 0.2205\n\n\n\n\nDeux variables quantitatives\n\nParamètres principaux\n\n\nY &lt;- don$MORINF\nX&lt;-don$PIB\nsummary(X)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n    757    2015    3290    5169    6437   19459       3 \n\nsummary(Y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.20   32.70   42.10   45.32   59.40   84.50 \n\n\n\nGraphique\n\n\nplot(X,Y, xlab=\"PIB\",ylab=\"Mortalité infantile\")\ntext(X,Y,don$iso3,pos = 4,cex=0.6)\n\n\n\n\n\nTest (Pearson)\n\n\ncor.test(Y,X)\n\n\n    Pearson's product-moment correlation\n\ndata:  Y and X\nt = -3.2035, df = 44, p-value = 0.002526\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.6438911 -0.1654734\nsample estimates:\n       cor \n-0.4348812 \n\n\n\n\nUne quantitative et une qualitative\n\nGraphique\n\n\nY &lt;- don$MORINF\nX &lt;- as.factor(don$LANGFR)\nlevels(X)&lt;-c(\"non\",\"oui\")\nplot(X,Y, \n     col=c(\"blue\",\"red\"),\n     xlab =\"Age médian\",\n     ylab = \"Francophone\",\n     horizontal=T)\n\n\n\n\n\nTest d’égalité des moyennes\n\n\nt.test(Y~X)\n\n\n    Welch Two Sample t-test\n\ndata:  Y by X\nt = -0.67091, df = 43.675, p-value = 0.5058\nalternative hypothesis: true difference in means between group non and group oui is not equal to 0\n95 percent confidence interval:\n -13.891195   6.953484\nsample estimates:\nmean in group non mean in group oui \n         43.76296          47.23182"
   },
   {
-    "objectID": "STAT1-Variables-Exo.html#type-des-variables",
-    "href": "STAT1-Variables-Exo.html#type-des-variables",
-    "title": "STAT1 : LES VARIABLES STATISTIQUES (Exercice)",
-    "section": "TYPE DES VARIABLES",
-    "text": "TYPE DES VARIABLES\nIl est important de s’assurer que le type des variables est correct. Si ce n’est pas le cas, il faut le changer.\n\nExamen du type des variables\nPour connaître le type des variables d’un tableau, on utilise la fonction str()\n\nstr(don)\n\n'data.frame':   4617 obs. of  7 variables:\n $ poids : num  67.1 62.7 81.7 58.2 58.4 54.6 53.4 51.4 45.8 56.4 ...\n $ taille: num  164 162 158 160 167 ...\n $ age   : int  33 39 33 28 48 39 30 19 19 20 ...\n $ region: chr  \"ALIBORI\" \"ALIBORI\" \"ALIBORI\" \"ALIBORI\" ...\n $ milieu: chr  \"Rural\" \"Rural\" \"Rural\" \"Rural\" ...\n $ educ  : int  0 0 0 0 0 0 0 3 13 0 ...\n $ nbenf : int  5 5 4 4 4 4 4 1 1 1 ...\n\n\n\n\nLes types de variable dans R\nOn trouve ici trois types de variables\n\nnum : variable quantitative continue\nint : variable quantitative discrète\nchr : variable de type caractère\n\nLes deux premiers types sont corrects sur le plan statistique. En revanche le type caractère ne correspond pas à une variable utilisable sur le plan statistique. Pour l’utiliser il faut le transformer dans un des deux types suivants :\n\nfactor : variable qualitative\nlogical : variable booléenne.\n\nIl existe d’autres types qu’on verra plus tard.\n\n\nTransformation des variables de type caractère en facteur\nOn utilise la fonction as.factor()pour déclarer qu’une variable est de type qualitatif.\n\ndon$region&lt;-as.factor(don$region)\ndon$milieu&lt;-as.factor(don$milieu)\n\n\n\nRésumé du tableau\nLorsque toutes les variables ont un type statistique correct, on peut résumer le tableau à l’aide de la fonction summary()\n\nsummary(don)\n\n     poids            taille           age               region    \n Min.   : 33.60   Min.   : 80.0   Min.   :15.00   BORGOU    : 565  \n 1st Qu.: 50.20   1st Qu.:154.8   1st Qu.:24.00   ALIBORI   : 554  \n Median : 56.20   Median :158.6   Median :28.00   ZOU       : 441  \n Mean   : 58.72   Mean   :158.7   Mean   :29.41   ATLANTIQUE: 436  \n 3rd Qu.: 64.10   3rd Qu.:162.5   3rd Qu.:34.00   ATACORA   : 431  \n Max.   :142.70   Max.   :187.0   Max.   :49.00   COLLINES  : 382  \n                                                  (Other)   :1808  \n   milieu          educ            nbenf       \n Rural:2759   Min.   : 0.000   Min.   : 1.000  \n Urban:1858   1st Qu.: 0.000   1st Qu.: 2.000  \n              Median : 0.000   Median : 3.000  \n              Mean   : 2.264   Mean   : 3.701  \n              3rd Qu.: 4.000   3rd Qu.: 5.000  \n              Max.   :17.000   Max.   :16.000  \n                                               \n\n\nOn peut également appliquer cette fonction sur une seule variable à la fois :\n\nsummary(don$poids)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  33.60   50.20   56.20   58.72   64.10  142.70"
+    "objectID": "STAT2-exo2.html#en-résumé",
+    "href": "STAT2-exo2.html#en-résumé",
+    "title": "STAT2 : STATISTIQUE DESCRIPTIVE",
+    "section": "En résumé",
+    "text": "En résumé\nNous avons survolé les principales fonctions élémentaires de R-Base pour montrer qu’il est facile et surtout rapide de les employer en lieu et place d’un tableur comme Excel ou d’un logiciel de statistique click-bouton.\nIl reste encore beaucoup à apprendre mais à ce stade il est important de bien consolider les acquis et de connaître par coeur le nom des principales fonctions de base qui ont été présentées au cours de ce chapitre.\nVous allez donc reprendre l’ensemble de ce chapitre en utilisant un tableau complet comportant plus de pays et de variables."
   },
   {
-    "objectID": "STAT1-Variables-Exo.html#creation-et-transformation-de-variables",
-    "href": "STAT1-Variables-Exo.html#creation-et-transformation-de-variables",
-    "title": "STAT1 : LES VARIABLES STATISTIQUES (Exercice)",
-    "section": "CREATION ET TRANSFORMATION DE VARIABLES",
-    "text": "CREATION ET TRANSFORMATION DE VARIABLES\nNous allons maintenant créer de nouvelles variables en combinant des variables existances ou en les transformant.\n\nTransformation de la taille en mètres\nOn peut utiliser les quatre opérations + _ * / dans le programme. Donc pour passer la taille en mètres on va écrire :\n\ndon$taille &lt;- don$taille/100\n\nOn vérifie le résultat :\n\nsummary(don$taille)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  0.800   1.548   1.586   1.587   1.625   1.870 \n\n\n\n\nCalcul de l’Indice de Masse Corporelle (IMC)\nPour calculer l’IMC on va utiliser la fonction puissance qui s’écrit **\n\ndon$IMC &lt;- don$poids/(don$taille**2)\n\nOn vérifie le résultat\n\nsummary(don$IMC)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  15.20   20.25   22.22   23.29   25.08  103.75 \n\n\n\n\nTransformation de l’IMC en variable qualitative\nOn va utiliser la fonction cut() pour transformer l’IMC (quantitatif) en une variable IMC2 (qualitative).\n\ndon$IMC2 &lt;- cut(don$IMC, breaks = c(15, 18, 25, 30, 35, 200))\n\nOn vérifie le résultat\n\nsummary(don$IMC2)\n\n (15,18]  (18,25]  (25,30]  (30,35] (35,200] \n     206     3234      789      266      122 \n\n\nOn peut changer le nom des classes d’un facteur avec l’instruction levels() :\n\nlevels(don$IMC2)&lt;- c(\"maigre\",\"normal\",\"surpoids\",\"obésité\",\"obésité grave\")\n\nOn vérifie\n\nsummary(don$IMC2)\n\n       maigre        normal      surpoids       obésité obésité grave \n          206          3234           789           266           122 \n\n\n\n\nTransformation de l’IMC en variable booléenne\nSupposons maintenant que l’on veuille juste repérer les personnes dont l’IMC est supérieur à 30. On va créer une variable logique (booléenne).\n\ndon$IMC3 &lt;- don$IMC &gt; 30\n\nOn la résume\n\nsummary(don$IMC3)\n\n   Mode   FALSE    TRUE \nlogical    4229     388"
+    "objectID": "STAT2-Explor-Cours.html#introduction",
+    "href": "STAT2-Explor-Cours.html#introduction",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Introduction",
+    "text": "Introduction\nLes deux exercices qui suivent utilisent volontairement les fonctions de base du langage R (on dit que l’on programme en R-base) à l’exclusion de tout package c’est-à-dire de tout outil graphique ou statistique mis au point ultérieurement.\nPar comparaison avec le jeu de lego, cela revient à effectuer des constructions avec la boîte de base. A première vue cela peut sembler frustrant. Mais en réalité cela ne bride en rien l’imagination et permet d’apprendre plein de choses sans être distrait …"
   },
   {
-    "objectID": "STAT0-PremiersPas.html",
-    "href": "STAT0-PremiersPas.html",
-    "title": "Premiers pas",
-    "section": "",
-    "text": "Excel"
+    "objectID": "STAT2-Explor-Cours.html#plan",
+    "href": "STAT2-Explor-Cours.html#plan",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Plan",
+    "text": "Plan\n\nLa manipulation des tableaux de données : c’est-à-dire à la fois l’importation, le recodage éventuel des variables et la correction de leur type, la sélection de lignes ou de colonnes pour créer des sous-tableaux.\nL’exploration statistique univariée : c’est-à-dire le calcul de résumés simples d’une variable à l’aide de paramètres statistiques (valeurs centrales, dispersion) et la production de graphiques élémentaires.\n\nPour rendre l’apprentissage moins austère, nous avons choisi un tableau de données sur les pays d’Afrique de l’Ouest en 2018"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#opérations-de-base",
-    "href": "STAT0-PremiersPas.html#opérations-de-base",
-    "title": "Premiers pas",
-    "section": "Opérations de base",
-    "text": "Opérations de base\n\n8+2\n\n[1] 10\n\n8-2\n\n[1] 6\n\n8*2\n\n[1] 16\n\n8/2\n\n[1] 4"
+    "objectID": "STAT2-Explor-Cours.html#importation",
+    "href": "STAT2-Explor-Cours.html#importation",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Importation",
+    "text": "Importation\n\nAvec la souris\n\nCliquer sur les menus déroulants File/Import Dataset/From text (base) puis suivre le menu"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#fonctions-mathématiques",
-    "href": "STAT0-PremiersPas.html#fonctions-mathématiques",
-    "title": "Premiers pas",
-    "section": "Fonctions mathématiques",
-    "text": "Fonctions mathématiques\n\n## Puissance\n8**2\n\n[1] 64\n\n## Racine carrée\nsqrt(8)\n\n[1] 2.828427\n\n8**(1/2)\n\n[1] 2.828427\n\n## Logarithme népérien\nlog(10)\n\n[1] 2.302585\n\n# Logarithme décimal\nlog10(10)\n\n[1] 1"
+    "objectID": "STAT2-Explor-Cours.html#importation-1",
+    "href": "STAT2-Explor-Cours.html#importation-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Importation",
+    "text": "Importation\n\nAvec des lignes de code\n\nOn utilise par exemple la fonction read.table() en précisant les paramètres utiles :\n\ndon &lt;- read.table(file = \"data/africa_pays_2018/data/africa_ouest_2018.csv\", # nom du fichier et chemin d'accès\n                  sep = \";\",                     # séparateur (ici, des points-virgule)\n                  dec=\",\", # Type de décimale\n                  header = TRUE,                 # ligne d'en-tête avec le nom des variables\n                  encoding=\"UTF-8\")              # encodage adapté au français"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#fonctions-géométriques",
-    "href": "STAT0-PremiersPas.html#fonctions-géométriques",
-    "title": "Premiers pas",
-    "section": "Fonctions géométriques",
-    "text": "Fonctions géométriques\n\n## Le nombre pi\npi\n\n[1] 3.141593\n\n## Sinus \nsin(pi)\n\n[1] 1.224647e-16\n\n## Cosinus\ncos(pi)\n\n[1] -1\n\n## Tangente\ntan(pi)\n\n[1] -1.224647e-16"
+    "objectID": "STAT2-Explor-Cours.html#dimensions-dun-tableau",
+    "href": "STAT2-Explor-Cours.html#dimensions-dun-tableau",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Dimensions d’un tableau",
+    "text": "Dimensions d’un tableau\n\nLa fonction dim() fournit les dimensions d’un tableau\n\n\ndim(don)\n\n[1] 15 11"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#eléments",
-    "href": "STAT0-PremiersPas.html#eléments",
-    "title": "Premiers pas",
-    "section": "Eléments",
-    "text": "Eléments\nUn élément est unique et constitue la brique de base de tous les objets suivants. On peut aussi l’interpréter comme un vecteur de longueur 1 ou une matrice de dimension 1x1.\n\nx&lt;-8\ny&lt;-2\n\nx+y\n\n[1] 10\n\nx*y\n\n[1] 16\n\nx**y\n\n[1] 64\n\n\nLes éléments se combinent différemment selon leur type. Par exemple, des éléments de type caractère (character) peuvent être assemblés avec l’instruction paste() ou découpez avec l’instruction substr() :\n\nx&lt;-\"Bonjour\"\ny&lt;- \"tout le monde\"\nz&lt;- \"!\"\npaste(x,y,z)\n\n[1] \"Bonjour tout le monde !\"\n\nsubstr(x,1,3)\n\n[1] \"Bon\"\n\n\nQuant aux éléments logiques (logical) nous verrons qu’ils peuvent se combiner avec des opérateurs comme & qui signifie ET ou bien | qui signifie OU.\n\nx&lt;-TRUE\ny&lt;-FALSE\n\nx & y\n\n[1] FALSE\n\nx | y \n\n[1] TRUE"
+    "objectID": "STAT2-Explor-Cours.html#type-dun-tableau",
+    "href": "STAT2-Explor-Cours.html#type-dun-tableau",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Type d’un tableau",
+    "text": "Type d’un tableau\n\nLa fonction class() fournit le type d’un tableau\n\n\nclass(don)\n\n[1] \"data.frame\""
   },
   {
-    "objectID": "STAT0-PremiersPas.html#vecteurs-vectors",
-    "href": "STAT0-PremiersPas.html#vecteurs-vectors",
-    "title": "Premiers pas",
-    "section": "vecteurs (vectors)",
-    "text": "vecteurs (vectors)\nUn vecteur est un ensemble d’éléments de même type que l’on a concaténés à l’aide de l’instruction c(). On peut ensuite les aditionner, les multiplier ou les combiner avec des éléments.\n\nx &lt;- c(1,2,4,8,16)\ny &lt;- 4\nx+y\n\n[1]  5  6  8 12 20\n\nx*y\n\n[1]  4  8 16 32 64\n\nx**y\n\n[1]     1    16   256  4096 65536\n\n\nOn remarque dans l’exemple ci-dessus que R n’a pas de problème pour combiner des vecteurs de tailles différentes."
+    "objectID": "STAT2-Explor-Cours.html#visualisation-dun-tableau",
+    "href": "STAT2-Explor-Cours.html#visualisation-dun-tableau",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Visualisation d’un tableau",
+    "text": "Visualisation d’un tableau\n\nPremières lignes avec head()\n\n\nhead(don)         # Affiche par défaut les 6 premières lignes\n\n  iso3           nom  POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI LOCKED LANGFR\n1  BEN         Bénin 11.6 3224   0.62   61.6   18.8   60.5   47.6      0      1\n2  BFA  Burkina Faso 20.0 2161   0.20   61.4   17.6   49.0   29.7      1      1\n3  CIV Côte d'Ivoire 25.4 5134   0.33   57.6   18.9   59.4   51.0      0      1\n4  GHA         Ghana 30.1 5304   0.61   63.9   21.5   34.9   56.4      0      0\n5  GIN        Guinée 12.6 2531   0.26   61.4   18.0   64.9   36.3      0      1\n6  GMB        Gambie  2.3 2176   0.27   61.9   17.8   39.0   61.6      0      0\n\n\n\nDernières lignes avec tail()\n\n\ntail(don,2)         # Affiche les 2 dernières lignes\n\n   iso3          nom POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI LOCKED LANGFR\n14  SLE Sierra Leone 7.7 1691   0.14   54.5   19.4   78.5   42.3      0      0\n15  TGO         Togo 8.0 1574   0.43   60.9   19.4   47.4   42.0      0      1"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#matrices-matrix",
-    "href": "STAT0-PremiersPas.html#matrices-matrix",
-    "title": "Premiers pas",
-    "section": "Matrices (matrix)",
-    "text": "Matrices (matrix)\nUne matrice est un ensemble de vecteurs de même longueur et de même type. On peut donc construire une matrice en concaténant des vecteurs verticalement avec cbind()ou horizontalement avec rbind().\n\n# deux vecteurs\nx1 &lt;- c(1,2,4,8,16)\nx2 &lt;- c(5,10,15,20,25)\n\n# matrice en colonnes\nm1 &lt;- cbind(x1,x2)\nm1\n\n     x1 x2\n[1,]  1  5\n[2,]  2 10\n[3,]  4 15\n[4,]  8 20\n[5,] 16 25\n\n# matrice en lignes\nm2 &lt;- rbind(x1,x2)\nm2\n\n   [,1] [,2] [,3] [,4] [,5]\nx1    1    2    4    8   16\nx2    5   10   15   20   25\n\n# piège !\nm3 &lt;- c(x1,x2)\nm3\n\n [1]  1  2  4  8 16  5 10 15 20 25\n\nis.matrix(m3)\n\n[1] FALSE\n\n\n\n\n\n\n\n\nImportant\n\n\n\nSi on assemble deux vecteurs à l’aide de la commande c()on obtient un vecteur et pas une matrice."
+    "objectID": "STAT2-Explor-Cours.html#verification-des-variables",
+    "href": "STAT2-Explor-Cours.html#verification-des-variables",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Verification des variables",
+    "text": "Verification des variables\n\nVérifie le type avec str()\n\n\nstr(don)\n\n'data.frame':   15 obs. of  11 variables:\n $ iso3  : chr  \"BEN\" \"BFA\" \"CIV\" \"GHA\" ...\n $ nom   : chr  \"Bénin\" \"Burkina Faso\" \"Côte d'Ivoire\" \"Ghana\" ...\n $ POP   : num  11.6 20 25.4 30.1 12.6 2.3 1.9 4.9 19.4 4.5 ...\n $ PIB   : int  3224 2161 5134 5304 2531 2176 1969 1462 2305 5120 ...\n $ CO2HAB: num  0.62 0.2 0.33 0.61 0.26 0.27 0.18 0.32 0.19 0.6 ...\n $ ESPVIE: num  61.6 61.4 57.6 63.9 61.4 61.9 58.2 63.9 59.1 64.8 ...\n $ AGEMED: num  18.8 17.6 18.9 21.5 18 17.8 18.8 19.4 16.3 20.1 ...\n $ MORINF: num  60.5 49 59.4 34.9 64.9 39 54 53.5 62 51.5 ...\n $ URBANI: num  47.6 29.7 51 56.4 36.3 61.6 43.6 51.4 42.8 54.1 ...\n $ LOCKED: int  0 1 0 0 0 0 0 0 1 0 ...\n $ LANGFR: int  1 1 1 0 1 0 0 0 1 0 ...\n\n\n\nRecode avec les fonctions as.xxx()\n\n\ndon$LOCKED&lt;-as.factor(don$LOCKED)\nlevels(don$LOCKED) &lt;- c(\"non enclavé\",\"enclavé\")\ndon$LANGFR &lt;-as.factor(don$LANGFR)\nlevels(don$LANGFR)&lt;-c(\"non francophone\",\"francophone\")"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#listes-list",
-    "href": "STAT0-PremiersPas.html#listes-list",
-    "title": "Premiers pas",
-    "section": "Listes (list)",
-    "text": "Listes (list)\nR utilise des types plus complexes d’objets qui lui sont propres et qui sont en général des listes ou des listes de listes.\n\nliste simple\nliste de liste\nlistes de vecteur = data.frame\n…\n\n\n\n\n\n\n\nImportant\n\n\n\nLes vecteurs regroupent des éléments de même type tandis que les listes regroupent des éléments ou des objets de type quelconque. Le type liste est donc beaucoup plus général, mais aussi plus difficile d’emploi.\nOn peut comparer une liste à un panier de course dans lequel on mélange des choux, des carottes, des navets, une boîte de douze oeufs, un paquet de croquettes pour chiens, etc…\n\n\n\n# Format vecteur\nprenom &lt;- c(\"Ali\", \"Amine\",\n    \"Anne\",\"Marc\",\"Zayneb\")\nsexe &lt;- c(\"H\",\"H\",\"F\",\"H\",\"F\")\nage  &lt;- c(21,22,24,18,25)\n\n\n# Format liste\nAli &lt;- list(\"H\",21)\nAmine &lt;- list(\"F\",22)\nAnne &lt;- list(\"F\",28)\nMarc &lt;- list (\"H\",18)\nZayneb &lt;- list(\"F\",25)\n\n# Ne pas confondre !\nAli &lt;- c(\"H\",21)\nAli\n\n[1] \"H\"  \"21\"\n\nAli &lt;- list(\"H\",21)\nAli\n\n[[1]]\n[1] \"H\"\n\n[[2]]\n[1] 21"
+    "objectID": "STAT2-Explor-Cours.html#résumé-du-tableau",
+    "href": "STAT2-Explor-Cours.html#résumé-du-tableau",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Résumé du tableau",
+    "text": "Résumé du tableau\nLa fonction summary() donne un aperçu général des variables\n\nsummary(don)\n\n     iso3               nom                 POP              PIB      \n Length:15          Length:15          Min.   :  1.90   Min.   :1208  \n Class :character   Class :character   1st Qu.:  6.30   1st Qu.:1830  \n Mode  :character   Mode  :character   Median : 12.60   Median :2305  \n                                       Mean   : 25.72   Mean   :2957  \n                                       3rd Qu.: 21.45   3rd Qu.:4238  \n                                       Max.   :198.40   Max.   :5304  \n     CO2HAB          ESPVIE          AGEMED          MORINF     \n Min.   :0.100   Min.   :54.50   Min.   :15.20   Min.   :31.80  \n 1st Qu.:0.195   1st Qu.:58.65   1st Qu.:17.90   1st Qu.:47.70  \n Median :0.320   Median :61.40   Median :18.80   Median :53.50  \n Mean   :0.376   Mean   :60.91   Mean   :18.52   Mean   :54.01  \n 3rd Qu.:0.605   3rd Qu.:63.05   3rd Qu.:19.40   3rd Qu.:61.25  \n Max.   :0.740   Max.   :67.80   Max.   :21.50   Max.   :78.50  \n     URBANI              LOCKED               LANGFR \n Min.   :16.50   non enclavé:12   non francophone:7  \n 1st Qu.:42.15   enclavé    : 3   francophone    :8  \n Median :47.50                                       \n Mean   :44.91                                       \n 3rd Qu.:51.20                                       \n Max.   :61.60"
   },
   {
-    "objectID": "STAT0-PremiersPas.html#exercices",
-    "href": "STAT0-PremiersPas.html#exercices",
-    "title": "Premiers pas",
-    "section": "Exercices",
-    "text": "Exercices\nExercice 1\nConstruire le vecteur x suivant :\n\n\n[1] \"Paris\"    \"Londres\"  \"Tokyo\"    \"New York\"\n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nx &lt;- c(\"Paris\", \"Londres\",\"Tokyo\",\"New York\")\nx\n\n[1] \"Paris\"    \"Londres\"  \"Tokyo\"    \"New York\"\n\n\n\n\n\nConstruire le vecteur y suivant :\n\n\n[1] \"France\"      \"Royaume-Uni\" \"Japon\"       \"USA\"        \n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\ny &lt;- c(\"France\", \"Royaume-Uni\",\"Japon\",\"USA\")\ny\n\n[1] \"France\"      \"Royaume-Uni\" \"Japon\"       \"USA\"        \n\n\n\n\n\nConstruire le vecteur z suivant :\n\n\n[1] 10.2 14.6 42.8 23.9\n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nz &lt;- c(10.2, 14.6,42.8,23.9)\nz\n\n[1] 10.2 14.6 42.8 23.9\n\n\n\n\n\nConstruire la matrice m1\n\n\n  [,1]     [,2]          [,3]    [,4]      \nx \"Paris\"  \"Londres\"     \"Tokyo\" \"New York\"\ny \"France\" \"Royaume-Uni\" \"Japon\" \"USA\"     \n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nm1&lt;-rbind(x,y)\nm1\n\n\n\n\nConstruire la matrice m2\n\n\n     x          y            \n[1,] \"Paris\"    \"France\"     \n[2,] \"Londres\"  \"Royaume-Uni\"\n[3,] \"Tokyo\"    \"Japon\"      \n[4,] \"New York\" \"USA\"        \n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nm2&lt;-cbind(x,y)\nm2\n\n\n\n\nConstruire le data.frame df\n\n\n            y        x    z\n1      France    Paris 10.2\n2 Royaume-Uni  Londres 14.6\n3       Japon    Tokyo 42.8\n4         USA New York 23.9\n\n\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\ndf&lt;-data.frame(y,x,z)\n\n\n\n\nExercice 2 (d’après J.Barnier)\nOn a demandé à 4 ménages le revenu des deux conjoints, et le nombre de personnes du ménage :\n\nconjoint1 &lt;- c(1200, 1180, 1750, 2100)\nconjoint2 &lt;- c(1450, 1870, 1690, 0)\nnb_personnes &lt;- c(4, 2, 3, 2)\n\nCalculer le revenu total de chaque ménage, puis diviser par le nombre de personnes pour obtenir le revenu par personne de chaque ménage.\n\n\n\n\n\n\nSolution ?\n\n\n\n\n\n\nrevenu_total &lt;- conjoint1 + conjoint2\nrevenu_total / nb_personnes\n\n[1]  662.500 1525.000 1146.667 1050.000"
+    "objectID": "STAT2-Explor-Cours.html#transformations",
+    "href": "STAT2-Explor-Cours.html#transformations",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Transformations",
+    "text": "Transformations\nCopie intégrale\nElle s’effectue avec l’opérateur &lt;-\n\ntab&lt;-don\ndim(tab)\n\n[1] 15 11\n\nhead(tab,2)\n\n  iso3          nom  POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI      LOCKED\n1  BEN        Bénin 11.6 3224   0.62   61.6   18.8   60.5   47.6 non enclavé\n2  BFA Burkina Faso 20.0 2161   0.20   61.4   17.6   49.0   29.7     enclavé\n       LANGFR\n1 francophone\n2 francophone\n\ntail(tab,2)\n\n   iso3          nom POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI      LOCKED\n14  SLE Sierra Leone 7.7 1691   0.14   54.5   19.4   78.5   42.3 non enclavé\n15  TGO         Togo 8.0 1574   0.43   60.9   19.4   47.4   42.0 non enclavé\n            LANGFR\n14 non francophone\n15     francophone"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-lignes",
+    "href": "STAT2-Explor-Cours.html#sélection-de-lignes",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de lignes",
+    "text": "Sélection de lignes\nOn utilise la syntaxe tab2&lt;-tab[conditions , ] avec les opérateurs logiques suivants\n\n== : est égal à\n!= : est différent de\n&gt;  : est strictement supérieur à\n&lt;  : est strictement inférieur à\n&gt;= : est supérieur ou égal à\n&lt;= : est inférieur ou égal à\n\n& : ET (vrai si les deux conditions sont vérifiées)\n| : OU inclusif (vrai si l’une des conditions est vérifiée)\nxor : OU exclusif (vrai si une seule des conditions est vérifiée)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-lignes-1",
+    "href": "STAT2-Explor-Cours.html#sélection-de-lignes-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de lignes",
+    "text": "Sélection de lignes\n\nExemple de sélection des pays enclavés\n\n\ndon2&lt;-don[don$LOCKED==\"enclavé\",]\ndon2\n\n   iso3          nom  POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI  LOCKED\n2   BFA Burkina Faso 20.0 2161   0.20   61.4   17.6     49   29.7 enclavé\n9   MLI         Mali 19.4 2305   0.19   59.1   16.3     62   42.8 enclavé\n11  NER        Niger 22.9 1208   0.10   62.2   15.2     48   16.5 enclavé\n        LANGFR\n2  francophone\n9  francophone\n11 francophone"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-lignes-2",
+    "href": "STAT2-Explor-Cours.html#sélection-de-lignes-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de lignes",
+    "text": "Sélection de lignes\n\nExemple de sélection des pays non enclavés\n\n\ndon3&lt;-don[don$LOCKED!=\"enclavé\",]\ndon3\n\n   iso3           nom   POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI      LOCKED\n1   BEN         Bénin  11.6 3224   0.62   61.6   18.8   60.5   47.6 non enclavé\n3   CIV Côte d'Ivoire  25.4 5134   0.33   57.6   18.9   59.4   51.0 non enclavé\n4   GHA         Ghana  30.1 5304   0.61   63.9   21.5   34.9   56.4 non enclavé\n5   GIN        Guinée  12.6 2531   0.26   61.4   18.0   64.9   36.3 non enclavé\n6   GMB        Gambie   2.3 2176   0.27   61.9   17.8   39.0   61.6 non enclavé\n7   GNB Guinée-Bissau   1.9 1969   0.18   58.2   18.8   54.0   43.6 non enclavé\n8   LBR       Libéria   4.9 1462   0.32   63.9   19.4   53.5   51.4 non enclavé\n10  MRT    Mauritanie   4.5 5120   0.60   64.8   20.1   51.5   54.1 non enclavé\n12  NGA       Nigéria 198.4 5145   0.65   54.5   18.1   75.7   50.8 non enclavé\n13  SEN       Sénégal  16.1 3355   0.74   67.8   18.5   31.8   47.5 non enclavé\n14  SLE  Sierra Leone   7.7 1691   0.14   54.5   19.4   78.5   42.3 non enclavé\n15  TGO          Togo   8.0 1574   0.43   60.9   19.4   47.4   42.0 non enclavé\n            LANGFR\n1      francophone\n3      francophone\n4  non francophone\n5      francophone\n6  non francophone\n7  non francophone\n8  non francophone\n10 non francophone\n12 non francophone\n13     francophone\n14 non francophone\n15     francophone"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-lignes-3",
+    "href": "STAT2-Explor-Cours.html#sélection-de-lignes-3",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de lignes",
+    "text": "Sélection de lignes\n\nExemple de sélection des pays de plus 20 millions d’habitant\n\n\nbig&lt;-don[don$POP&gt;20,]\nbig\n\n   iso3           nom   POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI      LOCKED\n3   CIV Côte d'Ivoire  25.4 5134   0.33   57.6   18.9   59.4   51.0 non enclavé\n4   GHA         Ghana  30.1 5304   0.61   63.9   21.5   34.9   56.4 non enclavé\n11  NER         Niger  22.9 1208   0.10   62.2   15.2   48.0   16.5     enclavé\n12  NGA       Nigéria 198.4 5145   0.65   54.5   18.1   75.7   50.8 non enclavé\n            LANGFR\n3      francophone\n4  non francophone\n11     francophone\n12 non francophone"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-lignes-4",
+    "href": "STAT2-Explor-Cours.html#sélection-de-lignes-4",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de lignes",
+    "text": "Sélection de lignes\n\nExemple de sélection des pays enclavés de plus 20 millions d’habitant (on mélange deux conditions avec l’opérateur &)\n\n\nbig2&lt;-don[don$LOCKED==\"enclavé\" & don$POP&gt;20,]\nbig2\n\n   iso3   nom  POP  PIB CO2HAB ESPVIE AGEMED MORINF URBANI  LOCKED      LANGFR\n11  NER Niger 22.9 1208    0.1   62.2   15.2     48   16.5 enclavé francophone"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-colonnes",
+    "href": "STAT2-Explor-Cours.html#sélection-de-colonnes",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de colonnes",
+    "text": "Sélection de colonnes\nOn utilise la syntaxe tab2&lt;-tab[  ,  liste ] avec différentes syntaxes pour les listes de variables :\n\nSélection nominale\n\n\ntab&lt;-don[,c(\"iso3\",\"nom\", \"POP\", \"PIB\", \"MORINF\")]\nhead(tab)\n\n  iso3           nom  POP  PIB MORINF\n1  BEN         Bénin 11.6 3224   60.5\n2  BFA  Burkina Faso 20.0 2161   49.0\n3  CIV Côte d'Ivoire 25.4 5134   59.4\n4  GHA         Ghana 30.1 5304   34.9\n5  GIN        Guinée 12.6 2531   64.9\n6  GMB        Gambie  2.3 2176   39.0\n\n\n\nSélection de positions\n\n\ntab&lt;-don[,c(1:4,8)]\nhead(tab,2)\n\n  iso3          nom  POP  PIB MORINF\n1  BEN        Bénin 11.6 3224   60.5\n2  BFA Burkina Faso 20.0 2161   49.0"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-de-lignes-et-colonnes",
+    "href": "STAT2-Explor-Cours.html#sélection-de-lignes-et-colonnes",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection de lignes et colonnes",
+    "text": "Sélection de lignes et colonnes\nOn utilise la syntaxe tab2&lt;-tab[ conditions ,  liste]\n\nExemple : PIB et POP des pays de plus de 20 millions d’habitant\n\n\ntab&lt;-don[don$POP&gt;20, c(\"nom\",\"POP\",\"PIB\")]\ntab\n\n             nom   POP  PIB\n3  Côte d'Ivoire  25.4 5134\n4          Ghana  30.1 5304\n11         Niger  22.9 1208\n12       Nigéria 198.4 5145"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#extraction-dune-variable-vecteur",
+    "href": "STAT2-Explor-Cours.html#extraction-dune-variable-vecteur",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Extraction d’une Variable = Vecteur",
+    "text": "Extraction d’une Variable = Vecteur\n\nSolution n°1 : utilisation de l’opérateur $\n\n\nmyvar&lt;-don$POP\nstr(myvar)\n\n num [1:15] 11.6 20 25.4 30.1 12.6 2.3 1.9 4.9 19.4 4.5 ...\n\nmean(myvar)\n\n[1] 25.72\n\n\n-Solution n°2 : utilisation de [ , ]\n\nmyvar&lt;-don[,3]\nstr(myvar)\n\n num [1:15] 11.6 20 25.4 30.1 12.6 2.3 1.9 4.9 19.4 4.5 ...\n\nmean(myvar)\n\n[1] 25.72"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-et-recodage",
+    "href": "STAT2-Explor-Cours.html#sélection-et-recodage",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection et recodage",
+    "text": "Sélection et recodage\nLes variables qualitatives nominales ou factor sont des objets composés d’une liste de numéros et d’une liste d’étiquettes.\n\nX&lt;-don$LANGFR\nX\n\n [1] francophone     francophone     francophone     non francophone\n [5] francophone     non francophone non francophone non francophone\n [9] francophone     non francophone francophone     non francophone\n[13] francophone     non francophone francophone    \nLevels: non francophone francophone\n\n# Vérification du type\nstr(X)\n\n Factor w/ 2 levels \"non francophone\",..: 2 2 2 1 2 1 1 1 2 1 ..."
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-et-recodage-1",
+    "href": "STAT2-Explor-Cours.html#sélection-et-recodage-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection et recodage",
+    "text": "Sélection et recodage\nSi la variable chargée est de type character il faut la transformer avec as.factor() et repérer les niveaux disponibles avec levels()\n\nX&lt;-as.factor(X)\nclass(X)\n\n[1] \"factor\"\n\nlevels(X)\n\n[1] \"non francophone\" \"francophone\""
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-et-recodage-2",
+    "href": "STAT2-Explor-Cours.html#sélection-et-recodage-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection et recodage",
+    "text": "Sélection et recodage\nOn peut remplacer les niveaux en utilisant l’instruction levels()à nouveau, mais suivie d’un vecteur de charactères indiquant les changements de nom.\n\nlevels(X)&lt;-c(\"non francophone\",\"francophone\")\n             \nX\n\n [1] francophone     francophone     francophone     non francophone\n [5] francophone     non francophone non francophone non francophone\n [9] francophone     non francophone francophone     non francophone\n[13] francophone     non francophone francophone    \nLevels: non francophone francophone\n\nstr(X)\n\n Factor w/ 2 levels \"non francophone\",..: 2 2 2 1 2 1 1 1 2 1 ..."
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-et-recodage-3",
+    "href": "STAT2-Explor-Cours.html#sélection-et-recodage-3",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection et recodage",
+    "text": "Sélection et recodage\nOn peut transformer une variable quantitative en facteur avec la fonction cut()\n\nsummary(don$POP)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.90    6.30   12.60   25.72   21.45  198.40 \n\nY&lt;-cut(don$POP, breaks=c(0,10,30,200))\nY\n\n [1] (10,30]  (10,30]  (10,30]  (30,200] (10,30]  (0,10]   (0,10]   (0,10]  \n [9] (10,30]  (0,10]   (10,30]  (30,200] (10,30]  (0,10]   (0,10]  \nLevels: (0,10] (10,30] (30,200]\n\nstr(Y)\n\n Factor w/ 3 levels \"(0,10]\",\"(10,30]\",..: 2 2 2 3 2 1 1 1 2 1 ..."
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#sélection-et-recodage-4",
+    "href": "STAT2-Explor-Cours.html#sélection-et-recodage-4",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Sélection et recodage",
+    "text": "Sélection et recodage\nOn peut ensuite recoder les classes avec levels()\n\nlevels(Y)&lt;-c(\"Petit\",\"Moyen\",\"Grand\")\nY\n\n [1] Moyen Moyen Moyen Grand Moyen Petit Petit Petit Moyen Petit Moyen Grand\n[13] Moyen Petit Petit\nLevels: Petit Moyen Grand\n\nstr(Y)\n\n Factor w/ 3 levels \"Petit\",\"Moyen\",..: 2 2 2 3 2 1 1 1 2 1 ..."
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#table-de-dénombrement",
+    "href": "STAT2-Explor-Cours.html#table-de-dénombrement",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Table de dénombrement",
+    "text": "Table de dénombrement\nPour dénomber une variable qualitative, on utilise l’instruction table() qui crée un objet particulier qui n’est ni un data.frame, ni une matrix.\n\ntab&lt;-table(X)\ntab\n\nX\nnon francophone     francophone \n              7               8 \n\nstr(tab)\n\n 'table' int [1:2(1d)] 7 8\n - attr(*, \"dimnames\")=List of 1\n  ..$ X: chr [1:2] \"non francophone\" \"francophone\""
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#table-de-dénombrement-1",
+    "href": "STAT2-Explor-Cours.html#table-de-dénombrement-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Table de dénombrement",
+    "text": "Table de dénombrement\nOn peut créer des tables à 2 dimensions\n\ntab2&lt;-table(X,Y)\ntab2\n\n                 Y\nX                 Petit Moyen Grand\n  non francophone     5     0     2\n  francophone         1     7     0\n\nstr(tab2)\n\n 'table' int [1:2, 1:3] 5 1 0 7 2 0\n - attr(*, \"dimnames\")=List of 2\n  ..$ X: chr [1:2] \"non francophone\" \"francophone\"\n  ..$ Y: chr [1:3] \"Petit\" \"Moyen\" \"Grand\""
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#table-de-dénombrement-2",
+    "href": "STAT2-Explor-Cours.html#table-de-dénombrement-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Table de dénombrement",
+    "text": "Table de dénombrement\nUn objet de type table peut être manipulé par des fonctions spéciales comme addmargins() quii rajoute des sommes en ligne (et en colonne si la table est de dimension 2)\n\naddmargins(tab)\n\nX\nnon francophone     francophone             Sum \n              7               8              15 \n\naddmargins(tab2)\n\n                 Y\nX                 Petit Moyen Grand Sum\n  non francophone     5     0     2   7\n  francophone         1     7     0   8\n  Sum                 6     7     2  15"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#table-de-dénombrement-3",
+    "href": "STAT2-Explor-Cours.html#table-de-dénombrement-3",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Table de dénombrement",
+    "text": "Table de dénombrement\nLes objets de type table sont souvent la source de crises de nerf de la part des étudiants qui les confondent avec des objets de type vecteur, matrice ou data.frame. Il existe des fonctions de conversion d’un type vers un autre mais leur emploi n’est pas très simple.\nOn retiendra donc dans l’immédiat que les résultats de l’instruction tablesont des objets transitoires qui servent uniquement à afficher des résultats ou produire des graphiques à l’aide des instructions plot() ou barplot()."
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#graphique-avec-plot",
+    "href": "STAT2-Explor-Cours.html#graphique-avec-plot",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Graphique avec plot()",
+    "text": "Graphique avec plot()\nLa fonction plot() s’applique à la plupart de objets R. Elle produit des résultats différents selon le type d’objet qu’elle a identifié. Si on l’applique à un vecteur de type factor on obtient un diagramme en bâtons (à ne pas confondre avec un histogramme)\n\nplot(Y)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#graphique-avec-plot-1",
+    "href": "STAT2-Explor-Cours.html#graphique-avec-plot-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Graphique avec plot()",
+    "text": "Graphique avec plot()\nOn peut améliorer le graphique en lui ajoutant des paramètres c’est-à-dire des instructions séparées par des virgules. Le retour à la ligne après chaque paramètre n’est pas obligatoire mais il est recommandé car il rend le code plus clair.\n\nplot(Y,\n     col=c(\"green\", \"yellow\",\"orange\"), \n     main= \"Les pays d'Afrique de l'Ouest\",\n     xlab = \"Taille\", \n     ylab = \"Nombre de pays\")"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#résumés-numériques",
+    "href": "STAT2-Explor-Cours.html#résumés-numériques",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Résumés numériques",
+    "text": "Résumés numériques\nUne variable numérique peut faire l’objet d’un ensemble de résumés statistiques à l’aide de fonctions élémentaires\n\nmin() : minimum\nmax() : maximum\nmean() : moyenne\nsd() : écart-type (en anglais : standard deviation, soit sd en abrégé)\nsum() : somme"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#résumés-numériques-1",
+    "href": "STAT2-Explor-Cours.html#résumés-numériques-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Résumés numériques",
+    "text": "Résumés numériques\n\nX &lt;- don$PIB\nmin(X)\n\n[1] 1208\n\nmax(X)\n\n[1] 5304\n\nmean(X)\n\n[1] 2957.267\n\nsd(X)\n\n[1] 1501.883"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#résumés-numériques-2",
+    "href": "STAT2-Explor-Cours.html#résumés-numériques-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Résumés numériques",
+    "text": "Résumés numériques\nPour calculer les quantiles on peut utiliser la fonction quantile() en paramétrant la valeur de fréquence cumulée ascendante\n\nquantile(X,0) : minimum\nquantile(X,0.10) : D1 (premier décile)\nquantile(X,0.25) : Q1 (premier quartile)\nquantile(X,0.5) : Q2 (médiane)\nquantile(X,0.75) : Q3 (troisième quartile)\nquantile(X,0.90) : D9 (dernier décile)\nquantile(X,1) : maximum"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#résumés-numériques-3",
+    "href": "STAT2-Explor-Cours.html#résumés-numériques-3",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Résumés numériques",
+    "text": "Résumés numériques\n\nX&lt;-don$PIB\nquantile(X,0.5)\n\n 50% \n2305 \n\nsel&lt;-c(0,0.25,0.5,0.75,1)\nquantile(X,sel)\n\n    0%    25%    50%    75%   100% \n1208.0 1830.0 2305.0 4237.5 5304.0 \n\nsel&lt;-c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)\nquantile(X,sel)\n\n    0%    10%    20%    30%    40%    50%    60%    70%    80%    90%   100% \n1208.0 1506.8 1667.6 2007.4 2170.0 2305.0 2808.2 3328.8 5122.8 5140.6 5304.0"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#discrétisation",
+    "href": "STAT2-Explor-Cours.html#discrétisation",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Discrétisation",
+    "text": "Discrétisation\nUne variable quantitative peut être discrétisée avec cut(). Elle devient alors un facteur qu’on peut dénomber avec table() puis visualiseer avec plot() sous la forme de diagramme en bâtons.\n\nsummary(X)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1208    1830    2305    2957    4238    5304 \n\nX&lt;-cut(don$PIB, c(1000,2000,3000,4000,5000,6000))\nstr(X)\n\n Factor w/ 5 levels \"(1e+03,2e+03]\",..: 3 2 5 5 2 2 1 1 2 5 ...\n\ntable(X)\n\nX\n(1e+03,2e+03] (2e+03,3e+03] (3e+03,4e+03] (4e+03,5e+03] (5e+03,6e+03] \n            5             4             2             0             4"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#discrétisation-1",
+    "href": "STAT2-Explor-Cours.html#discrétisation-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Discrétisation",
+    "text": "Discrétisation\n\nplot(X, col=c(\"green\",\"yellow\",\"orange\",\"red\",\"brown\"),\n     main = \"PIB/hab. en 2018\", xlab = \"classes\")"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#boîte-à-moustaches",
+    "href": "STAT2-Explor-Cours.html#boîte-à-moustaches",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Boîte à moustaches",
+    "text": "Boîte à moustaches\nLa fonction boxplot() permet de visualiser une distribution sous forme de boîte à moustache où l’on repère facilement :\n\nla médiane\nles quartiles Q1 et Q3\nle minimum et le maximum\nles valeurs extrêmes situées à une distance supéreiure à 1.5 x (Q3-Q1) de la médiane"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#boîte-à-moustaches-1",
+    "href": "STAT2-Explor-Cours.html#boîte-à-moustaches-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Boîte à moustaches",
+    "text": "Boîte à moustaches\nLa syntaxe de base est la suivante :\n\nX&lt;-don$PIB\nboxplot(X)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#boîte-à-moustaches-2",
+    "href": "STAT2-Explor-Cours.html#boîte-à-moustaches-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Boîte à moustaches",
+    "text": "Boîte à moustaches\nMais on peut améliorer la figure avec quelques paramètres de plus\n\nboxplot(X,horizontal = TRUE, col = \"gray80\",\n        main = \"PIB en 2018\",\n        xlab = \"en $/hab.\")"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#histogramme",
+    "href": "STAT2-Explor-Cours.html#histogramme",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Histogramme",
+    "text": "Histogramme\nDans le cas d’une variable quantitative continue, la visualisation la plus logique est l’histogramme que l’on peut tracer avec la fonction hist(). Celle-ci comporte de nombreux paramètres que l’on peut visualiser dans la fenêtre Help qui se trouve en bas à gauche de R-studio :"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#histogramme-1",
+    "href": "STAT2-Explor-Cours.html#histogramme-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Histogramme",
+    "text": "Histogramme\nComme d’habitude, on peut appliquer la syntaxe la plus simple :\n\nX&lt;-don$PIB\nhist(X)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#histogramme-2",
+    "href": "STAT2-Explor-Cours.html#histogramme-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Histogramme",
+    "text": "Histogramme\nOn peut ensuite améliorer avec l’ajout de titres et un choix précis de classes.\n\nhist(X, \n     breaks = c(1000, 1500, 2000,3000,5000, 6000), \n     col= \"lightyellow\",\n     main = \"PIB 2018\",\n     ylab = \"Densité de probabilité\", \n     xlab = \"en $/hab.\")"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#histogramme-3",
+    "href": "STAT2-Explor-Cours.html#histogramme-3",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Histogramme",
+    "text": "Histogramme\nOn peut également ajouter une courbe lissée de la distribution avec les fonctions lines() et density()en indiquant la portée du lissage à l’aide du paramètre bw(band width) qui est exprimé dans l’unité de mesure de X. On peut aussi ajouter un diagramme de distribution avec la fonction rug()\n\nhist(X, \n      breaks = c(1000, 1500, 2000,3000,5000, 6000),\n     col=\"lightyellow\",\n     main = \"PIB en 2018\",\n     ylab = \"Densité de probabilité\", \n     xlab = \"en $/hab\")\nlines(density(X),col=\"red\",lwd=2)\nrug(X, col=\"blue\",lwd=2)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#statistique-bivariée",
+    "href": "STAT2-Explor-Cours.html#statistique-bivariée",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Statistique bivariée",
+    "text": "Statistique bivariée\nNous verrons en détail dans les chapitres suivants comment croiser deux variables d’un point de vue statistiques. Mais on peut déjà indiquer brièvement comment les visualiser rapidement à l’aide de trois exemples."
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#deux-variables-qualitatives",
+    "href": "STAT2-Explor-Cours.html#deux-variables-qualitatives",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Deux variables qualitatives",
+    "text": "Deux variables qualitatives\n\nTableau de contingence\n\n\nX &lt;- as.factor(don$LANGFR)\nlevels(X)&lt;-c(\"non francophone\", \"francophone\")\nY&lt;-cut(don$POP, breaks=c(0,10,20,200))\nlevels(Y) &lt;- c(\"petit\",\"moyen\",\"grand\")\ntab&lt;-table(X,Y)\naddmargins(tab)\n\n                 Y\nX                 petit moyen grand Sum\n  non francophone     5     0     2   7\n  francophone         1     5     2   8\n  Sum                 6     5     4  15"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#deux-variables-qualitatives-1",
+    "href": "STAT2-Explor-Cours.html#deux-variables-qualitatives-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Deux variables qualitatives",
+    "text": "Deux variables qualitatives\n\nGraphique\n\n\nplot(tab, col=c(\"yellow\",\"orange\",\"brown\"))"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#deux-variables-qualitatives-2",
+    "href": "STAT2-Explor-Cours.html#deux-variables-qualitatives-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Deux variables qualitatives",
+    "text": "Deux variables qualitatives\n\nTest (Chi-2)\n\n\ntest&lt;-chisq.test(X,Y)\ntest\n\n\n    Pearson's Chi-squared test\n\ndata:  X and Y\nX-squared = 7.6339, df = 2, p-value = 0.02199"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#deux-variables-quantitatives",
+    "href": "STAT2-Explor-Cours.html#deux-variables-quantitatives",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Deux variables quantitatives",
+    "text": "Deux variables quantitatives\n\nParamètres principaux\n\n\nY &lt;- don$CO2HAB\nX&lt;-don$PIB\nsummary(X)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1208    1830    2305    2957    4238    5304 \n\nsummary(Y)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  0.100   0.195   0.320   0.376   0.605   0.740"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#deux-variables-quantitatives-1",
+    "href": "STAT2-Explor-Cours.html#deux-variables-quantitatives-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Deux variables quantitatives",
+    "text": "Deux variables quantitatives\n\nGraphique\n\n\nplot(X,Y, xlab=\"PIB/hab\",ylab=\"CO2/hab\")\ntext(X,Y,don$iso3,pos = 4,cex=0.6)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#deux-variables-quantitatives-2",
+    "href": "STAT2-Explor-Cours.html#deux-variables-quantitatives-2",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Deux variables quantitatives",
+    "text": "Deux variables quantitatives\n\nTest (Pearson)\n\n\ncor.test(Y,X)\n\n\n    Pearson's product-moment correlation\n\ndata:  Y and X\nt = 3.4734, df = 13, p-value = 0.004119\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.2816077 0.8898101\nsample estimates:\n      cor \n0.6937868"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#une-quantitative-et-une-qualitative",
+    "href": "STAT2-Explor-Cours.html#une-quantitative-et-une-qualitative",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Une quantitative et une qualitative",
+    "text": "Une quantitative et une qualitative\n\nGraphique\n\n\nY &lt;- don$AGEMED\nX &lt;- as.factor(don$LANGFR)\nlevels(X)&lt;-c(\"non\",\"oui\")\nplot(X,Y, \n     col=c(\"blue\",\"red\"),\n     xlab =\"Age médian\",\n     ylab = \"Francophone\",\n     horizontal=T)"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#une-quantitative-et-une-qualitative-1",
+    "href": "STAT2-Explor-Cours.html#une-quantitative-et-une-qualitative-1",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "Une quantitative et une qualitative",
+    "text": "Une quantitative et une qualitative\n\nTest (Fisher)\n\n\nmod&lt;-aov(Y~X)\nsummary(mod)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \nX            1  7.985   7.985   4.366 0.0569 .\nResiduals   13 23.779   1.829                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "STAT2-Explor-Cours.html#en-résumé",
+    "href": "STAT2-Explor-Cours.html#en-résumé",
+    "title": "STAT2 : STATISTIQUES EXPLORATOIRES",
+    "section": "En résumé",
+    "text": "En résumé\nNous avons survolé les principales fonctions élémentaires de R-Base pour montrer qu’il est facile et surtout rapide de les employer en lieu et place d’un tableur comme Excel ou d’un logiciel de statistique click-bouton.\nIl reste encore beaucoup à apprendre mais à ce stade il est important de bien consolider les acquis et de connaître par coeur le nom des principales fonctions de base qui ont été présentées au cours de ce chapitre.\nVous allez donc reprendre l’ensemble de ce chapitre en utilisant un tableau complet comportant plus de pays et de variables."
   }
 ]

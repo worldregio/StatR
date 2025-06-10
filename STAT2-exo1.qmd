@@ -1,0 +1,241 @@
+---
+title: "STAT2 : STATISTIQUE DESCRIPTIVE"
+subtitle: "Exo1 : Manipulation de tableaux"
+author: "Jean-Paul N’GBESSO & Claude GRASLAND"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+Le but de ce TD est de mettre en oeuvre les fonctions présentées dans le cours d'initiation à R-Base. Il suffit normalement de recopier les lignes du document de cours. Mais il n'est pas interdit d'y apporter vos propres commentaires. On a ajouté à la fin une partie "libre" pour tester l'apprentissage.
+
+
+# 1. IMPORTATION DES DONNEES
+
+
+## Chargement d'un fichier texte
+
+### Avec la souris
+
+Taper **File/Import Dataset / From text (base)** puis suivre le menu. Récupérer ensuite le code.
+
+
+### Avec des lignes de code
+
+On utilise par exemple la fonction **read.table()** en précisant les paramètres utiles :
+
+```{r}
+df<-read.table(file = "data/africa_pays_2018/data/africa_pays_2018.csv",
+           header=TRUE,
+           sep = ";",
+           dec = ",",
+           encoding = "UTF-8")
+
+```
+
+
+
+## Dimensions d'un tableau
+
+### La fonction **dim()** fournit les dimensions d'un tableau
+
+```{r}
+dim(df)
+```
+
+### La fonction **class()** fournit le type d'un tableau
+
+```{r}
+class(df)
+```
+
+
+## Visualisation du contenu d'un tableau
+
+### Premières lignes avec **head()**
+```{r}
+head(df)
+```
+
+### Dernières lignes avec **tail()**
+```{r}
+tail(df)
+```
+
+
+## Verifier et recoder le type des variables
+
+### Vérifier le type avec **str()**
+```{r}
+str(df)
+```
+
+
+
+
+### modifier le type des variables avec les fonctions **as.xxx()**
+
+Exemple : transformer la variable LOCKED en factor
+
+```{r}
+df$LOCKED<-as.factor(df$LOCKED)
+levels(df$LOCKED) <- c("non enclavé","enclavé")
+```
+
+
+
+## Résume le contenu du tableau
+
+### la fonction **summary()** donne un aperçu général des variables
+
+```{r}
+summary(df)
+```
+
+
+
+# 2. MANIPULATION DE TABLEAUX (*data.frame*)
+
+
+## Copie intégrale d'un tableau avec **<-**
+
+
+```{r}
+df2<-df
+```
+
+
+## Sélection de lignes
+
+On utilise la syntaxe **df2<-df[** ***condition***  **, ]** avec la syntaxe suivante pour les opérateurs logiques :
+
+- égal à **==**
+- différent de **!=**
+- supérieur à  **>** 
+- inférieur à  **<** 
+
+
+
+### Exemple de sélection des pays enclavés
+
+```{r}
+df2<-df[df$LOCKED=="enclavé",]
+```
+
+
+### Exemple de sélection des pays non enclavé
+
+```{r}
+df2<-df[df$LOCKED!="enclavé",]
+# ou df2<-df[df$LOCKED=="non enclavé",]
+```
+
+
+### Exemple de sélection des pays de plus 10 millions d'habitant
+
+```{r}
+df2<-df[df$POP>10,]
+```
+
+
+### Exemple de sélection des pays enclavés de plus 10 millions d'habitant
+
+- on mélange deux conditions avec l'opérateur **&**
+
+```{r}
+df2<-df[df$POP>20 & df$LOCKED=="enclavé",]
+```
+
+
+
+## Sélection de colonnes
+
+ On utilise la syntaxe **tab2<-tab[**,  ***liste***  **]** avec différentes  syntaxes pour les listes de variables :
+
+- liste nominale  **c("iso3", "nom", "POP", "PIB", "MORINF")** 
+- liste de positions **c(1,2,3,4,8)**
+- liste avec raccourcis **c(1:4,13)**
+
+
+
+### Sélection nominale
+
+```{r}
+df2<-df[,c("iso3", "nom", "POP", "PIB", "MORINF")]
+```
+
+### Sélection de position avec raccourcis
+
+```{r}
+df2<-df[,c(1:4,8)]
+```
+
+
+## Sélection simultanée de lignes et colonnes
+
+-  On utilise la syntaxe **df2<-df[** ***condition***,  ***liste***  **]** a
+
+### Exemple : iso3, PIB et MORINF des pays de moins de 10 millions d'habitant
+```{r}
+df2<-df[df$POP<10,c("iso3","PIB","MORINF")]
+```
+
+
+# 3. EXTRACTION D'OBJETS D'UN TABLEAU
+
+
+## Extraction d'une Variable = Vecteur
+
+### Solution n°1 : utilisation de l'opérateur **$**
+
+Extraire le vecteur Y correspondant à la population
+
+```{r}
+Y<-df$POP
+Y
+```
+
+### Solution n°2 : utilisation de  **[ , ]**
+
+```{r}
+Y<-df[,3]
+Y
+```
+
+
+
+# 4. EXERCICES LIBRES
+
+
+Proposez une série d'exercices utilisant les fonctions décrites dans le chapitre. 
+
+
+
+
+
+
+

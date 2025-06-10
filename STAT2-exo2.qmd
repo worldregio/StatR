@@ -1,0 +1,404 @@
+---
+title: "STAT2 : STATISTIQUE DESCRIPTIVE"
+subtitle: "Exo2 : Résumer une variable"
+author: "Jean-Paul N’GBESSO & Claude GRASLAND"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+
+## Exploration I (*var. quali.*)
+
+### Sélection et recodage
+
+Les variables qualitatives nominales ou *factor* sont des objets composés d'une liste de numéros et d'une liste d'étiquettes. 
+
+```{r quali1}
+don<-read.table(file = "data/africa_pays_2018/data/africa_pays_2018.csv",
+           header=TRUE,
+           sep = ";",
+           dec = ",",
+           encoding = "UTF-8")
+
+# Extraction de la variable
+X<-don$LANGFR
+X
+
+# Vérification du type
+str(X)
+```
+
+Si la variable chargée est de type *character* il faut la transformer avec `as.factor()` et repérer les niveaux disponibles avec `levels()`
+
+```{r}
+X<-as.factor(X)
+class(X)
+levels(X)
+```
+
+On peut remplacer les niveaux en utilisant l'instruction `levels() `à nouveau, mais suivie d'un vecteur de charactères indiquant les changements de nom. 
+
+```{r quali2}
+
+levels(X)<-c("non francophone","francophone")
+             
+X
+str(X)
+```
+
+On peut transformer une variable quantitative en facteur avec la fonction `cut()`
+
+```{r quali3}
+summary(don$POP)
+Y<-cut(don$POP, breaks=c(0,10,30,200))
+Y
+str(Y)
+
+```
+
+
+
+On peut ensuite recoder les classes avec `levels()`
+
+```{r quali4}
+levels(Y)<-c("Petit","Moyen","Grand")
+Y
+str(Y)
+```
+
+
+### Table de dénombrement
+
+Pour dénomber une variable qualitative, on utilise l'instruction `table()` qui crée un objet particulier qui n'est ni un *data.frame*, ni une *matrix*.
+
+```{r table}
+tab<-table(X)
+tab
+str(tab)
+```
+
+
+On peut créer des tables à 2, 3 ou 4 dimensions
+
+```{r table2}
+tab2<-table(X,Y)
+tab2
+str(tab2)
+```
+
+
+Un objet de type *table* peut être manipulé par des fonctions spéciales comme `addmargins()` quii rajoute des sommes en ligne (et en colonne si la table est de dimension 2)
+
+```{r table3}
+addmargins(tab)
+addmargins(tab2)
+```
+
+```{block, type='rmdimportant'}
+Les objets de type  `table` sont souvent la source de crises de nerf de la part des étudiants qui les confondent avec des objets de type `vecteur`, `matrice` ou `data.frame`. Il existe des fonctions de conversion d'un type vers un autre mais leur emploi n'est pas très simple. 
+
+On retiendra donc dans l'immédiat que les résultats de l'instruction `table`sont des **objets transitoires** qui servent uniquement à afficher des résultats ou produire des graphiques à l'aide des instructions `plot()` ou `barplot()`.
+```
+
+
+
+
+### Graphique avec plot()
+
+La fonction `plot()` s'applique à la plupart de objets R. Elle produit des résultats différents selon le type d'objet qu'elle a identifié. Si on l'applique à un vecteur de type factor on obtient un **diagramme en bâtons** (à ne pas confondre avec un histogramme) 
+
+```{r plot}
+plot(Y)
+```
+
+
+On peut améliorer le graphique en lui ajoutant des *paramètres* c'est-à-dire des instructions séparées par des virgules. Le retour à la ligne après chaque paramètre n'est pas obligatoire mais il est recommandé car il rend le code plus clair. 
+
+```{r, plot2}
+plot(Y,
+     col=c("green", "yellow","orange"), 
+     main= "Les pays d'Afrique",
+     xlab = "Taille", 
+     ylab = "Nombre de pays")
+```
+
+
+
+
+
+
+
+## Exploration II (*var. quanti*)
+
+### Résumés numériques
+
+
+Une variable numérique peut faire l'objet d'un ensemble de résumés statistiques à l'aide de fonctions élémentaires
+
+- `min()`   : minimum
+- `max()`   : maximum
+- `mean()`  : moyenne
+- `sd()`    : écart-type (en anglais : *standard deviation*, soit *sd* en abrégé)
+- `sum()`   : somme
+
+
+
+```{r}
+X <- don$MORINF
+min(X)
+max(X)
+mean(X)
+sd(X)
+```
+
+Pour calculer les quantiles on peut utiliser la fonction `quantile()` en paramétrant la valeur de fréquence cumulée ascendante
+
+- **quantile(X,0)**     : minimum
+- **quantile(X,0.10)**  : D1 (premier décile)
+- **quantile(X,0.25)**  : Q1 (premier quartile)
+- **quantile(X,0.5)**   : Q2 (médiane)
+- **quantile(X,0.75)**  : Q3 (troisième quartile)
+- **quantile(X,0.90)**  : D9 (dernier décile)
+- **quantile(X,1)**     : maximum
+
+
+
+```{r}
+X<-don$MORINF
+quantile(X,0.5)
+sel<-c(0,0.25,0.5,0.75,1)
+quantile(X,sel)
+sel<-c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)
+quantile(X,sel)
+```
+
+Il peut arriver qu'une fonction soit manquante dans R, comme par exemple le coefficient de variation. Dans ce cas, on peut faire le calcul par des lignes de code ou **créer sa propre fonction** avec l'instruction `function()`. La fonction qui est stockée en mémoire apparaît dans la fenêtre *Environnement*. Lorsqu'on a créé plusieurs fonctions, on peut en faire un programme R qu'on charge en mémoire au début de chaque session. A plus long terme, on peut en faire un **package** qu'on partagera avec les autres utilisateurs de R. 
+
+A titre d'exemple, nous créons une fonction `cv()` qui calcule le rapport entre l'écart-type et la moyenne d'une distribution : 
+
+```{r}
+# lignes de code
+X <- don$MORINF
+sd(X)/mean(X)
+
+# fonction
+cv<-function(var) {sd(var)/mean(var)}
+cv(X)
+```
+
+### Dénombrement
+
+Une variable quantitative peut être discrétisée avec `cut()`. Elle devient alors un facteur qu'on peut dénomber avec `table()` puis visualiseer avec `plot()` sous la forme de *diagramme en bâtons*.
+
+
+
+```{r}
+summary(X)
+X<-cut(don$MORINF, c(10,25,40,55,70,85))
+str(X)
+table(X)
+```
+
+
+
+
+```{r}
+plot(X, col=c("green","yellow","orange","red","brown"),
+     main = "PIB/hab. en 2018", xlab = "classes")
+```
+
+
+### Boîte à moustaches
+
+La fonction `boxplot()` permet de visualiser une distribution sous forme de boîte à moustache où l'on repère facilement :
+
+- la médiane
+- les quartiles Q1 et Q3
+- le minimum et le maximum
+- les valeurs extrêmes situées à une distance supéreiure à 1.5 x (Q3-Q1) de la médiane
+
+
+La syntaxe de base est la suivante : 
+
+```{r}
+X<-don$MORINF
+boxplot(X)
+```
+
+Mais on peut améliorer la figure avec quelques paramètres de plus
+
+```{r}
+boxplot(X,horizontal = TRUE, col = "gray80",
+        main = "Mortalité infantile en 2018",
+        xlab = "Décès pour 1000 naissances")
+```
+
+
+### Histogramme
+
+Dans le cas d'une variable **quantitative continue**, la visualisation la plus logique est l'histogramme que l'on peut tracer avec la fonction `hist()`. Celle-ci comporte de nombreux paramètres que l'on peut visualiser dans la **fenêtre Help** qui se trouve en bas à gauche de R-studio : 
+
+
+
+Comme d'habitude, on peut appliquer la syntaxe la plus simple : 
+
+
+```{r}
+X<-don$MORINF
+hist(X)
+```
+
+On peut ensuite améliorer avec l'ajout de titres et un choix précis de classes. On remarque que si les classes sont d'amplitudes inégales R utilise la densité de probabilité (rapport entre effectif et amplitude de la classe) et non plus l'effectif ce qui est statistiquement correct (et que ne fait pas Excel ...).
+
+
+
+```{r}
+hist(X, 
+     breaks = c(10, 20, 30,40,50, 60,90), 
+     col= "lightyellow",
+     main = "Mortalité infantile en 2018",
+     ylab = "Densité de probabilité", 
+     xlab = "Décès pour 1000 naissances")
+```
+
+On peut également ajouter une courbe lissée de la distribution avec les fonctions `lines() et `density()`en indiquant la portée du lissage à l'aide du paramètre `bw`(*band width*) qui est exprimé dans l'unité de mesure de X. On peut aussi ajouter un diagramme de distribution avec la fonction `rug()`
+```{r}
+hist(X, 
+     breaks = c(10, 20, 30,40,50, 60,90), 
+     col= "lightyellow",
+     main = "Mortalité infantile en 2018",
+     ylab = "Densité de probabilité", 
+     xlab = "Décès pour 1000 naissances")
+lines(density(X),col="red",lwd=2)
+rug(X, col="blue",lwd=2)
+```
+
+##  Exploration III (*2 variables*)
+
+Nous verrons en détail dans les chapitres suivants comment croiser deux variables d'un point de vue statistiques. Mais on peut déjà indiquer brièvement comment les visualiser rapidement à l'aide de trois exemples.
+
+### Deux variables qualitatives
+
+- Tableau de contingence
+
+```{r}
+X <- as.factor(don$LANGFR)
+levels(X)<-c("non francophone", "francophone")
+Y<-cut(don$POP, breaks=c(0,10,20,200))
+levels(Y) <- c("petit","moyen","grand")
+tab<-table(X,Y)
+addmargins(tab)
+```
+
+- Graphique
+
+```{r}
+plot(tab, col=c("yellow","orange","brown"))
+```
+
+- Test (Chi-2)
+
+```{r}
+test<-chisq.test(X,Y)
+test
+```
+
+
+### Deux variables quantitatives
+
+- Paramètres principaux
+
+```{r}
+Y <- don$MORINF
+X<-don$PIB
+summary(X)
+summary(Y)
+```
+
+- Graphique
+
+```{r}
+plot(X,Y, xlab="PIB",ylab="Mortalité infantile")
+text(X,Y,don$iso3,pos = 4,cex=0.6)
+```
+
+- Test (Pearson)
+
+
+```{r}
+cor.test(Y,X)
+```
+
+
+
+### Une quantitative et une qualitative
+
+- Graphique
+
+```{r}
+Y <- don$MORINF
+X <- as.factor(don$LANGFR)
+levels(X)<-c("non","oui")
+plot(X,Y, 
+     col=c("blue","red"),
+     xlab ="Age médian",
+     ylab = "Francophone",
+     horizontal=T)
+```
+
+- Test d'égalité des moyennes
+
+```{r}
+t.test(Y~X)
+
+```
+
+
+
+
+## En résumé
+
+
+
+Nous avons survolé les principales `fonctions élémentaires` de R-Base pour montrer qu'il est facile et surtout rapide de les employer en lieu et place d'un tableur comme Excel ou d'un logiciel de statistique click-bouton. 
+
+Il reste encore beaucoup à apprendre mais à ce stade il est important de bien consolider les acquis et de `connaître par coeur le nom des principales fonctions de base` qui ont été présentées au cours de ce chapitre. 
+
+Vous allez donc reprendre l'ensemble de ce chapitre en utilisant un tableau complet comportant plus de pays et de variables.
+
+
+
+
+
+
+
+
+
+
+
