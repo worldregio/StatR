@@ -1,0 +1,536 @@
+---
+title: "STAT3 : REGRESSION"
+subtitle: "Comment modéliser une relation linéaire Y = a.X+b ?"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-06-01"
+title-slide-attributes:
+  data-background-color: "#BA4A00"
+  data-background-size: cover
+  data-background-opacity: "0.5"
+format:
+  revealjs:
+    margin: 0
+    code-line-numbers: false
+    embed-resources: true
+    smaller: true
+    scrollable: true
+    theme: [simple,diapos.scss]
+execute:
+  echo: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+# 1. PREPARATION DES DONNEES
+
+## 1.1. Chargement du tableau principal
+
+On charge le fichier des pays en 2018
+
+```{r load}
+don <- read.table(file = "data/africa_pays_2018/data/africa_pays_2018.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8")              # encodage adapté au français
+
+```
+
+## 1.2 Choix des deux variables à analyser
+
+En dehors de iso3 et nom, on ne garde que deux variables que l'on renomme X et Y avec **colnames()** et que l'on convertit en type numérique général. Il suffira par la suite de modifier le choix des variables X et Y pour faire d'autres analyses. 
+
+```{r}
+sel<-don[,c("iso3","nom","URBANI","INTERN")]
+colnames(sel)<-c("CODE","NOM","X","Y")
+head(sel)
+#par(mfrow=c(1,1))
+#monplot(sel$X,sel$Y,sel$CODE)
+```
+
+## 1.3 On est malin ...
+
+Mais comme on ne sait plus ce que sont X et Y, on le précise avec des chaînes de caractères qu'on pourra utiliser dans les graphiques. Et on peut préparer une version multilangue ...
+
+```{r}
+# Pour la version française
+titre <- "Les pays d'Afrique en 2018"
+nomX <- "Taux d'urbanisation (%)"
+nomY <- "Taux d'accès à internet (%)"
+auteur <- "Ecole d'été AfromapR, Bouaké 2025"
+```
+
+
+# 2. NORMALITE, VISUALISATION, CORRELATION
+
+
+## 2.1 Vérification de la normalité de X et Y
+
+La régression linéaire met en relation deux variables quantitatives X et Y dont on suppose que la distribution est **normale (gaussienne)** , c'est-à-dire unimodale et symérique.
+
+```{r, eval = FALSE}
+Z<-rnorm(100000)
+hist(Z, nclass=50, main="Loi normale (moyenne = 0 et écart-type = 1) ",border ="gray80",col="lightyellow",ylab=NULL,xlab=NULL,probability = TRUE,
+     cex.axis=0.9,ylim = c(0,0.55), cex.main=0.8,cex.lab=0.8,xlim=c(-3,3))
+lines(density(Z,bw=0.2),col="red",lwd=1)
+abline(v=c(0),col="blue",lty=1,lwd=1)
+abline(v=c(-1,1),col="blue",lty=2,lwd=1)
+abline(v=c(-2,2),col="blue",lty=1,lwd=1)
+lines(c(-1,1),c(0.42,0.42))
+text(0,0.45,"67%",cex=0.7)
+lines(c(-2,2),c(0.5,0.5))
+text(0,0.52,"95%",cex=0.7)
+```
+
+## 2.1 Vérification de la normalité de X et Y
+
+On peut tester la normalité des disributions par inspection visuelle à l'aide de **hist()**
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2),mar=c(4,2,2,2))
+hist(sel$X, 
+     col="lightyellow",
+     main=nomX,
+     cex.main=0.7,
+     breaks=5,
+     probability = TRUE, 
+     xlab=NULL,
+     cex.axis=0.5)
+lines(density(sel$X),col="red",lwd=1)
+hist(sel$Y, 
+     col="lightyellow",
+     main=nomY,
+     cex.main=0.7, 
+     breaks=5, 
+     probability=TRUE, 
+     xlab=NULL, 
+     cex.axis=0.5)
+lines(density(sel$Y),col="red",lwd=1)
+```
+
+On voit que X est assez symétrique et unimodale. En revanche Y est plutôt dissymétrique à gauche. 
+
+## 2.1 Vérification de la normalité de X et Y
+
+Une analyse rapide avec boxplot() permet de repérer s'il y a des valeurs  exceptionnelles.
+
+```{r, eval=FALSE}
+par(mfrow=c(1,2),mar=c(4,2,2,2))
+boxplot(sel$X, 
+     col="lightyellow",
+     horizontal = TRUE,
+     main=nomX,
+     cex.main=0.7,
+     cex.axis=0.5)
+boxplot(sel$Y, 
+     col="lightyellow",
+     horizontal = TRUE,
+     main=nomY,
+     cex.main=0.7, 
+     cex.axis=0.5)
+
+```
+
+
+
+## 2.1 Vérification de la normalité de X et Y
+
+Une analyse rapide avec boxplot() permet de repérer s'il y a des valeurs  exceptionnelles.
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2),mar=c(4,2,2,2))
+boxplot(sel$X, 
+     col="lightyellow",
+     horizontal = TRUE,
+     main=nomX,
+     cex.main=0.7,
+     cex.axis=0.5)
+boxplot(sel$Y, 
+     col="lightyellow",
+     horizontal = TRUE,
+     main=nomY,
+     cex.main=0.7, 
+     cex.axis=0.5)
+
+```
+
+
+Pour X comme Y, on ne voit pas apparaître de valeurs exceptionnelles c'est-à-dire de points situés au delà de l'intervalle défini par la boîte à moustache. 
+
+
+## 2.1 Vérification de la normalité de X et Y
+
+Les fonctions **qqnorm()** et **qqline()** sont plus précises ...
+
+```{r}
+qqnorm(sel$X, col="blue",ylab=nomX)
+qqline(sel$X,col="red")
+```
+
+X suit bien la droite et est proche d'une distribution gaussienne
+
+## 2.1 Vérification de la normalité de X et Y
+
+Les fonctions **qqnorm()** et **qqline()** sont plus précises ...
+
+```{r}
+qqnorm(sel$Y, col="blue",ylab=nomY)
+qqline(sel$Y,col="red")
+```
+
+Y ne suit pas bien la droite donc elle n'est pas tout à fait gaussienne.
+
+## 2.1 Vérification de la normalité de X et Y
+
+Mais la solution la plus précise est le **test de Shapiro** qui pose l'hypothèse H0 : la distribution est normale.
+
+```{r}
+shapiro.test(sel$X)
+shapiro.test(sel$Y)
+```
+
+Si le test est supérieur à 0.05, on peut considérer que la distribution est gaussienne ce qui est le cas de X. Dans le cas contraire (p <0.05) la distribution n'est pas gaussienne ce qui est le cas de Y.
+
+Mais en pratique on accepte en général de faire des analyses de régression avec des distributions non-gaussienne, surtout s'il n'y a pas de valeurs exceptionnelles. 
+
+
+
+## 2.2 Visualisation de la forme de la relation
+
+On peut faire un simple plot(X,Y). Mais on peut aussi créer pour cela une **fonction personalisée** adapté à ses préférences
+
+```{r}
+monplot <- function (varX , varY,  varN )
+{ 
+  Ymin <- min(varY)
+  Ymax <- max(varY)
+  Ysup <- Ymax+(Ymax-Ymin)*0.1
+  plot(varX,varY,
+     main = titre,      # titre
+     cex.main = 1,      # police du titre
+     cex = 0.6,         # taille des symboles
+     pch = 19,          # cercles pleins
+     ylim = c(Ymin, Ysup),
+     col = "red")      # couleur des symboles
+  text(varX,varY,varN,cex=0.5,pos=3) # nom des élément
+  abline(v=mean(varX),lty=2,lwd=1,col="blue") # moyenne X
+  abline(h=mean(varY),lty=2,lwd=1,col="blue") # moyenne Y
+  grid()
+  }
+```
+
+## 2.2 Visualisation de la forme de la relation
+
+Je peux désormais utiliser ma fonction **monplot()** !
+
+```{r}
+monplot(varX = sel$X,varY = sel$Y, varN = sel$CODE)
+```
+
+## 2.2 Visualisation de la forme de la relation
+
+Je peux décider de ne pas afficher le label des points.
+
+```{r}
+monplot(varX = sel$X,varY = sel$Y, varN = NULL)
+```
+
+## 2.3 Analyse de la corrélation 
+
+Je commence par calculer le coefficient de corrélation linéaire (r) et le pouvoir explicatif de X par rapport à Y (r2)
+
+```{r}
+cor(sel$X,sel$Y)       # coefficient de corrélation (r)
+100*cor(sel$X,sel$Y)**2    # pouvoir explicatif (r2)
+```
+
+
+## 2.3 Analyse de la corrélation 
+
+Puis, je teste la significativité de la corrélation linéaire ...
+
+```{r}
+cor.test(sel$X,sel$Y)  # test de significativité (p-value)
+```
+
+## 2.3 Analyse de la corrélation 
+
+... et je la compare à celle  du coefficient de corrélation de rang de Spearman
+
+```{r}
+cor.test(sel$X,sel$Y, method="spearman")  # test de significativité (p-value)
+```
+
+Les deux coefficients sont assez proches (+0.53 pour Pearson et +0.47 pour Spearman) ce qui est rassurant. En général, si les deux coefficients diffèrent il y a un problème de valeur exceptionnelle ou de relation non linéaire. 
+
+
+## 2.3 Analyse de la corrélation 
+
+On peut conclure des analyses précédentes que :
+
+- il existe une relation **significative** (p-value < 0.01)
+- cette relation est **positive** (r = +0.53 )
+- cette relation a un **pouvoir explicatif assez faible** (r2 = 28%)
+- la relation est **monotone et globalement linéaire** car le coefficient de Spearman est à peu près égale au coefficient de Pearson. Il n'y a donc pas besoin de transformer les variables ou retirer des valeurs exceptionnelles.
+
+
+# 3. LA REGRESSION LINEAIRE
+
+## 3.1 Hypothèses statistiques
+
+**Conditions a priori**
+
+1. X et Y sont deux variables normales (gaussienne)
+2. il existe une corrélation significative entre X et Y (p< 0.05)
+3. X explique une part suffisamment forte de Y (r2 > 20% ) 
+4. Le nuage de point affiche une forme linéaire
+5. les points sont répartis de façon régulière le long du nuage de points 
+6. Il n'y a pas de valeurs exceptionnelles susceptibles de perturber le calcul.
+
+
+
+## 3.1 Hypothèses statistiques
+
+**Méthode des moindres carrés ordinaire (MCO)**
+
+- La droite $y_i = a.x_i + b + \epsilon_i$ qui minimise la somme des carrés des écarts entre les valeurs observées $y_i$ et les valeurs estimées $\hat{y_i}$ a pour équation :
+
+- $COV(X,Y) = \sum_{i=1}^k \sum_{j=1}^k (x_{i}-\bar{x})^2.(y_{i}-\bar{y})^2$
+- $a = COV(X,Y) / (\sigma_X)^2$
+- $b = \bar{y} - a.\bar{x}$
+
+## 3.1 Hypothèses statistiques
+
+**Analyse de la variance**
+
+- La **somme des carré des écarts totale** ($SCE_{tot}$) correspond à la variance de la variable à expliquer :
+$SCE_{tot} = \sum_{i=1}^k (y_{i}-\bar{y})^2$
+
+- La **somme des carré des écarts résiduels** ($SCE_{err}$) correspond à la somme des carrés des différences entre valeurs observées et estimées
+$SCE_{error} = \sum_{i=1}^k (y_{i}-\hat{y})^2$
+
+- Le **pouvoir explicatif** d'un modèle de régression correspond à la part de la variance de Y expliquée par X. 
+
+- $Var. expliquée = (SCE_{tot}-SCE_{res}) / SCE_{tot} = r(X,Y)^{2}$
+
+## 3.1 Hypothèses statistiques
+
+**Vérifications a posteriori**
+
+Un modèle de régression n'est valide que si les résidus de ce modèle $\epsilon_i = (y_i - \hat{y}_i)$ remplissent les conditions suivantes :
+
+1. **Normalité** de la distribution des résidus
+2. Absence d'**autocorrélation** des résidus
+3. **Homogénéité** de la variance des résidus
+4. Absence de valeur à fort **effet de levier**
+
+Si ces quatre conditions ne sont pas remplies, les estimations de Y en fonction de X seront entâchées d'erreur et leur intervalle de confiance ne sera pas valable.
+
+## 3.2 La fonction lm()
+
+La fonction **lm()** ou lm est l'abbréviation de **linear model** permet d'effectuer la plupart des modèles de régression linéaire basés sur la méthode des moindres carrés ordinaire. Sa syntaxe est a priori très simple et renvoie les coefficients b et a du modèle de régression.
+
+```{r}
+lm(sel$Y~sel$X)
+```
+
+## 3.2 La fonction lm()
+
+Mais en réalité lm() crée **une liste de résultats** que l'on a intérêt à stocker pour en examiner les composantes une à une. 
+
+```{r}
+monmodel<-lm(sel$Y~sel$X)
+str(monmodel)
+```
+
+## 3.3 Analyse du modèle
+
+Un résumé des résultats principaux est fourni avec **summary()** appliqué à l'objet créé par lm().
+
+```{r, eval=TRUE}
+summary(monmodel)
+```
+
+On obtient ainsi :
+
+- l'équation de la droite Y = a.X+b
+- la significativité et l'intervalle de confiance de a et b
+- le pouvoir explicatif du modèle $r(X,Y)^2$
+
+
+## 3.4 Tracé de la droite de régression
+
+On peut tracer la droite de régression avec **abline()**
+
+```{r}
+monplot(sel$X,sel$Y,sel$CODE)
+abline(monmodel, col="blue",lwd=2)
+```
+
+Cette droite a pour équation **Y = 0.5X + 2.8** ce qui veut dire que chaque fois que l'urbanisation augemente de 1 pt l'usage d'internet augmente de 0.5 pts. Un pays qui  aurait une urbanisation de 50% devrait donc avoir un taux d'usage d'internet égal à 0.5 x 50 + 2.8  = 27.8%
+
+
+## 3.5 Analyse des résidus
+
+On peut extraire de l'objet créé par lm() les **valeurs estimées** de Y et les **résidus** c'est-à-dire les erreurs d'estimation. 
+
+```{r}
+sel$Y_estim<-monmodel$fitted.values # Valeurs estimées
+sel$Y_resid<-monmodel$residuals     # Valeurs résiduelles
+sel <- sel[order(sel$Y_resid),]     # Tri du tableau en fonction des résidus
+sel
+```
+
+## 3.5 Analyse des résidus
+
+Les **résidus négatifs** correspondent aux pays qui **ont moins accès à internet que ce que leur urbanisation laisserait prévoir**  : 
+
+```{r}
+head(sel,5)
+```
+
+- Ainsi  le **Congo** n'a que 8.7% d'accès à internet (Y) alors que son taux d'urbanisation est de 67.2% (X) ce qui laisserait prévoir un taux d'accès à internet de 37.0% (Y_estim). Il a donc un résidus de -28 pts (Y_resid) qui signifie que son taux d'accès à internet est beaucoup plus faible que ce que laisserait prévoir son urbanisation. 
+
+## 3.5 Analyse des résidus
+
+Les **résidus positifs** correspondent aux pays qui **ont plus accès à internet que ce que leur urbanisation laisserait prévoir** : 
+
+```{r}
+tail(sel,5)
+```
+
+-Ainsi le **Swaziland** a 47 % d'accès à internet (Y) alors que son taux d'urbanisation est de 23.9% (X) ce qui laisserait prévoir un taux d'accès à internet de 13.9% (Y_estim). Il a donc un résidus de +33 pts (Y_resid) qui signifie que son taux d'accès à internet est beaucoup plus fort que ce que laisserait prévoir son urbanisation. 
+
+
+# 4. COMPLEMENTS STATISTIQUES (facultatifs)
+
+
+## 4.1 Hypothèses statistiques
+
+**Vérifications a posteriori**
+
+Un modèle de régression n'est valide que si les résidus de ce modèle $\epsilon_i = (y_i - \hat{y}_i)$ remplissent les conditions suivantes :
+
+1. **Normalité** de la distribution des résidus
+2. Absence d'**autocorrélation** des résidus
+3. **Homogénéité** de la variance des résidus
+4. Absence de valeur à fort **effet de levier**
+
+Si ces quatre conditions ne sont pas remplies, les estimations de Y en fonction de X seront entâchées d'erreur et leur intervalle de confiance ne sera pas valable.
+
+On charge le package **car** (companion to applied regession) pour réaliser certains des diagnostics
+```{r}
+library(car)
+```
+
+
+
+
+## 4.1 Diagnostic 1 : Indépendance des résidus ?
+
+L'objectif est de savoir si les résidus se répartissent régulièrement de part et d'autre de la droite de régression tout au long de celle-ci. Si c'est bien le cas le graphique residuals Vs Fitted généré par **plot(monmodel,1)** devrait donner une droite horizontale :
+
+
+```{r, eval = FALSE}
+plot(monmodel,1,labels.id = sel$CODE)
+```
+
+## 4.1 Diagnostic 1 : Indépendance des résidus ?
+
+
+```{r, echo = FALSE}
+plot(monmodel,1,labels.id = sel$CODE)
+```
+
+## 4.1 Diagnostic 1 : Indépendance des résidus ?
+
+On peut tester statistiquement l'indépendance des résidus à l'aide du **test de Durbin-Watson** qui mesure si deux valeurs successives ont des résidus proches. L'indépendance des résidus est rejetée si p-value < 0.05
+
+```{r}
+durbinWatsonTest(monmodel)
+```
+
+Ici on trouve p-value > 0.05 donc les résidus sont indépendants. 
+
+## Diagnostic 2 : Normalité des résidus ?
+
+L'objectif est de savoir si les résidus ont une distribution normale Si c'est bien le cas le graphique généré par **plot(monmodel,2)** devrait donner une droite oblique :
+
+
+```{r, eval = FALSE}
+plot(monmodel,2,labels.id = sel$CODE)
+```
+
+## Diagnostic 2 : Normalité des résidus ?
+
+```{r, echo = FALSE}
+plot(monmodel,2,labels.id =sel$CODE)
+```
+
+## Diagnostic 2 : Normalité des résidus ?
+
+On peut tester statistiquement la normalité des résidus à l'aide du **test de Shapiro-Wilk**. Les résidus sont normaux si p-value > 0.05
+
+```{r}
+shapiro.test(monmodel$residuals)
+```
+
+Ici on trouve une p-value supérieure à 0.05 donc **la distribution des résidus est approximativement gaussienne**. 
+
+
+## Diagnostic 3 : Homogénéité des résidus ?
+
+L'objectif est de savoir si la variance des résidus est constante, c'est-à-dire si il s'écarte environ de la même distance tout au long de la droite . Si c'est bien le cas le graphique généré par **plot(monmodel,3)** devrait donner une droite horizontale
+
+```{r, eval = FALSE}
+plot(monmodel,3,labels.id = sel$CODE)
+```
+
+## Diagnostic 3 : Homogénéité des résidus ?
+
+```{r, echo = FALSE}
+plot(monmodel,3,labels.id = sel$PAYS)
+```
+
+
+## Diagnostic 3 : Homogénéité des résidus ?
+
+On peut tester statistiquement l'homogénéité des résidus à l'aide du **test de Breush-Pagan**. L’hypothèse d’homogénéité est rejetée si la p-value est inférieure à 0.05.
+
+
+```{r}
+ncvTest(monmodel)
+```
+
+Ici, la p-value est supérieure à 0.05 donc **les résidus sont globalement homogènes**. 
+
+
+
+## Diagnostic 4 : Absence de valeur exceptionnelles ?
+
+L'objectif est de savoir s'il existe des valeurs qui exercent une influence exceptionnelle sur les résultats de la régression. On peut reprérer ces valeurs de plusieurs manières, notamment à l'aide de la distance de Cook générée par **plot(monmodel,4)**.
+
+
+```{r, eval = FALSE}
+plot(monmodel,4,labels.id = sel$CODE)
+```
+
+## Diagnostic 4 : Absence de valeur exceptionnelles ?
+
+On repère les pays les plus susceptibles de perturber le modèle (Sierra Léone, Sud Soudan et Côte d'Ivoire)
+
+```{r, echo = FALSE}
+plot(monmodel,4,labels.id = sel$CODE)
+```
+
+## Diagnostic 4 : Absence de valeur exceptionnelles ?
+
+Le test statistique de Bonferroni permet de déterminer s'il existe des valeurs exceptionnelles avec une p-value < 0.05.
+
+```{r}
+outlierTest(monmodel, labels = sel$CODE)
+```
+
+Ici, on  voit que la Côte d'Ivoire est le seul pays ayant une influence sur le modèle. Mais la p-value est tout juste inférieure à 0.05 donc ce n'est pas très grave.

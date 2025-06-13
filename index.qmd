@@ -1,7 +1,7 @@
 ---
 title: "Introduction à R"
 subtitle: "AfromapR Bouaké 2025"
-author: "Claude Grasland & Jean-Paul Nguessi"
+author: "Claude Grasland & Jean-Paul Nguesso"
 date: "2025-05-27"
 date-format: iso
 lang: fr

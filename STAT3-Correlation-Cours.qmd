@@ -1,0 +1,744 @@
+---
+title: "STAT3 : CORRELATION"
+subtitle: "Existe-t-il une relation entre deux variables quantitatives X et Y ?"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-06-01"
+title-slide-attributes:
+  data-background-color: "#BA4A00"
+  data-background-size: cover
+  data-background-opacity: "0.5"
+format:
+  revealjs:
+    margin: 0
+    code-line-numbers: false
+    embed-resources: true
+    smaller: true
+    scrollable: true
+    theme: [simple,diapos.scss]
+execute:
+  echo: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+# 1. PREPARATION DES DONNEES
+
+## 1.1. Chargement du tableau principal
+
+On charge notre bon vieux fichier des pays d'Afrique de l'Ouest en 2018
+
+```{r load}
+don <- read.table(file = "data/africa_pays_2018/data/africa_ouest_2018.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8")              # encodage adapté au français
+
+head(don)
+```
+
+## 1.2 Choix des deux variables à analyser
+
+En dehors de iso3 et nom, on ne garde que deux variables que l'on renomme X et Y avec **colnames()** et que l'on convertit en type numérique général. Il suffira par la suite de modifier le choix des variables X et Y pour faire d'autres analyses. 
+
+```{r}
+sel<-don[,c("iso3","nom","PIB","CO2HAB")]
+colnames(sel)<-c("CODE","NOM","X","Y")
+head(sel)
+```
+
+## 1.3 On est malin ...
+
+Mais comme on ne sait plus ce que sont X et Y, on le précise avec des chaînes de caractères qu'on pourra utiliser dans les graphiques. Et on peut préparer une version multilangue ...
+
+```{r}
+# Pour la version française
+fr_titre <- "Les pays d'Afrique de l'Ouest en 2018"
+fr_nomX <- "PIB en $/hab."
+fr_nomY <- "Emissions de CO2 en t./hab"
+fr_auteur <- "Ecole d'été AfromapR, Bouaké 2025"
+```
+
+
+```{r}
+# Pour la version anglaise
+en_titre <- "Countries from Western Africa in1988"
+en_nomX <- "GDP in $/hab."
+en_nomY <- "CO2 emissions (t./hab.)"
+en_auteur <- "Summer School AfromapR, Bouaké 2025"
+```
+
+
+
+# 2. EXPLORATION VISUELLE
+
+## 2.1 Visualisation avec plot(X,Y)
+
+La manière la plus simple d'analyser la relation entre X et Y est d'utiliser un simple plot
+
+```{r}
+plot(sel$X,sel$Y)
+```
+
+## 2.1 Visualisation avec plot(X,Y)
+
+La fonction plot() comporte de nombreux paramètres permettant d'améliorer le graphique et de l'habiller. Voici un exemple d'habillage
+
+```{r, eval=FALSE, echo=TRUE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+```
+
+## 2.1 Visualisation avec plot(X,Y)
+
+
+```{r, echo=FALSE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+```
+
+## 2.2 Identification des points avec **text(...)** 
+
+On peut ajouter au graphique généré par **plot(X,Y)** une couche de labels avec **text(X,Y,Code)**. On précise la position avec **pos =**, la taille de police avex **cex =** et la couleur avec **col =**.
+
+```{r, echo = TRUE, eval=FALSE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+text(x = sel$X,
+     y = sel$Y,
+     label = sel$CODE,
+     cex = 0.7,
+     pos=3,
+     col = "blue")
+```
+
+## 2.2 Identification des points avec **text(...)** 
+
+On peut ajouter au graphique généré par **plot(X,Y)** une couche de labels avec **text(X,Y,Code)**. On précise la position avec **pos =**, la taille de police avex **cex =** et la couleur avec **col =**.
+
+```{r, echo = FALSE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+text(x = sel$X,
+     y = sel$Y,
+     label = sel$CODE,
+     cex = 0.7,
+     pos=3,
+     col = "blue")
+```
+
+## 2.3 Ajout de lignes horizontales ou verticales avec **abline(...)**
+
+On peut rajouter à un graphique des lignes horizontales ou verticales avec abline en précisant leur position avec **h=** ou **v=**, leur épaisseur avec **lwd = **, leur style avec **lty=** et leur couleur avec **col=**.
+On peut également ajouter la droite de régression linéaire Y = aX+b comme on le verra au chapitre suivant.
+
+
+```{r, echo = TRUE, eval=FALSE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+
+text(x = sel$X,
+     y = sel$Y,
+     label = sel$CODE,
+     cex = 0.6,
+     pos=3,
+     col = "blue")
+
+
+# Ajout d'une ligne horizontale  correspondant à la moyenne de Y
+abline(h=mean(sel$Y),col="red",lwd = 1, lty = 2)
+# Ajout d'une ligne verticlae  correspondant à la moyenne de X
+abline(v=mean(sel$X),col="red",lwd = 1, lty = 2)
+
+
+```
+
+
+## 2.3 Ajout de lignes horizontales ou verticales avec **abline(...)** 
+
+```{r, echo = FALSE, eval=TRUE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+
+text(x = sel$X,
+     y = sel$Y,
+     label = sel$CODE,
+     cex = 0.6,
+     pos=3,
+     col = "blue")
+
+
+# Ajout d'une ligne horizontale  correspondant à la moyenne de Y
+abline(h=mean(sel$Y),col="red",lwd = 1, lty = 2)
+# Ajout d'une ligne verticlae  correspondant à la moyenne de X
+abline(v=mean(sel$X),col="red",lwd = 1, lty = 2)
+
+# Ajout de la droite de régression
+reglin <- lm(sel$Y~sel$X)
+abline(reglin, col="black", lwd=2)
+
+```
+
+
+## 2.4 Interprétation du diagramme
+
+Que vous apprend ce diagramme ? Quelles hypothèses permet-il de formuler ?
+
+```{r, echo = FALSE, eval=TRUE}
+plot(sel$X,sel$Y,
+     main = fr_titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+
+text(x = sel$X,
+     y = sel$Y,
+     label = sel$CODE,
+     cex = 0.6,
+     pos=3,
+     col = "blue")
+
+
+# Ajout d'une ligne horizontale  correspondant à la moyenne de Y
+abline(h=mean(sel$Y),col="red",lwd = 1, lty = 2)
+# Ajout d'une ligne verticlae  correspondant à la moyenne de X
+abline(v=mean(sel$X),col="red",lwd = 1, lty = 2)
+
+
+```
+
+
+
+# 3. CORRELATION LINEAIRE 
+
+## 3.1 Définitions : relation linéaire/monotone/complexe
+
+
+- il existe une **relation linéaire** entre deux variables quantitatives X et Y si l'on peut prédire leurs valeurs respectives par les fonctions **Y = a1.X + b1** et **X = a2.X = b2**
+
+- il existe une **relation monotone** entre deux variables quantitatives X et Y si l'on peut prédire les valeurs Y en fonction de celle de X far une **fonction Y=f(X)** qui est **strictement croissante** ou **strictement décroissante**.
+
+- il existe une **relation complexe** entre deux variables quantitatives X et Y si l'on peut prédire les valeurs Y en fonction de celle de X par une **fonction Y=f(X)** qui comporte au moins un point minimum ou maximum de changement de pente (**annulation de la dérivée première**)
+
+## 3.1 Définitions : relation linéaire/monotone/complexe
+
+```{r, echo=FALSE}
+par(mfrow=c(1,3),mar=c(4,4,2,2))
+X<-c(1,2,3,4,5,6,7,8,9)
+Y1<-c(4,8,12,16,20,24,28,32,36)
+plot(X,Y1, xlim=c(0,10),ylim=c(0,40),main="rel. linéaire",col="red")
+
+Y2<-c(4,5,7,10,14,19,25,32,40)
+plot(X,Y2, xlim=c(0,10),ylim=c(0,40), main="rel. monotone",col="red")
+Y3<-c(40,20,10,5,2.5,5,10,20,40)
+plot(X,Y3, xlim=c(0,10),ylim=c(0,40),main="rel. complexe", col="red")
+
+```
+
+## 3.1 Définitions : relation positive/négative/nulle
+
+- Une relation linéaire ou monotone est **positive** si à un accroissement de X correspond un accroissement de Y
+
+- Une relation linéaire ou monotone est **négative** si à un accroissement de X correspond une diminution de Y
+
+- une relation est **nulle** si une variation de X n'entraine pas de variation de Y
+
+## 3.1 Définitions : relation positive/négative/nulle
+
+```{r, echo=FALSE}
+par(mfrow=c(1,3),mar=c(4,4,2,2))
+X<-c(1,2,3,4,5,6,7,8,9)
+Y1<-c(2,8,10,18,14,24,25,27,33)
+plot(X,Y1, xlim=c(0,10),ylim=c(0,40),main="rel. positive",col="red")
+abline(lm(Y1~X),col="blue")
+Y2<-c(33, 27, 25, 24, 14, 18, 10, 8, 2)
+plot(X,Y2, xlim=c(0,10),ylim=c(0,40), main="rel. négative",col="red")
+abline(lm(Y2~X),col="blue")
+Y3<-c(26,18, 15, 25, 21,18, 24, 28,16)
+plot(X,Y3, xlim=c(0,10),ylim=c(0,40),main="rel. nulle", col="red")
+abline(lm(Y3~X),col="blue")
+
+```
+
+
+## 3.1 Définitions : relation forte/faible/nulle
+
+- Une relation linéaire  est **forte** si une valeur de X permet de prédire la valeur de Y avec une faible marge d'erreur.
+
+- Une relation linéaire ou monotone est **faible** si une valeur de X permet de prédire la valeur de Y avec une forte marge d'erreur.
+
+- une relation linéaire est **nulle** si une valeur de X ne permet aucunement de prédire la valeur de Y
+
+
+
+## 3.1 Définitions : relation forte/faible/nulle
+
+```{r, echo=FALSE}
+library(car)
+par(mfrow=c(1,3),mar=c(4,4,2,2))
+X<-runif(n=100)*10
+Y<-3*X+2
+Y1 = Y+runif(n=100, min=-2,max=+2)
+plot(X,Y1,xlim=c(0,10),ylim=c(0,40),main="rel.forte",col="red")
+abline(lm(Y1~X),col="blue")
+Y2 = Y+runif(n=100, min=-10,max=+10)
+plot(X,Y2,xlim=c(0,10),ylim=c(0,40),main="rel.faible",col="red")
+abline(lm(Y2~X),col="blue")
+Y3 = runif(n=100, min=10,max=30)
+plot(X,Y3,xlim=c(0,10),ylim=c(0,40),main="rel.nulle",col="red")
+abline(lm(Y3~X),col="blue")
+```
+
+## 3.1 Définitions : relation significative/non siginificative
+
+- Une relation linéaire est **significative** si l'effectif permettant de la mettre en évidence est suffisamment grand pour qu'on puisse exclure qu'elle soit l'effet du hasard.
+
+- Une relation linéaire ou monotone est **non significative** si l'effectif permettant de la mettre en évidence n'est pas suffisamment grand pour qu'on puisse exclure qu'elle soit l'effet du hasard.
+
+- On considère traditionnellement qu'une relation est significative s'il y a **moins de 5% de chances** qu'elle soit l'effet du hasard (**p-value < 0.05**).
+
+## 3.1 Définitions : relation significative/non siginificative
+
+```{r, echo=FALSE}
+library(car)
+par(mfrow=c(1,3),mar=c(4,4,2,2))
+X<-runif(n=4)*10
+Y<-3*X+10
+Y1 = Y+runif(n=4, min=-5,max=+5)
+plot(X,Y1,xlim=c(0,10),ylim=c(0,40),main="rel.non signif.",col="red")
+abline(lm(Y1~X),col="blue")
+
+
+X<-runif(n=10)*10
+Y<-3*X+10
+Y2 = Y+runif(n=10, min=-15,max=+15)
+plot(X,Y2,xlim=c(0,10),ylim=c(0,40),main="rel.signif.",col="red")
+abline(lm(Y2~X),col="blue")
+
+X<-runif(n=100)*10
+Y<-3*X+10
+Y3 = Y+runif(n=20, min=-20,max=+20)
+plot(X,Y3,xlim=c(0,10),ylim=c(0,40),main="rel.très signif.",col="red")
+abline(lm(Y3~X),col="blue")
+
+
+```
+
+## 3.2 la fonction **cor()** : objectif
+
+- La fonction **cor()** permet de mesurer le coefficient de corrélation  de deux variable X et Y.
+- Elle permet de détecter les **relations linéaires** en choisissant le paramètre (par défaut) **method = pearson**  
+- Elle permet de détecter **les relations non linéaires** en choisissant le paramètre **method = spearman** qui mesure l'existence d'une **relation monotone** entre les rangs de X et Y
+
+## 3.2 la fonction **cor()** : syntaxe
+
+- La syntaxe de la fonction **cor()** est très simple et permet de calculer trois types de corrélation. La méthode par défaut est **pearson** c'est-à-dire le coefficient de corrélation linéaire
+
+```{r}
+cor(sel$X,sel$Y)
+cor(sel$X,sel$Y, method = "spearman")
+cor(sel$X,sel$Y, method = "kendall")
+
+```
+
+
+
+
+## 3.2 **cor()** permet de savoir si la relation est linéaire ou monotone
+```{r, echo=FALSE}
+par(mfrow=c(1,2),mar=c(4,4,2,2))
+X<-c(1,2,3,4,5,6,7,8,9)
+Y<-c(4,8,12,16,20,24,28,32,36)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+
+X<-c(1,2,3,4,5,6,7,8,9)
+Y<-c(1,2,4,8,16,32,64,128,254)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+```
+
+
+## 3.2 **cor()** permet de repérer l'effet d'une valeur exceptionnelle
+
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2),mar=c(4,4,2,2))
+
+X<-c(1,2,3,4,5,6,7,8,50)
+Y<-c(10,9,8,7,6,5,4,3,50)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+
+
+rankX<-rank(X)
+rankY<-rank(Y)
+pears<-cor(rankX,rankY,method = "pearson")
+spear<-cor(rankX,rankY,method = "spearman")
+titre<-paste("Pears=", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(rankX,rankY, main = titre, col="red", cex.main=0.9)
+abline(lm(rankY~rankX),col="blue")
+```
+
+## 3.2 **cor()** permet de savoir si la relation est positive ou négative
+```{r, echo=FALSE}
+par(mfrow=c(1,2),mar=c(4,4,2,2))
+X<-c(1,2,3,4,5,6,7,8,9)
+Y<-c(2,8,10,18,14,24,25,27,33)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+
+X<-c(1,2,3,4,5,6,7,8,9)
+Y<-c(33, 27, 25, 24, 14, 18, 10, 8, 2)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+```
+
+## 3.2 **cor()** permet de avoir si la relation est forte ou faible
+```{r, echo=FALSE}
+
+par(mfrow=c(1,3),mar=c(4,4,2,0))
+
+X<-runif(n=100)*10
+Y<-3*X+2
+Y = Y+runif(n=100, min=-2,max=+2)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+
+X<-runif(n=100)*10
+Y<-3*X+2
+Y = Y+runif(n=100, min=-10,max=+10)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+
+X<-runif(n=100)*10
+Y<-3*X+2
+Y = Y+runif(n=100, min=-30,max=+30)
+pears<-cor(X,Y,method = "pearson")
+spear<-cor(X,Y,method = "spearman")
+titre<-paste("Pears= ", round(pears,digits = 2)," / Spear=", round(spear,digits=2))
+plot(X,Y, main = titre, col="red",cex.main=0.9)
+abline(lm(Y~X),col="blue")
+```
+
+
+## 3.3. la fonction cor.test() : objectif
+
+- la fonction **cor()** permet de savoir si une relation est forte ou faible, positive ou négative, linéaire ou non linéaire. Mais **cor() ne permet pas de savoir si une relation est significative ou pas.
+- C'est la fonction **cor.test()** qui permet de **tester la significativité d'une relation** en fournissant un **intervalle de confiance du coefficient de corrélation** et une probabilité de rejet de H0 : il n'y a pas de relation appelée en anglais la **p-value**.
+
+- p-value > 0.10 : relation non significative
+- 0.10 > p-value > 0.05 : relation presque significative
+- p-value < 0.05 : relation significative
+- p-value < 0.01 : relation très significative
+
+## 3.3. la fonction cor.test() : application au coefficient de Pearson
+
+Même syntaxe que cor() :
+
+```{r}
+cor.test(sel$Y,sel$X)
+```
+
+
+
+## 3.3. la fonction cor.test() : application au coefficient de Spearman
+
+Même syntaxe que cor() :
+
+```{r}
+cor.test(sel$Y,sel$X, method="spearman")
+```
+
+
+## 3.4 Intensité et significativité
+
+- Le carré du coefficient de corrélation appelé **r-square** ou **r2** permet de mesurer le pouvoir explicatif de X par rapport à Y. Il ne dépend pas du nombre d'observations.
+- le test de significativité ou **p-value** mesure la significativité de la relation c'est-à-dire le fait que la relation entre X et Y ne soit pas l'effet du hasard. Il dépend à la fois du niveau de corrélation et du nombre d'observations.
+
+
+## 3.4  Intensité et significativité
+
+- A gauche : une relation forte mais non significative
+- A droite : une relation faible mais très significative
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2),mar=c(4,4,2,2))
+
+X <- c(1,4,5,7,10)
+Y <-c(29,32,24,12,14)
+t<-cor.test(X,Y)
+titre<-paste("r2 = ",round(100*(cor(X,Y)**2),2), "% / p-value = ",round(t$p.value,4), sep="")
+plot(X,Y,main=titre,cex.main=0.8,col="red")
+abline(lm(Y~X),col="blue")
+
+
+
+
+X<-runif(n=100)*10
+Y<- -3*X+50
+Y = Y+runif(n=100, min=-20,max=+20)
+t<-cor.test(X,Y)
+titre<-paste("r2 = ",round(100*(cor(X,Y)**2),2), "% / p-value = ",round(t$p.value,4), sep="")
+plot(X,Y,main=titre,cex.main=0.8,col="red")
+abline(lm(Y~X),col="blue")
+
+
+
+```
+
+
+## 3.5 Conclusion : que pensez vous de la relation CO2 / PIB ?
+
+```{r, echo=FALSE}
+par(mfrow=c(1,1),mar=c(4,4,3,2))
+X <- sel$X
+Y <- sel$Y
+t<-cor.test(X,Y)
+titre<-paste("r2 = ",round(100*(cor(X,Y)**2),2), "% / p-value = ",round(t$p.value,4), sep="")
+plot(sel$X,sel$Y,
+     main = titre,   # titre
+     cex.main = 1,      # police du titre
+     sub = fr_auteur,   # sous-titre
+     cex.sub = 0.6,     # police du sous-titre
+     xlab = fr_nomX,    # nom de l'axe X
+     xlim = c(1000,6000),   # intervalle de l'axe X
+     ylab = fr_nomY,    # nom de l'axe Y
+     ylim = c(0,0.9),    # intervalle de l'axe Y
+     cex.axis = 0.8,    # police des gradations d'axes
+     cex.lab = 0.8,     # police des noms d'axes
+     cex = 0.6,         # taille des symboles
+     col = "blue")       # couleur des symboles
+
+# Ajout d'une ligne horizontale  correspondant à la moyenne de Y
+abline(h=mean(sel$Y),col="red",lwd = 1, lty = 2)
+# Ajout d'une ligne verticlae  correspondant à la moyenne de X
+abline(v=mean(sel$X),col="red",lwd = 1, lty = 2)
+
+text(x = sel$X,
+     y = sel$Y,
+     label = sel$CODE,
+     cex = 0.6,
+     pos=3,
+     col = "blue")
+
+
+```
+
+- positive ou négative ?
+- forte ou faible ?
+- linéaire ou non linéaire 
+- significative ou non siognificative ?
+
+
+# 4. ANALYSE D'UNE MATRICE DE CORRELATION (Supplément facultatif)
+
+## Objectif de l'analyse
+
+- Soit un ensemble de variables quantitatives continues **$(X_1...X_i...X_k)$** décrivant les **mêmes individus**.
+
+- On se propose de construire la matrice **$R_{ij}[1...i...k ; 1...j...k]$** indiquant pour chaque paire de variable $ij$ leur **coefficient de corrélation** (linéaire ou de rang)
+
+- Puis de construire la matrice **$p_{ij}[1...i...k ; 1...j...k]$** indiquant pour chaque paire de variable $ij$ la probabilité H0 d'absence de relation, c'est-à-dire le degré de **significativité** de la corrélation. 
+
+## Utilisation des résultats
+
+1. Mettre en évidence des **groupes de variables significativement corrélées entre elles**, que ce soit de façon positive ou négative. 
+
+2. Préparer la réalisation d'une **analyse en composantes principales** qui regroupera les variables corrélées entre elles en facteurs.
+
+3. Identifier des variables non redondantes pour construire un modèle de **régression multiple**.
+
+4. Indentifier des variables fortement corrélées pouvant servir de proxy pour estimer des **valeurs manquantes** dans un tableau
+
+## Visualisation d'une matrice de corrélation
+
+_ Sous la forme de **tableaux** montrant si possible à la fois les coefficients de corrélation et les seuils de significativité.
+
+- Sous la forme de **graphes** montrant de façon visuelle l'intesité, le signe et la significativité des relations.
+
+- Sous la forme de **plans factoriels** résultant d'une analyse en composantes principales.
+
+Chacun de ces objectifs supposant en général l'emploi de packages spécialisés.
+
+## Exemple : création d'un tableau quantitatif
+
+On ne sélectionne que des variables quantitatives et on ajoute les noms des pays en attribut des lignes afin de former une **matrice**.
+
+```{r}
+tab<-don[,c(4:9)]
+row.names(tab)<-don$iso3
+head(tab,3)
+```
+
+## Utilisation de la fonction cor()
+
+On applique la fonction cor()
+
+```{r}
+mat_cor<-cor(tab)
+```
+
+
+On affiche la matrice de corrélation en arrondissant les valeurs
+
+```{r}
+round(mat_cor,3)
+```
+
+## Utilisation du  package psych
+
+La fonction *cor.test()* de Rbase ne permet pas de calculer les corrélations pour toute une matrice. Aussi on charge le package **psych** qui dispose d'une fonction *corr.test()* beaucoup plus puissante qui crée plusieurs matrices de résultats
+
+```{r}
+library(psych)
+results<-psych::corr.test(tab)
+names(results)
+```
+
+## Utilisation du package psych
+
+On retrouve la matrice des coefficiences de corrélation 
+
+```{r}
+round(results$r,3)
+```
+
+## Utilisation du package psych
+
+Mais aussi la matrice des tests de significativité
+
+```{r}
+round(results$p,3)
+```
+
+## Utilisation du package psych
+
+On peut aussi faire une jolie matrice colorée avec des tests de signficativité sous forme d'étoiles
+
+```{r}
+corPlot(tab, stars=TRUE, diag=FALSE)
+```
+
+## Utilisation du package factoMineR
+
+Si on veut voir les axes factoriels d'une analyse en composante principales on utilise la fonction *PCA()* de **FactoMineR**
+
+```{r}
+library(FactoMineR)
+monacp<-PCA(tab, graph=FALSE)
+```
+
+On pourra ensuite visualiser la corrélation des variables avec les principaux axes factoriels et les coordonnées des individus sur ceux-ci.
+
+## Corrélation des variables avec les axes factoriels
+
+```{r}
+plot.PCA(monacp,choix = "varcor")
+```
+
+## Coordonnées des individus sur les axes factoriels
+
+
+```{r}
+plot.PCA(monacp,choix = "ind",)
+```
+
+

@@ -36,7 +36,10 @@ editor:
 
 
 
-- **Mise en place** : Télécharger le dossier ...
+::: {.callout-tip}
+## Télécharger l'exercice
+-  [STAT0](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT0-markdown.zip)
+:::
 
 
 # Objectif

@@ -36,7 +36,7 @@ L'objectif de cet exercice est d'importer un tableau puis de modifier les types 
 
 ::: {.callout-tip}
 ## Télécharger l'exercice
--  [STAT1](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT1-premierpas.zip)
+-  [STAT1](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT1-premierspas.zip)
 :::
 
 
