@@ -46,8 +46,6 @@ En dehors de iso3 et nom, on ne garde que deux variables que l'on renomme X et Y
 sel<-don[,c("iso3","nom","URBANI","INTERN")]
 colnames(sel)<-c("CODE","NOM","X","Y")
 head(sel)
-#par(mfrow=c(1,1))
-#monplot(sel$X,sel$Y,sel$CODE)
 ```
 
 ## 1.3 On est malin ...
@@ -70,7 +68,7 @@ auteur <- "Ecole d'été AfromapR, Bouaké 2025"
 
 La régression linéaire met en relation deux variables quantitatives X et Y dont on suppose que la distribution est **normale (gaussienne)** , c'est-à-dire unimodale et symérique.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE, echo=FALSE}
 Z<-rnorm(100000)
 hist(Z, nclass=50, main="Loi normale (moyenne = 0 et écart-type = 1) ",border ="gray80",col="lightyellow",ylab=NULL,xlab=NULL,probability = TRUE,
      cex.axis=0.9,ylim = c(0,0.55), cex.main=0.8,cex.lab=0.8,xlim=c(-3,3))
@@ -379,8 +377,8 @@ On peut extraire de l'objet créé par lm() les **valeurs estimées** de Y et le
 ```{r}
 sel$Y_estim<-monmodel$fitted.values # Valeurs estimées
 sel$Y_resid<-monmodel$residuals     # Valeurs résiduelles
-sel <- sel[order(sel$Y_resid),]     # Tri du tableau en fonction des résidus
-sel
+tri <- sel[order(sel$Y_resid),]     # Tri du tableau en fonction des résidus
+tri
 ```
 
 ## 3.5 Analyse des résidus
@@ -388,7 +386,7 @@ sel
 Les **résidus négatifs** correspondent aux pays qui **ont moins accès à internet que ce que leur urbanisation laisserait prévoir**  : 
 
 ```{r}
-head(sel,5)
+head(tri,5)
 ```
 
 - Ainsi  le **Congo** n'a que 8.7% d'accès à internet (Y) alors que son taux d'urbanisation est de 67.2% (X) ce qui laisserait prévoir un taux d'accès à internet de 37.0% (Y_estim). Il a donc un résidus de -28 pts (Y_resid) qui signifie que son taux d'accès à internet est beaucoup plus faible que ce que laisserait prévoir son urbanisation. 
@@ -398,7 +396,7 @@ head(sel,5)
 Les **résidus positifs** correspondent aux pays qui **ont plus accès à internet que ce que leur urbanisation laisserait prévoir** : 
 
 ```{r}
-tail(sel,5)
+tail(tri,5)
 ```
 
 -Ainsi le **Swaziland** a 47 % d'accès à internet (Y) alors que son taux d'urbanisation est de 23.9% (X) ce qui laisserait prévoir un taux d'accès à internet de 13.9% (Y_estim). Il a donc un résidus de +33 pts (Y_resid) qui signifie que son taux d'accès à internet est beaucoup plus fort que ce que laisserait prévoir son urbanisation. 
@@ -421,6 +419,7 @@ Un modèle de régression n'est valide que si les résidus de ce modèle $\epsil
 Si ces quatre conditions ne sont pas remplies, les estimations de Y en fonction de X seront entâchées d'erreur et leur intervalle de confiance ne sera pas valable.
 
 On charge le package **car** (companion to applied regession) pour réaliser certains des diagnostics
+
 ```{r}
 library(car)
 ```
@@ -517,9 +516,11 @@ L'objectif est de savoir s'il existe des valeurs qui exercent une influence exce
 plot(monmodel,4,labels.id = sel$CODE)
 ```
 
+
+
 ## Diagnostic 4 : Absence de valeur exceptionnelles ?
 
-On repère les pays les plus susceptibles de perturber le modèle (Sierra Léone, Sud Soudan et Côte d'Ivoire)
+Les pays qui influent sur la régression sont ceux qui sont à la fois éloignés de la droite et situés aux extrémités de celle-ci. Si on les retirait, la pente de la droite changerait.C'est ici le cas du Congo, de la Libye et du Swaziland
 
 ```{r, echo = FALSE}
 plot(monmodel,4,labels.id = sel$CODE)
@@ -527,10 +528,50 @@ plot(monmodel,4,labels.id = sel$CODE)
 
 ## Diagnostic 4 : Absence de valeur exceptionnelles ?
 
-Le test statistique de Bonferroni permet de déterminer s'il existe des valeurs exceptionnelles avec une p-value < 0.05.
+Le test statistique de Bonferroni permet de déterminer si les pays à fort effet de levier sont réellement de nature à pertureber les résultats.
 
 ```{r}
 outlierTest(monmodel, labels = sel$CODE)
 ```
 
-Ici, on  voit que la Côte d'Ivoire est le seul pays ayant une influence sur le modèle. Mais la p-value est tout juste inférieure à 0.05 donc ce n'est pas très grave.
+Ici, on  voit que le Swaziland est le pays le plus influent. Mai le test de Bonferoni renvoie NA et il n'est donc pas considéré comme réellement exceptionnel. 
+
+## Bilan des diagnostics :
+
+En résumé, nous avons pu vérifier que notre modèle était correct sur chacun des quatre diagnostics :
+
+1. Absence d'autocorrélation des résidus
+2. Normalité des résidus 
+3. Homogénéité des résidus
+4. Absence de valeur exceptionnellement influente.
+
+
+## Visualisation rapide 
+
+Lorsqu'on utilise le package car, on peut visualiser rapidement une relation en utilisant un petit nombre d'instruction avec la fonction **scatterplot()** du package `car`. Le paramètre **smooth=TRUE** permet de visualiser la dispersion des points sous forme d'ellipse : 
+
+```{r}
+scatterplot(formula = sel$X~sel$Y, 
+            smooth=FALSE,
+            ellipse=TRUE,
+            xlab=nomX,
+            ylab=nomY,
+            main = "Affichage de l'ellipse de dispersion")
+            
+```
+
+
+## Visualisation rapide 
+
+Lorsqu'on utilise le package car, on peut visualiser rapidement une relation en utilisant un petit nombre d'instruction avec la fonction **scatterplot()** du package `car`. Le paramètre **ellipse=TRUE** permet de visualiser la dispersion des points sous forme d'un ajustement non linéaire par la méthode loess. 
+
+```{r}
+scatterplot(formula = sel$X~sel$Y, 
+            smooth=T,
+            ellipse=F,
+            xlab=nomX,
+            ylab=nomY,
+            main = "Affichage de l'ajustement non linéaire (loess)")
+            
+```
+
