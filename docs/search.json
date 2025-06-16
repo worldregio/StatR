@@ -1664,5 +1664,117 @@
     "title": "STAT1 : LES VARIABLES STATISTIQUES",
     "section": "Préparation des variable dans R",
     "text": "Préparation des variable dans R\nLe logiciel R a été écrit par des statisticiens qui accordent une grande importance au choix du type des variables pour réaliser des traitements ou des graphiques appropriés.\n\nLa première étape d’une analyse statistique avec R consiste donc à vérifier précisément le type des données que l’on a importé et à effectuer les transformations nécessaires avant tout traitement."
+  },
+  {
+    "objectID": "STAT4-Exo1.html",
+    "href": "STAT4-Exo1.html",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "",
+    "text": "Le but de ce TD est de mettre en oeuvre le cours sur le tableau de contingence et le test du chi-2 fournissant un programme type d’analyse de la relation entre deux variables X et Y qualitatives à l’aide de R. Ce programme pourra ensuite être facilement adapaté à d’autres jeux de données."
+  },
+  {
+    "objectID": "STAT4-Exo1.html#chargement-des-données",
+    "href": "STAT4-Exo1.html#chargement-des-données",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "1.1. Chargement des données",
+    "text": "1.1. Chargement des données\nOn charge un fichier contenant les résultats d’une enquête.\n\nTrès important : On ajoute l’instruction stringAsFactors=TRUE pour que toutes les variables de type caractère deveiennent des variables de type factor.\n\n\ndon &lt;- read.table(file = \"data/civ_afrobarometer_2023/data/survey_data.csv\", # nom du fichier et chemin d'accès\n                  sep = \";\",                     # séparateur (ici, des points-virgule)\n                  dec=\",\",                       # Type de décimale\n                  header = TRUE,                 # ligne d'en-tête avec le nom des variables\n                  encoding=\"UTF-8\",              # encodage adapté au français\n                  stringsAsFactors = TRUE)       # Transforme les character en factor"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#chargement-des-métadonnées",
+    "href": "STAT4-Exo1.html#chargement-des-métadonnées",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "1.2 Chargement des métadonnées",
+    "text": "1.2 Chargement des métadonnées\nOn charge ensuite un tableau contenant des informations sur les variables et leurs modalités\n\nmeta &lt;- read.table(file = \"data/civ_afrobarometer_2023/data/survey_meta.csv\", # nom du fichier et chemin d'accès\n                  sep = \";\",                     # séparateur (ici, des points-virgule)\n                  dec=\",\",                       # Type de décimale\n                  header = TRUE,                 # ligne d'en-tête avec le nom des variables\n                  encoding=\"UTF-8\")              # encodage adapté au français\n\n## Affichage des métadonnées\nmeta\n\n          code\n1       RESPNO\n2  withinwt_ea\n3       URBRUR\n4       REGION\n5     EA_SVC_A\n6     EA_SVC_B\n7     EA_FAC_B\n8    EA_ROAD_C\n9      THISINT\n10    ADULT_CT\n11       CALLS\n12          Q1\n13          Q2\n14        Q46F\n15        Q46G\n16        Q46H\n17        Q46I\n18        Q57A\n19        Q57B\n20        Q58A\n21        Q58C\n22        Q90D\n23        Q90F\n24        Q90G\n25        Q91C\n26        Q92A\n27         Q94\n28      LENGTH\n29        Q101\n30        Q102\n31        Q103\n                                                                     def\n1                                                    Numéro du répondant\n2                                       Facteur de pondération nationale\n3                                        Type de milieu: Urbain ou Rural\n4                                                                 Région\n5                                 EA-SVC-A. Réseau électrique dans la ZD\n6                         EA-SVC-B. Système d'adduction d'eau dans la ZD\n7                                             EA-FAC-B. École dans la ZD\n8                       EA-ROAD-C. État de la route sur les derniers 5km\n9                                                    Cet entretien, sexe\n10                             Nombre de citoyens adultes dans le ménage\n11                                                     Nombre de visites\n12                                                               Q1. Age\n13                                      Q2. Langue parlée dans le ménage\n14                                     Q46f. Réduction de la criminalité\n15                      Q46g. Amélioration des services de santé de base\n16                           Q46h. Satisfaction des besoins en éducation\n17                Q46i. Fourniture de services d'eau et d'assainissement\n18                                 Q57a. Est tombé malade de la COVID-19\n19                          Q57b. Perte de revenu à cause de la COVID-19\n20                             Q58a. A reçu le vaccin contre la COVID-19\n21 Q58c. Raison principale pour laquelle il est peu probable de vacciner\n22                                              Q90d. Possède ordinateur\n23                                      Q90f. Possède téléphone portable\n24                               Q90g. Téléphone a un accès à l’Internet\n25                           Q91c. Emplacement de la toilette ou latrine\n26                           Q92a. Maison raccordée au réseau électrique\n27                                Q94. Niveau d'instruction du répondant\n28                                                  Durée de l'entretien\n29                                              Q101.  Sexe du répondant\n30                                              Q102.  Race du répondant\n31                                Q103. Langue principale de l'entretien"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#choix-de-variables-à-analyser",
+    "href": "STAT4-Exo1.html#choix-de-variables-à-analyser",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "1.3 Choix de variables à analyser",
+    "text": "1.3 Choix de variables à analyser\nOn sélectionne dans le tableau une variable Y que l’on veut expliquer et des variables X1, X2 …X3 qui peuvent servir à expliquer Y. On décide par exemple d’examiner les variables suivantes :\n\nvac : A été vacciné contre le covid (Q58A)\nsex : Sexe (Q101)\nage : Age (Q1)\nmil : Milieu Urbain ou rural (URBRUR)\nreg : région de résidence (REGION)\n\n\nsel&lt;-don[,c(\"Q58A\",\"Q101\",\"Q1\",\"URBRUR\",\"REGION\")]\ncolnames(sel)&lt;-c(\"vac\",\"sex\",\"age\",\"mil\",\"reg\")\nhead(sel)\n\n  vac   sex age    mil          reg\n1 Non Femme  27 Urbain YAMOUSSOUKRO\n2 Non Femme  52 Urbain      ABIDJAN\n3 Oui Homme  21 Urbain      ABIDJAN\n4 Oui Femme  45  Rural     MARAHOUE\n5 Oui Homme  76  Rural     TCHOLOGO\n6 Oui Homme  66 Urbain      ABIDJAN"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#elimination-des-valeurs-manquantes",
+    "href": "STAT4-Exo1.html#elimination-des-valeurs-manquantes",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "1.3 Elimination des valeurs manquantes",
+    "text": "1.3 Elimination des valeurs manquantes\nOn ne garde que les lignes du tableau qui sont complètes car autrement il risque d’y avoir des problèmes dans les analyses.\n\nsel &lt;-sel[complete.cases(sel), ]"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#création-de-nouvelles-variables",
+    "href": "STAT4-Exo1.html#création-de-nouvelles-variables",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "1.4 Création de nouvelles variables",
+    "text": "1.4 Création de nouvelles variables\n\nEffet métropole\nOn veut créer une variable abi pour les personnes qui résident à Abidjan\n\nsel$abi &lt;- sel$reg==\"ABIDJAN\"\n\n\n\nClasses d’âge\nOn veut découper la variable âge en trois classes :\n\nsel$age3 &lt;-cut(sel$age, breaks=c(17, 29, 49, 100))\nlevels(sel$age3) &lt;-c(\"- de 30 ans\",\"30-49 ans\", \"50 ans et +\")"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#resumé-du-tableau",
+    "href": "STAT4-Exo1.html#resumé-du-tableau",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "1.5 Resumé du tableau",
+    "text": "1.5 Resumé du tableau\nProposez un résumé rapide du tableau\n\nsummary(sel)\n\n  vac         sex           age            mil                  reg     \n Non:768   Femme:602   Min.   :18.00   Rural :544   ABIDJAN       :312  \n Oui:432   Homme:598   1st Qu.:24.00   Urbain:656   GBEKE         : 64  \n                       Median :32.00                TONKPI        : 64  \n                       Mean   :34.84                HAUT-SASSANDRA: 56  \n                       3rd Qu.:42.00                PORO          : 48  \n                       Max.   :85.00                GÔH           : 40  \n                                                    (Other)       :616  \n    abi                   age3    \n Mode :logical   - de 30 ans:482  \n FALSE:888       30-49 ans  :542  \n TRUE :312       50 ans et +:176"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#analyse-de-la-variable-à-expliquer-dépendante-y",
+    "href": "STAT4-Exo1.html#analyse-de-la-variable-à-expliquer-dépendante-y",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "2.1 : Analyse de la variable à expliquer (dépendante) Y",
+    "text": "2.1 : Analyse de la variable à expliquer (dépendante) Y\nOn suppose que la variable à expliquer est le fait d’être vacciné\n\nFréquence simple\nEn l’absence de pondération il suffit de calculer les fréquences avec l’instruction table()puis de les afficher en ajoutant le total avec addmargins()\n\nmytab1 &lt;-table(sel$vac)\nmytab1\n\n\nNon Oui \n768 432 \n\n\n\nCommentaire : 768 personnes déclarent avoir été vaccinées contre 432 qui déclarent ne pas l’avoir été\n\n\n\nPourcentage\nOn veut ensuite facilement calculer les valeurs en pourcentage en utlisant la fonction prop.table() de R-base\n\n100*prop.table(mytab1)\n\n\nNon Oui \n 64  36 \n\n\n\nCommentaire : Les personnes vaccinées représentent 64% des réponses, les non vaccinés 36%\n\n\n\nDiagramme en bâton\non veut visualiser la table avec barplot() :\n\nbarplot(mytab1)\n\n\n\n\nAméliorer le graphique avec des titres et des couleurs\n\nbarplot(mytab1, \n        main = \"Y : Vaccination contre le Covid en Côte d'Ivoire\",\n        sub = \"Source : Afrobarometer 2023\",\n        col = c(\"red\",\"blue\"))\n\n\n\n\n\n\nCamembert\nOn peut également faire un camenbert si on préfère avec pie()\n\npie(mytab1, \n        main = \"Vaccination contre le Covid en Côte d'Ivoire\",\n        sub = \"Source : Afrobarometer 2023\",\n        col = c(\"red\",\"blue\"))"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#analyse-de-la-variable-explicative-indépendante-x",
+    "href": "STAT4-Exo1.html#analyse-de-la-variable-explicative-indépendante-x",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "2.2 Analyse de la variable explicative (indépendante) X",
+    "text": "2.2 Analyse de la variable explicative (indépendante) X\nOn suppose que la variable explicative (indépendante) est age3 (âge en trois classes)\n\nFréquence simple\nCalculer les fréquences de chaque classe\n\nmytab2 &lt;-table(sel$age3)\nmytab2\n\n\n- de 30 ans   30-49 ans 50 ans et + \n        482         542         176 \n\n\n\nCommentaire : On trouve 482 personnes de 20 ans et moins, 542 personnes de 30-49 ans et 176 personnes de 50 ans et plus.\n\n\n\nPourcentage\nOn peut ensuite facilement calculer les valeurs en pourcentage en utlisant la fonction prop.table() de R-base\n\n100*prop.table(mytab2)\n\n\n- de 30 ans   30-49 ans 50 ans et + \n   40.16667    45.16667    14.66667 \n\n\n\nCommentaire : Notre échantillon comporte 40% de jeunes, 45% d’adultes et 15% de vieux.\n\n\n\nDiagramme en bâton\nVisualiser la table avec barplot :\n\nbarplot(mytab2)\n\n\n\n\nAméliorer le graphique en ajoutant des titres et des couleurs adaptées :\n\nbarplot(mytab2, \n        main = \" X : Âge des personnes enquêtées \",\n        sub = \"Source : Afrobarometer 2023\",\n        col = c(\"yellow\",\"orange\",\"brown\"))"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#objectif",
+    "href": "STAT4-Exo1.html#objectif",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "Objectif",
+    "text": "Objectif\nOn veut tester l’existence d’une relation entre les deux variables précédentes. Vous devez formuler deux hypothèses alternatives :\nH0 : Il n’y a pas de relation entre X et Y H1 : Il y a une relation entre X et Y"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#création-du-tableau-de-contingence",
+    "href": "STAT4-Exo1.html#création-du-tableau-de-contingence",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "3.1 Création du tableau de contingence",
+    "text": "3.1 Création du tableau de contingence\n\nTableau brut\nCréer un tableau de contingence en indiquant en premier la variable indépendante (X) et en second la variable à expliquer (Y)\n\ntabcont&lt;-table(sel$age3,sel$vac)\ntabcont\n\n             \n              Non Oui\n  - de 30 ans 337 145\n  30-49 ans   338 204\n  50 ans et +  93  83\n\n\n\n\nAjout des marges\nAjouter à votre tableau les sommes des lignes et des colonnes :\n\ntabtot &lt;- addmargins(tabcont)\ntabtot\n\n             \n               Non  Oui  Sum\n  - de 30 ans  337  145  482\n  30-49 ans    338  204  542\n  50 ans et +   93   83  176\n  Sum          768  432 1200\n\n\n\n\nPourcentage en ligne\nCalculez les pourcentages en lignes pour voir si la fréquence des modalités de Y varie en fonction de celles de X\n\ntabpct &lt;- 100*prop.table(tabcont,1) # Calcule le pourcentage en ligne (1)\nround(tabpct,1)                     # Arrondi à un chiffre après la virgule\n\n             \n               Non  Oui\n  - de 30 ans 69.9 30.1\n  30-49 ans   62.4 37.6\n  50 ans et + 52.8 47.2\n\n\n\nCommentaire : Il semble en effet y avoir une relation entre les deux variables. Le taux de personnes vaccinés est plus faible chez les jeunes (30.1%) que chez les adultes (37.6%) ou les vieux (47.2%)"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#visualisation-de-la-relation",
+    "href": "STAT4-Exo1.html#visualisation-de-la-relation",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "3.2 Visualisation de la relation",
+    "text": "3.2 Visualisation de la relation\nConstruire un graphique en mosaïque avec mosaicplot()\n\nmosaicplot(tabcont)\n\n\n\n\nAméliorer le graphique avec des titres et des couleurs :\n\nmosaicplot(tabcont, \n           main= \"Vaccination et âge en Côte d'Ivoire en 2021\",\n           sub = \"Source : Afrobarometer\",\n           xlab = \"Classes d'âge\",\n           ylab = \"Vaccination Covid\",\n           col = c(\"red\",\"blue\"))"
+  },
+  {
+    "objectID": "STAT4-Exo1.html#test-du-chi-2",
+    "href": "STAT4-Exo1.html#test-du-chi-2",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "3.3 Test du chi-2",
+    "text": "3.3 Test du chi-2\nOn va tester si les différences de pourcentage sont significatives ou sont l’effet du hasard.\n\nHypothèse nulle\nRappelez l’hypothèse H0 :\nH0 : il n’y a pas de relation entre X et Y. Les variations en Y en fonction de X sont l’effet du hasard.\n\n\nTest\nRéalisez un test du chi-2 à l’aide de la fonction chisq.test() et commentez les résultats du test.\n\nchisq.test(tabcont)\n\n\n    Pearson's Chi-squared test\n\ndata:  tabcont\nX-squared = 17.468, df = 2, p-value = 0.000161\n\n\n\nCommentaire : Notre tableau comportait 3 lignes et 2 colonnes et avait donc 2 degrés de liberté. Le chi-2 du tableau est de 17.48 ce qui donne une p-value de 0.000161. Il y a donc moins d’une chance sur 1000 (p &lt; 0.001) que les différences soient l’effet du hasard et que H0 soit vraie.\n\n\n\nConclusion\nAu vu des résultats on rejette H0 et on accepte H1. On conclue avec un risque d’erreur très faible (p &lt; 0.001) qu’il existe une relation entre l’âge et le fait d’être vacciné en Côte d’Ivoire en 2021."
+  },
+  {
+    "objectID": "STAT4-Exo1.html#vaccination-et-sexe",
+    "href": "STAT4-Exo1.html#vaccination-et-sexe",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "4.1 Vaccination et sexe",
+    "text": "4.1 Vaccination et sexe\n\n# tableau de contingence\ntabcont &lt;- table(sel$sex,sel$vac)\n# Pourcentages\nprop.table(tabcont,1)\n\n       \n              Non       Oui\n  Femme 0.6744186 0.3255814\n  Homme 0.6053512 0.3946488\n\n# graphique\nplot(tabcont)\n\n\n\n# test\nchisq.test(tabcont)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  tabcont\nX-squared = 5.9151, df = 1, p-value = 0.01501\n\n\n\nConclusion : Les femmes sont dans l’ensemble moins vaccinées (32.5%) que les hommes (39.5%). On peut affirmer avec un risque d’erreur inférieur à 0.05 que cette relation est significative."
+  },
+  {
+    "objectID": "STAT4-Exo1.html#vaccination-et-milieu-urbain-rural",
+    "href": "STAT4-Exo1.html#vaccination-et-milieu-urbain-rural",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "4.2 Vaccination et milieu urbain-rural",
+    "text": "4.2 Vaccination et milieu urbain-rural\n\n# tableau de contingence\ntabcont &lt;- table(sel$sex,sel$mil)\n# Pourcentages\nprop.table(tabcont,1)\n\n       \n            Rural    Urbain\n  Femme 0.4551495 0.5448505\n  Homme 0.4515050 0.5484950\n\n# graphique\nplot(tabcont)\n\n\n\n# test\nchisq.test(tabcont)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  tabcont\nX-squared = 0.0047352, df = 1, p-value = 0.9451\n\n\n\nConclusion : Il n’y a pas de différence significative de vaccination entre les personnes résidant en milieu urbain et rural."
+  },
+  {
+    "objectID": "STAT4-Exo1.html#vaccination-et-abidjan",
+    "href": "STAT4-Exo1.html#vaccination-et-abidjan",
+    "title": "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES",
+    "section": "4.3 Vaccination et Abidjan",
+    "text": "4.3 Vaccination et Abidjan\n\n# tableau de contingence\ntabcont &lt;- table(sel$sex,sel$abi)\n# Pourcentages\nprop.table(tabcont,1)\n\n       \n            FALSE      TRUE\n  Femme 0.7408638 0.2591362\n  Homme 0.7391304 0.2608696\n\n# graphique\nplot(tabcont)\n\n\n\n# test\nchisq.test(tabcont)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  tabcont\nX-squared = 6.9301e-06, df = 1, p-value = 0.9979\n\n\n\nConclusion : Il n’y a pas de différence significative de vaccination entre les personnes résidant à Abidjan et dans le reste du pays."
   }
 ]

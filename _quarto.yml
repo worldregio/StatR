@@ -42,6 +42,11 @@ website:
           text: "Cours : Régression linéaire"
         - href: STAT3-Exo1.qmd
           text: "Exo1 : Programme-type"
+      - section: "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES"
+        contents:   
+        - href: STAT4-Exo1.qmd
+          text: "Exo1 : Programme-type"
+          
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR

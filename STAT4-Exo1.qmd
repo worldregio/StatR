@@ -1,0 +1,411 @@
+---
+title: "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES"
+subtitle: "Exo1 : Tableau de contingence et test du chi-2"
+author: "Jean-Paul NGBESSO & Claude GRASLAND"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+Le but de ce TD est de mettre en oeuvre le cours sur le tableau de contingence et le test du chi-2  fournissant un  programme type d'analyse de la relation entre deux variables X et Y qualitatives à l'aide de R. Ce programme pourra ensuite être facilement adapaté à d'autres jeux de données.
+
+::: {.callout-tip}
+## Télécharger l'exercice
+-  [STAT4](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT4-enquete.zip)
+:::
+
+
+# 1. PREPARATION DES DONNEES
+
+## 1.1. Chargement des données
+
+On charge un fichier contenant les résultats d'une enquête. 
+
+- **Très important**  : On ajoute l'instruction `stringAsFactors=TRUE` pour que toutes les variables de type caractère deveiennent des variables de type factor.
+
+```{r}
+don <- read.table(file = "data/civ_afrobarometer_2023/data/survey_data.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8",              # encodage adapté au français
+                  stringsAsFactors = TRUE)       # Transforme les character en factor     
+
+```
+
+
+## 1.2 Chargement des métadonnées
+
+On charge ensuite un tableau contenant des informations sur les variables et leurs modalités
+
+```{r}
+meta <- read.table(file = "data/civ_afrobarometer_2023/data/survey_meta.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8")              # encodage adapté au français
+
+## Affichage des métadonnées
+meta
+```
+
+## 1.3 Choix de variables à analyser
+
+On sélectionne dans le tableau une variable Y que l'on veut expliquer et des variables X1, X2 ...X3 qui peuvent servir à expliquer Y. On décide par exemple d'examiner les variables suivantes :
+
+- vac : A été vacciné contre le covid (Q58A)
+- sex : Sexe (Q101)
+- age : Age (Q1)
+- mil : Milieu Urbain ou rural (URBRUR)
+- reg : région de résidence (REGION)
+ 
+
+
+```{r}
+sel<-don[,c("Q58A","Q101","Q1","URBRUR","REGION")]
+colnames(sel)<-c("vac","sex","age","mil","reg")
+head(sel)
+```
+
+## 1.3 Elimination des valeurs manquantes
+
+On ne garde que les lignes du tableau qui sont complètes car autrement il risque d'y avoir des problèmes dans les analyses. 
+
+```{r}
+sel <-sel[complete.cases(sel), ]
+```
+
+
+## 1.4 Création de nouvelles variables
+
+### Effet métropole
+
+On veut créer une variable **abi** pour les personnes qui résident à Abidjan 
+
+```{r}
+sel$abi <- sel$reg=="ABIDJAN"
+
+```
+
+
+
+### Classes d'âge
+
+On veut découper la variable âge en trois classes :
+
+```{r}
+sel$age3 <-cut(sel$age, breaks=c(17, 29, 49, 100))
+levels(sel$age3) <-c("- de 30 ans","30-49 ans", "50 ans et +")
+```
+
+
+
+
+
+## 1.5 Resumé du tableau
+
+Proposez un résumé rapide du tableau
+
+```{r}
+summary(sel)
+```
+
+
+
+# 2. ANALYSE UNIVARIEE
+
+Quelles sont les étapes d'analyse d'une variable qualitative de type factor ? On va proposer ci-dessous un programme type 
+
+
+## 2.1 : Analyse de la variable à expliquer (dépendante) Y
+
+On suppose que la variable à expliquer est le fait d'être vacciné
+
+### Fréquence simple 
+
+En l'absence de pondération il suffit de calculer les fréquences avec l'instruction `table()`puis de les afficher en ajoutant le total avec `addmargins()`
+
+```{r}
+mytab1 <-table(sel$vac)
+mytab1
+```
+
+- **Commentaire** : 768 personnes déclarent avoir été vaccinées contre 432 qui déclarent ne pas l'avoir été
+
+
+
+### Pourcentage 
+
+On veut ensuite facilement calculer les valeurs en pourcentage en utlisant la fonction `prop.table()` de R-base
+```{r}
+100*prop.table(mytab1)
+```
+
+
+- **Commentaire** : Les personnes vaccinées représentent 64% des réponses, les non vaccinés 36%
+
+
+
+### Diagramme en bâton 
+
+on veut visualiser la table avec barplot() :
+
+```{r}
+barplot(mytab1)
+```
+
+
+
+
+Améliorer le graphique avec des titres et des couleurs
+
+```{r}
+barplot(mytab1, 
+        main = "Y : Vaccination contre le Covid en Côte d'Ivoire",
+        sub = "Source : Afrobarometer 2023",
+        col = c("red","blue"))
+```
+
+
+### Camembert 
+
+On peut également faire un camenbert si on préfère avec pie()
+
+```{r}
+pie(mytab1, 
+        main = "Vaccination contre le Covid en Côte d'Ivoire",
+        sub = "Source : Afrobarometer 2023",
+        col = c("red","blue"))
+```
+
+
+## 2.2 Analyse de la variable explicative (indépendante) X
+
+On suppose que la variable explicative (indépendante) est age3 (âge en trois classes)
+
+### Fréquence simple 
+
+Calculer les fréquences de chaque classe
+
+```{r}
+mytab2 <-table(sel$age3)
+mytab2
+```
+
+- **Commentaire** : On trouve 482 personnes de 20 ans et moins, 542 personnes de 30-49 ans et 176 personnes de 50 ans et plus.
+
+
+
+### Pourcentage 
+
+On peut ensuite facilement calculer les valeurs en pourcentage en utlisant la fonction `prop.table()` de R-base
+```{r}
+100*prop.table(mytab2)
+```
+
+- **Commentaire** : Notre échantillon comporte 40% de jeunes, 45% d'adultes et 15% de vieux.
+
+
+
+### Diagramme en bâton 
+
+Visualiser la table avec barplot :
+
+```{r}
+barplot(mytab2)
+```
+
+
+
+
+Améliorer le graphique en ajoutant des titres et des couleurs adaptées : 
+
+```{r}
+barplot(mytab2, 
+        main = " X : Âge des personnes enquêtées ",
+        sub = "Source : Afrobarometer 2023",
+        col = c("yellow","orange","brown"))
+```
+
+
+
+
+
+# 3. ANALYSE BIVARIEE
+
+
+## Objectif
+
+On veut tester l'existence d'une relation entre les deux variables précédentes.  Vous devez formuler deux hypothèses alternatives :
+
+H0 : Il n'y a pas de relation entre X et Y
+H1 : Il y a une relation entre X et Y
+
+
+## 3.1 Création du tableau de contingence
+
+
+### Tableau brut
+
+Créer un tableau de contingence en indiquant en premier la variable indépendante (X) et en second la variable à expliquer (Y)
+
+```{r}
+tabcont<-table(sel$age3,sel$vac)
+tabcont
+```
+
+
+
+### Ajout des marges
+
+Ajouter à votre tableau les sommes des lignes et des colonnes :
+
+```{r}
+tabtot <- addmargins(tabcont)
+tabtot
+```
+
+
+
+
+### Pourcentage en ligne
+
+Calculez les pourcentages en lignes pour voir si la fréquence des modalités de Y varie en fonction de celles de X
+
+```{r}
+tabpct <- 100*prop.table(tabcont,1) # Calcule le pourcentage en ligne (1)
+round(tabpct,1)                     # Arrondi à un chiffre après la virgule
+```
+
+- **Commentaire** : Il semble en effet y avoir une relation entre les deux variables. Le taux de personnes vaccinés est plus faible chez les jeunes (30.1%) que chez les adultes (37.6%) ou les vieux (47.2%)
+
+
+
+## 3.2 Visualisation de la relation
+
+
+Construire un graphique en mosaïque avec mosaicplot()
+
+```{r}
+mosaicplot(tabcont)
+```
+
+
+
+
+Améliorer le graphique avec des titres et des couleurs : 
+
+```{r}
+mosaicplot(tabcont, 
+           main= "Vaccination et âge en Côte d'Ivoire en 2021",
+           sub = "Source : Afrobarometer",
+           xlab = "Classes d'âge",
+           ylab = "Vaccination Covid",
+           col = c("red","blue"))
+```
+
+
+## 3.3 Test du chi-2
+
+On va tester si les différences de pourcentage sont significatives ou sont l'effet du hasard.
+
+### Hypothèse nulle
+
+Rappelez l'hypothèse H0 :
+
+H0 : il n'y a pas de relation entre X et Y. Les variations en Y en fonction de X sont l'effet du hasard. 
+
+
+
+### Test 
+
+Réalisez un test du chi-2 à l'aide de la fonction chisq.test() et commentez les résultats du test.
+
+```{r}
+chisq.test(tabcont)
+```
+
+- **Commentaire** : Notre tableau comportait 3 lignes et 2 colonnes et avait donc **2 degrés de liberté**. Le chi-2 du tableau est de **17.48** ce qui donne une p-value de **0.000161**. Il y a donc moins d'une chance sur 1000 (p < 0.001) que les différences soient l'effet du hasard et que H0 soit vraie. 
+
+
+
+### Conclusion
+
+Au vu des résultats on rejette H0 et on accepte H1. On conclue avec un risque d'erreur très faible (p < 0.001) qu'**il existe une relation entre l'âge et le fait d'être vacciné en Côte d'Ivoire en 2021**. 
+
+
+
+# 4. A VOUS DE JOUER...
+
+Testez rapidement trois autres relations possibles 
+
+
+## 4.1 Vaccination et sexe
+
+```{r}
+# tableau de contingence
+tabcont <- table(sel$sex,sel$vac)
+# Pourcentages
+prop.table(tabcont,1)
+# graphique
+plot(tabcont)
+# test
+chisq.test(tabcont)
+```
+
+- **Conclusion** : Les femmes sont dans l'ensemble moins vaccinées (32.5%) que les hommes (39.5%). On peut affirmer avec un risque d'erreur inférieur à 0.05 que cette relation est significative. 
+
+## 4.2 Vaccination et milieu urbain-rural
+
+```{r}
+# tableau de contingence
+tabcont <- table(sel$sex,sel$mil)
+# Pourcentages
+prop.table(tabcont,1)
+# graphique
+plot(tabcont)
+# test
+chisq.test(tabcont)
+```
+
+- **Conclusion** : Il n'y a pas de différence significative de vaccination entre les personnes résidant en milieu urbain et rural.
+
+
+## 4.3 Vaccination et Abidjan
+
+```{r}
+# tableau de contingence
+tabcont <- table(sel$sex,sel$abi)
+# Pourcentages
+prop.table(tabcont,1)
+# graphique
+plot(tabcont)
+# test
+chisq.test(tabcont)
+```
+
+- **Conclusion** : Il n'y a pas de différence significative de vaccination entre les personnes résidant à Abidjan et dans le reste du pays.
