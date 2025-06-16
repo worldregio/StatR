@@ -1,0 +1,345 @@
+---
+title: "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES"
+subtitle: "Exo1 : Corrélation et régression"
+author: "Jean-Paul N’GBESSO & Claude GRASLAND"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+Le but de ce TD est de mettre en oeuvre les deux cours sur la corrélation et régression en fournissant un  programme type d'analyse de la relation entre deux variables X et Y à l'aide de R. Ce programme pourra ensuite être facilement adapaté à d'autres jeux de données.
+
+::: {.callout-tip}
+## Télécharger l'exercice
+-  [STAT3](https://github.com/worldregio/StatR/raw/refs/heads/main/exos/STAT3-bivarie.zip)
+:::
+
+
+
+# 1. PREPARATION DES DONNEES
+
+## 1.1. Chargement du tableau principal
+
+On charge le fichier des pays d'Afrique en 2018
+
+```{r load}
+don <- read.table(file = "data/africa_pays_2018/data/africa_pays_2018.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8")              # encodage adapté au français
+
+```
+
+## 1.2 Choix des deux variables à analyser
+
+On sélectionne dans le tableau les variables qui serviront de code et de nom ainsi que les deux variable quantitatives X et Y que l'on veut mettre en relation. On change leur nom afin de pouvoir préparer un programme type.  
+
+```{r}
+sel<-don[,c("iso3","nom","URBANI","INTERN")]
+colnames(sel)<-c("CODE","NOM","X","Y")
+head(sel)
+```
+## 1.3 Elimination des valeurs manquantes
+
+On ne garde que les lignes du tableau qui sont complètes car autrement il risque d'y avoir des problèmes dans les analyses. 
+
+```{r}
+tab <-sel[complete.cases(sel), ]
+```
+
+
+
+## 1.4 On est malin ...
+
+On stocke des chaînes de caractères qu'on pourra utiliser dans les graphiques pour donner le titre général, le nom des axes et la source 
+```{r}
+# Pour la version française
+titre <- "Les pays d'Afrique en 2018"
+nomX <- "Taux d'urbanisation (%)"
+nomY <- "Taux d'accès à internet (%)"
+source <- "Ecole d'été AfromapR, Bouaké 2025"
+```
+
+
+# 2. ANALYSE DES VARIABLES X et Y
+
+
+## 2.1 La distribution de X 
+
+### Paramètres principaux
+
+```{r}
+summary(tab$X)
+```
+
+
+
+
+### Histogramme rapide
+
+```{r}
+hist(tab$X)
+```
+
+### Histogamme amélioré
+
+```{r}
+hist(tab$X, 
+     main=titre,
+     sub = source,
+     xlab = nomX,
+     col="lightyellow",
+     probability = TRUE
+    )
+lines(density(tab$X),
+      col="red",
+      lwd=2)
+rug(tab$X,
+    col="blue",
+    lwd=2)
+```
+
+
+
+
+
+### Boxplot rapide
+
+```{r}
+boxplot(tab$X)
+```
+
+
+### Boxplot améliorée
+
+```{r}
+boxplot(tab$X,
+        horizontal=T,
+        col="lightyellow",
+        main = titre,
+        sub = source,
+        xlab = nomX)
+```
+
+
+### Tester la normalité
+
+```{r}
+shapiro.test(tab$X)
+```
+
+
+
+## 2.2 La distribution de Y
+
+### Paramètres principaux
+
+```{r}
+summary(tab$Y)
+```
+
+Le taux d'accès à internet varie entre 1.3% et 64.8% avec une moyenne de 20% et une médiane de 25%. La moitié des pays ont un taux comprois entre 9.8% (Q1) et 42% (Q3). 
+
+
+### Histogramme rapide
+
+```{r}
+hist(tab$Y)
+```
+
+### Histogamme amélioré
+
+```{r}
+hist(tab$Y, 
+     main=titre,
+     sub = source,
+     xlab = nomY,
+     col="lightyellow",
+     probability = TRUE
+    )
+lines(density(tab$Y),
+      col="red",
+      lwd=2)
+rug(tab$Y,
+    col="blue",
+    lwd=2)
+```
+
+### Boxplot rapide
+
+```{r}
+boxplot(tab$Y)
+```
+
+
+### Boxplot améliorée
+
+```{r}
+boxplot(tab$Y,
+        horizontal=T,
+        col="lightyellow",
+        main = titre,
+        sub = source,
+        xlab = nomY)
+```
+
+### Tester la normalité
+
+```{r}
+shapiro.test(tab$X)
+```
+
+# 3. CORRELATION
+
+
+## 3.1 Visualiser la relation entre X et Y
+
+### Graphique rapide
+
+```{r}
+plot(tab$X,tab$Y)
+```
+
+### Graphique amélioré
+
+```{r}
+plot(tab$X,tab$Y,
+     cex = 0.6,
+     pch = 19,
+     col = "red",
+     main = titre,
+     sub = source,
+     xlab = nomX,
+     ylab = nomY)
+text(tab$X, tab$Y, tab$CODE,
+     cex = 0.4,
+     col = "blue",
+     pos = 3)
+
+
+```
+
+
+
+## 3.2 Mesurer la corrélation entre X et Y
+
+
+### Coefficient de corrélation linéaire de Pearson (r)
+
+```{r}
+pears <- cor(tab$X,tab$Y)
+pears
+```
+
+### Coefficient de corrélation de rang de Spearman (rho)
+
+```{r}
+spear <-cor(tab$X,tab$Y, method = "spearman")
+spear
+```
+
+
+### Coefficient de détermination (r2)
+```{r}
+pears <- cor(tab$X,tab$Y)
+100*pears**2
+
+```
+
+### Test de significativité (p-value)
+```{r}
+cor.test(tab$X,tab$Y)
+```
+
+
+
+
+# 4. REGRESSION LINEAIRE
+
+## 4.1 Calculer l'équation de la droite Y = aX+B
+
+
+```{r}
+monmodel <- lm(tab$Y~tab$X)
+
+summary(monmodel)
+
+```
+
+## 4.2 Visualiser  la droite
+
+```{r}
+plot(tab$X,tab$Y,
+     cex = 0.6,
+     pch = 19,
+     col = "red",
+     main = titre,
+     sub = source,
+     xlab = nomX,
+     ylab = nomY)
+text(tab$X, tab$Y, tab$CODE,
+     cex = 0.4,
+     col = "blue",
+     pos = 3)
+abline(monmodel, col ="black", lwd =2)
+
+```
+
+
+## 4.3 Calculer les valeurs estimées et les résidus
+
+```{r}
+tab$Yest <- monmodel$fitted.values
+tab$Yres <- monmodel$residuals
+```
+
+## 4.4 Afficher les résidus les plus négatifs
+
+```{r}
+tri <- tab[order(tab$Yres),]
+head(tri)
+```
+
+## 4.5 Afficher les résidus les plus positifs
+
+```{r}
+tri <- tab[order(-tab$Yres),]
+head(tri)
+```
+
+## 4.4 Exporter le tableau de résultats
+
+```{r, eval=FALSE}
+write.table(tab, 
+            file ="resultats_regression.csv",
+            sep = ";",
+            dec = ".",
+            fileEncoding = "UTF-8")
+```
+
+

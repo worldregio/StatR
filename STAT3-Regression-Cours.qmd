@@ -1,6 +1,6 @@
 ---
-title: "STAT3 : REGRESSION"
-subtitle: "Comment modéliser une relation linéaire Y = a.X+b ?"
+title: "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES"
+subtitle: "Régression linéaire"
 author: "Claude Grasland & Jean-Paul Nguesso"
 date: "2025-06-01"
 title-slide-attributes:

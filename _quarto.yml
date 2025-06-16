@@ -34,12 +34,14 @@ website:
           text: "Exo1 : Manipuler des tableaux"
         - href: STAT2-Exo2.qmd
           text: "Exo2 : Résumer des variables"  
-      - section: "STAT3 : STATISTIQUE BIVARIEE"
+      - section: "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES"
         contents:
         - href: STAT3-Correlation-Cours.qmd
           text: "Cours : Corrélation"
         - href: STAT3-Regression-Cours.qmd
           text: "Cours : Régression linéaire"
+        - href: STAT3-Exo1.qmd
+          text: "Exo1 : Programme-type"
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR

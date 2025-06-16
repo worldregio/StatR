@@ -1,6 +1,6 @@
 ---
-title: "STAT3 : CORRELATION"
-subtitle: "Existe-t-il une relation entre deux variables quantitatives X et Y ?"
+title: "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES"
+subtitle: "Corrélation"
 author: "Claude Grasland & Jean-Paul Nguesso"
 date: "2025-06-01"
 title-slide-attributes:
