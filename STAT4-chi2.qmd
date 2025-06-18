@@ -1,0 +1,580 @@
+---
+title: "STAT4: RELATION ENTRE VARIABLES QUALITATIVES"
+subtitle: "Tableau de contingence et test du chi-2"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-06-01"
+title-slide-attributes:
+  data-background-color: "#BA4A00"
+  data-background-size: cover
+  data-background-opacity: "0.5"
+format:
+  revealjs:
+    margin: 0
+    code-line-numbers: false
+    embed-resources: true
+    smaller: true
+    scrollable: true
+    theme: [simple,diapos.scss]
+execute:
+  echo: false
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r}
+library(knitr)
+```
+
+## Introduction
+
+En simplifiant un peu, voici les différentes étapes que l'on doit suivre pour exploiter un questionnaire
+
+### Etapes
+1. le recodage des variables et de leurs modalités
+2. la production de tris à plat (analyse d'une variable isolée)
+3. la production de tableaux croisés (croisement de deux variables)
+4. le test d'hypothèse de relations entre deux variables (test du chi-2)
+
+
+# 1. PREPARATION DES DONNEES
+
+## 1.1. Chargement des données
+
+On charge un fichier contenant les résultats d'une enquête. 
+
+
+```{r}
+don <- read.table(file = "data/civ_afrobarometer_2023/data/survey_data.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8",              # encodage adapté au français
+                  stringsAsFactors = TRUE)       # Transforme les character en factor     
+kable(head(don))
+```
+
+
+## 1.2 Chargement des métadonnées
+
+On charge ensuite un tableau contenant des informations sur les variables et leurs modalités
+
+```{r}
+meta <- read.table(file = "data/civ_afrobarometer_2023/data/survey_meta.csv", # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8")              # encodage adapté au français
+
+## Affichage des métadonnées
+kable(meta)
+```
+
+## 1.3 Choix de variables à analyser
+
+On sélectionne dans le tableau une variable Y que l'on veut expliquer et des variables X1, X2 ...X3 qui peuvent servir à expliquer Y. On décide par exemple d'examiner les variables suivantes :
+
+- vac : A été vacciné contre le covid (Q58A)
+- sex : Sexe (Q101)
+- age : Age (Q1)
+- mil : Milieu Urbain ou rural (URBRUR)
+- ins : Niveau d'instruction (Q94)
+
+
+```{r}
+sel<-don[,c("Q58A","Q101","Q1","URBRUR","Q94")]
+colnames(sel)<-c("vac","sex","age","mil","ins")
+kable(head(sel))
+```
+
+
+## 1.4 Recodage de variables qualitative
+
+On veut simplifier la variable reltive au niveau d'instruction qui possède trop de classes. On commence par examiner la distribution des fréquences 
+
+```{r}
+kable(table(sel$ins))
+```
+
+## 1.4 Recodage de variables qualitative
+
+Puis on recode chaque niveau afin de n'avoir plus que quatre modalités
+
+
+```{r}
+sel$ins4<-sel$ins
+levels(sel$ins4) <- c(NA,
+                     "Inf.",
+                     "Prim.",
+                     "Prim.",
+                     "Sec.",
+                     "Sec.",
+                     NA,
+                     "Inf.",
+                     "Sup.",
+                     "Sup.",
+                     "Sup.",
+                     "Sup."
+                     )
+kable(table(sel$ins4))
+
+```
+
+
+## 1.5 Découpage de variables quantitatives
+
+On veut maintenant découper la variable âge en trois classes.
+
+On doit donc choisir de façon judicieuse les classes d'âge. 
+
+```{r}
+sel$age3 <-cut(sel$age, breaks=c(17, 29, 50,100))
+levels(sel$age3) <-c("- de 30 ans","30-50 ans", "+ de 50 ans")
+kable(table(sel$age3))
+
+```
+
+
+
+```{r}
+sel <-sel[complete.cases(sel), ]
+```
+
+
+## 1.5 Resumé du tableau
+
+On élimine les individus ayant de svaleurs manquantes (6 sur 1200) puis on résume rapidement le tableau: 
+
+```{r}
+library(gtsummary)
+tbl_summary(sel[,-c(3,5)])
+```
+
+
+# 2. TRI A PLAT
+
+Quelles sont les étapes d'analyse d'une variable qualitative ? On va suivre ici un programme type qui sera ensuite mis en oeuvre avec R
+
+
+## 2.1 : Analyse de la variable à expliquer (dépendante) Y
+
+On suppose que la variable à expliquer est le fait d'être vacciné
+
+### Fréquence simple 
+
+On calcule tout d'abord l'effectif de chaaque modalité
+
+```{r}
+mytab1 <-table(sel$vac)
+kable(mytab1)
+```
+
+- **Commentaire** : 764 personnes déclarent avoir été vaccinées contre 430 qui déclarent ne pas l'avoir été
+
+## 2.1 : Analyse de la variable à expliquer (dépendante) Y
+
+
+### Pourcentage 
+
+On calcule ensuite la part du total que cela représente en pourcentage 
+
+```{r}
+kable(addmargins(100*prop.table(mytab1)), digits=1)
+```
+
+
+- **Commentaire** : Les personnes vaccinées représentent 64% des réponses, les non vaccinés 36%
+
+## 2.1 : Analyse de la variable à expliquer (dépendante) Y
+
+On visualise généralement à l'aide d'un diagramme en bâtons :
+
+### Diagramme en bâton 
+
+
+```{r}
+barplot(mytab1, 
+        main = "Y : Vaccination contre le Covid en Côte d'Ivoire",
+        sub = "Source : Afrobarometer 2023",
+        col = c("red","blue"))
+```
+
+## 2.1 : Analyse de la variable à expliquer (dépendante) Y
+
+
+### Camembert 
+
+On peut également faire un camenbert si on préfère. C'est plus joli mais en fait moins facile à lire.
+
+```{r}
+pie(mytab1, 
+        main = "Vaccination contre le Covid en Côte d'Ivoire",
+        sub = "Source : Afrobarometer 2023",
+        col = c("red","blue"))
+```
+
+
+## 2.2 Analyse de la variable explicative (indépendante) X
+
+On suppose que la variable explicative (indépendante) est age3 (âge en trois classes)
+On reprend les étapes précédentes
+
+### Fréquence simple 
+
+Calculer les fréquences de chaque classe
+
+```{r}
+mytab2 <-table(sel$age3)
+kable(mytab2)
+```
+
+- **Commentaire** : On trouve 479 personnes de - de 30 ans, 459 de 30-44 ans, 180 de 45-59 ans, 76 de 60 ans et +.
+
+## 2.2 Analyse de la variable explicative (indépendante) X
+
+
+### Pourcentage 
+
+Calculer les valeurs en pourcentage
+
+```{r}
+kable(addmargins(100*prop.table(mytab2)), digits=1)
+```
+
+- **Commentaire** : Notre échantillon comporte 40.1% de jeunes, 46.6% d'adultes et 13.2% de vieux.
+
+## 2.2 Analyse de la variable explicative (indépendante) X
+
+
+### Diagramme en bâton 
+
+
+```{r}
+barplot(mytab2, 
+        main = " X : Âge des personnes enquêtées ",
+        sub = "Source : Afrobarometer 2023",
+        col = c("yellow","orange","brown"))
+```
+
+
+
+
+## 2.3 Marge d'erreur
+
+### Quel est le problème ?
+
+- On appelle **tri à plat** l'opération consistant à dénombrer les modalités d'une variable qualitative et à l'exprimer soit en **effectif (nombre de réponses)** soit en **pourcentage (part des réponses).**.
+
+- Les deux opérations paraissent équivalentes mais en réalité elles ne le sont pas car le pourentage seul ne permet pas de retrouvr la **taille de l'échantillon total** sur lequel ce pourcentage a été calculé. 
+
+- Or, un pourcentage doit toujours être associé à une **marge d'erreur** qui dépend de la taille de l'échantillon
+
+- **Plus l'échantillon est grand, plus la marge d'erreur sera faible**.
+
+
+
+## 2.3 Tri à plat et marge d'erreur
+
+**La marge d'erreur sur un pourcentage** aussi appelée **erreur d'échantillonage** dépend donc de la **taille de l'échantillon** selon la formule suivante
+
+
+$$
+E  = \sqrt{p(1-p) / n}
+$$
+
+
+Nous avons trouvé que **36% des personnes étaient vaccinées** sur un échantillon de 1194 personnes
+
+On a donc p = 0.36, (1-p) = 0.64 et  n = 1194, donc 
+
+$$
+E  = \sqrt{0.36 * 0.64 / 1194} = 0.014
+$$
+
+
+Notre intervalle de confiance à 95% sera alors défini par [p-2E ; p+2E] soit une erreur de + ou - 2.8 points de pourcentage. 
+
+- Il est donc pplus juste de dire que le pourcentage de personnes vaccinées est compris **entre 33.2% et 38.8%**
+
+
+## 2.3 Tri à plat et marge d'erreur
+
+### Calcul de la  marge d'erreur
+
+Si vous êtes allergiques aux calculs mathématiques, vous pouvez vous contenter de retenir les valeurs de référence suivantes :
+
+```{r}
+n<-c(20, 50, 100,200,400, 1000, 1600, 5000, 10000)
+E<-round(200*sqrt(0.5 * 0.5 / n),1)
+tab<-data.frame(cbind(n,E))
+names(tab)=c("taille de l'échantillon (n)","Intervalle de confiance (+ ou - )")
+kable(tab)
+
+```
+
+Exemple : pour un sondage sur **1000 personnes**, l'intervalle de confiance correspond au pourcentage observé  **plus ou moins 3.2 points**.  
+
+
+
+# 3. la production de tableaux croisés 
+
+Le coeur du travail d'analyse du questionnaire est la réalisation de **tris croisés** c'est-à-dire de **tableaux de contingence** croisant les réponses à deux questions (X et Y).
+
+## 3.1 tableau de contingence 
+
+```{r}
+Y<-sel$vac
+X<-as.factor(sel$age3)
+tab<-table(X,Y)
+kable(addmargins(tab))
+```
+
+**Exemple de lecture** : **143** individus de - de 30 ans n'ont pas été vaccinés contre le Covid 
+
+ 
+Le tableau de contingence permet de produire différents tableaux de pourcentage.
+
+## 3.2 pourcentage en ligne
+
+```{r}
+library(questionr)
+kable(lprop(tab),digits=1)
+```
+
+**Exemple de lecture** : **29.9%** des individus de - de 30 ans n'ont pas été vaccinés contre le Covid 
+
+
+## 3.3  pourcentage en colonne
+
+```{r}
+library(questionr)
+kable(cprop(tab), digits=1)
+```
+
+
+**Exemple de lecture** : **33.3%** des personnes qui ont été vaccinés ont moins de 30 ans
+
+
+
+# 4. Test du chi-2
+
+## 4.1 Formulation d'une hypothèse H1
+
+Dans le cas de notre exemple on remarque que :
+
+- les jeunes sont les moins vaccinés (30%)
+- les adultes sont proches de la moyenne (38%)
+- les vieux sont les plus vaccinés (48%)
+
+#### Formulation de l'hypothèse de recherche
+
+**H1: Dans le cas de la population de plus de 18 ans en Côte d'Ivoire en 2021, il existe un lien entre l'âge  (X) et le fait d'avoir été vacciné contre le covid (Y).**
+
+## 4.2 Transformation en hypothèse H0
+
+- En statistique, on ne teste jamais directement l'hypothèse H1 (*il y a une relation entre X et Y*) mais on teste l'hypothèse inverse (*il n'y a pas de relation entre X et Y*) qu'on appelle **hypothèse nulle**. Pourquoi cette complication apparente ?
+
+- Parce que l'hypothèse nulle est plus rigoureuse et revient à **se demander si ce n'est pas le hasard qui explique les différence de pourcentage observées**.  Dans notre exemple on va donc poser :
+
+#### Formulation de l'hypothèse nulle
+**H0 : Il n'y a pas de relation entre l'âge (X) et le fait d'avoir été vacciné contre le Covid (Y).** Les différences de pourcentage que nous avons mises en évidence sont peut-être l'effet du hasard. 
+
+
+## 4.3 Effectifs théoriques
+
+Afin de voir si le hasard est effectivement intervenu, on va reconstituer ce que serait le tableau de contingence croisant X et Y dans le cas où les deux variables ne sont pas reliées.
+
+#### Effectifs observés : Nij  et effectifs théoriques Tij = (Ni. x N.j)/N..
+```{r}
+kable(addmargins(tab))
+
+t<-chisq.test(tab)
+kable(addmargins(t$expected), digits=1)
+```
+
+
+## 4.4 Effectifs résiduels
+
+On va ensuite mesurer les écarts entre effectifs observés et théoriques appelés résidus **(Nij-Tij)** puis les exprimer sous une forme mathématique appelée chi2 définie par la formule **(Nij-Tij)x(Nij-Tij)/Tij**
+
+#### Résidus (Nij-Tij)  et Chi-2 = (Nij-Tij)x(Nij-Tij)/Tij
+```{r}
+O<-tab
+E<-t$expected
+kable(addmargins(round(O-E,2)), digits=1)
+K<-(O-E)*(O-E)/E
+kable(addmargins(round(K,2)), digits=1)
+```
+
+
+## 4.5 Calcul du chi-2
+
+Le **chi-2 total du tableau (18.75)** sera d'autant plus élevé que la distribution observée s'éloigne de la distribution théorique. Plus le chi-2 augmente, moins il y a de chance que le hasard explique les différences entre valeurs observées et estimées. On peut alors **faire un test pour connaître la probabilité que le chi-2 observé soit l'effet du hasard.** 
+
+```{r}
+chisq.test(tab)
+```
+
+
+
+## 4.5 Test du chi-2
+
+- le tableau possède **2 degré de liberté** =  (lignes - 1) x (colonnes - 1)
+- le tableau possède un **chi-2  égal à 18.75**
+- Un calcul effectué par un logiciel de statistique montre que la probabilité que cette valeur soit l'effet du hasard **(p-value)** est de **0.00008** c'est-à-dire moins d'une chance sur 1000
+
+On va donc **rejeter l'hypothèse d'indépendance H0**   
+   
+**Conclusion : On ne peut affirmer avec un risque d'erreur très faible (moins d'une chance sur 1000) qu'il existe une relation entre l'âge et le fait d'avoir été vacciné contre le Covid en côte d'ivoire en 2021.**  
+
+## 4.6 Significativité
+
+Pour fixer les ordres de grandeur, voici un tableau simple à retenir :
+
+
+```{r}
+p<-c("> 0.10", "0.05 à 0.10", "0.01 à 0.05", "0.001 à 0.01", "0.001 <")
+s<-c("Non significatif", "Presque significatif", "légèrement significatif", "significatif", "très significatif")
+c<-c("n.s", ".", "*","**","***")
+
+mytab<-data.frame("Test (p-value)"=p,"Interprétation"=s,"code"=c)
+kable(mytab)
+```
+
+## 4.7 Limites du test du chi-2
+
+
+1. On doit disposer d'un échantillon d'**au moins 20 individus**
+
+2. Toutes les cases du tableau doivent avoir un **effectif théorique >= 5**
+
+Si ces conditions ne sont pas respectées, le test du chi-2 n'est pas valide et R enverra un message d'avertissement ou refusera de faire le calcul. 
+
+
+# 5. AUTRES EXEMPLES
+
+
+## 5.1 Relation entre vaccination et sexe
+
+Que pensez vous de cette relation ? 
+
+```{r}
+X<-sel$sex
+tab<-table(X,Y)
+kable(addmargins(tab),caption = "Tableau de contingence")
+kable(lprop(tab),digits = 1, caption = "% enligne")
+chisq.test(tab)
+```
+
+## 5.2 Relation entre vaccination et milieu urbain/rural
+
+Que pensez vous de cette relation ? 
+
+```{r}
+X<-sel$mil
+tab<-table(X,Y)
+kable(addmargins(tab),caption = "Tableau de contingence")
+kable(lprop(tab),digits = 1, caption = "% enligne")
+chisq.test(tab)
+```
+
+## 5.2 Relation entre vaccination et niveau d'instruction
+
+Que pensez vous de cette relation ? 
+
+```{r}
+X<-sel$ins4
+tab<-table(X,Y)
+kable(addmargins(tab),caption = "Tableau de contingence")
+kable(lprop(tab),digits = 1, caption = "% enligne")
+chisq.test(tab)
+```
+
+# 6. QUIZZ
+
+## 6.1 Quelle est la principale utilisation du test du χ²?
+
+- Etudier la liaison entre deux variables qualitatives
+
+- Calculer la variance d'une variable quantitative
+
+- Mesurer la moyenne d'une variable quantitative
+
+- Déterminer la mode d'une distribution
+
+## 6.1 Quelle est la principale utilisation du test du χ²?
+
+- Etudier la liaison entre deux variables qualitatives
+
+
+## 6.2 Quelle hypothèse nulle correspond au test du χ² d’indépendance?
+
+- Les deux variables ont la même distribution 
+
+- Il n'existe pas de liaison entre les deux variables qualitatives 
+
+- Les deux variables sont parfaitement liées 
+
+- Les deux variables sont indépendantes de la population
+
+## 6.2 Quelle hypothèse nulle correspond au test du χ² d’indépendance?
+
+- Il n'existe pas de liaison entre les deux variables qualitatives 
+
+
+## 6.3 Quelle condition doit être remplie pour appliquer le test du χ²?
+
+- Les effectifs théoriques doivent être supérieurs ou égaux à 5 
+
+- Les effectifs observés doivent être inférieurs à 5 
+
+- Les effectifs théoriques doivent être inférieurs à 5 
+
+- Les effectifs observés doivent être supérieurs à 5
+
+## 6.3 Quelle condition doit être remplie pour appliquer le test du χ²?
+
+- Les effectifs théoriques doivent être supérieurs ou égaux à 5 
+
+## 6.4 Que représente un tableau de contingence dans le contexte du test du χ²?
+
+- Un graphique en barres 
+- Une liste de valeurs numériques simples 
+- Une distribution de probabilités
+- Une matrice qui présente la distribution des fréquences observées entre deux variables 
+
+## 6.4 Que représente un tableau de contingence dans le contexte du test du χ²?
+
+- Une matrice qui présente la distribution des fréquences observées entre deux variables 
+
+
+## 6.5 Comment calcule-t-on le degré de liberté pour un test du χ²?
+
+- Nombre de cellules dans le tableau 
+
+- Nombre total d'observations 
+
+- Nombre de lignes + nombre de colonnes 
+
+- (nombre de lignes - 1) × (nombre de colonnes - 1) 
+
+## 6.5 Comment calcule-t-on le degré de liberté pour un test du χ²?
+
+- (nombre de lignes - 1) × (nombre de colonnes - 1) 
+
+## 6.6 Quelle est la valeur seuil généralement retenue pour la p dans le test du χ²?
+
+- supérieure à 0,05 
+
+- supérieure à  0,1 
+
+- inférieure à 0,05 
+
+- inférieure à 0,01
+
+## 6.6 Quelle est la valeur seuil généralement retenue pour la p dans le test du χ²?
+
+- inférieure à 0,05 
+
+
+

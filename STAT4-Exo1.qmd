@@ -81,17 +81,64 @@ On sélectionne dans le tableau une variable Y que l'on veut expliquer et des va
 - sex : Sexe (Q101)
 - age : Age (Q1)
 - mil : Milieu Urbain ou rural (URBRUR)
-- reg : région de résidence (REGION)
+- ins : Niveau d'instruction (Q94)
+
  
 
 
 ```{r}
-sel<-don[,c("Q58A","Q101","Q1","URBRUR","REGION")]
-colnames(sel)<-c("vac","sex","age","mil","reg")
+sel<-don[,c("Q58A","Q101","Q1","URBRUR","Q94")]
+colnames(sel)<-c("vac","sex","age","mil","ins")
 head(sel)
 ```
 
-## 1.3 Elimination des valeurs manquantes
+
+
+
+## 1.3 Recodage de variables qualitative
+
+On veut simplifier la variable reltive au niveau d'instruction qui possède trop de classes. On commence par examiner la distribution des fréquences 
+
+```{r}
+table(sel$ins)
+```
+
+Puis on recode chaque niveau avec l'instruction levels(). On indique NA pour les non réponses.
+
+```{r}
+sel$ins4<-sel$ins
+levels(sel$ins4) <- c(NA,
+                     "Inf.",
+                     "Prim.",
+                     "Prim.",
+                     "Sec.",
+                     "Sec.",
+                     NA,
+                     "Inf.",
+                     "Sup.",
+                     "Sup.",
+                     "Sup.",
+                     "Sup."
+                     )
+table(sel$ins4)
+
+```
+
+
+## 1.4 Découpage de variables quantitatives
+
+On veut découper la variable âge en trois classes :
+
+```{r}
+summary(sel$age)
+sel$age3 <-cut(sel$age, breaks=c(17, 29, 50,100))
+levels(sel$age3) <-c("- de 30 ans","30-50 ans", "+ de 50 ans")
+table(sel$age3)
+
+```
+
+
+## 1.5 Elimination des valeurs manquantes
 
 On ne garde que les lignes du tableau qui sont complètes car autrement il risque d'y avoir des problèmes dans les analyses. 
 
@@ -100,33 +147,8 @@ sel <-sel[complete.cases(sel), ]
 ```
 
 
-## 1.4 Création de nouvelles variables
 
-### Effet métropole
-
-On veut créer une variable **abi** pour les personnes qui résident à Abidjan 
-
-```{r}
-sel$abi <- sel$reg=="ABIDJAN"
-
-```
-
-
-
-### Classes d'âge
-
-On veut découper la variable âge en trois classes :
-
-```{r}
-sel$age3 <-cut(sel$age, breaks=c(17, 29, 49, 100))
-levels(sel$age3) <-c("- de 30 ans","30-49 ans", "50 ans et +")
-```
-
-
-
-
-
-## 1.5 Resumé du tableau
+## 1.6 Resumé du tableau
 
 Proposez un résumé rapide du tableau
 
@@ -216,8 +238,7 @@ mytab2 <-table(sel$age3)
 mytab2
 ```
 
-- **Commentaire** : On trouve 482 personnes de 20 ans et moins, 542 personnes de 30-49 ans et 176 personnes de 50 ans et plus.
-
+- **Commentaire** : On trouve 479 personnes de - de 30 ans, 459 de 30-44 ans, 180 de 45-59 ans, 76 de 60 ans et +.
 
 
 ### Pourcentage 
@@ -301,7 +322,7 @@ tabpct <- 100*prop.table(tabcont,1) # Calcule le pourcentage en ligne (1)
 round(tabpct,1)                     # Arrondi à un chiffre après la virgule
 ```
 
-- **Commentaire** : Il semble en effet y avoir une relation entre les deux variables. Le taux de personnes vaccinés est plus faible chez les jeunes (30.1%) que chez les adultes (37.6%) ou les vieux (47.2%)
+- **Commentaire** : Il semble en effet y avoir une relation entre les deux variables. Le taux de personnes vaccinés est plus faible chez les jeunes (30%) que chez les adultes (38%) ou les vieux (48%). 
 
 
 
@@ -349,7 +370,7 @@ Réalisez un test du chi-2 à l'aide de la fonction chisq.test() et commentez le
 chisq.test(tabcont)
 ```
 
-- **Commentaire** : Notre tableau comportait 3 lignes et 2 colonnes et avait donc **2 degrés de liberté**. Le chi-2 du tableau est de **17.48** ce qui donne une p-value de **0.000161**. Il y a donc moins d'une chance sur 1000 (p < 0.001) que les différences soient l'effet du hasard et que H0 soit vraie. 
+- **Commentaire** : Notre tableau comportait 3 lignes et 2 colonnes et avait donc **2 degrés de liberté**. Le chi-2 du tableau est de **18.74** ce qui donne une p-value de **0.000085**. Il y a donc moins d'une chance sur 1000 (p < 0.001) que les différences soient l'effet du hasard et que H0 soit vraie. 
 
 
 
@@ -357,18 +378,23 @@ chisq.test(tabcont)
 
 Au vu des résultats on rejette H0 et on accepte H1. On conclue avec un risque d'erreur très faible (p < 0.001) qu'**il existe une relation entre l'âge et le fait d'être vacciné en Côte d'Ivoire en 2021**. 
 
+L'explication paraît à première vue assez simple. En effet la pandémie de Covid était particulèrement dangereuse pour les personnes âgées, ce qui a pu pousser à les vacciner en priorité. Mais d'autres interprétations ne sont pas à exclure. Par exemple une plus grande méfiance des jeunes ? une plus grande insouciance ? des revenus insuffisants pour payer le vaccin ? etc. 
+
+
 
 
 # 4. A VOUS DE JOUER...
 
-Testez rapidement trois autres relations possibles 
+Testez rapidement trois autres relations possibles
 
 
 ## 4.1 Vaccination et sexe
 
+
 ```{r}
 # tableau de contingence
 tabcont <- table(sel$sex,sel$vac)
+tabcont
 # Pourcentages
 prop.table(tabcont,1)
 # graphique
@@ -383,7 +409,8 @@ chisq.test(tabcont)
 
 ```{r}
 # tableau de contingence
-tabcont <- table(sel$sex,sel$mil)
+tabcont <- table(sel$mil,sel$vac)
+tabcont
 # Pourcentages
 prop.table(tabcont,1)
 # graphique
@@ -392,14 +419,15 @@ plot(tabcont)
 chisq.test(tabcont)
 ```
 
-- **Conclusion** : Il n'y a pas de différence significative de vaccination entre les personnes résidant en milieu urbain et rural.
+- **Conclusion** : Le taux de vaccination est plus élevé dans les zones ruales (38.6%) que dans les zones urbaines (33.8%). Mais le text du chi-2 nous indique que la différence n'est pas tout à fait sigificative au seul habituel p < 0.05. Il faudrait prendre un risque d'erreur de 10% pour rejeter H0. Dans ce type de situation où la p-value est comprise entre 0.05 et 0.10 on ne dit pas qu'il n'y a pas de relation mais que l'échantillon d'enquête est de taille insuffisante pour conclure avec certitude à l'existence d'une relation. 
 
 
-## 4.3 Vaccination et Abidjan
+## 4.4 Vaccination et instruction 
 
 ```{r}
 # tableau de contingence
-tabcont <- table(sel$sex,sel$abi)
+tabcont <- table(sel$ins4, sel$vac)
+tabcont
 # Pourcentages
 prop.table(tabcont,1)
 # graphique
@@ -408,4 +436,9 @@ plot(tabcont)
 chisq.test(tabcont)
 ```
 
-- **Conclusion** : Il n'y a pas de différence significative de vaccination entre les personnes résidant à Abidjan et dans le reste du pays.
+- **Conclusion** : Le taux de vacination le plus élevé concerne les personnes ayant un niveau d'étude primaire (39%) et le plus faible les personnes ayant un niveau d'instruction supérieur (31.6%). Mais le test du chi-2 montre qu'il n'y a aucune relation entre le fait d'être vacciné et le niveau d'instruction (p= .42 > 0.05). C'est un résultat négatif mais intéressant car on aurait pu penser que le contraire serait vrai.
+
+
+
+
+

@@ -1,0 +1,306 @@
+---
+title: "STAT4: RELATION ENTRE VARIABLES QUALITATIVES"
+subtitle: "Enquêtes et échantillonage"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-06-01"
+title-slide-attributes:
+  data-background-color: "#BA4A00"
+  data-background-size: cover
+  data-background-opacity: "0.5"
+format:
+  revealjs:
+    margin: 0
+    code-line-numbers: false
+    embed-resources: true
+    smaller: true
+    scrollable: true
+    theme: [simple,diapos.scss]
+execute:
+  echo: false
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# ECHANTILLONAGE
+
+## Méthodes d'échantillonage
+
+Il existe de très nombreuses méthodes de constitution d'un échantillon représentatif d'une population. Les principales sont :
+
+### méthodes
+1. Tirage aléatoire simple
+2. Tirage aléatoire stratifié
+3. Tirage aléatoire par grappes
+4. Méthode des quotas
+5. Autres méthodes
+
+## Tirage aléatoire 
+
+La solution idéale est de disposer d'une **liste complète** des individus membres de la **population** que l'on veut étudier et que l'on appelle **base de sondage**.
+
+### Exemples de base de sondage
+
+1. *La population ivoirienne de plus de 18 ans* est connue à travers le recensement général de population de 2021. 
+
+2. *Les étudiants de l'Université d'Abidjan* sont connus grâce au fichier des inscriptions. 
+
+3. *Les étrangers en situation irrégulière* ne sont pas connus et ne disposent donc pas de base de sondage.
+
+## Tirage aléatoire simple
+
+La solution la plus évidente et la plus fiable d'un point de vue statistique est de **tirer au hasard les individus dans la liste complète** pour obtenir un échantillon de la taille souhaitée.
+
+![echantillon aléatoire](img/ech_alea.jpg){width=800}
+
+Source : [http://www.mathwebs.com](http://www.mathwebs.com/ApprendreEnMaternelle/Exercices/Sondages/sondage_aleatoire.php)
+
+
+## Tirage aléatoire simple
+
+### Exemple : les étudiants de l'Université d'Abidjan
+- On se procure la liste de l'ensemble des étudiants inscrits
+- On tire au sort 500 étudiants à l'aide d'une table de nombres au hasard. 
+- On contacte chacun des étudiants pour lui administrer le questionnaire.
+
+## Tirage aléatoire simple
+
+### Avantages
+- aucun arbitraire n'intervient dans la liste des personnes.
+- il est inutile de pondérer les calculs.
+- la méthode est facile à comprendre.
+
+### Inconvenients
+- la base de sondage n'est jamais parfaitement exhaustive ou n'est pas facilement accessible.
+- si les personnes tirées au sort ne répondent pas, l'analyse est faussée. 
+
+
+## Tirage aléatoire stratifié
+
+Pour mieux observer certains phénomènes, on divise la liste en **groupes (= strates)** et on tire au sort les individus dans chacun de ces groupes. 
+
+![echantillon aléatoire stratifié](img/ech_strat.jpg){width=800}
+
+Source : [http://www.mathwebs.com](http://www.mathwebs.com/ApprendreEnMaternelle/Exercices/Sondages/sondage_aleatoire.php)
+
+
+
+
+
+
+
+## Tirage aléatoire stratifié
+
+N.B. Les échantillons stratifiés ne sont donc pas forcément représentatifs de **l'ensemble de la population**. Il sont en revanche représentatifs de chacune des strates.
+
+
+![](img/ech_strat2.jpg){width=400}
+![](img/ech_strat3.jpg){width=400}
+
+
+
+## Tirage aléatoire stratifié
+
+### Exemple : les étudiants de l'université d'Abidjan
+- On se fixe un objectif de 200 étudiants par faculté (SH, Sciences, Médecine), même si cela ne correspond pas aux effectifs.
+- On décide qu'il y aura 100 femmes sondées dans chaque secteur, même si cela ne correspond pas à la répartition réelle
+- On tire au hasard les 6 échantillons à l'aide des listes d'inscription.
+- Il s'agit donc ici d'un sondage stratifié à deux degrés (faculté et sexe)
+
+## Tirage aléatoire stratifié
+
+### Avantages
+- On est certain que toutes les strates sont présentes
+- On peut pondérer les strates les plus faibles
+
+### Inconvenients
+- Il faut une base de sondage fiable à la fois pour les individus et leur strate d'appartenance
+- Analyse plus complexe que le sondage aléatoire simple. . 
+
+
+
+
+
+
+
+## Tirage aléatoire par grappes
+
+Le sondage en grappe consiste à tirer au sort non pas directement un individu, mais des unités collectives. Ce type de sondage est utilisé lorsqu'on n'a pas de liste des individus, mais qu'on dispose d'une liste de grappes réunissant plusieurs individus. 
+
+![tirage aléatoire par grappes](img/ech_grap1.jpg){width=600}
+source : [http://www.mathwebs.com](http://www.mathwebs.com/ApprendreEnMaternelle/Exercices/Sondages/sondage_aleatoire.php)
+
+
+## Tirage aléatoire par grappes
+
+L'ensemble des individus de l'unité collective sont inclus dans l'enquête.
+
+![tirage aléatoire par grappes](img/ech_grap2.jpg){width=800}
+
+Source : [http://www.mathwebs.com](http://www.mathwebs.com/ApprendreEnMaternelle/Exercices/Sondages/sondage_aleatoire.php)
+
+## Tirage aléatoire par grappes
+
+### Exemple : les étudiants de l'Université d'Abidjan
+- On tire au hasard un certain nombre de spécialités de master dans l'offre de formation de l'établissement
+- On effectue l'enquête sur l'ensemble des étudiants des spécialités de master qui ont été tirées au sort
+- On peut éventuellement affiner le tirage au sort des grappes en prenant le même nombre de spécialités de master dans chacun des grands secteurs (SH, Sciences, Médecine) 
+
+## Tirage aléatoire par grappes
+
+### Avantages
+- Réalisation de l'enquête plus facile et moins coûteuse.
+- Ne demande pas une base de sondage individuelle
+
+### Inconvenients
+- Echantillon final pas forcément représentatif (surtout si le nombre de grappes est faible)
+- Analyse statistique plus complexe.
+- Risques de contestation des résultats
+
+
+## Méthode des quotas
+
+- On ne dispose pas de base de sondage (liste d'individu) mais on connaît les caractéristiques d'ensemble de la population (e.g. âge, sexe, diplôme, ...). 
+
+- Du coup, on va choisir des indvidus de telle sorte que la composition de l'échantillon corresponde à celle de la population de référence. 
+
+- Les enquêteurs doivent choisir des personnes de façon à remplir simultanément plusieurs objectifs.
+
+- C'est facile au début ... mais il est souvent difficile d'arriver pile sur le quota demandé.
+
+
+## Méthode des quotas
+
+Exemple de fiche d'objectif :
+
+![méthode des quotas](img/ech_quota1.jpeg){width=600}
+
+## Méthode des quotas
+
+Exemple de quotas pour la population adulte française
+
+![méthode des quotas](img/ech_quota2.jpg){width=800}
+
+Source : [définitions-marketing.com](https://www.definitions-marketing.com/definition/echantillon-representatif/)
+
+
+
+## Méthode des quotas
+
+### Avantages
+- Seule méthode possible en l'absence de base de sondage
+- Coût faible par rapport aux autres méthodes
+- Possibilité de construire un panel
+
+### Inconvenients
+- Echantillon final pas forcément représentatif 
+- Quotas pas toujours faciles à atteindre
+- Risques de biais statistiques invisibles
+
+## Autres méthodes
+
+### Echantillon "pratique"
+
+
+![méthode "pratique"](img/ech_conven.jpg){width=800}
+
+
+- source : [questionpro](https://www.questionpro.com/blog/convenience-sampling/) 
+
+
+
+
+## Autres méthodes
+
+### Echantillon "boule de neige"
+
+![Méthode "boule de neige"](img/ech_snowball.jpg){width=800}
+
+
+- source : [questionpro](https://www.questionpro.com/blog/convenience-sampling/) 
+
+# EXEMPLE DE MAUVAIS ECHANTILLONAGE
+
+## Etudiants de licence de Paris Cité
+
+### Contexte et objectif
+
+On a demandé à 30 étudiants de licence 3 de collecter les réponses à un petit questionnaire mis au point sur Kobo Toolbox.
+
+Le questionnaire ne comportait que 10 questions et pouvait être administré en 5 minutes environ. 
+
+Chaque étudiant devait obtenir 10 réponses, 5 de personnes de nationalité française et 5 de personnes d'une autre nationalité.
+
+
+## Etudiants de licence de Paris Cité
+
+![Questionnaire UPC](img/kobo_sample_00.jpg){width=600}
+
+Représentatif au niveau mondial ?
+
+## Etudiants de licence de Paris Cité
+
+![Questionnaire UPC](img/kobo_sample.jpg){width=600}
+
+
+Représentatif au niveau de l'Ile de France ?
+
+
+## Etudiants de licence de Paris Cité
+
+![Questionnaire UPC](img/kobo_sample_02.jpg){width=600}
+
+Représenatif de l'Université Paris Cité ?
+
+# EXEMPLE DE BON ECHANTILLONAGE
+
+## Les enquêtes Afrobarometer
+
+### Principes d'échantillonnage et pondération
+
+Afrobaromètre utilise des **échantillons probabilistes nationaux** conçus pour générer un échantillon représentatif de tous les citoyens en âge de voter dans un pays donné. L'objectif est de donner à chaque citoyen adulte une chance égale et connue d'être sélectionné pour une interview. Nous y parvenons en en utilisant des méthodes de **sélection aléatoire à tous les stades de l'échantillonnage** et à tous les stades avec une probabilité proportionnelle à la taille de la population dans la mesure du possible afin de garantir que les unités géographiques plus grandes (c'est-à-dire plus peuplées) ont une probabilité proportionnellement plus grande d'être sélectionnées dans l'échantillon.
+
+L'univers d'échantillonnage comprend normalement **tous les citoyens âgés de 18 ans** et plus. En règle générale, nous excluons les personnes vivant dans des institutions, telles que les étudiants dans les dortoirs, les patients dans les hôpitaux et les personnes dans les prisons ou les maisons de retraite. Occasionnellement, nous devons également exclure les personnes vivant dans des zones jugées inaccessibles en raison d'un conflit ou de l'insécurité. Toute exclusion de ce type est mentionnée dans le rapport d'information technique (RIT) qui accompagne chaque ensemble de données.
+
+
+Source : https://www.afrobarometer.org/surveys-and-methods/sampling/
+
+
+
+## Les enquêtes Afrobarometer
+
+### Taille et conception de l'échantillon
+
+Les échantillons comprennent généralement **1200 ou 2400 cas.** Un échantillon de n=1200 cas sélectionnés au hasard permet de faire des inférences sur les populations adultes nationales avec **une marge d'erreur d'échantillonnage ne dépassant pas +/-2,8 points de pourcentage** avec un niveau de confiance de 95 %. Avec un échantillon de n=2400, la marge d'erreur diminue à +/-2,0 points de pourcentage avec un niveau de confiance de 95 %.
+
+Le plan d'échantillonnage est un **échantillon probabiliste en grappes, stratifié, à plusieurs degrés et par zone**. Plus précisément, nous stratifions d'abord l'échantillon en fonction de la principale unité de gouvernement infranationale (État, province, région, etc.) et de la localisation urbaine ou rurale.
+
+La stratification par zone réduit la probabilité que des groupes ethniques ou linguistiques distincts soient exclus de l'échantillon. **Afrobaromètre sur-échantillonne parfois volontairement certaines populations politiquement importantes dans un pays** afin de s'assurer que le sous-échantillon est suffisamment grand pour être analysé. Tout suréchantillon est noté dans le TIR.
+
+Source : https://www.afrobarometer.org/surveys-and-methods/sampling/
+
+## Les enquêtes Afrobarometer
+
+### Étapes de l'échantillonnage
+
+Les échantillons sont constitués en quatre ou cinq étapes :
+
+- Étape 1 : dans les zones rurales uniquement, la première étape consiste à tirer des unités d'échantillonnage secondaires (UES). Les UES ne sont pas utilisées dans les zones urbaines et, dans certains pays, elles ne sont pas utilisées dans les zones rurales. Voir le TIR qui accompagne chaque ensemble de données pour plus de détails sur l'échantillon dans un pays donné.
+- Étape 2 : Nous sélectionnons au hasard des unités primaires d'échantillonnage (UPE).
+- Étape 3 : Nous sélectionnons ensuite au hasard les points de départ de l'échantillonnage.
+- Étape 4 : Les enquêteurs sélectionnent au hasard les ménages.
+- Étape 5 : Au sein du ménage, l'enquêteur sélectionne au hasard un répondant individuel. Dans chaque ménage, l'enquêteur interroge alternativement un homme et une femme afin de garantir l'équilibre entre les sexes dans l'échantillon.
+
+Pour maintenir les coûts et la logistique du travail sur le terrain dans des limites gérables, huit entretiens sont regroupés dans chaque UPE sélectionnée.
+
+Source : https://www.afrobarometer.org/surveys-and-methods/sampling/
+
+## Les enquêtes Afrobarometer
+
+### Pondération des données
+
+Pour certaines enquêtes nationales, **les données sont pondérées pour corriger le sur-échantillonnage, le sous-échantillonnage ou la taille du ménage.** L'option « Withinwt » doit être activée pour toutes les statistiques descriptives au niveau national dans les pays qui contiennent cette variable de pondération. Elle est incluse dans l'ensemble de données et les détails sont décrits dans le livre de codes. Pour les ensembles de données fusionnés, « Combinwt » doit être activé pour les comparaisons transnationales des statistiques descriptives. Note : Cette variable de pondération standardise tous les échantillons nationaux comme s'ils étaient de taille égale.
+
+Dans les cycles 1 à 3, Afrobaromètre n'a procédé qu'à une pondération minimale des données pour corriger les sur- ou sous-échantillons de certaines populations, généralement en fonction de la région ou de la localisation urbaine ou rurale. Cependant, à partir du cycle 4, nous avons commencé à collecter des données supplémentaires (population de chaque zone d'énumération sélectionnée et population totale de chaque strate) afin d'améliorer nos calculs de facteurs de pondération basés sur les probabilités de sélection individuelles, qui sont maintenant incluses pour tous les pays. Cela nous permet de calculer des poids à l'intérieur des pays beaucoup plus complets et précis, qui peuvent être identifiés par la variable « WITHINWT »
+
+Source : https://www.afrobarometer.org/surveys-and-methods/sampling/

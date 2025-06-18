@@ -1,7 +1,6 @@
 project:
   type: website
   output-dir: docs
-
 website:
   title: "AfroMap'R 2024 : Statistiques avec R et Rstudio"
   sidebar:
@@ -44,6 +43,10 @@ website:
           text: "Exo1 : Programme-type"
       - section: "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES"
         contents:   
+        - href: STAT4-Enquetes.qmd
+          text: "Cours : Echantillonage"
+        - href: STAT4-chi2.qmd
+          text: "Cours : Test du chi-2"
         - href: STAT4-Exo1.qmd
           text: "Exo1 : Programme-type"
           
