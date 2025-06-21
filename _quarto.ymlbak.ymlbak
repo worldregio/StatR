@@ -1,0 +1,70 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "AfroMap'R 2024 : Statistiques avec R et Rstudio"
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 2
+    logo: img/logo.png
+    contents:
+      - href: index.qmd
+        text: "A propos"
+      - section: "STAT0 : OFFICE KILLER"
+        contents:
+        - href: STAT0-Excel_Killer.qmd
+          text: "Les programmes R : Excel Killer ?"
+        - href: STAT0-Word_Killer.qmd
+          text: "Les documents Rmd : Word Killer ?"
+      - section: "STAT1 : LES VARIABLES STATISTIQUES"
+        contents:
+        - href: STAT1-Variables-Cours.qmd
+          text: "Cours : Types de variables"  
+        - href: STAT1-Exo1.qmd
+          text: "Exo1 : Premiers pas dans R"
+        - href: STAT1-Exo2.qmd
+          text: "Exo2 : Les femmes du Bénin"
+      - section: "STAT2 : STATISTIQUE EXPLORATOIRE"
+        contents:
+        - href: STAT2-Explor-Cours.qmd
+          text: "Cours : Exploration avec R-base"
+        - href: STAT2-Exo1.qmd
+          text: "Exo1 : Manipuler des tableaux"
+        - href: STAT2-Exo2.qmd
+          text: "Exo2 : Résumer des variables"  
+      - section: "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES"
+        contents:
+        - href: STAT3-Correlation-Cours.qmd
+          text: "Cours : Corrélation"
+        - href: STAT3-Regression-Cours.qmd
+          text: "Cours : Régression linéaire"
+        - href: STAT3-Exo1.qmd
+          text: "Exo1 : Programme-type"
+      - section: "STAT4 : RELATION ENTRE DEUX VARIABLES QUALITATIVES"
+        contents:   
+        - href: STAT4-Enquetes.qmd
+          text: "Cours : Echantillonage"
+        - href: STAT4-chi2.qmd
+          text: "Cours : Test du chi-2"
+        - href: STAT4-Exo1.qmd
+          text: "Exo1 : Programme-type"
+          
+    right: 
+      - icon: github # add icons as navbar buttons
+        href: https://github.com/worldregio/StatR
+        target: _blank
+  page-footer:
+    background: dark
+    left: Copyright 2025, FR CIST
+format:
+  html:
+    grid:
+      sidebar-width: 300px
+    theme: 
+      light: minty    
+      dark: solar
+    css: style.scss
+    toc: true
+
+
