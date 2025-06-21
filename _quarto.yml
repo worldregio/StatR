@@ -44,6 +44,23 @@ website:
           text: "Cours : Test du chi-2"
         - href: STAT4-Exo1.qmd
           text: "Exo1 : Programme-type"
+      - text: "CARTOGRAPHIE AVEC MAGRIT"
+        menu:     
+        - text: "---- MAGRIT 1 : PREMEIRS PAS ----"
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1/MAGRIT1.pptx" 
+          text: "Cours (.pptx)"
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1.zip" 
+          text: "Exercice (dossier)"    
+        - text: "---- MAGRIT 2 : STOCKS ET TAUX ----"
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT2/MAGRIT2.pdf" 
+          text: "Cours (.pdf)"
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT2.zip" 
+          text: "Exercice (dossier)" 
+        - text: "---- MAGRIT 3 : SELECTION ET AGREGATION ----"
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT3/MAGRIT3.pptx" 
+          text: "Cours (.pptx)"
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT3.zip" 
+          text: "Exercice (dossier)"  
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR

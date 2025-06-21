@@ -1110,7 +1110,7 @@
     "href": "STAT3-Regression-Cours.html#diagnostic-1-indépendance-des-résidus-2",
     "title": "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES",
     "section": "4.1 Diagnostic 1 : Indépendance des résidus ?",
-    "text": "4.1 Diagnostic 1 : Indépendance des résidus ?\nOn peut tester statistiquement l’indépendance des résidus à l’aide du test de Durbin-Watson qui mesure si deux valeurs successives ont des résidus proches. L’indépendance des résidus est rejetée si p-value &lt; 0.05\n\ndurbinWatsonTest(monmodel)\n\n lag Autocorrelation D-W Statistic p-value\n   1      0.00312332       1.94811    0.86\n Alternative hypothesis: rho != 0\n\n\nIci on trouve p-value &gt; 0.05 donc les résidus sont indépendants."
+    "text": "4.1 Diagnostic 1 : Indépendance des résidus ?\nOn peut tester statistiquement l’indépendance des résidus à l’aide du test de Durbin-Watson qui mesure si deux valeurs successives ont des résidus proches. L’indépendance des résidus est rejetée si p-value &lt; 0.05\n\ndurbinWatsonTest(monmodel)\n\n lag Autocorrelation D-W Statistic p-value\n   1      0.00312332       1.94811    0.88\n Alternative hypothesis: rho != 0\n\n\nIci on trouve p-value &gt; 0.05 donc les résidus sont indépendants."
   },
   {
     "objectID": "STAT3-Regression-Cours.html#diagnostic-2-normalité-des-résidus",
