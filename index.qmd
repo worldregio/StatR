@@ -15,11 +15,9 @@ format: html
 ::: {first-column}
 ![](img/logo_up1.jpg){width=60}
 ![](img/logo_upc.png){width=60}
-![](img/logo_UGA.png){width=60} 
 ![](img/logo_geoteca.jpg){width=60} 
 ![](img/logo_geocites.jpg){width=60}
 ![](img/logo_PRODIG.png){width=60}
-![](img/logo_pacte.png){width=60}
 
 
 

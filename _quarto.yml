@@ -47,20 +47,44 @@ website:
       - text: "CARTOGRAPHIE AVEC MAGRIT"
         menu:     
         - text: "---- MAGRIT 1 : PREMEIRS PAS ----"
-        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1/MAGRIT1.pptx" 
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1/MAGRIT1.pptx
           text: "Cours (.pptx)"
-        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1.zip" 
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1.zip
           text: "Exercice (dossier)"    
         - text: "---- MAGRIT 2 : STOCKS ET TAUX ----"
-        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT2/MAGRIT2.pdf" 
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT2/MAGRIT2.pdf 
           text: "Cours (.pdf)"
-        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT2.zip" 
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT2.zip
           text: "Exercice (dossier)" 
         - text: "---- MAGRIT 3 : SELECTION ET AGREGATION ----"
-        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT3/MAGRIT3.pptx" 
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT3/MAGRIT3.pptx
           text: "Cours (.pptx)"
-        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT3.zip" 
-          text: "Exercice (dossier)"  
+        - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT3.zip
+          text: "Exercice (dossier)"       
+      - text: "GEOMATIQUE"
+        menu:  
+        - href: Raster.html
+          text: "Manipuler des données raster avec R et Terra" 
+      - text: "KOBO"
+        menu:  
+        - href: https://ee2023.netlify.app/modules/out3_kobo
+          text: "Prise en main (EE CIST 2023)"          
+      - text: "ATELIERS"
+        menu:            
+        - href: Atelier1.qmd
+          text: "Atelier1 : Agriculture"  
+        - href: Atelier2.qmd
+          text: "Atelier2 : Démographie" 
+        - href: Atelier3.qmd
+          text: "Atelier3 : Eau" 
+        - href: Atelier4.qmd
+          text: "Atelier4 : Mines" 
+        - href: Atelier5.qmd
+          text: "Atelier5 : Santé" 
+        - href: Atelier6.qmd
+          text: "Atelier6 : Urbanisation" 
+        - href: Atelier7.qmd
+          text: "Atelier7 : Transport"           
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR

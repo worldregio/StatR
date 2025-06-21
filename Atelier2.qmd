@@ -1,0 +1,63 @@
+---
+title: "ATELIER 2 : DEMOGRAPHIE"
+subtitle: ""
+author: ""
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# INTRODUCTION
+
+- Presenter les membres de l’équipe et le thème attribué décrire les objectifs du rapport et formuler des hypothèses
+
+# 1. ACQUISITION DE DONNEES
+
+- Décrire les différents types de données qui seront mobilisées Sources ? dates ? couverture spatiale ? fonds de carte ? couches SIG, …
+
+# 2. ANALYSE STATISTIQUE AVEC R
+
+- Décrire les variables intéressantes, produire des taleaux ou des graphiques
+- Tester la relation entre deux variables
+- Synthétiser les résultats
+
+# 3. ANALYSE CARTOGRAPHIQUE AVEC MAGRIT
+
+- Produire différents types de carte
+- Mettre en page les cartes
+- Commenter les cartes
+
+# 4. ANALYSE D’ENQUETE AVEC KOBO
+- Construire un questionnaire
+- Tester ce questionnaire auprès des participants de l’EE
+- Proposer des améliorations
+
+# CONCLUSION
+
+- Synthétiser vos résultats principaux
+- Décrire les difficultés rencontrées.
+- Indiquer si vous souhaitez poursuivre les apprentissages
+  
