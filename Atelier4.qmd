@@ -1,7 +1,7 @@
 ---
 title: "ATELIER 4 : MINES"
 subtitle: ""
-author: ""
+author: "GUEDE	Ogho Irène, SORHO	Foungotrigué Drissa, YAO	Amani Patrick Stéphane"
 date: "2025-05-27"
 date-format: iso
 lang: fr

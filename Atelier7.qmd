@@ -1,7 +1,7 @@
 ---
 title: "ATELIER 7 : TRANSPORT"
 subtitle: ""
-author: ""
+author: "AFFELI	N'Dri Marius Arthur, AKE	Brice Patrick, NGUESSAN	Kouakou Firmain"
 date: "2025-05-27"
 date-format: iso
 lang: fr

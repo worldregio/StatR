@@ -1,7 +1,7 @@
 ---
 title: "ATELIER 6 : URBANISATION"
 subtitle: ""
-author: ""
+author: "DIEME	Alida Gwladys, KONE	Vassamouka,KOUAKOU	Adjoua Sylvie"
 date: "2025-05-27"
 date-format: iso
 lang: fr

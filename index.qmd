@@ -38,11 +38,11 @@ FR CIST & UMR PRODIG
 :::
 
 ::: {second-column}
-![](img/logo_uao.jpg){width=80}
-![](img/logo_uabi.png){width=80}
-![](img/logo_ukor.png){width=80}
-![](img/logo_vst.png){width=90}
- ![](img/logo_igt.jpg){width=90}
+![](img/logo_uao.jpg){width=60}
+![](img/logo_uabi.png){width=60}
+![](img/logo_ukor.png){width=60}
+![](img/logo_vst.png){width=60}
+ ![](img/logo_igt.jpg){width=60}
 
 **Bamba VAKARAMOKO**
 
@@ -192,7 +192,7 @@ Chaque atelier utilisant ces bases visera à produire des exemples pédagogiques
 
 - **Jean-Paul N'Gbesso** : R, statistiques
 
-- **Felix Kouamé N'Dri** : R, SIG
+- **Amalaman Marc Auriol** : R, SIG
 
 - **Grégoire Feyt** : Ateliers, enquête, statistiques
 

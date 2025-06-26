@@ -1,7 +1,7 @@
 ---
 title: "ATELIER 3 : EAU"
 subtitle: ""
-author: ""
+author: "SANGARE	Nouhoun, NZI	Parfait, YAO	Affouet Prisca Elodie"
 date: "2025-05-27"
 date-format: iso
 lang: fr

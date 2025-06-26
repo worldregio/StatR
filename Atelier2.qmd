@@ -1,7 +1,7 @@
 ---
 title: "ATELIER 2 : DEMOGRAPHIE"
 subtitle: ""
-author: ""
+author: "ESSE	Kanga Bernardi, MOYOU	Jeanne Dominique, YOH	Oulai Munné-Prisca"
 date: "2025-05-27"
 date-format: iso
 lang: fr
