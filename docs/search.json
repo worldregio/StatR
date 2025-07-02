@@ -2357,5 +2357,19 @@
     "title": "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES",
     "section": "Coordonnées des individus sur les axes factoriels",
     "text": "Coordonnées des individus sur les axes factoriels\n\nplot.PCA(monacp,choix = \"ind\",)"
+  },
+  {
+    "objectID": "bouaké.html",
+    "href": "bouaké.html",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "Localisation des 98 enquêtes géolocalisées sur 115\n\n\nReading layer `EE_AfromapR_2025_brut' from data source \n  `/Users/claudegrasland1/worldregio/StatR/data/Marché_Bouaké/geom/EE_AfromapR_2025_brut.geojson' \n  using driver `GeoJSON'\nSimple feature collection with 98 features and 32 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -5.027682 ymin: 7.696584 xmax: -5.023176 ymax: 7.699239\nGeodetic CRS:  WGS 84"
+  },
+  {
+    "objectID": "bouaké.html#carte-de-localisation",
+    "href": "bouaké.html#carte-de-localisation",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "Localisation des 98 enquêtes géolocalisées sur 115\n\n\nReading layer `EE_AfromapR_2025_brut' from data source \n  `/Users/claudegrasland1/worldregio/StatR/data/Marché_Bouaké/geom/EE_AfromapR_2025_brut.geojson' \n  using driver `GeoJSON'\nSimple feature collection with 98 features and 32 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -5.027682 ymin: 7.696584 xmax: -5.023176 ymax: 7.699239\nGeodetic CRS:  WGS 84"
   }
 ]

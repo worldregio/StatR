@@ -68,7 +68,9 @@ website:
       - text: "KOBO"
         menu:  
         - href: https://ee2023.netlify.app/modules/out3_kobo
-          text: "Prise en main (EE CIST 2023)"          
+          text: "Prise en main (EE CIST 2023)"    
+        - href: bouaké.qmd
+          text: "Enquête AfromapR 2025" 
       - text: "ATELIERS"
         menu:            
         - href: Atelier1.qmd

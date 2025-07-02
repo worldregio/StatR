@@ -1,0 +1,54 @@
+---
+title: "ENQUETE AU MARCHE DE BOUAKE"
+subtitle: "Réalisée le 2 Juillet 2025"
+author: "Participants au projet projet Afromap'R"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+```{r}
+library(sf)
+library(mapview)
+library(htmltools)
+library(RColorBrewer)
+```
+
+
+## CARTE DE LOCALISATION
+
+Localisation des 98 enquêtes géolocalisées sur 115
+
+```{r}
+map<-st_read("data/Marché_Bouaké/geom/EE_AfromapR_2025_brut.geojson")
+names(map)[32]<-"Atelier"
+display.brewer.all()
+mypal<-brewer.pal(8,"Set1")
+mapview(map, zcol="Atelier",col.regions=mypal)
+```
+
