@@ -1,0 +1,19 @@
+﻿code;definition;source
+gdlcode;code cartographique des unités infranationales;GDL
+continent;continent;GDL
+iso_code;code ISO3 du pays;GDL
+sup;Superficie approximative en km2;Calcul SIG
+lon;Longitude;Calcul SIG
+lat;Latitude;Calcul SIG
+country;Nom du pays;GDL
+year;Année ;GDL
+region;nom de l'unité infra nationale;GDL
+idh;Indicateur de développement humain (0 à 1);GDL
+idh_vie;Composante espérance de vie de l'IDH (0 à 1);GDL
+idh_rev;Composante revenu de l'IDH (0 à 1);GDL
+idh_edu;Composante éducation de l'IDH (0 à 1);GDL
+edu_esp;Duréee attendue de scolarisation (en années);GDL
+edu_moy;Durée moyenne de scolarisation (en années);GDL
+esp_vie;Espérance de vie (en année);GDL
+pib_hab;Produit intérieur brut par habitant (en $);GDL
+pop;Population (en milliers;GDL

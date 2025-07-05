@@ -1,10 +1,34 @@
 ---
-title: "AFROMAPR 2025"
-subtitle: "CARTOGRAPHIER LES TERRITOIRES AVEC R ET MAGRIT"
-author: "(c) FR CIST 2025"
-format: html
+title: "AFROMAP'R 2025"
+subtitle: "Cartographier les territoires avec R et Magrit"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-05-27"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    bibliography: [references.bib]
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+execute:
+  warning: false
+  message: false 
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
 ---
-
 
 
 

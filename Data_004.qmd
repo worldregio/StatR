@@ -1,0 +1,216 @@
+---
+title: "Afrobarometer - Côte d'Ivoire 2023"
+subtitle: "civ_afrobarometer_2023"
+author: "Claude Grasland & Jean-Paul Nguesso"
+date: "2025-03-28"
+date-format: iso
+lang: fr
+format:
+  html:
+    embed-resources: true
+    smooth-scroll: true
+    fontsize: 0.9em
+    toc: true
+    toc-depth: 3
+    toc-title: "."
+    crossrefs-hover: false
+    css: custom.css
+    theme: [yeti, style.scss]
+    code-fold: true
+execute:
+  warning: false
+  message: false 
+  echo: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r}
+library(knitr)
+library(sf)
+library(mapsf)
+library(dplyr)
+library(ggplot2)
+```
+
+
+::: {.callout-tip}
+## Télécharger le jeu de données
+-  [Cliquer ici](https://github.com/worldregio/StatR/raw/refs/heads/main/datazip/civ_afrobarometer_2023.zip)
+:::
+
+### Source
+
+Les enquêtes [Afrobarometer](https://www.afrobarometer.org/)) sont réalisées par vagues à laquelle tous les pays du continent sont invités à participer. Au cours de chacune des vagues, des questions identiques sont posés aux citoyens de chacun des pays qui participent à l'enquête ce qui permet de comparer leurs opinions. Toutefois certains pays refusent de participer ou bien participent mais ne posent pas toutes les questions et en ajoutent parfois d'autres. Malgré ces limites il s'agit d'une source majeure d'information sur l'évolution des opinions publiques en Afrique puisque la première vague remonte à 1999 et que nous en sommes aujoud'hui à la dixième.
+
+La Côte d'Ivoire a participé aux enquêtes Afrobarometer de 2013, 2014, 2019, 2021 and 2023. Celles-ci ont été réalisées par le laboratoire [Zechlab](https://www.zechlab.com/). Les fichiers de résultats sont librement accessibles sur le site [Afrobarometer](https://www.afrobarometer.org/)) qui fournit à la fois les données (au format SPSS) et les métadonnées relatives aux questions posées et aux modes de collecte.
+
+### Conversation de SPSS vers R
+
+Bien qu'elles soient fournies au format SPSS (extension *.sav*) les données AfroBarometer peuvent facilmement être importées dans R à l'aide du package **haven**. On peut ensuite récupérer le code des variables à l'aide du package **labelled**. On ajoute le package **dplyr** pour faciliter les sélections de lignes et colonnes
+
+Nous procédons ici à l'importation d'un nombre volontairement limité de variables choisies pour l'école d'été. Mais chacun pourra adapter le programme ci-dessous à ses besoins.
+
+::: {.callout-important}
+Il est recommandé de toujours placer en début de liste la variable **RESPNO** qui est l'identifiant unique des personnes enquêtées et la variable **withinwt_ea** qui est le pondérant permettant de redresser l'échantillonage. Il est également important de retenir les variables **URBRUR** (urbain ou rural) et **REGION** (localisation) si l'on veut pouvoir cartographier les résultats.
+:::
+
+```{r, echo=TRUE, eval=FALSE}
+library(haven)
+library(labelled)
+library(dplyr)
+library(writexl)
+
+# (A) Importe les données de SPSS vers R
+
+base <-haven::read_sav("data/civ_afrobarometer_2023/source/afrobarometer_release-dataset_cdi_r9_fr_2023-03-01.sav")
+
+names(base)
+
+# (B) Définit la liste des variables
+sel <-c("RESPNO",
+        "withinwt_ea",
+        "URBRUR",	"REGION",	
+        "EA_SVC_A",
+        "EA_SVC_B",
+        "EA_FAC_B",
+        "EA_ROAD_C",
+        "THISINT",
+        "ADULT_CT",	
+        "CALLS",
+        "Q1",	"Q2",	
+        "Q46F",	"Q46G",	"Q46H",	"Q46I",	
+        "Q57A",	"Q57B",	"Q58A",	"Q58C",	
+        "Q90D",	"Q90F",	"Q90G",	"Q91C",	"Q92A",	"Q94",
+        "LENGTH",	"Q101",	"Q102",	"Q103")
+
+
+## (C) Extrait les variables
+tab <- base%>% select(all_of(sel))
+
+
+## (D) Extrait les métadonnées
+w<-labelled::var_label(tab)
+meta<-data.frame(code=names(w),def=as.character(w))
+
+## (E) Convertit les variables spss qualitatives en factor
+tab <- to_factor(tab,labelled_only = T)
+
+## (F) Convertit le tableau en data.frame
+tab<-as.data.frame(tab)
+
+
+## (G) Sauvegarde au format .RDS les données et métadonnées
+saveRDS(tab,"data/civ_afrobarometer_2023/data/survey_data.RDS")
+saveRDS(meta,"data/civ_afrobarometer_2023/data/survey_meta.RDS")
+
+## (H) Sauvegarde au format .csv (si besoin)
+write.table(tab,"data/civ_afrobarometer_2023/data/survey_data.csv", sep=";", row.names=F, fileEncoding = "UTF-8")
+write.table(meta,"data/civ_afrobarometer_2023/data/survey_meta.csv", sep=";", row.names=F, fileEncoding = "UTF-8")
+
+## (I) Exporte au format excel (si besoin)
+library(writexl)
+write_xlsx(list("data"=tab,"meta"=meta),path = "data/civ_afrobarometer_2023/data/survey.xlsx")
+```
+
+
+### Liste des variables
+
+Celle-ci dépend des choix qui sont opérés dans le questionnaire Afrobarometer qui en comporte plusieurs centaines. A titre d'exemple, le programme d'extraction présenté ci-dessus aboutit à la liste suivante :
+
+```{r}
+meta <- readRDS("data/civ_afrobarometer_2023/data/survey_meta.RDS")
+kable(meta)
+```
+
+Mais il est tout à fait possible de choisir d'autres variables en consultant au préalable la documentation de l'enquête qui est fournie avec le dossier.
+
+
+### Utilisation avec Magrit
+
+La localisation des enquêtés est effectuée au niveau des 33 départements. L'effectif est grosso modo proportionnelle à la population puisque le sondage a été effectué selon la methode des quotas. Mais du coup on aboutit à des effectifs très faibles dans certains départements ce qui exclue le calcul de pourcentages significatifs.
+
+```{r}
+# Charge le fichier d'enquête
+don <-readRDS("data/civ_afrobarometer_2023/data/survey_data.RDS")
+
+# Dénombre les enquêtés par région
+tab <-don %>% group_by(REGION) %>% count()
+
+# Charge le fonds de carte et le projette
+map <- readRDS("data/civ_afrobarometer_2023/geom/CIV_regions.RDS") 
+
+# Effectue la jointure
+mapdon <- left_join(map,tab)
+
+# Réalise la carte
+mf_map(map, type="base", col="lightyellow")
+mf_map(mapdon, type="prop", 
+       var="n",
+       col="red",
+       inches=0.3,
+       leg_title = "Effectif")
+mf_layout(title = "Réponse à l'enquête Afrobarometer 2023 par départements", credits = "Source : Afrobarometer", frame = T, scale=F)
+```
+
+Il sera donc prudent si l'on veut cartographier les résultats de regrouper les réponses au niveau des 14 districts voire à un niveau encore plus élevé car certains districts ont encore un effectif très faible, notamment Denguélé (16 réponses) et Yamoussoukro(24 réponses)
+
+```{r}
+mapdon2 <- mapdon %>% group_by(DIS_CODE, DIS_NOM) %>%
+  summarise(n= sum(n))
+
+mf_map(mapdon2, type="base", col="lightyellow")
+mf_map(mapdon2, type="prop", 
+       var="n",
+       col="red",
+       inches=0.3,
+       leg_title = "Effectif")
+mf_layout(title = "Réponse à l'enquête Afrobarometer 2023 par districts", credits = "Source : Afrobarometer", frame = T, scale=F)
+```
+
+### Utilisation avec R
+
+L'enquête Afrobarometer sera donc principalement exploitée avec R dans le cadre des cours de statistique sur les données d'enquête. Elle permettra notamment d'illustrer les méthodes de recodage de variable qualitative pour produire des tris à plat ou des tableaux de contingence sur lesquels on pourra effectuer des tests du chi-2. Les plus avancés en statistique pourront également utiliser ces données pour des cours de régression logitique, analyse des correspondances, etc.
+
+Examinons juste à titre d'exemple le test d'une hypothèse mettant en relation le sexe (X) et le fait d'avoir reçu une vaccination contre le Covid-19 (Y).
+
+```{r}
+library(questionr)
+# Chargement des données
+don <- readRDS("data/civ_afrobarometer_2023/data/survey_data.RDS")
+# Sélection des variables
+X <- don$Q101
+Y <- don$Q58A
+
+
+# Dénombrement de X
+table(X)
+
+# Dénombrement de Y
+levels(Y) <-c(NA, "Non vacciné","Vacciné",NA,NA)
+table(Y)
+
+# tableau croisé
+tabcont<-table(X,Y)
+addmargins(tabcont)
+
+# Pourcentages
+lprop(tabcont)
+
+# graphique
+plot(tabcont, col=c("orange","green"),main = "Sexe et vaccination Covid 19",sub = "Enquêtes Afrobarometer 2023")
+
+# Test du chi2
+chisq.test(tabcont)
+
+```
+
+
+On constate que les hommes sont un peu plus nombreux (39.5%)  que les femmes (32.6%) à déclarer  avoir reçu une vacination contre le Covid-19 au moment de l'enquête Afrobarometer de 2023. Le test du chi-2 montre que la relation est légèrement significative (p < 0.05).
+

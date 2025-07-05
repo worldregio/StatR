@@ -86,7 +86,17 @@ website:
         - href: Atelier6.qmd
           text: "Atelier6 : Urbanisation" 
         - href: Atelier7.qmd
-          text: "Atelier7 : Transport"           
+          text: "Atelier7 : Transport"  
+      - text: "DONNNEES"
+        menu: 
+        - href: Data_001.qmd
+          text: "Afrique : développement 2018"  
+        - href: Data_002.qmd
+          text: "Afrique : IDH régional 1992-2022"  
+        - href: Data_003.qmd
+          text: "Côte d'Ivoire : RP 2021" 
+        - href: Data_004.qmd
+          text: "Côte d'Ivoire : Enquête Afrobarometer 2023" 
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR

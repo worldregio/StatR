@@ -1,0 +1,511 @@
+oldcode;dis_code;dis_nom;dep_code;dep_nom;spr_code;spr_nom;pop;men
+CI010101;A;Abidjan;A1;Abidjan;A101;Abidjan;5616633;1261750
+CI010102;A;Abidjan;A1;Abidjan;A102;Anyama;389592;80147
+CI010103;A;Abidjan;A1;Abidjan;A103;Bingerville;204656;46607
+CI010104;A;Abidjan;A1;Abidjan;A104;Brofodoumé;20357;5088
+CI010105;A;Abidjan;A1;Abidjan;A105;Songon;89778;20544
+CI020101;B;Yamoussoukro;B1;Attiégouakro;B101;Attiégouakro;14863;2819
+CI020102;B;Yamoussoukro;B1;Attiégouakro;B102;Lolobo;34650;6513
+CI020201;B;Yamoussoukro;B1;Yamoussoukro;B103;Yamoussoukro;340234;67394
+CI020202;B;Yamoussoukro;B1;Yamoussoukro;B104;Kossou;32326;6034
+CI290102;C;Bas-Sassandra;C1;San Pédro;C101;Doba;95246;17498
+CI290103;C;Bas-Sassandra;C1;San Pédro;C102;Dogbo;61632;10015
+CI290104;C;Bas-Sassandra;C1;San Pédro;C103;Gabiadji;113369;20666
+CI290105;C;Bas-Sassandra;C1;San Pédro;C104;Grand-Béréby;129340;26269
+CI290101;C;Bas-Sassandra;C1;San Pédro;C105;San-Pédro;390654;75903
+CI290202;C;Bas-Sassandra;C2;Tabou;C201;Dapo-Iboké;20368;4647
+CI290203;C;Bas-Sassandra;C2;Tabou;C202;Djamandioké;22824;3372
+CI290204;C;Bas-Sassandra;C2;Tabou;C203;Djouroutou;91316;15377
+CI290205;C;Bas-Sassandra;C2;Tabou;C204;Grabo;53824;9789
+CI290206;C;Bas-Sassandra;C2;Tabou;C205;Olodio;19429;4786
+CI290201;C;Bas-Sassandra;C2;Tabou;C206;Tabou;62719;9743
+CI260101;C;Bas-Sassandra;C3;Buyo;C301;Buyo;100848;15769
+CI260102;C;Bas-Sassandra;C3;Buyo;C302;Dapéoua;75721;11922
+CI260202;C;Bas-Sassandra;C4;Guéyo;C401;Dabouyo;45751;7579
+CI260201;C;Bas-Sassandra;C4;Guéyo;C402;Guéyo;56462;10230
+CI260402;C;Bas-Sassandra;C6;Méagui;C501;Gnanmangui;83794;13047
+CI260301;C;Bas-Sassandra;C5;Méagui;C502;Méagui;153483;33047
+CI260302;C;Bas-Sassandra;C5;Méagui;C503;Oupoyo;61973;9385
+CI260403;C;Bas-Sassandra;C6;Soubré;C601;Grand-Zatry;112049;17399
+CI260404;C;Bas-Sassandra;C6;Soubré;C602;Liliyo;82566;14682
+CI260405;C;Bas-Sassandra;C6;Soubré;C603;Okrouyo;120053;19805
+CI260401;C;Bas-Sassandra;C6;Soubré;C604;Soubre;272773;56747
+CI120101;C;Bas-Sassandra;C7;Fresco;C701;Dahiri;34821;5802
+CI120102;C;Bas-Sassandra;C7;Fresco;C702;Fresco;48098;10602
+CI120103;C;Bas-Sassandra;C7;Fresco;C703;Gbagbam;24832;4222
+CI120202;C;Bas-Sassandra;C8;Sassandra;C801;Dakpadou;71998;12089
+CI120203;C;Bas-Sassandra;C8;Sassandra;C802;Grihiri;41965;7083
+CI120204;C;Bas-Sassandra;C8;Sassandra;C803;Lobakuya;42746;6521
+CI120205;C;Bas-Sassandra;C8;Sassandra;C804;Medon;17437;3554
+CI120206;C;Bas-Sassandra;C8;Sassandra;C805;Sago;91140;17190
+CI120201;C;Bas-Sassandra;C8;Sassandra;C806;Sassandra;87945;18028
+CI200101;D;Comoe;D1;Abengourou;D101;Abengourou;164424;32376
+CI200102;D;Comoe;D1;Abengourou;D102;Amélékia;25387;6863
+CI200103;D;Comoe;D1;Abengourou;D103;Aniassué;42729;8215
+CI200104;D;Comoe;D1;Abengourou;D104;Ebilassokro;28331;5098
+CI200105;D;Comoe;D1;Abengourou;D105;Niable;57081;10734
+CI200106;D;Comoe;D1;Abengourou;D106;Yakasse-Féyassé;52445;11742
+CI200107;D;Comoe;D1;Abengourou;D107;Zaranou;60142;12466
+CI200201;D;Comoe;D2;Agnibilékrou;D201;Agnibilekrou;99501;23896
+CI200202;D;Comoe;D2;Agnibilékrou;D202;Akoboissué;36022;7281
+CI200203;D;Comoe;D2;Agnibilékrou;D203;Damé;23691;4501
+CI200204;D;Comoe;D2;Agnibilékrou;D204;Duffrebo;44107;8738
+CI200205;D;Comoe;D2;Agnibilékrou;D205;Tanguélan;12944;2466
+CI200301;D;Comoe;D3;Béttié;D301;Bettié;33020;6207
+CI200302;D;Comoe;D3;Béttié;D302;Diamarakro;36621;5558
+CI300101;D;Comoe;D4;Aboisso;D401;Aboisso;100903;23098
+CI300102;D;Comoe;D4;Aboisso;D402;Adaou;51050;8836
+CI300103;D;Comoe;D4;Aboisso;D403;Adjouan;28663;5347
+CI300104;D;Comoe;D4;Aboisso;D404;Ayamé;28272;5632
+CI300105;D;Comoe;D4;Aboisso;D405;Bianouan;49647;8165
+CI300106;D;Comoe;D4;Aboisso;D406;Kouakro;34685;6780
+CI300107;D;Comoe;D4;Aboisso;D407;Maféré;46410;10134
+CI300108;D;Comoe;D4;Aboisso;D408;Yaou;22213;3749
+CI300201;D;Comoe;D5;Adiaké;D501;Adiake;50556;10651
+CI300202;D;Comoe;D5;Adiaké;D502;Assinie-Mafia;21941;5208
+CI300203;D;Comoe;D5;Adiaké;D503;Etuéboué;15510;2541
+CI300301;D;Comoe;D6;Grand-Bassam;D601;Bongo;24148;5614
+CI300302;D;Comoe;D6;Grand-Bassam;D602;Bonoua;118388;27302
+CI300303;D;Comoe;D6;Grand-Bassam;D603;Grand-Bassam;124567;27232
+CI300402;D;Comoe;D7;Tiapoum;D701;Noé;24651;4335
+CI300403;D;Comoe;D7;Tiapoum;D702;Nouamou;17403;2491
+CI300401;D;Comoe;D7;Tiapoum;D703;Tiapoum;25887;4799
+CI210101;E;Denguele;E1;Gbeleban;E101;Gbéléban;4507;797
+CI210102;E;Denguele;E1;Gbeleban;E102;Samango;17219;2680
+CI210103;E;Denguele;E1;Gbeleban;E103;Seydougou;7806;1013
+CI210202;E;Denguele;E2;Madinani;E201;Fengolo;7462;693
+CI210201;E;Denguele;E2;Madinani;E202;Madinani;32751;3558
+CI210203;E;Denguele;E2;Madinani;E203;N'Goloblasso;10035;930
+CI210302;E;Denguele;E3;Odienne;E301;Bako;28373;3767
+CI210303;E;Denguele;E3;Odienne;E302;Bougousso;10151;1066
+CI210304;E;Denguele;E3;Odienne;E303;Dioulatiedougou;20285;3025
+CI210301;E;Denguele;E3;Odienne;E304;Odienné;86279;20193
+CI210305;E;Denguele;E3;Odienne;E305;Tiémé;11644;1986
+CI210402;E;Denguele;E4;Samatiguila;E401;Kimbirila Sud;11933;1686
+CI210401;E;Denguele;E4;Samatiguila;E402;Samatiguila;7777;1612
+CI210502;E;Denguele;E5;Séguélon;E501;Gbongaha;12372;1772
+CI210501;E;Denguele;E5;Séguélon;E502;Séguélon;21213;3338
+CI100101;E;Denguele;E6;Kaniasso;E601;Goulia;27121;2331
+CI100102;E;Denguele;E6;Kaniasso;E602;Kaniasso;18639;2193
+CI100103;E;Denguele;E6;Kaniasso;E603;Mahandiana-Sokourani;38812;4035
+CI100202;E;Denguele;E7;Minignan;E701;Kimbirila-Nord;9415;1242
+CI100201;E;Denguele;E7;Minignan;E702;Minignan;24251;4292
+CI100203;E;Denguele;E7;Minignan;E703;Sokoro;8109;1586
+CI100204;E;Denguele;E7;Minignan;E704;Tienko;19862;2833
+CI130101;F;Goh-Djiboua;F1;Gagnoa;F101;Bayota;54139;9022
+CI130102;F;Goh-Djiboua;F1;Gagnoa;F102;Dahiépa-Kéhi;20827;4261
+CI130103;F;Goh-Djiboua;F1;Gagnoa;F103;Dignago;35712;6233
+CI130104;F;Goh-Djiboua;F1;Gagnoa;F104;Dougroupalégnoa;58655;9609
+CI130105;F;Goh-Djiboua;F1;Gagnoa;F105;Doukouyo;18867;2869
+CI130106;F;Goh-Djiboua;F1;Gagnoa;F106;Gagnoa;277044;56063
+CI130107;F;Goh-Djiboua;F1;Gagnoa;F107;Galébouo;38550;7442
+CI130108;F;Goh-Djiboua;F1;Gagnoa;F108;Gnagbodougnoa;17196;3171
+CI130109;F;Goh-Djiboua;F1;Gagnoa;F109;Guiberoua;77669;14794
+CI130110;F;Goh-Djiboua;F1;Gagnoa;F110;Ouragahio;50150;9227
+CI130111;F;Goh-Djiboua;F1;Gagnoa;F111;Sérihio;46320;7537
+CI130112;F;Goh-Djiboua;F1;Gagnoa;F112;Yopohue;29367;4865
+CI130202;F;Goh-Djiboua;F2;Oumé;F201;Diégonéfla;74076;14809
+CI130203;F;Goh-Djiboua;F2;Oumé;F202;Guépahouo;28007;4427
+CI130201;F;Goh-Djiboua;F2;Oumé;F203;Oumé;127153;25028
+CI130204;F;Goh-Djiboua;F2;Oumé;F204;Tonla;31550;5192
+CI220101;F;Goh-Djiboua;F3;Divo;F301;Chiépo;26330;3809
+CI220102;F;Goh-Djiboua;F3;Divo;F302;Didoko;34280;5510
+CI220103;F;Goh-Djiboua;F3;Divo;F303;Divo;294559;54662
+CI220104;F;Goh-Djiboua;F3;Divo;F304;Hiré;78139;16619
+CI220105;F;Goh-Djiboua;F3;Divo;F305;Nébo;32516;5602
+CI220106;F;Goh-Djiboua;F3;Divo;F306;Ogoudou;72586;13042
+CI220107;F;Goh-Djiboua;F3;Divo;F307;Zégo;33278;4421
+CI220202;F;Goh-Djiboua;F4;Guitry;F401;Dairo Didizo;59267;9164
+CI220201;F;Goh-Djiboua;F4;Guitry;F402;Guitry;79231;14257
+CI220203;F;Goh-Djiboua;F4;Guitry;F403;Lauzoua;32024;5400
+CI220204;F;Goh-Djiboua;F4;Guitry;F404;Yocoboué;26713;4425
+CI220302;F;Goh-Djiboua;F5;Lakota;F501;Djidji;16114;2884
+CI220304;F;Goh-Djiboua;F5;Lakota;F502;Kadéko;19959;3002
+CI220303;F;Goh-Djiboua;F5;Lakota;F503;Goudouko;32677;6722
+CI220301;F;Goh-Djiboua;F5;Lakota;F504;Lakota;169330;33968
+CI220305;F;Goh-Djiboua;F5;Lakota;F505;Niambézaria;84303;14338
+CI220306;F;Goh-Djiboua;F5;Lakota;F506;Zikisso;11851;2260
+CI060101;G;Lacs;G1;Didievi;G101;Boli;14006;2313
+CI060102;G;Lacs;G1;Didievi;G102;Didievi;26500;4867
+CI060103;G;Lacs;G1;Didievi;G103;Molonou-Blé;22431;3600
+CI060104;G;Lacs;G1;Didievi;G104;Raviart;18339;2923
+CI060105;G;Lacs;G1;Didievi;G105;Tie N'Diékro;12353;2158
+CI060201;G;Lacs;G2;Djekanou;G201;Bonikro;10337;2824
+CI060202;G;Lacs;G2;Djekanou;G202;Djékanou;26944;5978
+CI060302;G;Lacs;G3;Tiébissou;G301;Lomokankro;14988;2578
+CI060303;G;Lacs;G3;Tiébissou;G302;Molonou;23062;4647
+CI060301;G;Lacs;G3;Tiébissou;G303;Tiébissou;65251;12465
+CI060304;G;Lacs;G3;Tiébissou;G304;Yakpabo-Sakassou;13020;2475
+CI060402;G;Lacs;G4;Toumodi;G401;Angoda;11819;2222
+CI060403;G;Lacs;G4;Toumodi;G402;Kokoumbo;34575;6764
+CI060404;G;Lacs;G4;Toumodi;G403;Kpouèbo;33388;6758
+CI060401;G;Lacs;G4;Toumodi;G404;Toumodi;88580;17809
+CI190103;G;Lacs;G5;Daoukro;G501;Daoukro;101136;23632
+CI190104;G;Lacs;G5;Daoukro;G502;Ettrokro;22963;3696
+CI190105;G;Lacs;G5;Daoukro;G503;N'Gattakro;11707;2800
+CI190107;G;Lacs;G5;Daoukro;G504;Samanza;12290;2093
+CI190202;G;Lacs;G6;M'Bahiakro;G601;Bonguéra;18301;2799
+CI190203;G;Lacs;G6;M'Bahiakro;G602;Kondossou;10311;1901
+CI190201;G;Lacs;G6;M'Bahiakro;G603;M'Bahiakro;49758;9904
+CI190101;G;Lacs;G7;Ouellé;G701;Akpassanou;5693;1082
+CI190102;G;Lacs;G7;Ouellé;G702;Ananda;13166;2304
+CI190106;G;Lacs;G7;Ouellé;G703;Ouellé;37641;8675
+CI190302;G;Lacs;G8;Prikro;G801;Anianou;7956;1032
+CI190303;G;Lacs;G8;Prikro;G802;Famienkro;17163;2372
+CI190304;G;Lacs;G8;Prikro;G803;Koffi-Amonkro;12933;2165
+CI190305;G;Lacs;G8;Prikro;G804;Nafana;13667;2179
+CI190301;G;Lacs;G8;Prikro;G805;Prikro;43875;7782
+CI270101;G;Lacs;G9;Bocanda;G901;Bengassou;24655;4078
+CI270102;G;Lacs;G9;Bocanda;G902;Bocanda;59242;10525
+CI270103;G;Lacs;G9;Bocanda;G903;Kouadioblékro;20455;3226
+CI270104;G;Lacs;G9;Bocanda;G904;N'Zécrezessou;17118;3223
+CI270201;G;Lacs;GA;Dimbokro;GA01;Abigui;8665;1558
+CI270202;G;Lacs;GA;Dimbokro;GA02;Diangokro;16135;4072
+CI270203;G;Lacs;GA;Dimbokro;GA03;Dimbokro;70198;15377
+CI270204;G;Lacs;GA;Dimbokro;GA04;Nofou;7194;1516
+CI270301;G;Lacs;GB;Kouassi-Kouassikro;GB01;Kouassi-Kouassikro;24421;3977
+CI270302;G;Lacs;GB;Kouassi-Kouassikro;GB02;Mékro;6541;1073
+CI250101;G;Lacs;GC;Arrah;GC01;Arrah;45625;9762
+CI250102;G;Lacs;GC;Arrah;GC02;Kotobi;37595;7538
+CI250103;G;Lacs;GC;Arrah;GC03;Krégbé;20626;3898
+CI250201;G;Lacs;GD;Bongouanou;GD01;Andé;58287;13387
+CI250202;G;Lacs;GD;Bongouanou;GD02;Assié-Koumassi;21962;3338
+CI250203;G;Lacs;GD;Bongouanou;GD03;Bongouanou;74281;16585
+CI250204;G;Lacs;GD;Bongouanou;GD04;N'Guessankro;38629;7130
+CI250302;G;Lacs;GE;M'Batto;GE01;Anoumaba;22572;3925
+CI250303;G;Lacs;GE;M'Batto;GE02;Assahara;11495;1856
+CI250301;G;Lacs;GE;M'Batto;GE03;M'Batto;76129;12338
+CI250304;G;Lacs;GE;M'Batto;GE04;Tiémélékro;32554;6668
+CI150101;H;Lagunes;H1;Dabou;H101;Dabou;138083;29086
+CI150102;H;Lagunes;H1;Dabou;H102;Lopou;35286;7491
+CI150103;H;Lagunes;H1;Dabou;H103;Toupah;40212;9205
+CI150201;H;Lagunes;H2;Grand-Lahou;H201;Ahouanou;33939;5895
+CI150202;H;Lagunes;H2;Grand-Lahou;H202;Bacanda;22926;3648
+CI150203;H;Lagunes;H2;Grand-Lahou;H203;Ebonou;18552;3543
+CI150204;H;Lagunes;H2;Grand-Lahou;H204;Grand Lahou;77479;15533
+CI150205;H;Lagunes;H2;Grand-Lahou;H205;Toukouzou;2935;648
+CI150302;H;Lagunes;H3;Jacqueville;H301;Attoutou;30899;6784
+CI150301;H;Lagunes;H3;Jacqueville;H302;Jacqueville;49694;11327
+CI030101;H;Lagunes;H4;Agboville;H401;Aboudé;28315;4129
+CI030103;H;Lagunes;H4;Agboville;H402;Ananguié;18311;2805
+CI030102;H;Lagunes;H4;Agboville;H403;Agboville;135082;27333
+CI030104;H;Lagunes;H4;Agboville;H404;Attobrou;25972;4008
+CI030105;H;Lagunes;H4;Agboville;H405;Azaguié;38066;8761
+CI030106;H;Lagunes;H4;Agboville;H406;Cechi;25967;3951
+CI030107;H;Lagunes;H4;Agboville;H407;Grand-Morié;25302;4026
+CI030108;H;Lagunes;H4;Agboville;H408;Guessiguié;26167;4585
+CI030109;H;Lagunes;H4;Agboville;H409;Loviguié;19771;3445
+CI030110;H;Lagunes;H4;Agboville;H410;Oress-Krobou;8611;1277
+CI030111;H;Lagunes;H4;Agboville;H411;Rubino;32775;5811
+CI030202;H;Lagunes;H5;Sikensi;H501;Gomon;34865;5795
+CI030201;H;Lagunes;H5;Sikensi;H502;Sikensi;91032;16715
+CI030302;H;Lagunes;H6;Taabo;H601;Pacobo;19572;4269
+CI030301;H;Lagunes;H6;Taabo;H602;Taabo;57189;10485
+CI030402;H;Lagunes;H7;Tiassalé;H701;Gbolouville;42476;6430
+CI030403;H;Lagunes;H7;Tiassalé;H702;Morokro;55636;8158
+CI030404;H;Lagunes;H7;Tiassalé;H703;N'Douci;97194;17644
+CI030401;H;Lagunes;H7;Tiassalé;H704;Tiassalé;83648;19135
+CI240101;H;Lagunes;H8;Adzopé;H801;Adzopé;156488;25668
+CI240102;H;Lagunes;H8;Adzopé;H802;Agou;31091;4555
+CI240103;H;Lagunes;H8;Adzopé;H803;Annepé;25367;2721
+CI240104;H;Lagunes;H8;Adzopé;H804;Assikoi;20899;2566
+CI240105;H;Lagunes;H8;Adzopé;H805;Bécédi-Brignan;22614;2750
+CI240106;H;Lagunes;H8;Adzopé;H806;Yakassé-Mé;27268;3668
+CI240201;H;Lagunes;H9;Akoupé;H901;Afféry;47109;7391
+CI240202;H;Lagunes;H9;Akoupé;H902;Akoupé;79065;11500
+CI240203;H;Lagunes;H9;Akoupé;H903;Bécouéfin;30525;5066
+CI240301;H;Lagunes;HA;Alépé;HA01;Aboisso-Comoé;33471;4074
+CI240302;H;Lagunes;HA;Alépé;HA02;Alépé;60468;11141
+CI240303;H;Lagunes;HA;Alépé;HA03;Allosso;13860;2195
+CI240304;H;Lagunes;HA;Alépé;HA04;Danguira;55413;8351
+CI240305;H;Lagunes;HA;Alépé;HA05;Oghlwapo;17041;3154
+CI240402;H;Lagunes;HB;Yakassé-Attobrou;HB01;Abongoua;17497;2208
+CI240403;H;Lagunes;HB;Yakassé-Attobrou;HB02;Biéby;24178;3037
+CI240401;H;Lagunes;HB;Yakassé-Attobrou;HB03;Yakasse-Attobrou;64311;7999
+CI320101;I;Montagnes;I1;Biankouma;I101;Biankouma;71470;14505
+CI320102;I;Montagnes;I1;Biankouma;I102;Blapleu;25371;5150
+CI320103;I;Montagnes;I1;Biankouma;I103;Gbangbégouiné;4132;1256
+CI320104;I;Montagnes;I1;Biankouma;I104;Gbonné;54809;10246
+CI320105;I;Montagnes;I1;Biankouma;I105;Gouiné;21835;4582
+CI320106;I;Montagnes;I1;Biankouma;I106;Kpata;9278;2127
+CI320107;I;Montagnes;I1;Biankouma;I107;Santa;51819;10161
+CI320201;I;Montagnes;I2;Danané;I201;Daleu;56653;10998
+CI320202;I;Montagnes;I2;Danané;I202;Danané;131586;26004
+CI320203;I;Montagnes;I2;Danané;I203;Gbon-Houyé;19090;3522
+CI320204;I;Montagnes;I2;Danané;I204;Kouan-Houlé;36769;7056
+CI320205;I;Montagnes;I2;Danané;I205;Mahapleu;66898;13396
+CI320206;I;Montagnes;I2;Danané;I206;Seileu;23525;4083
+CI320207;I;Montagnes;I2;Danané;I207;Zonneu;29491;5137
+CI320302;I;Montagnes;I3;Man;I301;Bogouiné;21096;4021
+CI320303;I;Montagnes;I3;Man;I302;Fagnampleu;3149;707
+CI320304;I;Montagnes;I3;Man;I303;Gbangbegouiné-Yati;25660;4960
+CI320305;I;Montagnes;I3;Man;I304;Logoualé;32854;6352
+CI320301;I;Montagnes;I3;Man;I305;Man;241969;49052
+CI320306;I;Montagnes;I3;Man;I306;Podiagouiné;32607;6319
+CI320307;I;Montagnes;I3;Man;I307;Sandougou-Soba;7347;1860
+CI320308;I;Montagnes;I3;Man;I308;Sangouiné;63521;12048
+CI320309;I;Montagnes;I3;Man;I309;Yapleu;11145;2000
+CI320310;I;Montagnes;I3;Man;I310;Zagoué;5822;1497
+CI320311;I;Montagnes;I3;Man;I311;Ziogouiné;15966;2880
+CI320401;I;Montagnes;I4;Sipilou;I401;Sipilou;41516;7826
+CI320402;I;Montagnes;I4;Sipilou;I402;Yorodougou;31593;6935
+CI320502;I;Montagnes;I5;Zouan-Hounien;I501;Banneu;20393;3271
+CI320503;I;Montagnes;I5;Zouan-Hounien;I502;Bin-Houyé;30796;5080
+CI320504;I;Montagnes;I5;Zouan-Hounien;I503;Goulaleu;30250;4961
+CI320505;I;Montagnes;I5;Zouan-Hounien;I504;Téapleu;42814;7351
+CI320506;I;Montagnes;I5;Zouan-Hounien;I505;Yelleu;15586;2516
+CI320501;I;Montagnes;I5;Zouan-Hounien;I506;Zouan Hounien;111099;20792
+CI090101;I;Montagnes;I6;Bloléquin;I601;Bloléquin;123133;24448
+CI090102;I;Montagnes;I6;Bloléquin;I602;Diboké;24758;5467
+CI090103;I;Montagnes;I6;Bloléquin;I603;Doké;35677;7767
+CI090104;I;Montagnes;I6;Bloléquin;I604;Tinhou;22744;4769
+CI090105;I;Montagnes;I6;Bloléquin;I605;Zéaglo;31631;6559
+CI090202;I;Montagnes;I7;Guiglo;I701;Bédi-Gaozon;26618;5286
+CI090201;I;Montagnes;I7;Guiglo;I702;Guiglo;171454;31791
+CI090203;I;Montagnes;I7;Guiglo;I703;Kaadé;39413;7015
+CI090204;I;Montagnes;I7;Guiglo;I704;Nizahon;21897;3237
+CI090301;I;Montagnes;I8;Taï;I801;Taï;42909;9238
+CI090302;I;Montagnes;I8;Taï;I802;Zagné;74478;15876
+CI090402;I;Montagnes;I9;Toulepleu;I901;Bakoubly;7186;1537
+CI090403;I;Montagnes;I9;Toulepleu;I902;Méo;22012;4719
+CI090404;I;Montagnes;I9;Toulepleu;I903;Nézobly;9300;1130
+CI090405;I;Montagnes;I9;Toulepleu;I904;Péhé;17609;3227
+CI090406;I;Montagnes;I9;Toulepleu;I905;Tiobly;9742;1807
+CI090401;I;Montagnes;I9;Toulepleu;I906;Toulepleu;27680;5671
+CI160101;I;Montagnes;IA;Bangolo;IA01;Bangolo;56415;12169
+CI160102;I;Montagnes;IA;Bangolo;IA02;Béoué-Zibiao;18297;3585
+CI160103;I;Montagnes;IA;Bangolo;IA03;Bléniméouin;18593;2754
+CI160104;I;Montagnes;IA;Bangolo;IA04;Diéouzon;18316;3472
+CI160105;I;Montagnes;IA;Bangolo;IA05;Gohouo-Zagna;15564;2290
+CI160106;I;Montagnes;IA;Bangolo;IA06;Guinglo-Tahouaké;17999;3268
+CI160107;I;Montagnes;IA;Bangolo;IA07;Kahin-Zarabaon;59759;10211
+CI160108;I;Montagnes;IA;Bangolo;IA08;Zéo;12822;2641
+CI160109;I;Montagnes;IA;Bangolo;IA09;Zou;52864;8820
+CI160201;I;Montagnes;IB;Duékoué;IB01;Bagohouo;30001;4921
+CI160202;I;Montagnes;IB;Duékoué;IB02;Duékoué;220953;43377
+CI160203;I;Montagnes;IB;Duékoué;IB03;Gbapleu;60833;9211
+CI160204;I;Montagnes;IB;Duékoué;IB04;Guéhiébly;52689;8583
+CI160205;I;Montagnes;IB;Duékoué;IB05;Guézon;56435;9198
+CI160301;I;Montagnes;IC;Facobly;IC01;Facobly;27352;5052
+CI160302;I;Montagnes;IC;Facobly;IC02;Guézon;10208;1790
+CI160303;I;Montagnes;IC;Facobly;IC03;Koua;11892;2017
+CI160304;I;Montagnes;IC;Facobly;IC04;Sémien;35636;5440
+CI160305;I;Montagnes;IC;Facobly;IC05;Tiény-Séably;9522;1816
+CI160401;I;Montagnes;ID;Kouibly;ID01;Kouibly;49047;7619
+CI160402;I;Montagnes;ID;Kouibly;ID02;Nidrou;12953;2927
+CI160403;I;Montagnes;ID;Kouibly;ID03;Ouyably-Gnondrou;61786;8616
+CI160404;I;Montagnes;ID;Kouibly;ID04;Totrodrou;20936;4125
+CI180101;J;Sassandra-Marahoue;J1;Daloa;J101;Bédiala;84474;12125
+CI180102;J;Sassandra-Marahoue;J1;Daloa;J102;Daloa;421879;80584
+CI180103;J;Sassandra-Marahoue;J1;Daloa;J103;Gadouan;62056;9546
+CI180104;J;Sassandra-Marahoue;J1;Daloa;J104;Gboguhé;69020;11154
+CI180105;J;Sassandra-Marahoue;J1;Daloa;J105;Gonaté;44611;7198
+CI180106;J;Sassandra-Marahoue;J1;Daloa;J106;Zaibo;23338;3632
+CI180202;J;Sassandra-Marahoue;J2;Issia;J201;Boguédia;26336;4466
+CI180203;J;Sassandra-Marahoue;J2;Issia;J202;Iboguhé;56481;9181
+CI180201;J;Sassandra-Marahoue;J2;Issia;J203;Issia;126252;23248
+CI180204;J;Sassandra-Marahoue;J2;Issia;J204;Nahio;22943;4223
+CI180205;J;Sassandra-Marahoue;J2;Issia;J205;Namané;44527;7486
+CI180206;J;Sassandra-Marahoue;J2;Issia;J206;Saïoua;100085;17517
+CI180207;J;Sassandra-Marahoue;J2;Issia;J207;Tapéguia;34004;5666
+CI180302;J;Sassandra-Marahoue;J3;Vavoua;J301;Bazra-Nattis;67048;8326
+CI180303;J;Sassandra-Marahoue;J3;Vavoua;J302;Dananon;36746;4679
+CI180304;J;Sassandra-Marahoue;J3;Vavoua;J303;Dania;106612;14938
+CI180305;J;Sassandra-Marahoue;J3;Vavoua;J304;Kétro-Bassam;24968;3062
+CI180306;J;Sassandra-Marahoue;J3;Vavoua;J305;Seitifla;109252;14250
+CI180301;J;Sassandra-Marahoue;J3;Vavoua;J306;Vavoua;132528;21222
+CI180402;J;Sassandra-Marahoue;J4;Zoukougbeu;J401;Domangbeu;18183;2750
+CI180403;J;Sassandra-Marahoue;J4;Zoukougbeu;J402;Grégbeu;26505;4702
+CI180404;J;Sassandra-Marahoue;J4;Zoukougbeu;J403;Guéssabo;41931;7099
+CI180401;J;Sassandra-Marahoue;J4;Zoukougbeu;J404;Zoukougbeu;59918;10448
+CI230102;J;Sassandra-Marahoue;J5;Bonon;J501;Bonon;116871;18735
+CI230107;J;Sassandra-Marahoue;J5;Bonon;J502;Zaguiéta;50525;6731
+CI230101;J;Sassandra-Marahoue;J6;Bouaflé;J601;Bégbéssou;24476;5519
+CI230103;J;Sassandra-Marahoue;J6;Bouaflé;J602;Bouaflé;213967;45210
+CI230104;J;Sassandra-Marahoue;J6;Bouaflé;J603;N'Douffoukankro;20025;3575
+CI230105;J;Sassandra-Marahoue;J6;Bouaflé;J604;Pakouabo;19597;4411
+CI230106;J;Sassandra-Marahoue;J6;Bouaflé;J605;Tibéita;22239;4301
+CI230302;J;Sassandra-Marahoue;J7;Gohitafla;J701;Gohitafla;46470;6249
+CI230303;J;Sassandra-Marahoue;J7;Gohitafla;J702;Iriéfla;8406;1107
+CI230305;J;Sassandra-Marahoue;J7;Gohitafla;J703;Maminigui;28495;4012
+CI230202;J;Sassandra-Marahoue;J8;Sinfra;J801;Bazré;30562;5277
+CI230203;J;Sassandra-Marahoue;J8;Sinfra;J802;Kononfla;55427;10195
+CI230204;J;Sassandra-Marahoue;J8;Sinfra;J803;Kouétinfla;22028;4871
+CI230201;J;Sassandra-Marahoue;J8;Sinfra;J804;Sinfra;137210;24635
+CI230304;J;Sassandra-Marahoue;J9;Zuénoula;J901;Kanzra;36674;5605
+CI230306;J;Sassandra-Marahoue;J9;Zuénoula;J902;Voueboufla;25213;4779
+CI230307;J;Sassandra-Marahoue;J9;Zuénoula;J903;Zanzra;44381;7278
+CI230301;J;Sassandra-Marahoue;J9;Zuénoula;J904;Zuénoula;78613;14815
+CI280101;K;Savanes;K1;Dikodougou;K101;Boron;34308;4587
+CI280102;K;Savanes;K1;Dikodougou;K102;Dikodougou;47935;7362
+CI280103;K;Savanes;K1;Dikodougou;K103;Guiembé;19872;3195
+CI280202;K;Savanes;K2;Korhogo;K201;Dassoungboho;8703;1381
+CI280203;K;Savanes;K2;Korhogo;K202;Kanoroba;24548;3436
+CI280204;K;Savanes;K2;Korhogo;K203;Karakoro;22982;3498
+CI280205;K;Savanes;K2;Korhogo;K204;Kiémou;31958;5822
+CI280206;K;Savanes;K2;Korhogo;K205;Kombolokoura;8930;1776
+CI280207;K;Savanes;K2;Korhogo;K206;Komborodougou;16703;2810
+CI280208;K;Savanes;K2;Korhogo;K207;Koni;17054;2699
+CI280201;K;Savanes;K2;Korhogo;K208;Korhogo;440926;81738
+CI280209;K;Savanes;K2;Korhogo;K209;Lataha;26895;4516
+CI280211;K;Savanes;K2;Korhogo;K210;Nafoun;10206;1442
+CI280212;K;Savanes;K2;Korhogo;K211;Napiéléodougou;31004;6429
+CI280210;K;Savanes;K2;Korhogo;K212;N'Ganon;9181;1767
+CI280213;K;Savanes;K2;Korhogo;K213;Niofoin;36772;6844
+CI280214;K;Savanes;K2;Korhogo;K214;Sirasso;29633;4495
+CI280215;K;Savanes;K2;Korhogo;K215;Sohouo;11434;1907
+CI280216;K;Savanes;K2;Korhogo;K216;Tioroniaradougou;21464;3424
+CI280302;K;Savanes;K3;M'Bengué;K301;Bougou;16369;1667
+CI280303;K;Savanes;K3;M'Bengué;K302;Katiali;13074;1810
+CI280304;K;Savanes;K3;M'Bengué;K303;Katogo;19749;2912
+CI280301;K;Savanes;K3;M'Bengué;K304;M'Bengué;65779;11963
+CI280402;K;Savanes;K4;Sinématiali;K401;Bahouakaha;6300;1066
+CI280403;K;Savanes;K4;Sinématiali;K402;Kagbolodougou;10153;1783
+CI280404;K;Savanes;K4;Sinématiali;K403;Sédiogo;6600;1181
+CI280401;K;Savanes;K4;Sinématiali;K404;Sinématiali;51929;8663
+CI310101;K;Savanes;K5;Ferkessédougou;K501;Ferkéssédougou;160267;29865
+CI310102;K;Savanes;K5;Ferkessédougou;K502;Koumbala;14531;2085
+CI310103;K;Savanes;K5;Ferkessédougou;K503;Togoniéré;15342;2487
+CI310202;K;Savanes;K6;Kong;K601;Bilimono;28740;4072
+CI310201;K;Savanes;K6;Kong;K602;Kong;33391;5917
+CI310203;K;Savanes;K6;Kong;K603;Nafana;28439;4032
+CI310204;K;Savanes;K6;Kong;K604;Sikolo;27733;5371
+CI310302;K;Savanes;K7;Ouangolodougou;K701;Diawala;85334;8067
+CI310303;K;Savanes;K7;Ouangolodougou;K702;Kaouara;33558;4142
+CI310304;K;Savanes;K7;Ouangolodougou;K703;Niellé;48524;5501
+CI310301;K;Savanes;K7;Ouangolodougou;K704;Ouangolodougou;82801;13218
+CI310305;K;Savanes;K7;Ouangolodougou;K705;Toumoukoro;44423;4959
+CI050101;K;Savanes;K8;Boundiali;K801;Baya;16715;2019
+CI050102;K;Savanes;K8;Boundiali;K802;Boundiali;92792;13905
+CI050103;K;Savanes;K8;Boundiali;K803;Ganaoni;25216;3676
+CI050104;K;Savanes;K8;Boundiali;K804;Kasséré;39106;5711
+CI050105;K;Savanes;K8;Boundiali;K805;Siempurgo;24713;4102
+CI050202;K;Savanes;K9;Kouto;K901;Blességué;21345;2364
+CI050203;K;Savanes;K9;Kouto;K902;Gbon;32189;2819
+CI050204;K;Savanes;K9;Kouto;K903;Kolia;32113;3097
+CI050201;K;Savanes;K9;Kouto;K904;Kouto;55893;5958
+CI050205;K;Savanes;K9;Kouto;K905;Sianhala;34048;2694
+CI050302;K;Savanes;KA;Tengrela;KA01;Débété;5229;699
+CI050303;K;Savanes;KA;Tengrela;KA02;Kanakono;30630;4821
+CI050304;K;Savanes;KA;Tengrela;KA03;Papara;13448;3443
+CI050301;K;Savanes;KA;Tengrela;KA04;Tengrela;92454;13496
+CI110101;L;Vallée du Bandama;L1;Béoumi;L101;Ando-Kékrénou;16826;2618
+CI110102;L;Vallée du Bandama;L1;Béoumi;L102;Béoumi;85600;15381
+CI110103;L;Vallée du Bandama;L1;Béoumi;L103;Bodokro;37048;5223
+CI110104;L;Vallée du Bandama;L1;Béoumi;L104;Kondrobo;18052;2534
+CI110105;L;Vallée du Bandama;L1;Béoumi;L105;Lolobo;11586;1592
+CI110106;L;Vallée du Bandama;L1;Béoumi;L106;Marabadiassa;10664;1870
+CI110107;L;Vallée du Bandama;L1;Béoumi;L107;N'Guéssankro;15239;2198
+CI110201;L;Vallée du Bandama;L2;Botro;L201;Botro;36461;5547
+CI110202;L;Vallée du Bandama;L2;Botro;L202;Diabo;35761;5539
+CI110203;L;Vallée du Bandama;L2;Botro;L203;Krofoinsou;13402;1999
+CI110204;L;Vallée du Bandama;L2;Botro;L204;Languibonou;32300;5224
+CI110301;L;Vallée du Bandama;L3;Bouaké;L301;Bouaké;832371;152187
+CI110302;L;Vallée du Bandama;L3;Bouaké;L302;Bounda;15710;1975
+CI110303;L;Vallée du Bandama;L3;Bouaké;L303;Brobo;22780;4123
+CI110304;L;Vallée du Bandama;L3;Bouaké;L304;Djébonoua;40481;6242
+CI110305;L;Vallée du Bandama;L3;Bouaké;L305;Mamini;20509;2953
+CI110402;L;Vallée du Bandama;L4;Sakassou;L401;Ayaou-Sran;16278;3431
+CI110403;L;Vallée du Bandama;L4;Sakassou;L402;Dibri-Assirikro;18405;3043
+CI110401;L;Vallée du Bandama;L4;Sakassou;L403;Sakassou;69386;13362
+CI110404;L;Vallée du Bandama;L4;Sakassou;L404;Toumodi-Sakassou;4041;981
+CI170101;L;Vallée du Bandama;L5;Dabakala;L501;Bassawa;21487;4376
+CI170102;L;Vallée du Bandama;L5;Dabakala;L502;Bonieredougou;27696;6095
+CI170103;L;Vallée du Bandama;L5;Dabakala;L503;Dabakala;78634;14894
+CI170104;L;Vallée du Bandama;L5;Dabakala;L504;Foumbolo;29022;7200
+CI170105;L;Vallée du Bandama;L5;Dabakala;L505;Niéméné;16684;3582
+CI170106;L;Vallée du Bandama;L5;Dabakala;L506;Satama-Sokoro;26163;6048
+CI170107;L;Vallée du Bandama;L5;Dabakala;L507;Satama-Sokoura;13067;3004
+CI170108;L;Vallée du Bandama;L5;Dabakala;L508;Sokala-Sobara;17824;2922
+CI170109;L;Vallée du Bandama;L5;Dabakala;L509;Tendéné-Bambarasso;15238;2648
+CI170110;L;Vallée du Bandama;L5;Dabakala;L510;Yaossédougou;8616;1535
+CI170202;L;Vallée du Bandama;L6;Katiola;L601;Fronan;56796;9327
+CI170201;L;Vallée du Bandama;L6;Katiola;L602;Katiola;90641;18052
+CI170203;L;Vallée du Bandama;L6;Katiola;L603;Timbé;15035;2694
+CI170302;L;Vallée du Bandama;L7;Niakaramandougou;L701;Arikokaha;13486;1807
+CI170303;L;Vallée du Bandama;L7;Niakaramandougou;L702;Badikaha;27498;6261
+CI170301;L;Vallée du Bandama;L7;Niakaramandougou;L703;Niakaramandougou;78301;14306
+CI170304;L;Vallée du Bandama;L7;Niakaramandougou;L704;Niédiékaha;13193;2166
+CI170305;L;Vallée du Bandama;L7;Niakaramandougou;L705;Tafiré;32240;5490
+CI170306;L;Vallée du Bandama;L7;Niakaramandougou;L706;Tortiya;30409;5279
+CI330102;M;Woroba;M1;Kani;M101;Djibrosso;22484;4710
+CI330103;M;Woroba;M1;Kani;M102;Fadiadougou;34552;6362
+CI330101;M;Woroba;M1;Kani;M103;Kani;55109;11327
+CI330104;M;Woroba;M1;Kani;M104;Morondo;19283;3641
+CI330202;M;Woroba;M2;Séguéla;M201;Bobi-Diarabana;25063;5800
+CI330203;M;Woroba;M2;Séguéla;M202;Dualla;9996;2489
+CI330204;M;Woroba;M2;Séguéla;M203;Kamalo;13584;2864
+CI330205;M;Woroba;M2;Séguéla;M204;Massala;40647;6181
+CI330201;M;Woroba;M2;Séguéla;M205;Séguéla;103980;18775
+CI330206;M;Woroba;M2;Séguéla;M206;Sifié;31264;7223
+CI330207;M;Woroba;M2;Séguéla;M207;Worofla;66713;11173
+CI070101;M;Woroba;M3;Dianra;M301;Dianra;61527;11176
+CI070102;M;Woroba;M3;Dianra;M302;Dianra-Village;57619;9752
+CI070202;M;Woroba;M4;Kounahiri;M401;Kongasso;37281;5462
+CI070201;M;Woroba;M4;Kounahiri;M402;Kounahiri;63830;9326
+CI070302;M;Woroba;M5;Mankono;M501;Bouandougou;45494;9705
+CI070301;M;Woroba;M5;Mankono;M502;Mankono;74165;11877
+CI070303;M;Woroba;M5;Mankono;M503;Marandallah;42729;6243
+CI070304;M;Woroba;M5;Mankono;M504;Sarhala;42450;9372
+CI070305;M;Woroba;M5;Mankono;M505;Tiéningboué;67055;8640
+CI040102;M;Woroba;M6;Koro;M601;Booko;22894;3429
+CI040103;M;Woroba;M6;Koro;M602;Borotou;5202;781
+CI040101;M;Woroba;M6;Koro;M603;Koro;33567;6780
+CI040104;M;Woroba;M6;Koro;M604;Mahandougou;6337;896
+CI040105;M;Woroba;M6;Koro;M605;Niokosso;8346;1281
+CI040202;M;Woroba;M7;Ouaninou;M701;Gbèlo;6369;1618
+CI040203;M;Woroba;M7;Ouaninou;M702;Gouékan;4592;597
+CI040204;M;Woroba;M7;Ouaninou;M703;Koonan;9970;1322
+CI040201;M;Woroba;M7;Ouaninou;M704;Ouaninou;27919;4773
+CI040205;M;Woroba;M7;Ouaninou;M705;Saboudougou;5225;870
+CI040206;M;Woroba;M7;Ouaninou;M706;Santa;11906;1635
+CI040302;M;Woroba;M8;Touba;M801;Dioman;6375;1091
+CI040303;M;Woroba;M8;Touba;M802;Foungbesso;24562;4433
+CI040304;M;Woroba;M8;Touba;M803;Guintéguéla;34575;6261
+CI040301;M;Woroba;M8;Touba;M804;Touba;55013;10451
+CI140101;N;Zanzan;N1;Bondoukou;N101;Appimadoum;9920;2864
+CI140106;N;Zanzan;N1;Bondoukou;N102;Pinda-Boroko;5951;1499
+CI140102;N;Zanzan;N1;Bondoukou;N103;Bondo;28482;6479
+CI140103;N;Zanzan;N1;Bondoukou;N104;Bondoukou;141568;36959
+CI140104;N;Zanzan;N1;Bondoukou;N105;Gouméré;23870;5709
+CI140105;N;Zanzan;N1;Bondoukou;N106;Laoudi-Ba;98053;23639
+CI140107;N;Zanzan;N1;Bondoukou;N107;Sapli-Sépingo;12403;2786
+CI140108;N;Zanzan;N1;Bondoukou;N108;Sorobango;34797;8921
+CI140109;N;Zanzan;N1;Bondoukou;N109;Tabagne;26909;6990
+CI140110;N;Zanzan;N1;Bondoukou;N110;Tagadi;35143;7436
+CI140111;N;Zanzan;N1;Bondoukou;N111;Taoudi;27917;6292
+CI140112;N;Zanzan;N1;Bondoukou;N112;Yézimala;8829;2769
+CI140202;N;Zanzan;N2;Koun Fao;N201;Boahia;11834;2153
+CI140203;N;Zanzan;N2;Koun Fao;N202;Kokomian;15090;2511
+CI140204;N;Zanzan;N2;Koun Fao;N203;Kouassi-Datékro;30328;7054
+CI140201;N;Zanzan;N2;Koun Fao;N204;Koun-Fao;49280;10047
+CI140205;N;Zanzan;N2;Koun Fao;N205;Tankessé;35940;7875
+CI140206;N;Zanzan;N2;Koun Fao;N206;Tienkoikro;25409;4856
+CI140302;N;Zanzan;N3;Sandegue;N301;Bandakagni-Tomora;11264;2611
+CI140303;N;Zanzan;N3;Sandegue;N302;Dimandougou;9190;2404
+CI140301;N;Zanzan;N3;Sandegue;N303;Sandégué;26918;6638
+CI140304;N;Zanzan;N3;Sandegue;N304;Yorobodi;22369;5655
+CI140502;N;Zanzan;N4;Transua;N401;Assuéfry;45293;7748
+CI140503;N;Zanzan;N4;Transua;N402;Kouassia-Niaguini;21522;2949
+CI140501;N;Zanzan;N4;Transua;N403;Transua;46026;8213
+CI140402;N;Zanzan;N5;Tanda;N501;Amanvi;10141;2977
+CI140403;N;Zanzan;N5;Tanda;N502;Diamba;17045;3761
+CI140401;N;Zanzan;N5;Tanda;N503;Tanda;69597;16100
+CI140404;N;Zanzan;N5;Tanda;N504;Tchèdio;16740;3855
+CI080101;N;Zanzan;N6;Bouna;N601;Bouko;24550;3230
+CI080102;N;Zanzan;N6;Bouna;N602;Bouna;94883;17285
+CI080103;N;Zanzan;N6;Bouna;N603;Ondéfidouo;33822;4855
+CI080105;N;Zanzan;N6;Bouna;N604;Youndouo;24826;3494
+CI080104;N;Zanzan;N6;Bouna;N60X;Parc National de Bona;;
+CI080201;N;Zanzan;N7;Doropo;N701;Danoa;13502;1465
+CI080202;N;Zanzan;N7;Doropo;N702;Doropo;48225;8269
+CI080203;N;Zanzan;N7;Doropo;N703;Kalamon;9236;1400
+CI080204;N;Zanzan;N7;Doropo;N704;Niamoué;22423;2493
+CI080302;N;Zanzan;N8;Nassian;N801;Bogofa;10544;1937
+CI080303;N;Zanzan;N8;Nassian;N802;Kakpin;8441;1719
+CI080304;N;Zanzan;N8;Nassian;N803;Koutouba;14209;2516
+CI080301;N;Zanzan;N8;Nassian;N804;Nassian;27159;6267
+CI080305;N;Zanzan;N8;Nassian;N805;Sominassé;11371;2079
+CI080402;N;Zanzan;N9;Téhini;N901;Gogo;23509;2328
+CI080401;N;Zanzan;N9;Téhini;N902;Téhini;29755;3483
+CI080403;N;Zanzan;N9;Téhini;N903;Tougbo;30582;3772

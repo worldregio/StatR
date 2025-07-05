@@ -47,7 +47,10 @@ Localisation des 98 enquêtes géolocalisées sur 115
 ```{r}
 map<-st_read("data/Marché_Bouaké/geom/EE_AfromapR_2025_brut.geojson")
 names(map)[32]<-"Atelier"
-display.brewer.all()
+map$Atelier<-as.factor(map$Atelier)
+levels(map$Atelier) <- c("1.Agriculture","2.Démographie","3.Eau","4.Mines","5.Santé","6.Urbanisation","7.Transport","Formateurs")
+map$Atelier[is.na(map$Atelier)]<-"Formateurs"
+#display.brewer.all()
 mypal<-brewer.pal(8,"Set1")
 mapview(map, zcol="Atelier",col.regions=mypal)
 ```
