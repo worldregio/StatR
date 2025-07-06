@@ -1264,7 +1264,7 @@
     "href": "bouaké.html",
     "title": "ENQUETE AU MARCHE DE BOUAKE",
     "section": "",
-    "text": "Localisation des 98 enquêtes géolocalisées sur 115\n\n\nReading layer `EE_AfromapR_2025_brut' from data source \n  `/Users/claudegrasland1/worldregio/StatR/data/Marché_Bouaké/geom/EE_AfromapR_2025_brut.geojson' \n  using driver `GeoJSON'\nSimple feature collection with 98 features and 32 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -5.027682 ymin: 7.696584 xmax: -5.023176 ymax: 7.699239\nGeodetic CRS:  WGS 84"
+    "text": "L’idée initiale de l’enquête était d’apprendre aux auditeurs qui ne maîtrisait pas encore cet outil à utiliser Kobo Toolbox. Mais un second objectif était de fournir une base de données qui permettrait à chaque atelier thématique de proposer au moins une question qui serait ensuite posée par tous les autres groupes et que l’on pourrait croiser avec un talon commun. Il s’agissait en d’autres termes de pratique la méthoe de l’enquête omnibus.\n\n\n\nEnquête Omnibus\n\n\n\n\n\nL’enquête a été préparée collectivement par les auditeurs et les formateurs puis mise en ligne sur KoboToolbox. Elle comportait en tout 31 questions qui devaient être administées en face à face.\n\n\n\n\n\n\n\nL’enquête a été effectué le 2 juillet 2025 par les auditeurs de l’école d’été AfromapR 2025. Grâce aux contacts établis par les formateurs, notamment le docteur Bamba Vakaramaoko, nous avons été reçu par l’équipe de direction du marché de Bouaké qui nous a présénté ses origines et son organisation. Puis nous a autorisé à parcourir le marché pour administrer le questionnaire auprès des personnes présentés.\nLes auditeurs qui étaient organisés en sept ateliers ont recueilli 115 questionnaires dont 98 ont été géolocalisés ce qui permet de voir qu’un relativement bon échantillonage spatial a été produit\n\n\n\n\n\n\n\n\n\n\nBien que la mesure ne soit pas totalement fiable, ni systématique, on peut estimer le temps moyen des entretiens en comparant le moment où ils ont débuté et celui où il sont été validés.\n\n\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n  2.517   7.402  11.501  12.908  16.402  49.231      10 \n\n\n\nCommentaire : La durée moyenne des entetiens a été de 13 minutes avec une médiane de 11 minutes et demi. La moitié des entretiens ont duré de 7 à 16 minutes. Cette durée étatit assez variable selon les groupes d’auditeurs :"
   },
   {
     "objectID": "bouaké.html#carte-de-localisation",
@@ -2399,5 +2399,117 @@
     "title": "STAT3 : RELATION ENTRE DEUX VARIABLES QUANTITATIVES",
     "section": "Coordonnées des individus sur les axes factoriels",
     "text": "Coordonnées des individus sur les axes factoriels\n\nplot.PCA(monacp,choix = \"ind\",)"
+  },
+  {
+    "objectID": "bouaké.html#objectif",
+    "href": "bouaké.html#objectif",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "L’idée initiale de l’enquête était d’apprendre aux auditeurs qui ne maîtrisait pas encore cet outil à utiliser Kobo Toolbox. Mais un second objectif était de fournir une base de données qui permettrait à chaque atelier thématique de proposer au moins une question qui serait ensuite posée par tous les autres groupes et que l’on pourrait croiser avec un talon commun. Il s’agissait en d’autres termes de pratique la méthoe de l’enquête omnibus.\n\n\n\nEnquête Omnibus"
+  },
+  {
+    "objectID": "bouaké.html#préparation-avec-kobo",
+    "href": "bouaké.html#préparation-avec-kobo",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "L’enquête a été préparée collectivement par les auditeurs et les formateurs puis mise en ligne sur KoboToolbox. Elle comportait en tout 31 questions qui devaient être administées en face à face.\n\n\n\nEnquête Omnibus\n\n\n\n\n\nEnquête Omnibus\n\n\n\n\n\nEnquête Omnibus\n\n\n\n\n\nEnquête Omnibus"
+  },
+  {
+    "objectID": "bouaké.html#collecte",
+    "href": "bouaké.html#collecte",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "L’enquête a été effectué le 2 juillet 2025 par les auditeurs de l’école d’été AfromapR 2025. Grâce aux contacts établis par les formateurs, notamment le docteur Bamba Vakaramaoko, nous avons été reçu par l’équipe de direction du marché de Bouaké qui nous a présénté ses origines et son organisation. Puis nous a autorisé à parcourir le marché pour administrer le questionnaire auprès des personnes présentés.\nLes auditeurs qui étaient organisés en sept ateliers ont recueilli 115 questionnaires dont 98 ont été géolocalisés ce qui permet de voir qu’un relativement bon échantillonage spatial a été produit"
+  },
+  {
+    "objectID": "bouaké.html#questionnaire-kobo",
+    "href": "bouaké.html#questionnaire-kobo",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "L’enquête a été préparée collectivement par les auditeurs et les formateurs puis mise en ligne sur KoboToolbox. Elle comportait en tout 31 questions qui devaient être administées en face à face."
+  },
+  {
+    "objectID": "bouaké.html#temps-moyen-dentretien",
+    "href": "bouaké.html#temps-moyen-dentretien",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "Bien que la mesure ne soit pas totalement fiable, ni systématique, on peut estimer le temps moyen des entretiens en comparant le moment où ils ont débuté et celui où il sont été validés."
+  },
+  {
+    "objectID": "bouaké.html#lieu-de-collecte",
+    "href": "bouaké.html#lieu-de-collecte",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "L’enquête a été effectué le 2 juillet 2025 par les auditeurs de l’école d’été AfromapR 2025. Grâce aux contacts établis par les formateurs, notamment le docteur Bamba Vakaramaoko, nous avons été reçu par l’équipe de direction du marché de Bouaké qui nous a présénté ses origines et son organisation. Puis nous a autorisé à parcourir le marché pour administrer le questionnaire auprès des personnes présentés.\nLes auditeurs qui étaient organisés en sept ateliers ont recueilli 115 questionnaires dont 98 ont été géolocalisés ce qui permet de voir qu’un relativement bon échantillonage spatial a été produit"
+  },
+  {
+    "objectID": "bouaké.html#durée-des-entretien",
+    "href": "bouaké.html#durée-des-entretien",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "Bien que la mesure ne soit pas totalement fiable, ni systématique, on peut estimer le temps moyen des entretiens en comparant le moment où ils ont débuté et celui où il sont été validés.\n\n\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n  2.517   7.402  11.501  12.908  16.402  49.231      10 \n\n\nLa durée moyenne des entetiens a été de 13 minutes avec une médiane de 11 minutes et demi. La moitié des entretiens ont duré de 7 à 16 minutes. Cette durée étatit assez variable selon les groupes d’auditeurs :"
+  },
+  {
+    "objectID": "bouaké.html#durée-des-entretiens",
+    "href": "bouaké.html#durée-des-entretiens",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "",
+    "text": "Bien que la mesure ne soit pas totalement fiable, ni systématique, on peut estimer le temps moyen des entretiens en comparant le moment où ils ont débuté et celui où il sont été validés.\n\n\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n  2.517   7.402  11.501  12.908  16.402  49.231      10 \n\n\n\nCommentaire : La durée moyenne des entetiens a été de 13 minutes avec une médiane de 11 minutes et demi. La moitié des entretiens ont duré de 7 à 16 minutes. Cette durée étatit assez variable selon les groupes d’auditeurs :"
+  },
+  {
+    "objectID": "bouaké.html#sexe",
+    "href": "bouaké.html#sexe",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Sexe",
+    "text": "Sexe\n\n\n\n\n\n\n\n\nModalité\nFréquence (%)\n\n\n\n\nFemme\n24.6\n\n\nHomme\n75.4\n\n\nSum\n100.0\n\n\n\n\n\n\nCommentaire : Les femmes représentaien environ un quart de l’échantillon"
+  },
+  {
+    "objectID": "bouaké.html#âge",
+    "href": "bouaké.html#âge",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Âge",
+    "text": "Âge\n\n\n\n\n\n\n\n\nModalité\nFréquence (%)\n\n\n\n\n18-29\n18.8\n\n\n30-44\n45.5\n\n\n45+\n35.7\n\n\nSum\n100.0\n\n\n\n\n\n\nCommentaire : La classe la plus nombreuse était celle des 30-44 ans, suivie de celle des 45 ans et plus."
+  },
+  {
+    "objectID": "bouaké.html#raison-de-la-présence-sur-le-marché",
+    "href": "bouaké.html#raison-de-la-présence-sur-le-marché",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Raison de la présence sur le marché",
+    "text": "Raison de la présence sur le marché\n\n\n\n\n\n\n\n\nModalité\nFréquence (%)\n\n\n\n\nAutre\n10.4\n\n\nCommerçant\n38.3\n\n\nGrossiste\n29.6\n\n\nParticulier\n12.2\n\n\nTransporteur\n9.6\n\n\nSum\n100.0\n\n\n\n\n\n\nCommentaire : Les personnes interrogées étaient principalement des commerçants (38.3%) et des grossistes (29.6%). On trouvait ensuite des particuliers (12.2%) et des transporteurs (9.6%)."
+  },
+  {
+    "objectID": "bouaké.html#niveau-dinstruction",
+    "href": "bouaké.html#niveau-dinstruction",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Niveau d’instruction",
+    "text": "Niveau d’instruction\n\n\n\n\n\n\n\n\nModalité\nFréquence (%)\n\n\n\n\nAucun\n21.1\n\n\nEcole coranique\n17.5\n\n\nPrimaire\n27.2\n\n\nSecondaire\n28.1\n\n\nSupérieur\n6.1\n\n\nSum\n100.0\n\n\n\n\n\n\nCommentaire : Les personnes enquêtées avaient le plus souvent un niveau d’instruction primaire (27%) ou secondaire (28%). Venaient ensuite les personnes n’ayant pas suivi d’enseignement (21%) ou ayant suivi une école coranique (17.5%). Très peu avaient fait des études supérieures (6%)"
+  },
+  {
+    "objectID": "bouaké.html#type-dhabitat",
+    "href": "bouaké.html#type-dhabitat",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Type d’habitat",
+    "text": "Type d’habitat\n\n\n\n\n\n\n\n\nModalité\nFréquence (%)\n\n\n\n\nPrécaire\n13.4\n\n\nAutre\n17.9\n\n\nMaison\n60.7\n\n\nVilla\n8.0\n\n\nSum\n100.0\n\n\n\n\n\n\nCommentaire : Cette variable était un proxy indirect du niveau de richesse. Mais elle s’avère peu efficace puisque la majorité des personnes (61%) résident dans des maisons."
+  },
+  {
+    "objectID": "bouaké.html#taille-des-ménages",
+    "href": "bouaké.html#taille-des-ménages",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Taille des ménages",
+    "text": "Taille des ménages\n\n\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   1.00    5.00    8.00   10.12   13.25   30.00       3 \n\n\n\nCommentaire : La majorité des personnes étant mariées et relativement âgées, on trouve des tailles de ménages importantes avec une moyenne de 10 personnes et une médiane de 8 personnes."
+  },
+  {
+    "objectID": "bouaké.html#statut-matrimonial",
+    "href": "bouaké.html#statut-matrimonial",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Statut matrimonial",
+    "text": "Statut matrimonial\n\n\n\n\n\n\n\n\nModalité\nFréquence (%)\n\n\n\n\nCélibataire\n18.4\n\n\nDivorcé\n2.6\n\n\nMarié ou concubinage\n78.9\n\n\nSum\n100.0\n\n\n\n\n\n\nCommentaire : Plus de trois quart des personnes enquêtées étaient mariées ou vivaient en concubinage (79%). 18% étaient célibataires et 2.6% divorcés."
+  },
+  {
+    "objectID": "bouaké.html#nombre-denfants-par-ménage",
+    "href": "bouaké.html#nombre-denfants-par-ménage",
+    "title": "ENQUETE AU MARCHE DE BOUAKE",
+    "section": "Nombre d’enfants par ménage",
+    "text": "Nombre d’enfants par ménage\n\n\n\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n  0.000   2.000   4.000   5.619   8.000  25.000       2 \n\n\n\nCommentaire : Les personnes enquêtées ont déclaré avoir en moyenne 5.6 enfants avec une médiane de 4 enfants.La moitié des personnes interrogées avait de 2 à 8 enfants."
   }
 ]

@@ -1,0 +1,116 @@
+"lon";"lat";"duree";"groupe";"sexe";"age";"statut";"instr";"habitat";"tailmen";"tailmen_4";"enfmen";"enfmen_4";"sac_riz";"orig";"raison";"transport";"alim";"mines";"cmu";"cmu_utilise";"eau_autre";"eau_bouteille";"eau_forage";"eau_robinet"
+NA;NA;2,51698333422343;"8. Autres";"Homme";"45+";"Marié ou concubinage";"Supérieur";"Maison";2;"(0,4]";0;NA;0;"Bouaké";"Particulier";"bus";"non";NA;"non";NA;0;1;0;1
+NA;NA;11,0802500009537;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;"Côte d'Ivoire";"Grossiste";"taxi";NA;NA;"non";NA;0;1;0;0
+-5,024735;7,697178;10,1396499991417;"3.Eau";"Homme";"18-29";"Célibataire";"Ecole coranique";"Maison";5;"(4,8]";0;NA;1;"Bouaké";"Autre";"taxi-moto";"non";"1.Très négative";"non";NA;0;0;1;0
+NA;NA;NA;NA;"Femme";"18-29";"Célibataire";"Ecole coranique";"Maison";23;"(16,30]";15;"(8,25]";3;"Bouaké";"Particulier";"taxi";"oui";NA;"non";NA;0;1;0;1
+-5,024729;7,697137;NA;"3.Eau";"Homme";"18-29";"Marié ou concubinage";"Secondaire";"Maison";20;"(16,30]";5;"(4,8]";2;"Bouaké";"Commerçant";"taxi-moto";"non";"2.Négative";"oui";"oui";0;0;0;1
+-5,024672;7,697121;NA;"3.Eau";"Homme";"18-29";"Célibataire";"Secondaire";"Maison";6;"(4,8]";2;"(0,2]";1;"Bouaké";"Autre";"taxi-moto";"non";NA;"non";NA;1;0;0;0
+-5,023231;7,697566;NA;NA;"Femme";"30-44";"Marié ou concubinage";"Aucun";"Autre";5;"(4,8]";4;"(2,4]";2;"Bouaké";"Commerçant";"auto";"oui";NA;"non";NA;0;0;1;0
+-5,02361;7,697382;13,9566833337148;"5.Santé";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Autre";25;"(16,30]";14;"(8,25]";4;"Bouaké";"Grossiste";"moto";"non";"5.Très positive";"oui";"non";0;0;0;1
+-5,024789;7,697138;NA;"4.Mines";"Homme";"45+";"Marié ou concubinage";"Secondaire";"Maison";9;"(8,16]";6;"(4,8]";2;"Bouaké";"Commerçant";"marche";"oui";"4.Positive";"non";NA;0;0;0;1
+-5,025069;7,697648;6,15226666529973;"2.Démographie";"Femme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";6;"(4,8]";4;"(2,4]";1;"Bouaké";"Grossiste";"auto";"non";"2.Négative";"non";NA;1;0;0;0
+-5,024534;7,697614;3,66181666453679;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";3;"(0,4]";1;"(0,2]";1;"Bouaké";"Commerçant";"moto";"oui";NA;"oui";"non";0;1;1;0
+-5,02459;7,697567;NA;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";3;"(0,4]";1;"(0,2]";1;"Bouaké";"Commerçant";"taxi-moto";"non";NA;"oui";"non";0;1;1;0
+-5,024864;7,697111;9,4036666671435;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Aucun";"Maison";10;"(8,16]";5;"(4,8]";2;"Bouaké";"Grossiste";"taxi-moto";"non";"3.Neutre";"non";NA;0;0;1;0
+-5,024675;7,697126;5,93181666930517;"3.Eau";"Homme";"18-29";"Célibataire";"Secondaire";"Maison";6;"(4,8]";2;"(0,2]";1;"Bouaké";"Autre";"auto";"non";"1.Très négative";"non";NA;0;0;1;1
+-5,023348;7,696805;NA;"2.Démographie";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Villa";10;"(8,16]";8;"(4,8]";NA;"Bouaké";"Commerçant";"taxi";"non";"4.Positive";"oui";"non";0;0;0;1
+-5,02481;7,697128;9,10619999965032;"4.Mines";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";6;"(4,8]";3;"(2,4]";5;"Etranger";"Autre";"taxi-moto";"non";"1.Très négative";"non";NA;0;0;0;1
+NA;NA;7,27120000123978;NA;"Femme";"30-44";"Marié ou concubinage";"Supérieur";"Maison";3;"(0,4]";1;"(0,2]";2;"Bouaké";"Particulier";"taxi";"oui";NA;"oui";"oui";0;1;0;1
+NA;NA;11,0133833328883;"2.Démographie";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Villa";5;"(4,8]";5;"(4,8]";3;"Bouaké";"Commerçant";"taxi-moto";"non";"4.Positive";"oui";"oui";0;0;0;1
+-5,02346;7,697436;5,92371666431427;"5.Santé";"Homme";"45+";"Marié ou concubinage";"Aucun";"Autre";15;"(8,16]";7;"(4,8]";3;"Bouaké";"Grossiste";"moto";"non";"5.Très positive";"oui";"non";0;0;0;1
+NA;NA;NA;"7.Transport";"Femme";"30-44";"Marié ou concubinage";"Primaire";"Précaire";8;"(4,8]";6;"(4,8]";2;"Bouaké";"Grossiste";"taxi-moto";"non";"2.Négative";"non";NA;0;0;0;1
+NA;NA;13,2732833305995;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Aucun";"Précaire";5;"(4,8]";3;"(2,4]";2;"Bouaké";"Grossiste";"taxi-moto";"non";"3.Neutre";"oui";"oui";0;0;0;1
+-5,024648;7,697123;9,28806666533152;"3.Eau";"Homme";"18-29";"Marié ou concubinage";"Aucun";"Maison";5;"(4,8]";2;"(0,2]";1;"Bouaké";"Transporteur";"auto";"oui";"4.Positive";"oui";"non";0;0;0;1
+-5,0234;7,697516;18,1679833332698;"5.Santé";"Homme";"45+";"Marié ou concubinage";"Aucun";"Autre";12;"(8,16]";8;"(4,8]";4;"Bouaké";"Commerçant";"taxi-moto";"oui";"3.Neutre";"non";NA;0;0;1;0
+-5,024487;7,697266;NA;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Secondaire";"Maison";3;"(0,4]";1;"(0,2]";1;"Bouaké";"Grossiste";"moto";"non";NA;"oui";"non";0;0;0;1
+-5,024707;7,697682;16,8474000016848;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Maison";12;"(8,16]";3;"(2,4]";2;"Bouaké";"Autre";"taxi-moto";"non";"2.Négative";"non";NA;1;0;0;0
+NA;NA;7,40180000066757;NA;"Femme";"30-44";"Marié ou concubinage";"Aucun";"Maison";10;"(8,16]";2;"(0,2]";2;"Bouaké";"Transporteur";"taxi";"oui";NA;"non";NA;0;1;0;1
+-5,02474;7,697675;9,83031666676203;"6.Urbanisation";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Maison";20;"(16,30]";9;"(8,25]";8;"Bouaké";"Grossiste";"taxi-moto";"non";NA;"oui";"non";0;1;1;1
+-5,024845;7,697086;12,8161666671435;"4.Mines";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";9;"(8,16]";3;"(2,4]";2;"Etranger";"Commerçant";"taxi-moto";"non";"2.Négative";"non";NA;0;0;1;0
+-5,024719;7,697137;10,7926166653633;"3.Eau";"Homme";"30-44";"Marié ou concubinage";"Aucun";"Villa";21;"(16,30]";12;"(8,25]";8;"Bouaké";"Grossiste";"auto";"non";"4.Positive";"non";NA;0;0;0;1
+-5,025059;7,697153;8,64220000108083;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Secondaire";NA;11;"(8,16]";13;"(8,25]";2;"Bouaké";"Grossiste";"auto";"non";"2.Négative";"non";NA;0;0;0;1
+-5,024844;7,697675;14,2616833329201;"6.Urbanisation";"Homme";"45+";"Marié ou concubinage";"Primaire";"Maison";10;"(8,16]";6;"(4,8]";4;"Bouaké";"Commerçant";"taxi-moto";"non";NA;"oui";"non";1;1;0;0
+-5,02494;7,697176;13,2035666664441;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Secondaire";"Maison";4;"(0,4]";2;"(0,2]";4;"Bouaké";"Commerçant";"moto";"non";"5.Très positive";"oui";"non";0;0;0;1
+-5,025359;7,698487;16,6922166665395;"2.Démographie";"Femme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";10;"(8,16]";8;"(4,8]";1;"Bouaké";"Grossiste";"auto";"oui";"3.Neutre";"oui";"oui";0;0;0;1
+-5,024928;7,697154;11,2942000031471;"3.Eau";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Précaire";6;"(4,8]";4;"(2,4]";1;"Bouaké";"Transporteur";"moto";"non";"1.Très négative";"oui";"non";0;0;1;1
+-5,025357;7,697428;11,4350333333015;"4.Mines";"Homme";"45+";"Marié ou concubinage";"Secondaire";"Maison";10;"(8,16]";7;"(4,8]";3;"Bouaké";"Commerçant";"auto";"oui";"2.Négative";"non";NA;0;0;0;1
+NA;NA;7,48808333476384;NA;"Femme";"18-29";"Célibataire";"Secondaire";"Précaire";10;"(8,16]";3;"(2,4]";3;"Bouaké";"Particulier";"marche";"oui";NA;"non";NA;0;1;0;1
+-5,025528;7,697608;16,4021833340327;"8. Autres";"Homme";"45+";"Marié ou concubinage";"Aucun";"Maison";30;"(16,30]";25;"(8,25]";10;"Bouaké";"Grossiste";"moto";"non";"1.Très négative";"non";NA;1;0;0;1
+-5,023217;7,697117;12,5329666694005;"5.Santé";"Femme";"45+";"Marié ou concubinage";"Secondaire";"Villa";25;"(16,30]";20;"(8,25]";2;"Bouaké";"Grossiste";"taxi";"non";"4.Positive";"oui";"non";0;0;1;0
+NA;NA;14,9925999999046;"2.Démographie";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";3;"(0,4]";1;"(0,2]";1;"Bouaké";"Particulier";"marche";"non";"3.Neutre";"oui";"non";0;0;0;1
+-5,025265;7,697307;12,4768666664759;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Primaire";"Autre";30;"(16,30]";20;"(8,25]";4;"Bouaké";"Commerçant";"taxi-moto";"non";NA;"non";NA;1;0;0;0
+-5,024931;7,697173;14,4534166693687;"4.Mines";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Précaire";16;"(8,16]";10;"(8,25]";3;"Bouaké";"Commerçant";"taxi-moto";"non";"3.Neutre";"oui";"oui";0;0;0;1
+-5,023534;7,696584;14,7210333307584;"5.Santé";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";3;"(0,4]";2;"(0,2]";1;"Bouaké";"Grossiste";"taxi-moto";"non";"5.Très positive";"oui";"non";0;0;0;1
+-5,025601;7,697256;5,1590499997139;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Primaire";"Villa";8;"(4,8]";3;"(2,4]";4;"Bouaké";"Grossiste";"auto";"non";"5.Très positive";"oui";"oui";0;0;0;1
+-5,025576;7,697602;18,2485499978065;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Autre";4;"(0,4]";3;"(2,4]";2;"Bouaké";"Commerçant";"moto";"oui";"1.Très négative";"oui";"non";1;0;0;1
+-5,023503;7,696587;23,742549999555;"5.Santé";"Homme";"30-44";"Célibataire";"Supérieur";"Autre";15;"(8,16]";5;"(4,8]";6;"Bouaké";"Grossiste";"moto";"oui";"2.Négative";"oui";"oui";0;0;1;0
+-5,027226;7,699;14,1640000025431;"1.Agriculture";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Maison";20;"(16,30]";16;"(8,25]";6;"Bouaké";"Commerçant";"auto";"oui";"1.Très négative";"oui";"oui";0;0;0;1
+-5,025649;7,697641;20,5791333357493;"8. Autres";"Homme";"18-29";"Célibataire";"Primaire";"Autre";20;"(16,30]";8;"(4,8]";1;"Bouaké";"Commerçant";"taxi-moto";"non";"3.Neutre";"non";NA;1;1;0;0
+-5,027202;7,699044;24,483300002416;"1.Agriculture";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Maison";20;"(16,30]";6;"(4,8]";4;"Bouaké";"Commerçant";"taxi";"non";"3.Neutre";"non";NA;0;0;1;0
+NA;NA;5,87264999945958;NA;"Femme";"18-29";"Célibataire";"Supérieur";"Autre";3;"(0,4]";0;NA;2;"Bouaké";"Particulier";"marche";"oui";NA;"oui";"non";0;1;0;1
+-5,025351;7,697127;8,55148333311081;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";NA;24;"(16,30]";17;"(8,25]";6;"Bouaké";"Grossiste";"auto";"non";"2.Négative";"oui";"non";0;0;0;1
+-5,024617;7,69769;13,5104500015577;"6.Urbanisation";"Homme";NA;"Marié ou concubinage";"Primaire";"Maison";9;"(8,16]";7;"(4,8]";3;"Bouaké";"Commerçant";"auto";"non";NA;"oui";"non";0;1;1;1
+-5,024939;7,697169;6,66971666812897;"3.Eau";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Précaire";6;"(4,8]";4;"(2,4]";1;"Bouaké";"Transporteur";"moto";"non";"3.Neutre";"oui";"non";0;0;1;0
+-5,02522;7,69723;5,71071666876475;"4.Mines";"Homme";"30-44";"Marié ou concubinage";"Aucun";"Précaire";18;"(16,30]";13;"(8,25]";8;"Bouaké";"Commerçant";"auto";"oui";"3.Neutre";"oui";"non";0;0;0;1
+-5,025725;7,697685;23,2369333346685;"2.Démographie";"Homme";"45+";"Marié ou concubinage";"Primaire";"Maison";24;"(16,30]";8;"(4,8]";NA;"Bouaké";"Commerçant";"taxi-moto";"non";"1.Très négative";"oui";"non";0;0;1;0
+-5,027682;7,699007;NA;"1.Agriculture";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Maison";10;"(8,16]";7;"(4,8]";6;"Bouaké";"Grossiste";"taxi-moto";"oui";"2.Négative";"oui";"oui";0;0;1;1
+-5,024919;7,69714;13,5272833347321;"4.Mines";"Homme";"45+";"Marié ou concubinage";"Aucun";"Précaire";9;"(8,16]";7;"(4,8]";2;"Bouaké";"Autre";"marche";"oui";"2.Négative";"non";NA;0;0;1;0
+-5,025265;7,697307;7,77691666682561;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Supérieur";"Autre";15;"(8,16]";3;"(2,4]";4;"Bouaké";"Commerçant";"auto";"non";NA;"oui";"non";0;1;0;0
+-5,025664;7,697632;5,11453333298365;"8. Autres";"Homme";"45+";"Marié ou concubinage";"Secondaire";"Maison";5;"(4,8]";3;"(2,4]";1;"Bouaké";"Particulier";"taxi";"non";"1.Très négative";"non";NA;1;1;0;1
+-5,025627;7,697605;7,00931666692098;"7.Transport";"Homme";"18-29";"Célibataire";"Secondaire";"Autre";20;"(16,30]";1;"(0,2]";2;"Bouaké";"Grossiste";"taxi-moto";"oui";"2.Négative";"non";NA;0;0;0;1
+-5,024647;7,697694;8,82711666822433;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Autre";5;"(4,8]";3;"(2,4]";1;"Bouaké";"Commerçant";"moto";"non";NA;"oui";"non";0;0;1;0
+-5,023207;7,697627;4,29703333377838;"2.Démographie";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";15;"(8,16]";11;"(8,25]";5;"Etranger";"Transporteur";"moto";"non";"1.Très négative";"non";NA;0;1;0;0
+NA;NA;7,2040333310763;NA;"Femme";"18-29";"Célibataire";"Aucun";"Précaire";5;"(4,8]";1;"(0,2]";2;"Bouaké";"Particulier";"gbaka";"oui";NA;"non";NA;0;1;0;1
+-5,02436;7,697581;18,6201166669528;"3.Eau";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";8;"(4,8]";2;"(0,2]";1;"Etranger";"Transporteur";"taxi";"non";"1.Très négative";"oui";"non";0;0;1;1
+-5,023195;7,697616;2,73456666866938;"2.Démographie";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";6;"(4,8]";4;"(2,4]";1;"Bouaké";"Grossiste";"auto";"oui";"3.Neutre";"oui";"oui";0;0;0;1
+-5,024687;7,697638;23,7901166637739;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Maison";6;"(4,8]";4;"(2,4]";1;"Bouaké";"Commerçant";"auto";"non";"1.Très négative";"oui";"non";0;0;1;0
+-5,023254;7,697139;12,924916668733;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Aucun";"Maison";8;"(4,8]";4;"(2,4]";3;"Bouaké";"Commerçant";"auto";"non";"5.Très positive";"non";NA;0;0;0;1
+-5,024638;7,697616;7,2715833346049;"3.Eau";"Homme";"45+";"Marié ou concubinage";"Primaire";"Précaire";7;"(4,8]";6;"(4,8]";1;"Bouaké";"Commerçant";"taxi";"non";"3.Neutre";"non";NA;0;0;1;0
+NA;NA;3,86380000114441;"2.Démographie";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Maison";NA;NA;8;"(4,8]";2;"Bouaké";"Commerçant";"taxi-moto";"non";"3.Neutre";"oui";"oui";0;0;0;1
+-5,025649;7,697615;5,69915000200272;"7.Transport";"Femme";"30-44";"Marié ou concubinage";"Secondaire";"Villa";3;"(0,4]";0;NA;1;"Bouaké";"Particulier";"taxi";"non";"1.Très négative";"oui";"non";0;0;1;0
+-5,025326;7,697625;3,16158333222071;"3.Eau";"Femme";"18-29";"Célibataire";"Secondaire";"Maison";3;"(0,4]";0;NA;1;"Bouaké";"Commerçant";"taxi-moto";"non";"1.Très négative";"non";NA;0;0;1;1
+-5,025468;7,697181;9,00593333244324;"4.Mines";"Homme";"45+";"Marié ou concubinage";"Primaire";"Maison";6;"(4,8]";3;"(2,4]";NA;"Bouaké";"Commerçant";"auto";"non";"4.Positive";"oui";"oui";0;0;0;1
+-5,025413;7,697184;10,4327500025431;"3.Eau";"Homme";"45+";"Marié ou concubinage";"Primaire";"Villa";7;"(4,8]";3;"(2,4]";2;"Bouaké";"Grossiste";"auto";"non";"2.Négative";"non";NA;0;0;1;1
+-5,023787;7,697033;16,9251333316167;"5.Santé";"Homme";"45+";"Marié ou concubinage";"Primaire";"Autre";25;"(16,30]";13;"(8,25]";6;"Bouaké";"Grossiste";"auto";"oui";"4.Positive";"non";NA;0;0;0;1
+-5,025414;7,697172;12,7839333335559;"7.Transport";"Femme";"30-44";"Marié ou concubinage";"Primaire";"Précaire";4;"(0,4]";6;"(4,8]";1;"Bouaké";"Commerçant";"taxi-moto";"non";"2.Négative";"oui";"non";0;0;0;1
+-5,025508;7,697135;9,35171666542689;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Aucun";"Maison";2;"(0,4]";0;NA;1;"Bouaké";"Transporteur";"taxi-moto";"non";NA;"non";NA;1;0;0;0
+-5,023176;7,696659;17,9403333306313;"5.Santé";"Femme";"30-44";"Marié ou concubinage";"Aucun";"Maison";9;"(8,16]";4;"(2,4]";2;"Bouaké";"Autre";"taxi-moto";"non";"5.Très positive";"oui";"non";0;0;0;1
+-5,024924;7,697504;4,25544999837875;"7.Transport";"Femme";"18-29";"Célibataire";"Aucun";"Précaire";6;"(4,8]";0;NA;1;"Bouaké";"Particulier";"taxi";"non";"2.Négative";"oui";"non";1;1;0;1
+-5,023895;7,696762;16,1302166700363;"5.Santé";"Homme";"18-29";"Marié ou concubinage";"Secondaire";"Autre";30;"(16,30]";12;"(8,25]";6;"Bouaké";"Commerçant";"moto";"non";"1.Très négative";"non";NA;0;0;1;0
+-5,025377;7,697147;18,3470333337784;"4.Mines";"Femme";"45+";"Marié ou concubinage";"Aucun";"Maison";2;"(0,4]";0;NA;1;"Bouaké";"Commerçant";"taxi-moto";"non";"1.Très négative";"oui";"non";0;1;0;0
+NA;NA;6,95348333120346;NA;"Femme";"30-44";"Célibataire";"Primaire";"Maison";18;"(16,30]";10;"(8,25]";5;"Bouaké";"Commerçant";"taxi";"non";NA;"oui";"oui";0;1;0;1
+-5,026432;7,699165;19,7274666666985;"1.Agriculture";"Femme";"45+";"Marié ou concubinage";"Secondaire";"Maison";10;"(8,16]";7;"(4,8]";2;"Bouaké";"Autre";"taxi";"oui";"1.Très négative";"oui";"oui";0;0;1;0
+-5,025771;7,697633;7,18779999812444;"3.Eau";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";4;"(0,4]";2;"(0,2]";1;"Bouaké";"Commerçant";"auto";"non";"3.Neutre";"oui";"non";0;0;1;0
+-5,025197;7,697656;9,79989999930064;"3.Eau";"Homme";"45+";"Marié ou concubinage";"Primaire";"Maison";9;"(8,16]";4;"(2,4]";1;"Bouaké";"Commerçant";"auto";"non";"3.Neutre";"non";NA;0;0;0;1
+-5,025268;7,697612;6,19660000006358;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";8;"(4,8]";8;"(4,8]";4;"Bouaké";"Grossiste";"moto";NA;NA;"oui";"non";0;1;0;0
+-5,025322;7,697586;3,58686666488647;"6.Urbanisation";"Homme";NA;"Marié ou concubinage";"Primaire";"Maison";NA;NA;NA;NA;4;"Bouaké";"Grossiste";"moto";NA;NA;"oui";"non";1;1;0;0
+-5,026483;7,69908;8,0445833325386;"1.Agriculture";"Femme";"18-29";"Célibataire";"Supérieur";"Villa";12;"(8,16]";10;"(8,25]";2;"Bouaké";"Autre";"taxi-moto";"non";"1.Très négative";"oui";"oui";0;0;1;0
+-5,024646;7,69767;17,9554166674614;"6.Urbanisation";"Homme";"45+";"Marié ou concubinage";"Aucun";"Maison";11;"(8,16]";9;"(8,25]";3;"Bouaké";"Grossiste";"auto";"non";"3.Neutre";"oui";"non";0;0;0;1
+-5,026459;7,699118;25,2443499962489;"1.Agriculture";"Femme";"30-44";"Célibataire";"Supérieur";"Maison";2;"(0,4]";1;"(0,2]";2;"Bouaké";"Grossiste";"gbaka";"oui";"1.Très négative";"oui";"non";0;0;1;1
+-5,025549;7,697615;9,50756666660309;"3.Eau";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";15;"(8,16]";6;"(4,8]";3;"Bouaké";"Commerçant";"auto";"non";"1.Très négative";"oui";"non";0;0;1;1
+-5,02431;7,696771;15,5914333343506;"5.Santé";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Autre";30;"(16,30]";12;"(8,25]";2;"Bouaké";"Commerçant";"taxi-moto";"oui";"3.Neutre";"non";NA;0;0;0;1
+-5,025636;7,697577;17,4310499986013;"4.Mines";"Homme";"45+";"Marié ou concubinage";"Aucun";"Maison";11;"(8,16]";8;"(4,8]";4;"Bouaké";"Commerçant";"auto";"non";"4.Positive";"non";NA;0;0;0;1
+-5,025217;7,697636;27,6742999990781;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Villa";4;"(0,4]";2;"(0,2]";2;"Bouaké";"Commerçant";"auto";"non";NA;"non";NA;0;1;1;1
+-5,025657;7,69756;16,363666665554;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Précaire";13;"(8,16]";8;"(4,8]";2;"Bouaké";"Grossiste";"moto";"non";"1.Très négative";"non";NA;0;0;0;1
+-5,025069;7,697285;15,6619166692098;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Ecole coranique";"Maison";8;"(4,8]";8;"(4,8]";4;"Bouaké";"Grossiste";"moto";"oui";"3.Neutre";"oui";"non";0;0;1;0
+-5,024382;7,696815;15,7373500029246;"5.Santé";"Homme";"18-29";"Marié ou concubinage";"Secondaire";"Autre";7;"(4,8]";2;"(0,2]";1;"Bouaké";"Commerçant";"moto";"non";"4.Positive";"non";NA;0;0;1;1
+-5,025122;7,697658;5,75321666797002;"6.Urbanisation";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";5;"(4,8]";3;"(2,4]";2;"Etranger";"Transporteur";NA;NA;NA;"oui";"non";1;1;1;0
+-5,024376;7,696791;16,3515166680018;"5.Santé";"Femme";"18-29";"Divorcé";"Ecole coranique";"Autre";5;"(4,8]";1;"(0,2]";2;"Bouaké";"Commerçant";"gbaka";"non";"5.Très positive";"non";NA;0;0;1;0
+-5,026493;7,699121;31,5355333367983;"1.Agriculture";"Femme";"45+";"Divorcé";"Aucun";"Maison";4;"(0,4]";1;"(0,2]";2;"Bouaké";"Commerçant";"taxi-moto";"non";"4.Positive";"oui";"non";0;0;0;1
+-5,027081;7,698103;19,5699833313624;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Primaire";"Autre";25;"(16,30]";18;"(8,25]";6;"Bouaké";"Transporteur";"moto";"non";NA;"oui";"non";1;0;0;0
+-5,026788;7,699239;8,46738333304723;"1.Agriculture";"Femme";"30-44";"Marié ou concubinage";"Primaire";"Précaire";4;"(0,4]";2;"(0,2]";1;"Bouaké";"Grossiste";"taxi-moto";"non";"1.Très négative";"oui";"non";0;0;1;0
+-5,025627;7,697641;10,9838500022888;"3.Eau";"Homme";"18-29";"Célibataire";"Primaire";"Maison";5;"(4,8]";0;NA;1;"Bouaké";"Autre";"taxi-moto";"non";"1.Très négative";"non";NA;0;0;1;1
+-5,026426;7,69917;12,3411333362261;"1.Agriculture";"Femme";"45+";"Divorcé";"Secondaire";"Maison";1;"(0,4]";0;NA;1;"Bouaké";"Grossiste";"gbaka";"non";"2.Négative";"non";NA;0;0;1;1
+-5,027081;7,698104;7,48176666498184;"7.Transport";"Homme";"45+";"Marié ou concubinage";"Aucun";"Autre";1;"(0,4]";0;NA;0;"Côte d'Ivoire";"Transporteur";"marche";"non";NA;"non";NA;1;1;0;0
+-5,024321;7,696807;13,7098833322525;"5.Santé";"Homme";"18-29";"Célibataire";"Ecole coranique";"Autre";10;"(8,16]";5;"(4,8]";3;"Bouaké";"Commerçant";"taxi-moto";"oui";"4.Positive";"non";NA;0;0;1;0
+-5,025564;7,697624;13,9483000000318;"4.Mines";"Homme";"30-44";"Marié ou concubinage";"Primaire";"Maison";7;"(4,8]";4;"(2,4]";3;"Etranger";"Grossiste";"auto";"non";"2.Négative";"oui";"non";0;0;1;1
+-5,025301;7,697658;17,0336333354314;"6.Urbanisation";"Femme";"30-44";"Célibataire";"Secondaire";"Maison";14;"(8,16]";12;"(8,25]";3;"Etranger";"Particulier";"moto";"non";"2.Négative";"oui";"oui";0;0;0;1
+NA;NA;49,2308833320936;"2.Démographie";"Homme";"45+";"Marié ou concubinage";"Primaire";"Maison";10;"(8,16]";5;"(4,8]";2;"Etranger";"Autre";"auto";"non";"4.Positive";"oui";"oui";0;0;1;1
+NA;NA;35,6581500013669;"2.Démographie";"Homme";"45+";"Marié ou concubinage";"Aucun";"Précaire";6;"(4,8]";4;"(2,4]";2;"Côte d'Ivoire";"Particulier";"taxi-moto";"non";"1.Très négative";"non";NA;0;0;1;0
+-5,026533;7,699125;11,5009500026703;"1.Agriculture";"Homme";"18-29";"Célibataire";"Secondaire";"Maison";10;"(8,16]";6;"(4,8]";2;"Bouaké";"Particulier";"marche";"non";"4.Positive";"non";NA;0;0;0;1
+-5,023943;7,69761;5,66646666924159;"6.Urbanisation";"Femme";"30-44";"Célibataire";"Secondaire";"Maison";3;"(0,4]";1;"(0,2]";1;"Bouaké";"Particulier";"taxi";"non";"2.Négative";"oui";"non";0;0;1;0
+-5,023656;7,697495;11,9943500002225;"3.Eau";"Femme";"18-29";"Célibataire";"Primaire";"Maison";2;"(0,4]";0;NA;1;"Bouaké";"Autre";"taxi";"non";"3.Neutre";"non";NA;0;0;1;0
+-5,025654;7,697617;22,4033833305041;"6.Urbanisation";"Homme";"45+";"Marié ou concubinage";"Aucun";"Maison";17;"(16,30]";17;"(8,25]";6;"Bouaké";"Grossiste";"auto";"non";"4.Positive";"oui";"non";0;1;0;1
+-5,024324;7,696805;10,2191999991735;"5.Santé";"Homme";"45+";"Marié ou concubinage";"Ecole coranique";"Maison";6;"(4,8]";4;"(2,4]";1;"Bouaké";"Commerçant";"moto";"non";"5.Très positive";"non";NA;0;0;1;0
+NA;NA;24,8858000000318;"7.Transport";"Homme";"30-44";"Marié ou concubinage";"Secondaire";"Maison";8;"(4,8]";5;"(4,8]";1;"Bouaké";"Grossiste";"moto";"non";"1.Très négative";"oui";"non";0;0;0;1
+-5,026293;7,698357;23,8835666696231;"1.Agriculture";"Homme";"30-44";"Marié ou concubinage";"Aucun";"Maison";7;"(4,8]";2;"(0,2]";3;"Bouaké";"Transporteur";"taxi";"non";"4.Positive";"oui";"non";0;0;0;1
