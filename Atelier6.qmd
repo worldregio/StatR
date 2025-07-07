@@ -20,6 +20,7 @@ format:
 execute:
   warning: false
   message: false 
+  echo: false
 knitr:
   opts_chunk:
     out.width: "100%"
@@ -30,34 +31,181 @@ editor:
     wrap: 72
 ---
 
-# INTRODUCTION
 
-- Presenter les membres de l’équipe et le thème attribué décrire les objectifs du rapport et formuler des hypothèses
 
-# 1. ACQUISITION DE DONNEES
+> Exemple de traitement réalisé par les groupes d'auditeur à partir de l'enquête AfroMapR.
 
-- Décrire les différents types de données qui seront mobilisées Sources ? dates ? couverture spatiale ? fonds de carte ? couches SIG, …
+# 1. Préparation des données
 
-# 2. ANALYSE STATISTIQUE AVEC R
+```{r}
+don <- read.table(file = "data/Marché_Bouaké/data/data_clean.csv",  # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8",              # encodage adapté au français
+                  stringsAsFactors = TRUE)       # Transforme les character en factor     
 
-- Décrire les variables intéressantes, produire des taleaux ou des graphiques
-- Tester la relation entre deux variables
-- Synthétiser les résultats
+```
 
-# 3. ANALYSE CARTOGRAPHIQUE AVEC MAGRIT
 
-- Produire différents types de carte
-- Mettre en page les cartes
-- Commenter les cartes
+## Choix des variables à analyser
 
-# 4. ANALYSE D’ENQUETE AVEC KOBO
-- Construire un questionnaire
-- Tester ce questionnaire auprès des participants de l’EE
-- Proposer des améliorations
+On sélectionne dans le tableau une variable Y que l'on veut expliquer et une variables X  qui peut servir à expliquer Y. On décide par exemple d'examiner les variables suivantes :
 
-# CONCLUSION
+- **Y : groupe**       : Groupe d'enquêteurs
+- **X : sexe**         : Sexe de la personne interrogée
 
-- Synthétiser vos résultats principaux
-- Décrire les difficultés rencontrées.
-- Indiquer si vous souhaitez poursuivre les apprentissages
-  
+Ces variables ne concernent pas l'urbanisation, mais la variable choisie par le groupe (lieu de résidence personnes : Bouaké, reste du pays, étranger) s'est révélée trop peu discriminante pour une analyse statistique puisque 90% des personnes interrogées résidaient à Bouaké. Faute de temps pour coder les quartiers de Bouaké, l'analyse s'est portée sur la question du choix des personnes interrogées. 
+
+```{r}
+X<-don$groupe
+nameX <- "Groupe d'enquêteurs"
+Y<-don$sexe
+nameY <- "Sexe de la personne interrogée"
+sel<-data.frame(X,Y)
+titre <- "Réalisation de l'atelier 6 : urbanisation"
+
+sel <-sel[complete.cases(sel), ]
+
+
+```
+
+##  Recodage éventuel des étiquettes
+
+On peut raccourcir ou modifier les étiquettes pour faciliter leur affichage ou fusionner des modalités trop peu nombreuses. Ici on a décidé de retirer les enquêtes effectuées par les formateurs pour ne garder que celles réalisées par les sept groupes d'ateliers.
+
+```{r}
+
+levels(sel$X)<-c("Agri.","Demo.","Eau","Mines","Santé","Urba.","Trans.",NA)
+
+```
+
+
+# 2. Analyse de la variable à expliquer Y
+
+
+## Fréquence simple 
+
+```{r}
+library(knitr)
+mytab2 <-table(sel$Y)
+kable(addmargins(mytab2),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+
+```{r}
+pct <- 100*prop.table(mytab2)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab2, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameY,
+        col = c("pink","lightblue"))
+```
+
+
+# 3. Analyse de la variable explicative X
+
+
+## Fréquence simple 
+
+
+```{r}
+mytab1 <-table(sel$X)
+kable(addmargins(mytab1),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+```{r}
+pct<-100*prop.table(mytab1)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab1, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameX,
+        col = rainbow(7))
+```
+
+
+
+# 4. Relation entre X et Y
+
+
+## Hypothèses
+
+On veut tester l'existence d'une relation entre les deux variables précédentes. 
+
+- **H0** : Il n'y a pas de relation entre X et Y
+- **H1** : Il y a une relation entre X et Y
+
+- **Justification de l'hypothèse H1** : On suppose que les groupes d'enquêteurs comportant plus de femmes ont interrogé également plus de femmes. Et inversement pour les groupes d'enquêteurs ayant plus d'hommes.
+
+
+## Tableau de contingence
+
+
+```{r}
+tabcont<-table(sel$X,sel$Y)   # Créer le tableau de contingence
+tabtot <- addmargins(tabcont) # Ajouter les sommes en lignes et en colonne
+kable(tabtot )                       # Afficher
+```
+
+
+## Pourcentage en ligne
+
+```{r}
+tabpct <- 100*prop.table(addmargins(tabcont,1),1) # Calcule le pourcentage en ligne (1)
+
+kable(addmargins(tabpct,2), digits=1)                    # Arrondi à un chiffre après la virgule
+```
+
+On constate une forte singularité du groupe 1 (agriculture) qui est le seul à avoir interrogé majoritairement des femmes.
+
+
+## Graphique en mosaïque 
+
+```{r}
+mosaicplot(tabcont, 
+           main= titre,
+           sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+           xlab = nameX,
+        col = c("pink","lightblue"))
+```
+
+
+## Test du chi-2
+
+
+On part de l'hypothèse nulle H0 : il n'y a pas de relation entre X et Y. Les variations en Y en fonction de X sont l'effet du hasard. 
+
+
+On effectue un test du chi-2 qui donne les résultats suivants :
+
+```{r}
+chisq.test(tabcont)
+```
+
+
+## Conclusion
+
+Le résultat du test du chi-2 indique une relation presque significative qui n'a que 9% de chances d'être l'effet du hasard. Mais R envoie un message d'alerte car les catégories sont trop nombreuses par rapport à la taille de l'échantillon
+
+Pour que le test du chi-2 soit pleinement valable, il faudrait soit accroître la taille de l'échantillon, soit procéder à des regroupements des variables en catégories moins nombreuses, par exemple en isolant le groupe 1, agriculture contre tous les autres.
+

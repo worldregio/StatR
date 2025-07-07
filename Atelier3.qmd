@@ -20,6 +20,7 @@ format:
 execute:
   warning: false
   message: false 
+  echo: false
 knitr:
   opts_chunk:
     out.width: "100%"
@@ -30,34 +31,190 @@ editor:
     wrap: 72
 ---
 
-# INTRODUCTION
 
-- Presenter les membres de l’équipe et le thème attribué décrire les objectifs du rapport et formuler des hypothèses
 
-# 1. ACQUISITION DE DONNEES
+> Exemple de traitement réalisé par les groupes d'auditeur à partir de l'enquête AfroMapR.
 
-- Décrire les différents types de données qui seront mobilisées Sources ? dates ? couverture spatiale ? fonds de carte ? couches SIG, …
+# 1. Préparation des données
 
-# 2. ANALYSE STATISTIQUE AVEC R
+```{r}
+don <- read.table(file = "data/Marché_Bouaké/data/data_clean.csv",  # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8",              # encodage adapté au français
+                  stringsAsFactors = TRUE)       # Transforme les character en factor     
 
-- Décrire les variables intéressantes, produire des taleaux ou des graphiques
-- Tester la relation entre deux variables
-- Synthétiser les résultats
+```
 
-# 3. ANALYSE CARTOGRAPHIQUE AVEC MAGRIT
 
-- Produire différents types de carte
-- Mettre en page les cartes
-- Commenter les cartes
+## Choix des variables à analyser
 
-# 4. ANALYSE D’ENQUETE AVEC KOBO
-- Construire un questionnaire
-- Tester ce questionnaire auprès des participants de l’EE
-- Proposer des améliorations
+On sélectionne dans le tableau une variable Y que l'on veut expliquer et une variables X  qui peut servir à expliquer Y. On décide par exemple d'examiner les variables suivantes :
 
-# CONCLUSION
 
-- Synthétiser vos résultats principaux
-- Décrire les difficultés rencontrées.
-- Indiquer si vous souhaitez poursuivre les apprentissages
-  
+- **Y : eau_robinet** : Consomme de l'eau du robinet
+- **X : instr**       : Niveau d'instruction
+
+
+
+```{r}
+X<-don$instr
+Y<-as.factor(don$eau_robinet)
+sel<-data.frame(X,Y)
+```
+
+
+```{r}
+X<-don$instr
+nameX <- "Niveau d'instruction"
+Y<-as.factor(don$eau_robinet)
+nameY <- "Equipement en eau du robinet"
+sel<-data.frame(X,Y)
+titre <- "Réalisation de l'atelier 3 : eau"
+
+sel <-sel[complete.cases(sel), ]
+
+
+```
+
+##  Recodage éventuel des étiquettes
+
+On peut raccourcir ou modifier les étiquettes pour faciliter leur affichage ou fusionner des modalités trop peu nombreuses. Ici on a regroupé les diplômés du supérieur, trop peu nombreux, avec ceux du secondaire. 
+
+```{r}
+levels(sel$X)<-c("Aucun","Ecole coran.","Primaire","Secondaire et sup.","Secondaire et sup.")
+levels(sel$Y)<-c("Non","Oui")
+```
+
+
+# 2. Analyse de la variable à expliquer Y
+
+
+## Fréquence simple 
+
+```{r}
+library(knitr)
+mytab2 <-table(sel$Y)
+kable(addmargins(mytab2),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+
+```{r}
+pct <- 100*prop.table(mytab2)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons 
+
+
+```{r}
+barplot(mytab2, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameY,
+        col = c("lightyellow","yellow","orange"))
+```
+
+
+# 3. Analyse de la variable explicative X
+
+
+## Fréquence simple 
+
+
+```{r}
+mytab1 <-table(sel$X)
+kable(addmargins(mytab1),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+```{r}
+pct<-100*prop.table(mytab1)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab1, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameX,
+           col = c("lightyellow","yellow","orange","brown"))
+```
+
+
+
+# 4. Relation entre X et Y
+
+
+## Hypothèses
+
+On veut tester l'existence d'une relation entre les deux variables précédentes. 
+
+- **H0** : Il n'y a pas de relation entre X et Y
+- **H1** : Il y a une relation entre X et Y
+
+- **Justification de l'hypothèse H1** : On suppose que les personnes disposant d'un diplôme élevé sont plus riches et plus sensibles aux enjeux de risque de maladie. Elles vivent également plus souvent en ville. Pour toutes ces raisons on suppose qu'elles seront mieux équipées en eau du robinet.
+
+
+## Tableau de contingence
+
+
+```{r}
+tabcont<-table(sel$X,sel$Y)   # Créer le tableau de contingence
+tabtot <- addmargins(tabcont) # Ajouter les sommes en lignes et en colonne
+kable(tabtot )                       # Afficher
+```
+
+
+## Pourcentage en ligne
+
+```{r}
+tabpct <- 100*prop.table(addmargins(tabcont,1),1) # Calcule le pourcentage en ligne (1)
+
+kable(addmargins(tabpct,2), digits=1)                    # Arrondi à un chiffre après la virgule
+```
+
+On constate des différences de poucentage en fonction du diplôme mais elles sont faibles et ne suivent pas l'hypothèse attendue. Les mieux équipés sont ainsi les personnes sans diplômes. 
+
+## Graphique en mosaïque 
+
+```{r}
+mosaicplot(tabcont, 
+           main= titre,
+           sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+           xlab = nameX,
+           ylab = nameY,
+           col = c("lightyellow","yellow","orange","brown"))
+```
+
+
+## Test du chi-2
+
+
+On part de l'hypothèse nulle H0 : il n'y a pas de relation entre X et Y. Les variations en Y en fonction de X sont l'effet du hasard. 
+
+
+On effectue un test du chi-2 qui donne les résultats suivants :
+
+```{r}
+chisq.test(tabcont)
+```
+
+
+## Conclusion
+
+Il n'est pas possible de rejeter l'hypothèse H0 puisque la p-value indique que la relation entre les deux variable a 80.5% de chances d'être l'effet du hasard. La petite taille de l'échantillon peut expliquer l'absence de relation significative.
+
+Mais on peut aussi penser que le niveau de diplôme n'est pas forcément une bonne aproximation du niveau de richesse des individus car il dépend de l'âge ou, plus précisément de la génération.
+
+ 
+

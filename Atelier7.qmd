@@ -20,6 +20,7 @@ format:
 execute:
   warning: false
   message: false 
+  echo: false
 knitr:
   opts_chunk:
     out.width: "100%"
@@ -30,34 +31,182 @@ editor:
     wrap: 72
 ---
 
-# INTRODUCTION
 
-- Presenter les membres de l’équipe et le thème attribué décrire les objectifs du rapport et formuler des hypothèses
+> Exemple de traitement réalisé par les groupes d'auditeur à partir de l'enquête AfroMapR.
 
-# 1. ACQUISITION DE DONNEES
+# 1. Préparation des données
 
-- Décrire les différents types de données qui seront mobilisées Sources ? dates ? couverture spatiale ? fonds de carte ? couches SIG, …
+```{r}
+don <- read.table(file = "data/Marché_Bouaké/data/data_clean.csv",  # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8",              # encodage adapté au français
+                  stringsAsFactors = TRUE)       # Transforme les character en factor     
 
-# 2. ANALYSE STATISTIQUE AVEC R
+```
 
-- Décrire les variables intéressantes, produire des taleaux ou des graphiques
-- Tester la relation entre deux variables
-- Synthétiser les résultats
 
-# 3. ANALYSE CARTOGRAPHIQUE AVEC MAGRIT
+## Choix des variables à analyser
 
-- Produire différents types de carte
-- Mettre en page les cartes
-- Commenter les cartes
+On sélectionne dans le tableau une variable Y que l'on veut expliquer et une variables X  qui peut servir à expliquer Y. On décide par exemple d'examiner les variables suivantes :
 
-# 4. ANALYSE D’ENQUETE AVEC KOBO
-- Construire un questionnaire
-- Tester ce questionnaire auprès des participants de l’EE
-- Proposer des améliorations
+- **Y : transport**    : Mode de transport pour venir au marché de Bouaké
+- **X : raison**       : motif de la présence au marché de Bouaké
 
-# CONCLUSION
 
-- Synthétiser vos résultats principaux
-- Décrire les difficultés rencontrées.
-- Indiquer si vous souhaitez poursuivre les apprentissages
-  
+```{r}
+Y<-don$transport
+nameY <- "Moyen de transport utilisé"
+X<-don$raison
+nameX <- "Raison de la présence au marché"
+sel<-data.frame(X,Y)
+titre <- "Réalisation de l'atelier 7 : transport"
+
+sel <-sel[complete.cases(sel), ]
+
+
+```
+
+##  Recodage éventuel des étiquettes
+
+On peut raccourcir ou modifier les étiquettes pour faciliter leur affichage ou fusionner des modalités trop peu nombreuses. Ici on a décidé de regrouper les modes de transport en 5 catégories afin d'avoir des effectifs suffisant dans chaque classe. Pour la même raison, on a regroupé les motifs de présence au marché en trois catégories seulement.
+
+```{r}
+
+levels(sel$X) <-c("Autre","Commerçant","Grossiste","Autre","Autre")
+
+
+levels(sel$Y) <-c("Auto","Autre","Autre","Autre","Moto","Taxi","Taxi-moto")
+```
+
+
+# 2. Analyse de la variable à expliquer Y
+
+
+## Fréquence simple 
+
+```{r}
+library(knitr)
+mytab2 <-table(sel$Y)
+kable(addmargins(mytab2),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+
+```{r}
+pct <- 100*prop.table(mytab2)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab2, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameY,
+        col = rainbow(5))
+```
+
+
+# 3. Analyse de la variable explicative X
+
+
+## Fréquence simple 
+
+
+```{r}
+mytab1 <-table(sel$X)
+kable(addmargins(mytab1),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+```{r}
+pct<-100*prop.table(mytab1)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab1, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameX,
+        col = c("gray","lightyellow","orange"))
+```
+
+
+
+# 4. Relation entre X et Y
+
+
+## Hypothèses
+
+On veut tester l'existence d'une relation entre les deux variables précédentes. 
+
+- **H0** : Il n'y a pas de relation entre X et Y
+- **H1** : Il y a une relation entre X et Y
+
+- **Justification de l'hypothèse H1** : On suppose que les acteurs du marché disposent de ressources économiques différentes qui les conduisent à utiliser des modes de transport plus oumoins coûteux et rapides.
+
+
+## Tableau de contingence
+
+
+```{r}
+tabcont<-table(sel$X,sel$Y)   # Créer le tableau de contingence
+tabtot <- addmargins(tabcont) # Ajouter les sommes en lignes et en colonne
+kable(tabtot )                       # Afficher
+```
+
+
+## Pourcentage en ligne
+
+```{r}
+tabpct <- 100*prop.table(addmargins(tabcont,1),1) # Calcule le pourcentage en ligne (1)
+
+kable(addmargins(tabpct,2), digits=1)                    # Arrondi à un chiffre après la virgule
+```
+
+On constate de très fortes différences de mode de transport selon les acteurs du marché. Par exemple, la moto et l'automobile individuelle est plus pratiquée par les grossistes. Les commerçants utilisent beaucoup le taxi-modo et l'automodible. Les autres personnes présentes sur le marchévont plus utiliser le taxi et les modes de transports divers tels que la marche. 
+
+## Graphique en mosaïque 
+
+```{r}
+mosaicplot(tabcont, 
+           main= titre,
+           sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+           xlab = nameX,
+           ylab = nameY,
+           col = rainbow(5))
+```
+
+
+## Test du chi-2
+
+
+On part de l'hypothèse nulle H0 : il n'y a pas de relation entre X et Y. Les variations en Y en fonction de X sont l'effet du hasard. 
+
+
+On effectue un test du chi-2 qui donne les résultats suivants :
+
+```{r}
+chisq.test(tabcont)
+```
+
+
+## Conclusion
+
+Le résultat du test du chi-2 indique une relation très significative (p <0.001) qui suggère que l'on peut rejeter facilement l'hypothèse H0. Toutefois, R indique un message d'alerte car les catégories étaient trop nombreuses à la fois pour X et pour Y.
+
+Pour que le test du chi-2 soit pleinement valable, il faudrait soit accroître la taille de l'échantillon, soit procéder à des regroupements des variables en catégories moins nombreuses.
+
+La relation existe peut-être mais notre échantillon est trop petit ou pas assez représentatif pour le démontrer. 

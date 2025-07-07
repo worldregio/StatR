@@ -20,6 +20,7 @@ format:
 execute:
   warning: false
   message: false 
+  echo: false
 knitr:
   opts_chunk:
     out.width: "100%"
@@ -30,34 +31,179 @@ editor:
     wrap: 72
 ---
 
-# INTRODUCTION
 
-- Presenter les membres de l’équipe et le thème attribué décrire les objectifs du rapport et formuler des hypothèses
+> Exemple de traitement réalisé par les groupes d'auditeur à partir de l'enquête AfroMapR.
 
-# 1. ACQUISITION DE DONNEES
+# 1. Préparation des données
 
-- Décrire les différents types de données qui seront mobilisées Sources ? dates ? couverture spatiale ? fonds de carte ? couches SIG, …
+```{r}
+don <- read.table(file = "data/Marché_Bouaké/data/data_clean.csv",  # nom du fichier et chemin d'accès
+                  sep = ";",                     # séparateur (ici, des points-virgule)
+                  dec=",",                       # Type de décimale
+                  header = TRUE,                 # ligne d'en-tête avec le nom des variables
+                  encoding="UTF-8",              # encodage adapté au français
+                  stringsAsFactors = TRUE)       # Transforme les character en factor     
 
-# 2. ANALYSE STATISTIQUE AVEC R
+```
 
-- Décrire les variables intéressantes, produire des taleaux ou des graphiques
-- Tester la relation entre deux variables
-- Synthétiser les résultats
 
-# 3. ANALYSE CARTOGRAPHIQUE AVEC MAGRIT
+## Choix des variables à analyser
 
-- Produire différents types de carte
-- Mettre en page les cartes
-- Commenter les cartes
+On sélectionne dans le tableau une variable Y que l'on veut expliquer et une variables X  qui peut servir à expliquer Y. On décide par exemple d'examiner les variables suivantes :
 
-# 4. ANALYSE D’ENQUETE AVEC KOBO
-- Construire un questionnaire
-- Tester ce questionnaire auprès des participants de l’EE
-- Proposer des améliorations
+- **Y : alim**    : sentiment d'insécurité alimentaire
+- **X : statut** : statut matrimonial
 
-# CONCLUSION
 
-- Synthétiser vos résultats principaux
-- Décrire les difficultés rencontrées.
-- Indiquer si vous souhaitez poursuivre les apprentissages
-  
+```{r}
+Y<-don$alim
+nameY <- "Insécurité alimentaire"
+X<-don$statut
+nameX <- "Situation matrimoniale"
+sel<-data.frame(X,Y)
+titre <- "Réalisation de l'atelier 1 : agriculture"
+
+sel <-sel[complete.cases(sel), ]
+
+
+```
+
+##  Recodage éventuel des étiquettes
+
+On peut raccourcir ou modifier les étiquettes pour faciliter leur affichage ou fusionner des modalités trop peu nombreuses. Ici on a décidé de regrouper les personnes mariées et divorcées.
+
+```{r}
+levels(sel$X) <-c("Celibataire", "Couple","Couple")
+```
+
+
+# 2. Analyse de la variable à expliquer Y
+
+
+## Fréquence simple 
+
+```{r}
+library(knitr)
+mytab2 <-table(sel$Y)
+kable(addmargins(mytab2),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+
+```{r}
+pct <- 100*prop.table(mytab2)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab2, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameY,
+        col = c("lightyellow","yellow","orange"))
+```
+
+
+# 3. Analyse de la variable explicative X
+
+
+## Fréquence simple 
+
+
+```{r}
+mytab1 <-table(sel$X)
+kable(addmargins(mytab1),col.names=c("Modalité","Fréquence"))
+```
+
+## Pourcentage 
+
+```{r}
+pct<-100*prop.table(mytab1)
+kable(addmargins(pct),col.names=c("Modalité","%"), digits=1)
+```
+
+
+## Diagramme en bâtons
+
+
+```{r}
+barplot(mytab1, 
+        main = titre,
+        sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+        ylab = nameX,
+        col = c("red","blue","green"))
+```
+
+
+
+# 4. Relation entre X et Y
+
+
+## Hypothèses
+
+On veut tester l'existence d'une relation entre les deux variables précédentes. 
+
+- **H0** : Il n'y a pas de relation entre X et Y
+- **H1** : Il y a une relation entre X et Y
+
+- **Justification de l'hypothèse H1** : On suppose que les personnes mariées ont moins de risque d'insécrurité alimentaire que les personnes célibataires vivant seules.
+
+
+## Tableau de contingence
+
+
+```{r}
+tabcont<-table(sel$X,sel$Y)   # Créer le tableau de contingence
+tabtot <- addmargins(tabcont) # Ajouter les sommes en lignes et en colonne
+kable(tabtot )                       # Afficher
+```
+
+
+## Pourcentage en ligne
+
+```{r}
+tabpct <- 100*prop.table(addmargins(tabcont,1),1) # Calcule le pourcentage en ligne (1)
+
+kable(addmargins(tabpct,2), digits=1)                    # Arrondi à un chiffre après la virgule
+```
+
+On constate que les célibataires ont en effet un sentiment d'insécurité alimentaire plus important (38%) que les personnes vivant en couple (21%). Mais ces différences sont-elles significatives ?
+
+## Graphique en mosaïque 
+
+```{r}
+mosaicplot(tabcont, 
+           main= titre,
+           sub = "Source : Enquête AfroMapR, Bouaké, 2025",
+           xlab = nameX,
+           ylab = nameY,
+           col = c("lightyellow","yellow","orange"))
+```
+
+
+## Test du chi-2
+
+
+On part de l'hypothèse nulle H0 : il n'y a pas de relation entre X et Y. Les variations en Y en fonction de X sont l'effet du hasard. 
+
+
+On effectue un test du chi-2 qui donne les résultats suivants :
+
+```{r}
+chisq.test(tabcont)
+```
+
+
+## Conclusion
+
+Il n'est pas possible de rejeter l'hypothèse H0 puisque la p-value indique que la relation entre les deux variable a 17.6% de chances d'être l'effet du hasard. 
+
+La relation existe peut-être mais notre échantillon est trop petit ou pas assez représentatif pour le démontrer. 
+
+
+

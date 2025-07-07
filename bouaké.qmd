@@ -249,3 +249,5 @@ summary(don$enfmen)
 ```
 
 - **Commentaire** : Les personnes enquêtées ont déclaré avoir en moyenne 5.6 enfants avec une médiane de 4 enfants.La moitié des personnes interrogées avait de 2 à 8 enfants. 
+
+

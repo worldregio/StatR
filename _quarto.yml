@@ -44,7 +44,7 @@ website:
           text: "Cours : Test du chi-2"
         - href: STAT4-Exo1.qmd
           text: "Exo1 : Programme-type"
-      - text: "CARTOGRAPHIE AVEC MAGRIT"
+      - text: "CARTO. AVEC MAGRIT"
         menu:     
         - text: "---- MAGRIT 1 : PREMEIRS PAS ----"
         - href: https://github.com/worldregio/StatR/raw/refs/heads/main/MAGRIT/MAGRIT1/MAGRIT1.pptx
@@ -65,14 +65,12 @@ website:
         menu:  
         - href: Raster.html
           text: "Manipuler des données raster avec R et Terra" 
-      - text: "KOBO"
+      - text: "ENQUETE DE TERRAIN"
         menu:  
         - href: https://ee2023.netlify.app/modules/out3_kobo
-          text: "Prise en main (EE CIST 2023)"    
+          text: "Kobo mode d'emploi"    
         - href: bouaké.html
-          text: "Enquête AfromapR 2025" 
-      - text: "ATELIERS"
-        menu:            
+          text: "L'Enquête AfroMapR 2025" 
         - href: Atelier1.qmd
           text: "Atelier1 : Agriculture"  
         - href: Atelier2.qmd
@@ -97,6 +95,8 @@ website:
           text: "Côte d'Ivoire : RP 2021" 
         - href: Data_004.qmd
           text: "Côte d'Ivoire : Enquête Afrobarometer 2023" 
+        - href: Data_005.qmd
+          text: "Côte d'Ivoire : Base Africapolis 1950-2050"           
     right: 
       - icon: github # add icons as navbar buttons
         href: https://github.com/worldregio/StatR
